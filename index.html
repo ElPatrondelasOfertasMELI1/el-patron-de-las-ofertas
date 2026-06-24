@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Patrón De Las Ofertas</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+margin:0;
+padding:0;
+}
+
+header{
+background:#FFE600;
+padding:20px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+.subtitulo{
+text-align:center;
+padding:10px;
+}
+
+.cupon{
+background:white;
+margin:15px;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+button{
+background:#3483FA;
+color:white;
+border:none;
+padding:10px 20px;
+border-radius:8px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:.9;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+👑 El Patrón De Las Ofertas
+</header>
+
+<div class="subtitulo">
+Los mejores cupones y promociones
+</div>
+
+<div class="cupon">
+<h3>🔥 Cupón Disponible</h3>
+<p>$200 OFF</p>
+
+<div id="codigo1">
+************
+</div>
+
+<br>
+
+<button onclick="copiarCupon()">
+Copiar Cupón
+</button>
+
+<br><br>
+
+<a href="https://meli.la/2rSJqhZ">
+Ir a Activar
+</a>
+
+</div>
+
+<script>
+function copiarCupon(){
+
+let codigo="VERANOREBAJAS";
+
+navigator.clipboard.writeText(codigo);
+
+document.getElementById("codigo1").innerHTML=codigo;
+
+alert("Cupón copiado");
+}
+</script>
+
+</body>
+</html>
