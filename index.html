@@ -13,7 +13,6 @@ body{
   color:#111;
 }
 
-/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:14px;
@@ -21,16 +20,24 @@ header{
   font-weight:900;
 }
 
-/* LOGO */
+/* LOGO (SEGURO SI NO CARGA IMAGEN) */
 .logo{
   display:flex;
   justify-content:center;
   margin:12px 0;
 }
-.logo img{
-  width:90px;
-  height:90px;
+.logo-box{
+  width:95px;
+  height:95px;
   border-radius:50%;
+  background:#111;
+  color:#ffcc00;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  text-align:center;
+  font-size:11px;
   border:3px solid #ffcc00;
 }
 
@@ -43,7 +50,7 @@ header{
   font-weight:bold;
 }
 
-/* SECCIONES */
+/* TITULO */
 .section{
   text-align:center;
   font-weight:900;
@@ -73,21 +80,9 @@ header{
   margin-top:8px;
 }
 
-/* RELÁMPAGOS */
-.reveal{
-  background:#2962ff;
-  color:#fff;
-  font-weight:900;
-  padding:10px;
-  border-radius:8px;
-  width:100%;
-  border:0;
-}
-
-/* TEXTO PEQUEÑO */
-.small{
-  font-size:13px;
-  color:#333;
+/* RELÁMPAGOS LINEA AMARILLA */
+.flash{
+  border-left:5px solid #ffcc00;
 }
 
 /* TOAST */
@@ -103,14 +98,13 @@ header{
   opacity:0;
   transition:0.3s;
   font-weight:900;
-  z-index:9999;
 }
 .toast.show{
   opacity:1;
 }
 
 /* WHATSAPP */
-.wa-float{
+.wa{
   position:fixed;
   bottom:18px;
   right:18px;
@@ -124,9 +118,7 @@ header{
   justify-content:center;
   font-size:26px;
   text-decoration:none;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
   animation:bounce 2s infinite;
-  z-index:999;
 }
 
 @keyframes bounce{
@@ -140,32 +132,24 @@ header{
 
 <header>⚡🔥 EL PATRÓN DE LAS OFERTAS 🔥⚡</header>
 
-<!-- LOGO (puedes cambiar imagen si quieres) -->
+<!-- LOGO -->
 <div class="logo">
-  <img src="https://i.imgur.com/yourlogo.png" alt="logo">
+  <div class="logo-box">PATRÓN<br>DE OFERTAS</div>
 </div>
 
 <div class="counter" id="counter">👆 Clics: 0</div>
 
-<!-- TOAST -->
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
-<!-- ⭐ MELI EXCLUSIVO -->
+<!-- ⭐ MELI OCULTO -->
 <div class="section">⭐ CUPÓN EXCLUSIVO MELI+</div>
-
 <div class="card">
   SOLO USUARIOS MELI+
+  <div class="small">Compra mínima: $4000 | Tope: $500</div>
 
-  <div class="small">
-    Usa el cupón <b>MELIMASGOL</b> al momento de pagar.<br><br>
-
-    📌 Compra mínima: $4,000 MXN<br>
-    💰 Tope: $500 MXN<br><br>
-
-    ⏳ Vigencia: 22 de junio al 1 de julio
-  </div>
-
-  <button class="btn" onclick="go('MELIMASGOL')">VER CUPÓN</button>
+  <button class="btn" onclick="go('MELIMASGOL')">
+    VER CUPÓN
+  </button>
 </div>
 
 <!-- ⚡ RELÁMPAGOS -->
@@ -177,35 +161,50 @@ header{
 <div id="banks"></div>
 
 <!-- WHATSAPP -->
-<a class="wa-float" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">💬</a>
+<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">💬</a>
 
 <script>
 
 const link = "https://meli.la/1mj3itE";
 
-/* CLICS */
 let clicks = localStorage.getItem("clicks") || 0;
 document.getElementById("counter").innerText = "👆 Clics: " + clicks;
 
 /* TOAST */
-function showToast(){
-  const t = document.getElementById("toast");
+function toast(){
+  const t=document.getElementById("toast");
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"),1200);
 }
 
-/* RELÁMPAGOS */
+/* CLICK FINAL */
+function go(code){
+
+  navigator.clipboard.writeText(code).catch(()=>{});
+
+  clicks++;
+  localStorage.setItem("clicks",clicks);
+  document.getElementById("counter").innerText = "👆 Clics: " + clicks;
+
+  toast();
+
+  setTimeout(()=>{
+    window.location.href = link;
+  },500);
+}
+
+/* RELÁMPAGOS (OCULTOS) */
 const flash = [
 {n:"SIEMPREFUT",m:"$2,000",d:"$215"},
 {n:"DESCUENTO600",m:"$6,000",d:"$600"},
 {n:"JUEVES10",m:"$500",d:"$100"}
 ];
 
-const flashBox = document.getElementById("flashBox");
+const flashBox=document.getElementById("flashBox");
 
 flash.forEach(f=>{
   flashBox.innerHTML += `
-  <div class="card">
+  <div class="card flash">
     ⚡ ${f.n}
     <div class="small">📌 Compra mínima: ${f.m} | 💰 Descuento: ${f.d}</div>
     <button class="btn" onclick="go('${f.n}')">VER CUPÓN</button>
@@ -225,7 +224,7 @@ const bancos = [
 ["Mifel","$2500","$750","MIFEGOL"]
 ];
 
-const banks = document.getElementById("banks");
+const banks=document.getElementById("banks");
 
 bancos.forEach(b=>{
   banks.innerHTML += `
@@ -235,22 +234,6 @@ bancos.forEach(b=>{
     <button class="btn" onclick="go('${b[3]}')">VER CUPÓN</button>
   </div>`;
 });
-
-/* FUNCIÓN PRINCIPAL */
-function go(code){
-
-  navigator.clipboard.writeText(code).catch(()=>{});
-
-  clicks++;
-  localStorage.setItem("clicks",clicks);
-  document.getElementById("counter").innerText = "👆 Clics: " + clicks;
-
-  showToast();
-
-  setTimeout(()=>{
-    window.location.href = link;
-  },500);
-}
 
 </script>
 
