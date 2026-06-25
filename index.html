@@ -1,188 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Patrón de las Ofertas</title>
+<!-- ⭐ MELI (AGREGADO OCULTO SIN ROMPER TU SISTEMA) -->
+<div class="section">⭐ CUPÓN EXCLUSIVO MELI+</div>
 
-<style>
-body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#0f0f0f;
-    color:white;
-}
-
-header{
-    text-align:center;
-    padding:20px;
-}
-
-header img{
-    width:120px;
-    border-radius:20px;
-}
-
-h1{
-    margin:10px 0;
-}
-
-.container{
-    padding:15px;
-}
-
-.cupon{
-    background:#1c1c1c;
-    margin:10px 0;
-    padding:15px;
-    border-radius:10px;
-    border:1px solid #333;
-}
-
-button{
-    padding:10px;
-    width:100%;
-    border:none;
-    border-radius:8px;
-    background:#00c853;
-    color:white;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-.hidden{
-    display:none;
-}
-
-.relampago{
-    border:2px solid gold;
-}
-
-.bancario{
-    border-left:5px solid #2196f3;
-}
-
-#toast{
-    position:fixed;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:black;
-    padding:10px 20px;
-    border-radius:10px;
-    display:none;
-}
-
-#whatsapp{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#25D366;
-    color:white;
-    padding:15px;
-    border-radius:50%;
-    font-size:20px;
-    text-decoration:none;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-    <img src="logo.png.PNG" alt="logo">
-    <h1>🔥 El Patrón de las Ofertas 🔥</h1>
-    <p>Cupones actualizados diariamente</p>
-</header>
-
-<div class="container">
-
-<!-- ⭐ OCULTO ESPECIAL -->
-<div class="cupon hidden" id="meli">
-⭐ MELIMASGOL
-<button onclick="copiar('MELIMASGOL')">Copiar cupón</button>
+<div class="card">
+  SOLO USUARIOS MELI+
+  <div class="small">Compra mínima: $4000 | Tope: $500</div>
+  <button class="btn" onclick="go('MELIMASGOL')">VER CUPÓN</button>
 </div>
 
-<!-- ⚡ RELÁMPAGOS -->
-<div class="cupon relampago hidden">
-⚡ SIEMPREFUT - 10% OFF
-<button onclick="copiar('SIEMPREFUT')">Copiar cupón</button>
-</div>
-
-<div class="cupon relampago hidden">
-⚡ DESCUENTO600 - $600 OFF
-<button onclick="copiar('DESCUENTO600')">Copiar cupón</button>
-</div>
-
-<div class="cupon relampago hidden">
-⚡ JUEVES10 - 10% OFF
-<button onclick="copiar('JUEVES10')">Copiar cupón</button>
-</div>
-
-<div class="cupon relampago hidden">
-⚡ JUEVESMIL - $1000 OFF
-<button onclick="copiar('JUEVESMIL')">Copiar cupón</button>
-</div>
-
-<div class="cupon relampago hidden">
-⚡ OCHOMIL - descuento especial
-<button onclick="copiar('OCHOMIL')">Copiar cupón</button>
-</div>
-
-<!-- 🏦 BANCARIOS -->
-<div class="cupon bancario">
-🏦 BBVA - 10% OFF
-<button onclick="copiar('BBVAGOL')">Copiar cupón</button>
-</div>
-
-<div class="cupon bancario">
-🏦 Mercado Pago - 10% OFF
-<button onclick="copiar('TCMPGOL')">Copiar cupón</button>
-</div>
-
-<div class="cupon bancario">
-🏦 AFIRME - 10% OFF
-<button onclick="copiar('AFIRMEGOL')">Copiar cupón</button>
-</div>
-
-<div class="cupon bancario">
-🏦 MIFEL - 15% OFF
-<button onclick="copiar('MIFEGOL')">Copiar cupón</button>
-</div>
-
-</div>
-
-<!-- TOAST -->
-<div id="toast">Cupón copiado ✔️</div>
-
-<!-- WHATSAPP -->
-<a id="whatsapp" href="https://wa.me/5210000000000" target="_blank">💬</a>
+<!-- ⚡ RELÁMPAGOS (ACTUALIZADO CON NUEVOS) -->
+<div class="section">⚡ CUPONES RELÁMPAGO</div>
+<div id="flashBox"></div>
 
 <script>
-let contador = 0;
-
-function copiar(codigo){
-    navigator.clipboard.writeText(codigo);
-
-    document.getElementById("toast").style.display="block";
-
-    setTimeout(()=>{
-        document.getElementById("toast").style.display="none";
-    },2000);
-
-    contador++;
-
-    if(contador >= 3){
-        document.querySelectorAll(".hidden").forEach(e=>{
-            e.style.display="block";
-        });
-    }
-
-    setTimeout(()=>{
-        window.location.href = "https://meli.la/1mj3itE";
-    },1200);
-}
+const flash = [
+{n:"SIEMPREFUT",m:"$2,000",d:"$215"},
+{n:"DESCUENTO600",m:"$6,000",d:"$600"},
+{n:"JUEVES10",m:"$500",d:"$100"},
+{n:"JUEVESMIL",m:"$5,000",d:"$1,000"},   // 🔥 NUEVO
+{n:"OCHOMIL",m:"$8,000",d:"$1,500"}     // 🔥 NUEVO
+];
 </script>
-
-</body>
-</html>
