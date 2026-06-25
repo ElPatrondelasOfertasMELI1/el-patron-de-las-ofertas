@@ -18,18 +18,20 @@ header{
   padding:14px;
   text-align:center;
   font-weight:900;
+  font-size:18px;
 }
 
-/* LOGO (SEGURO SI NO CARGA IMAGEN) */
+/* LOGO MEJORADO */
 .logo{
   display:flex;
   justify-content:center;
   margin:12px 0;
 }
+
 .logo-box{
-  width:95px;
-  height:95px;
-  border-radius:50%;
+  width:180px;
+  height:90px;
+  border-radius:14px;
   background:#111;
   color:#ffcc00;
   display:flex;
@@ -37,8 +39,9 @@ header{
   justify-content:center;
   font-weight:900;
   text-align:center;
-  font-size:11px;
+  font-size:14px;
   border:3px solid #ffcc00;
+  box-shadow:0 0 12px rgba(255,204,0,0.4);
 }
 
 /* CONTADOR */
@@ -50,7 +53,7 @@ header{
   font-weight:bold;
 }
 
-/* TITULO */
+/* SECCIÓN */
 .section{
   text-align:center;
   font-weight:900;
@@ -83,6 +86,13 @@ header{
 /* RELÁMPAGOS LINEA AMARILLA */
 .flash{
   border-left:5px solid #ffcc00;
+}
+
+/* STATUS */
+.status{
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:6px;
 }
 
 /* TOAST */
@@ -130,26 +140,26 @@ header{
 
 <body>
 
-<header>⚡🔥 EL PATRÓN DE LAS OFERTAS 🔥⚡</header>
+<header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
 <!-- LOGO -->
 <div class="logo">
-  <div class="logo-box">PATRÓN<br>DE OFERTAS</div>
+  <div class="logo-box">
+    EL PATRÓN<br>DE LAS OFERTAS
+  </div>
 </div>
 
 <div class="counter" id="counter">👆 Clics: 0</div>
 
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
-<!-- ⭐ MELI OCULTO -->
+<!-- ⭐ MELI -->
 <div class="section">⭐ CUPÓN EXCLUSIVO MELI+</div>
+
 <div class="card">
   SOLO USUARIOS MELI+
   <div class="small">Compra mínima: $4000 | Tope: $500</div>
-
-  <button class="btn" onclick="go('MELIMASGOL')">
-    VER CUPÓN
-  </button>
+  <button class="btn" onclick="go('MELIMASGOL')">VER CUPÓN</button>
 </div>
 
 <!-- ⚡ RELÁMPAGOS -->
@@ -167,6 +177,7 @@ header{
 
 const link = "https://meli.la/1mj3itE";
 
+/* CLICS */
 let clicks = localStorage.getItem("clicks") || 0;
 document.getElementById("counter").innerText = "👆 Clics: " + clicks;
 
@@ -177,7 +188,15 @@ function toast(){
   setTimeout(()=>t.classList.remove("show"),1200);
 }
 
-/* CLICK FINAL */
+/* HORA STATUS RELÁMPAGOS */
+function getStatus(){
+  const h = new Date().getHours();
+  if(h >= 9 && h < 12) return "🟢 ACTIVO";
+  if(h >= 12 && h < 24) return "🟠 POR AGOTARSE";
+  return "🔴 AGOTADO";
+}
+
+/* CLICK */
 function go(code){
 
   navigator.clipboard.writeText(code).catch(()=>{});
@@ -193,7 +212,7 @@ function go(code){
   },500);
 }
 
-/* RELÁMPAGOS (OCULTOS) */
+/* RELÁMPAGOS (OCULTOS HASTA CLIC) */
 const flash = [
 {n:"SIEMPREFUT",m:"$2,000",d:"$215"},
 {n:"DESCUENTO600",m:"$6,000",d:"$600"},
@@ -205,6 +224,7 @@ const flashBox=document.getElementById("flashBox");
 flash.forEach(f=>{
   flashBox.innerHTML += `
   <div class="card flash">
+    <div class="status">${getStatus()}</div>
     ⚡ ${f.n}
     <div class="small">📌 Compra mínima: ${f.m} | 💰 Descuento: ${f.d}</div>
     <button class="btn" onclick="go('${f.n}')">VER CUPÓN</button>
