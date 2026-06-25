@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Patrón de las Ofertas</title>
+<title>El Patrón de las Ofertas PRO</title>
 
 <style>
 body{
@@ -14,23 +14,36 @@ body{
 
 /* HEADER */
 header{
-  background:#ffe600;
-  padding:12px;
+  background:linear-gradient(90deg,#ffe600,#ffcc00);
+  padding:14px;
   text-align:center;
   font-weight:bold;
+  animation:pulse 2s infinite;
+}
+
+/* ANIMACIÓN */
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.02)}
+  100%{transform:scale(1)}
 }
 
 /* LOGO */
 .logo{
   display:flex;
   justify-content:center;
-  margin:10px 0;
+  margin:10px;
 }
 .logo img{
   width:90px;
   height:90px;
   border-radius:50%;
-  object-fit:cover;
+  animation:float 3s infinite ease-in-out;
+}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-5px)}
+  100%{transform:translateY(0)}
 }
 
 /* CARD */
@@ -39,6 +52,13 @@ header{
   margin:10px;
   padding:12px;
   border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  animation:fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px)}
+  to{opacity:1; transform:translateY(0)}
 }
 
 /* BOTÓN */
@@ -51,6 +71,11 @@ header{
   color:#fff;
   font-weight:bold;
   cursor:pointer;
+  transition:0.2s;
+}
+
+.btn:active{
+  transform:scale(0.97);
 }
 
 /* CONTADOR */
@@ -62,7 +87,7 @@ header{
   font-size:14px;
 }
 
-/* WHATSAPP FLOAT */
+/* WHATSAPP */
 .whatsapp{
   position:fixed;
   bottom:20px;
@@ -71,61 +96,65 @@ header{
   color:#fff;
   padding:15px;
   border-radius:50%;
-  text-decoration:none;
   font-size:20px;
+  text-decoration:none;
   box-shadow:0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* PANEL STATS */
+.stats{
+  text-align:center;
+  font-size:13px;
+  margin:10px;
+  color:#333;
 }
 </style>
 </head>
 
 <body>
 
-<header>👑 EL PATRÓN DE LAS OFERTAS</header>
+<header>👑 EL PATRÓN DE LAS OFERTAS PRO</header>
 
-<!-- LOGO (cambia el src por tu imagen) -->
 <div class="logo">
   <img src="https://i.imgur.com/yourlogo.png" alt="logo">
 </div>
 
 <div class="counter" id="counter"></div>
 
-<!-- CUPÓN MELI+ -->
-<div class="card">
-⭐ Meli+ Exclusivo (10%)
-<button class="btn" onclick="go()">Ver cupón</button>
+<div class="stats">
+👆 Clics totales: <span id="clicks">0</span>
 </div>
 
-<!-- CUPONES BANCARIOS -->
+<!-- SONIDO -->
+<audio id="sound" src="https://www.myinstants.com/media/sounds/mixkit-fast-small-sweep-transition-166.mp3"></audio>
+
+<!-- MELI+ -->
+<div class="card">
+⭐ Meli+ Exclusivo
+<button class="btn" onclick="go()">VER CUPÓN</button>
+</div>
+
+<!-- BANCOS -->
 <div id="banks"></div>
 
 <!-- RELÁMPAGO -->
 <div class="card">
-⚡ Cupones Relámpago
-
+⚡ Cupones Relámpago<br><br>
 <button class="btn" onclick="go()">SIEMPREFUT</button><br><br>
 <button class="btn" onclick="go()">DESCUENTO600</button><br><br>
 <button class="btn" onclick="go()">JUEVES10</button>
 </div>
 
 <!-- WHATSAPP -->
-<a class="whatsapp" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">
-💬
-</a>
+<a class="whatsapp" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">💬</a>
 
 <script>
 
 const link = "https://meli.la/1mj3itE";
 
 const bancos = [
-"Mercado Pago",
-"Meses sin tarjeta",
-"BBVA",
-"HSBC",
-"Banorte",
-"Santander",
-"AMEX",
-"Afirme",
-"Mifel"
+"Mercado Pago","Meses sin tarjeta","BBVA","HSBC",
+"Banorte","Santander","AMEX","Afirme","Mifel"
 ];
 
 const banks = document.getElementById("banks");
@@ -134,14 +163,27 @@ for(let i=0;i<bancos.length;i++){
   banks.innerHTML += `
   <div class="card">
     🏦 ${bancos[i]}
-    <button class="btn" onclick="go()">Ver cupón</button>
+    <button class="btn" onclick="go()">VER CUPÓN</button>
   </div>`;
 }
 
+/* SONIDO + CLICS */
+let clicks = localStorage.getItem("clicks") || 0;
+document.getElementById("clicks").innerText = clicks;
+
 function go(){
-  window.location.href = link;
+  clicks++;
+  localStorage.setItem("clicks", clicks);
+  document.getElementById("clicks").innerText = clicks;
+
+  document.getElementById("sound").play();
+
+  setTimeout(()=>{
+    window.location.href = link;
+  },500);
 }
 
+/* CONTADOR */
 document.getElementById("counter").innerHTML =
 "🎟️ Cupones activos: " + (bancos.length + 4);
 
