@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Patrón de las Ofertas</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#f5f5f5;
+}
+
+/* HEADER */
+header{
+  background: linear-gradient(90deg,#ffe600,#ffcc00);
+  padding:18px;
+  text-align:center;
+  font-weight:bold;
+  font-size:20px;
+  position:sticky;
+  top:0;
+}
+
+/* CONTADOR */
+.counter{
+  background:#111;
+  color:#fff;
+  text-align:center;
+  padding:10px;
+  font-size:14px;
+}
+
+/* CONTAINER */
+.container{
+  padding:15px;
+  max-width:900px;
+  margin:auto;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.title{
+  font-weight:bold;
+}
+
+.badge{
+  display:inline-block;
+  background:#ffe600;
+  padding:3px 8px;
+  border-radius:6px;
+  font-size:12px;
+  margin-left:5px;
+}
+
+/* BOTONES */
+button{
+  padding:10px;
+  border:none;
+  border-radius:8px;
+  margin-top:8px;
+  cursor:pointer;
+  width:100%;
+  font-weight:bold;
+}
+
+.copyBtn{background:#00c853;color:#fff;}
+.showBtn{background:#2962ff;color:#fff;}
+
+.code{
+  display:none;
+  margin-top:8px;
+  font-weight:bold;
+  background:#f0f0f0;
+  padding:8px;
+  border-radius:8px;
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  padding:15px;
+  border-radius:50%;
+  text-decoration:none;
+  font-size:20px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+👑 EL PATRÓN DE LAS OFERTAS | CUPÓNES ML
+</header>
+
+<div class="counter" id="counter">
+🎟️ Cupones disponibles: 10+
+</div>
+
+<div class="container">
+
+<!-- EXCLUSIVO MELI+ -->
+<div class="card">
+<div class="title">⭐ Meli+ Exclusivo</div>
+<div>10% OFF <span class="badge">VIP</span></div>
+<button class="showBtn" onclick="toggleCode('m1')">Ver cupón</button>
+<div class="code" id="m1">MELIMASGOL</div>
+<button class="copyBtn" onclick="copy('MELIMASGOL')">Copiar y Activar</button>
+</div>
+
+<!-- CUPONES -->
+<script>
+const cupones = [
+["Mercado Pago","TCMPGOL"],
+["Meses sin tarjeta","MSTGOL"],
+["BBVA","BBVAGOL"],
+["HSBC","HSBCGOL"],
+["Banorte","BNRTGOL"],
+["Santander","SANTGOL"],
+["AMEX","AMEXGOL"],
+["Afirme","AFRMGOL"],
+["Mifel","MIFEGOL"]
+];
+</script>
+
+<div id="list"></div>
+
+<!-- PROMOS DIARIAS -->
+<div class="card">
+<div class="title">🚀 Cupones Relámpago</div>
+
+🎟️ SIEMPREFUT<br>
+🎟️ DESCUENTO600<br>
+🎟️ JUEVES10<br>
+
+</div>
+
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/5210000000000" target="_blank">💬</a>
+
+<script>
+
+// generar cupones dinámicos
+const list = document.getElementById("list");
+
+cupones.forEach((c,i)=>{
+  list.innerHTML += `
+  <div class="card">
+    <div class="title">🏦 ${c[0]}</div>
+    <button class="showBtn" onclick="toggleCode('c${i}')">Ver cupón</button>
+    <div class="code" id="c${i}">${c[1]}</div>
+    <button class="copyBtn" onclick="copy('${c[1]}')">Copiar y Activar</button>
+  </div>`;
+});
+
+// mostrar código
+function toggleCode(id){
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === "block" ? "none" : "block";
+}
+
+// copiar código + redirección
+function copy(code){
+  navigator.clipboard.writeText(code);
+  
+  // redirección automática
+  setTimeout(()=>{
+    window.location.href = "https://meli.la/1mj3itE";
+  }, 800);
+}
+
+// contador simple
+let total = 10 + cupones.length;
+document.getElementById("counter").innerHTML =
+`🎟️ Cupones disponibles: ${total}+`;
+
+</script>
+
+</body>
+</html>
