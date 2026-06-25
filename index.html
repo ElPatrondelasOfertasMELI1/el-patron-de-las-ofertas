@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>⚡ El Patrón de las Ofertas EXTREMO</title>
+<title>El Patrón de las Ofertas</title>
 
 <style>
 body{
@@ -19,30 +19,19 @@ header{
   padding:14px;
   text-align:center;
   font-weight:900;
-  font-size:18px;
 }
 
-/* LOGO (CREADO EN CSS) */
+/* LOGO */
 .logo{
   display:flex;
   justify-content:center;
   margin:12px 0;
 }
-
-.logo-badge{
-  width:110px;
-  height:110px;
+.logo img{
+  width:90px;
+  height:90px;
   border-radius:50%;
-  background:radial-gradient(circle,#111,#000);
-  border:4px solid #ffcc00;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#ffcc00;
-  font-weight:900;
-  text-align:center;
-  font-size:12px;
-  box-shadow:0 0 15px rgba(255,204,0,0.6);
+  border:3px solid #ffcc00;
 }
 
 /* CONTADOR */
@@ -54,7 +43,7 @@ header{
   font-weight:bold;
 }
 
-/* TITULOS */
+/* SECCIONES */
 .section{
   text-align:center;
   font-weight:900;
@@ -101,7 +90,7 @@ header{
   color:#333;
 }
 
-/* TOAST COPIADO */
+/* TOAST */
 .toast{
   position:fixed;
   bottom:80px;
@@ -114,23 +103,13 @@ header{
   opacity:0;
   transition:0.3s;
   font-weight:900;
+  z-index:9999;
 }
 .toast.show{
   opacity:1;
 }
 
-/* FLASH highlight */
-.flash{
-  border:2px solid #ffcc00;
-}
-</style>
-</head>
-
-<a class="wa-float" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">
-💬
-</a>
-
-<style>
+/* WHATSAPP */
 .wa-float{
   position:fixed;
   bottom:18px;
@@ -154,35 +133,51 @@ header{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-6px)}
 }
-
 </style>
+</head>
 
 <body>
 
-<header>⚡🔥 EL PATRÓN DE LAS OFERTAS EXTREMO 🔥⚡</header>
+<header>⚡🔥 EL PATRÓN DE LAS OFERTAS 🔥⚡</header>
 
-<!-- LOGO -->
+<!-- LOGO (puedes cambiar imagen si quieres) -->
 <div class="logo">
-  <div class="logo-badge">
-    EL PATRÓN<br>DE OFERTAS<br>VIP
-  </div>
+  <img src="https://i.imgur.com/yourlogo.png" alt="logo">
 </div>
 
 <div class="counter" id="counter">👆 Clics: 0</div>
 
-<!-- AUDIO VIRAL -->
-<audio id="sound" src="https://www.myinstants.com/media/sounds/mixkit-click-melodic-tone-1129.mp3"></audio>
-
 <!-- TOAST -->
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
-<!-- RELÁMPAGOS -->
+<!-- ⭐ MELI EXCLUSIVO -->
+<div class="section">⭐ CUPÓN EXCLUSIVO MELI+</div>
+
+<div class="card">
+  SOLO USUARIOS MELI+
+
+  <div class="small">
+    Usa el cupón <b>MELIMASGOL</b> al momento de pagar.<br><br>
+
+    📌 Compra mínima: $4,000 MXN<br>
+    💰 Tope: $500 MXN<br><br>
+
+    ⏳ Vigencia: 22 de junio al 1 de julio
+  </div>
+
+  <button class="btn" onclick="go('MELIMASGOL')">VER CUPÓN</button>
+</div>
+
+<!-- ⚡ RELÁMPAGOS -->
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
 <div id="flashBox"></div>
 
-<!-- BANCOS -->
+<!-- 🏦 BANCOS -->
 <div class="section">🏦 CUPONES BANCARIOS 👇</div>
 <div id="banks"></div>
+
+<!-- WHATSAPP -->
+<a class="wa-float" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">💬</a>
 
 <script>
 
@@ -199,48 +194,21 @@ function showToast(){
   setTimeout(()=>t.classList.remove("show"),1200);
 }
 
-/* SONIDO */
-function playSound(){
-  const s = document.getElementById("sound");
-  s.currentTime = 0;
-  s.play();
-}
-
-<div class="section">⭐ CUPÓN EXCLUSIVO MELI</div>
-
-<div class="card flash">
-  ⭐ SOLO USUARIOS MELI+
-
-  <div class="small">
-    Usa el cupón <b>MELIMASGOL</b> al momento de pagar.<br><br>
-
-    📌 Aplica únicamente para usuarios Meli+<br>
-    🛒 Compra mínima: <b>$4,000 MXN</b><br>
-    💰 Descuento máximo: <b>$500 MXN</b><br><br>
-
-    ⏳ Vigencia: 22 de junio al 1 de julio
-  </div>
-
-  <button class="btn" onclick="go('MELIMASGOL')">
-    VER CUPÓN
-  </button>
-</div>
-
 /* RELÁMPAGOS */
 const flash = [
-{n:"SIEMPREFUT",m:"$2,000",d:"$215",c:"SIEMPREFUT"},
-{n:"DESCUENTO600",m:"$6,000",d:"$600",c:"DESCUENTO600"},
-{n:"JUEVES10",m:"$500",d:"$100",c:"JUEVES10"}
+{n:"SIEMPREFUT",m:"$2,000",d:"$215"},
+{n:"DESCUENTO600",m:"$6,000",d:"$600"},
+{n:"JUEVES10",m:"$500",d:"$100"}
 ];
 
 const flashBox = document.getElementById("flashBox");
 
 flash.forEach(f=>{
   flashBox.innerHTML += `
-  <div class="card flash">
+  <div class="card">
     ⚡ ${f.n}
     <div class="small">📌 Compra mínima: ${f.m} | 💰 Descuento: ${f.d}</div>
-    <button class="reveal" onclick="go('${f.c}')">VER CUPÓN</button>
+    <button class="btn" onclick="go('${f.n}')">VER CUPÓN</button>
   </div>`;
 });
 
@@ -268,7 +236,7 @@ bancos.forEach(b=>{
   </div>`;
 });
 
-/* FUNCION PRINCIPAL */
+/* FUNCIÓN PRINCIPAL */
 function go(code){
 
   navigator.clipboard.writeText(code).catch(()=>{});
@@ -277,12 +245,11 @@ function go(code){
   localStorage.setItem("clicks",clicks);
   document.getElementById("counter").innerText = "👆 Clics: " + clicks;
 
-  playSound();
   showToast();
 
   setTimeout(()=>{
     window.location.href = link;
-  },600);
+  },500);
 }
 
 </script>
