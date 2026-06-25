@@ -3,37 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔥 Cupones Relámpago ML</title>
+<title>🔥 El Patrón de las Ofertas EXTREMO</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial;
-  background:#f5f5f5;
+  background:#f4f4f4;
+  color:#111;
 }
 
+/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:14px;
   text-align:center;
+  font-weight:900;
+  font-size:18px;
+}
+
+/* LOGO */
+.logo{
+  display:flex;
+  justify-content:center;
+  margin:12px 0;
+}
+.logo img{
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  border:3px solid #ffcc00;
+}
+
+/* CONTADOR */
+.counter{
+  text-align:center;
+  background:#111;
+  color:#fff;
+  padding:8px;
   font-weight:bold;
-  animation:pulse 2s infinite;
 }
 
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.02)}
-  100%{transform:scale(1)}
+/* TITULOS */
+.section{
+  text-align:center;
+  font-weight:900;
+  margin:15px 0 5px;
+  font-size:16px;
 }
 
+/* CARD */
 .card{
   background:#fff;
   margin:10px;
   padding:12px;
   border-radius:10px;
   box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  font-weight:600;
 }
 
+/* BOTÓN */
 .btn{
   width:100%;
   padding:12px;
@@ -41,25 +70,30 @@ header{
   border-radius:8px;
   background:#00c853;
   color:#fff;
-  font-weight:bold;
+  font-weight:900;
   cursor:pointer;
-  margin-top:6px;
+  margin-top:8px;
 }
 
-.counter{
-  text-align:center;
-  background:#111;
+/* OCULTO RELÁMPAGOS */
+.hidden{
+  display:none;
+}
+
+.reveal{
+  background:#2962ff;
   color:#fff;
-  padding:8px;
-  font-size:14px;
+  font-weight:900;
+  padding:10px;
+  border-radius:8px;
+  width:100%;
+  border:0;
 }
 
-/* RELÁMPAGOS DESTACADOS */
+/* HIGHLIGHT */
 .flash{
   border:2px solid #ffcc00;
-  box-shadow:0 0 10px #ffcc00;
 }
-
 .small{
   font-size:13px;
   color:#333;
@@ -69,93 +103,109 @@ header{
 
 <body>
 
-<header>⚡🔥 CUPONES RELÁMPAGO ML 🔥⚡</header>
+<header>⚡🔥 EL PATRÓN DE LAS OFERTAS EXTREMO 🔥⚡</header>
 
-<div class="counter" id="counter"></div>
+<!-- LOGO -->
+<div class="logo">
+  <img src="https://i.imgur.com/yourlogo.png">
+</div>
 
-<!-- 🔥 RELÁMPAGOS PRIMERO -->
-<div id="flash"></div>
+<div class="counter" id="counter">Clics: 0</div>
 
-<!-- 🏦 BANCOS -->
+<!-- RELÁMPAGOS -->
+<div class="section">⚡ CUPONES RELÁMPAGO (OCULTOS)</div>
+
+<div id="flashBox"></div>
+
+<!-- BANCOS -->
+<div class="section">🏦 CUPONES BANCARIOS 👇</div>
+
 <div id="banks"></div>
 
 <script>
 
 const link = "https://meli.la/1mj3itE";
 
-/* CUPONES RELÁMPAGO (PRIMERO) */
+/* clics */
+let clicks = localStorage.getItem("clicks") || 0;
+document.getElementById("counter").innerText = "👆 Clics: " + clicks;
+
+/* RELÁMPAGOS (OCULTOS HASTA CLIC) */
 const flash = [
-{
-name:"SIEMPREFUT",
-min:"$2,000",
-cap:"$215",
-code:"SIEMPREFUT"
-},
-{
-name:"DESCUENTO600",
-min:"$6,000",
-cap:"$600",
-code:"DESCUENTO600"
-},
-{
-name:"JUEVES10",
-min:"$500",
-cap:"$100",
-code:"JUEVES10"
-}
+{n:"SIEMPREFUT",m:"$2,000",d:"$215",c:"SIEMPREFUT"},
+{n:"DESCUENTO600",m:"$6,000",d:"$600",c:"DESCUENTO600"},
+{n:"JUEVES10",m:"$500",d:"$100",c:"JUEVES10"}
 ];
+
+const flashBox = document.getElementById("flashBox");
+
+flash.forEach((f,i)=>{
+  flashBox.innerHTML += `
+  <div class="card flash">
+    ⚡ Cupón Relámpago #${i+1}
+    <div class="small">📌 Compra mínima: ${f.m} | 💰 Descuento: ${f.d}</div>
+
+    <button class="reveal" onclick="revealFlash(this,'${f.c}')">
+      VER CUPÓN
+    </button>
+
+    <div class="hidden" style="margin-top:8px;font-weight:900;">
+      🎟️ ${f.c}
+    </div>
+  </div>`;
+});
 
 /* BANCOS */
 const bancos = [
-{n:"Mercado Pago",m:"$4000",c:"TCMPGOL"},
-{n:"Meses sin tarjeta",m:"$2500",c:"MSTGOL"},
-{n:"BBVA",m:"$4500",c:"BBVAGOL"},
-{n:"HSBC",m:"$3000",c:"HSBCGOL"},
-{n:"Banorte",m:"$3000",c:"BNRTGOL"},
-{n:"Santander",m:"$2500",c:"SANTGOL"},
-{n:"AMEX",m:"$4500",c:"AMEXGOL"},
-{n:"Afirme",m:"$2500",c:"AFRMGOL"},
-{n:"Mifel",m:"$2500",c:"MIFEGOL"}
+["Mercado Pago","$4000","$500","TCMPGOL"],
+["Meses sin tarjeta","$2500","$500","MSTGOL"],
+["BBVA","$4500","$500","BBVAGOL"],
+["HSBC","$3000","$500","HSBCGOL"],
+["Banorte","$3000","$500","BNRTGOL"],
+["Santander","$2500","$500","SANTGOL"],
+["AMEX","$4500","$500","AMEXGOL"],
+["Afirme","$2500","$1000","AFRMGOL"],
+["Mifel","$2500","$750","MIFEGOL"]
 ];
 
-const flashDiv = document.getElementById("flash");
-const banksDiv = document.getElementById("banks");
+const banks = document.getElementById("banks");
 
-/* RENDER RELÁMPAGOS */
-flash.forEach(f=>{
-  flashDiv.innerHTML += `
-  <div class="card flash">
-    ⚡ ${f.name}
-    <div class="small">📌 ${f.min} | 💰 ${f.cap}</div>
-    <button class="btn" onclick="go('${f.code}')">VER CUPÓN</button>
-  </div>`;
-});
-
-/* RENDER BANCOS */
 bancos.forEach(b=>{
-  banksDiv.innerHTML += `
+  banks.innerHTML += `
   <div class="card">
-    🏦 ${b.n}
-    <div class="small">📌 ${b.m}</div>
-    <button class="btn" onclick="go('${b.c}')">VER CUPÓN</button>
+    🏦 ${b[0]}
+    <div class="small">📌 Compra mínima: ${b[1]} | 💰 Tope: ${b[2]}</div>
+    <button class="btn" onclick="go('${b[3]}')">VER CUPÓN</button>
   </div>`;
 });
 
-/* FUNCION VIRAL */
+/* FUNCION PRINCIPAL */
 function go(code){
 
-  // copiar cupón
   navigator.clipboard.writeText(code).catch(()=>{});
 
-  // redirigir a meli
+  clicks++;
+  localStorage.setItem("clicks",clicks);
+  document.getElementById("counter").innerText = "👆 Clics: " + clicks;
+
   setTimeout(()=>{
     window.location.href = link;
-  },400);
+  },500);
 }
 
-/* contador */
-document.getElementById("counter").innerHTML =
-"🎟️ Cupones activos: " + (flash.length + bancos.length);
+/* RELÁMPAGO: REVELAR + COPIAR */
+function revealFlash(btn,code){
+
+  navigator.clipboard.writeText(code).catch(()=>{});
+
+  btn.innerText = "COPIADO ✔";
+
+  btn.nextElementSibling.classList.remove("hidden");
+
+  setTimeout(()=>{
+    window.location.href = link;
+  },600);
+}
 
 </script>
 
