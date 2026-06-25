@@ -12,23 +12,13 @@ body{
   background:#f5f5f5;
 }
 
-/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:14px;
   text-align:center;
   font-weight:bold;
-  animation:pulse 2s infinite;
 }
 
-/* ANIMACIÓN */
-@keyframes pulse{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.02)}
-  100%{transform:scale(1)}
-}
-
-/* LOGO */
 .logo{
   display:flex;
   justify-content:center;
@@ -38,30 +28,16 @@ header{
   width:90px;
   height:90px;
   border-radius:50%;
-  animation:float 3s infinite ease-in-out;
-}
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-5px)}
-  100%{transform:translateY(0)}
 }
 
-/* CARD */
 .card{
   background:#fff;
   margin:10px;
   padding:12px;
   border-radius:10px;
   box-shadow:0 2px 8px rgba(0,0,0,0.1);
-  animation:fadeIn 0.6s ease;
 }
 
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(10px)}
-  to{opacity:1; transform:translateY(0)}
-}
-
-/* BOTÓN */
 .btn{
   width:100%;
   padding:12px;
@@ -71,14 +47,9 @@ header{
   color:#fff;
   font-weight:bold;
   cursor:pointer;
-  transition:0.2s;
+  margin-top:6px;
 }
 
-.btn:active{
-  transform:scale(0.97);
-}
-
-/* CONTADOR */
 .counter{
   text-align:center;
   background:#111;
@@ -87,26 +58,19 @@ header{
   font-size:14px;
 }
 
-/* WHATSAPP */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:#fff;
-  padding:15px;
-  border-radius:50%;
-  font-size:20px;
-  text-decoration:none;
-  box-shadow:0 2px 10px rgba(0,0,0,0.3);
+/* RELÁMPAGOS OCULTOS */
+.hidden{
+  display:none;
 }
 
-/* PANEL STATS */
-.stats{
-  text-align:center;
-  font-size:13px;
-  margin:10px;
-  color:#333;
+.toggleBtn{
+  background:#2962ff;
+  width:100%;
+  padding:10px;
+  border:0;
+  color:#fff;
+  border-radius:8px;
+  font-weight:bold;
 }
 </style>
 </head>
@@ -116,71 +80,103 @@ header{
 <header>👑 EL PATRÓN DE LAS OFERTAS PRO</header>
 
 <div class="logo">
-  <img src="https://i.imgur.com/yourlogo.png" alt="logo">
+  <img src="https://i.imgur.com/yourlogo.png">
 </div>
 
 <div class="counter" id="counter"></div>
 
-<div class="stats">
-👆 Clics totales: <span id="clicks">0</span>
-</div>
-
-<!-- SONIDO -->
-<audio id="sound" src="https://www.myinstants.com/media/sounds/mixkit-fast-small-sweep-transition-166.mp3"></audio>
-
 <!-- MELI+ -->
 <div class="card">
-⭐ Meli+ Exclusivo
+⭐ Meli+ Exclusivo (10%)
+📌 Compra mínima: $4000  
+💰 Tope: $500  
 <button class="btn" onclick="go()">VER CUPÓN</button>
 </div>
 
-<!-- BANCOS -->
+<!-- CUPONES BANCARIOS -->
 <div id="banks"></div>
 
-<!-- RELÁMPAGO -->
+<!-- RELÁMPAGOS OCULTOS -->
 <div class="card">
-⚡ Cupones Relámpago<br><br>
-<button class="btn" onclick="go()">SIEMPREFUT</button><br><br>
-<button class="btn" onclick="go()">DESCUENTO600</button><br><br>
-<button class="btn" onclick="go()">JUEVES10</button>
-</div>
+⚡ Cupones Relámpago
+<button class="toggleBtn" onclick="toggle()">Mostrar relámpagos</button>
 
-<!-- WHATSAPP -->
-<a class="whatsapp" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">💬</a>
+<div id="flash" class="hidden">
+
+<br>
+🎟️ SIEMPREFUT  
+📌 $2,000 mínimo | 💰 $215 off  
+<button class="btn" onclick="go()">VER CUPÓN</button>
+
+<br><br>
+
+🎟️ DESCUENTO600  
+📌 $6,000 mínimo | 💰 $600 off  
+<button class="btn" onclick="go()">VER CUPÓN</button>
+
+<br><br>
+
+🎟️ JUEVES10  
+📌 $500 mínimo | 💰 $100 off  
+<button class="btn" onclick="go()">VER CUPÓN</button>
+
+</div>
+</div>
 
 <script>
 
 const link = "https://meli.la/1mj3itE";
 
 const bancos = [
-"Mercado Pago","Meses sin tarjeta","BBVA","HSBC",
-"Banorte","Santander","AMEX","Afirme","Mifel"
+{
+name:"Mercado Pago",min:"$4000",cap:"$500"
+},
+{
+name:"Meses sin tarjeta",min:"$2500",cap:"$500"
+},
+{
+name:"BBVA",min:"$4500",cap:"$500"
+},
+{
+name:"HSBC",min:"$3000",cap:"$500"
+},
+{
+name:"Banorte",min:"$3000",cap:"$500"
+},
+{
+name:"Santander",min:"$2500",cap:"$500"
+},
+{
+name:"AMEX",min:"$4500",cap:"$500"
+},
+{
+name:"Afirme",min:"$2500",cap:"$1000"
+},
+{
+name:"Mifel",min:"$2500",cap:"$750"
+}
 ];
 
 const banks = document.getElementById("banks");
 
-for(let i=0;i<bancos.length;i++){
+bancos.forEach(b=>{
   banks.innerHTML += `
   <div class="card">
-    🏦 ${bancos[i]}
+    🏦 ${b.name} (10% OFF)
+    <br>📌 Compra mínima: ${b.min}
+    <br>💰 Tope: ${b.cap}
     <button class="btn" onclick="go()">VER CUPÓN</button>
   </div>`;
-}
-
-/* SONIDO + CLICS */
-let clicks = localStorage.getItem("clicks") || 0;
-document.getElementById("clicks").innerText = clicks;
+});
 
 function go(){
-  clicks++;
-  localStorage.setItem("clicks", clicks);
-  document.getElementById("clicks").innerText = clicks;
+  window.location.href = link;
+}
 
-  document.getElementById("sound").play();
-
-  setTimeout(()=>{
-    window.location.href = link;
-  },500);
+/* RELÁMPAGOS */
+function toggle(){
+  const f = document.getElementById("flash");
+  f.style.display = (f.style.display === "block") ? "none" : "block";
 }
 
 /* CONTADOR */
