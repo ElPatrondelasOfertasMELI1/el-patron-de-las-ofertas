@@ -143,139 +143,21 @@ Aquí manda el ahorro
 </div>
 
 <div class="contador">
-🎟️ Cupones activos: 7
+🎟️ Cupones activos: 3
 </div>
 
 <div class="cupon">
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>El Patrón de las Ofertas</title>
 
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #0f0f0f;
-    color: white;
-    margin: 0;
-    padding: 20px;
-  }
-
-  h1 {
-    text-align: center;
-    color: gold;
-  }
-
-  .coupon {
-    background: #1c1c1c;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 12px;
-    border: 1px solid #333;
-  }
-
-  .tag {
-    color: #00ff99;
-    font-weight: bold;
-  }
-
-  .btn {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 12px;
-    background: gold;
-    color: black;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    text-decoration: none;
-  }
-
-  .copy {
-    background: #333;
-    color: white;
-    margin-left: 10px;
-  }
-
-  .small {
-    font-size: 12px;
-    opacity: 0.8;
-  }
-</style>
-</head>
-
-<body>
-
-<h1>🔥 El Patrón de las Ofertas 🔥</h1>
-
-<div id="container"></div>
-
-<script>
-const redirectLink = "https://meli.la/1mj3itE";
-
-const coupons = [
-  {bank:"Mercado Pago", off:"10% OFF", code:"TCMPGOL", min:"$4000", cap:"$500"},
-  {bank:"Mercado Pago MSI", off:"10% OFF", code:"MSTGOL", min:"$2500", cap:"$500"},
-  {bank:"BBVA", off:"10% OFF", code:"BBVAGOL", min:"$4500", cap:"$500"},
-  {bank:"HSBC", off:"10% OFF", code:"HSBCGOL", min:"$3000", cap:"$500"},
-  {bank:"Banorte", off:"10% OFF", code:"BNRTGOL", min:"$3000", cap:"$500"},
-  {bank:"Santander", off:"10% OFF", code:"SANTGOL", min:"$2500", cap:"$500"},
-  {bank:"AMEX", off:"10% OFF", code:"AMEXGOL", min:"$4500", cap:"$500"},
-  {bank:"Afirme", off:"10% OFF", code:"AFRMGOL", min:"$2500", cap:"$1000"},
-  {bank:"Mifel", off:"15% OFF", code:"MIFEGOL", min:"$2500", cap:"$750"},
-  {bank:"Meli+", off:"5% OFF", code:"MELIMASGOL", min:"$4000", cap:"$500"},
-
-  {bank:"Cupón general", off:"$200 OFF", code:"VERANOREBAJAS", min:"$2000", cap:"$200"},
-  {bank:"Cupón especial", off:"$700 OFF", code:"QUEGANEMEX", min:"$7000", cap:"$700"},
-  {bank:"Flash", off:"10% OFF", code:"YAPIDE", min:"$500", cap:"$100"},
-  {bank:"Flash 12", off:"$390 OFF", code:"12FLASH", min:"$3250", cap:"$390"},
-];
-
-const container = document.getElementById("container");
-
-function copy(text){
-  navigator.clipboard.writeText(text);
-  alert("Código copiado: " + text);
-}
-
-coupons.forEach(c => {
-  const div = document.createElement("div");
-  div.className = "coupon";
-
-  div.innerHTML = `
-    <div><span class="tag">${c.bank}</span></div>
-    <div>${c.off}</div>
-    <div><b>🎟️ ${c.code}</b></div>
-    <div class="small">Compra mínima: ${c.min} | Tope: ${c.cap}</div>
-
-    <a class="btn" href="${redirectLink}" target="_blank">
-      🔥 Usar cupón
-    </a>
-
-    <button class="btn copy" onclick="copy('${c.code}')">
-      📋 Copiar código
-    </button>
-  `;
-
-  container.appendChild(div);
-});
-</script>
-
-</body>
-</html>
 <h3>🔥 Cupón General</h3>
 
-<p>$1,000 OFF</p>
+<p>$200 OFF</p>
 
 <div class="oculto" id="c1">
 ************
 </div>
 
 <button class="btn"
-onclick="activarCupon('MERCADOLIBRE','https://meli.la/1mj3itE','c1')">
+onclick="activarCupon('VERANOREBAJAS','https://meli.la/2rSJqhZ','c1')">
 
 🚀 Copiar y Activar
 
