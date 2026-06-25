@@ -1,4 +1,159 @@
-<!-- ⭐ MELI (AGREGADO OCULTO SIN ROMPER TU SISTEMA) -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Patrón de las Ofertas</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f4f4f4;
+  color:#111;
+}
+
+header{
+  background:linear-gradient(90deg,#ffe600,#ffcc00);
+  padding:14px;
+  text-align:center;
+  font-weight:900;
+  font-size:18px;
+}
+
+/* LOGO MEJORADO */
+.logo{
+  display:flex;
+  justify-content:center;
+  margin:12px 0;
+}
+
+.logo-box{
+  width:180px;
+  height:90px;
+  border-radius:14px;
+  background:#111;
+  color:#ffcc00;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  text-align:center;
+  font-size:14px;
+  border:3px solid #ffcc00;
+  box-shadow:0 0 12px rgba(255,204,0,0.4);
+}
+
+/* CONTADOR */
+.counter{
+  text-align:center;
+  background:#111;
+  color:#fff;
+  padding:8px;
+  font-weight:bold;
+}
+
+/* SECCIÓN */
+.section{
+  text-align:center;
+  font-weight:900;
+  margin:15px 0 5px;
+}
+
+/* CARD */
+.card{
+  background:#fff;
+  margin:10px;
+  padding:12px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  font-weight:600;
+}
+
+/* BOTÓN */
+.btn{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:8px;
+  background:#00c853;
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+/* RELÁMPAGOS LINEA AMARILLA */
+.flash{
+  border-left:5px solid #ffcc00;
+}
+
+/* STATUS */
+.status{
+  font-size:12px;
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:10px 15px;
+  border-radius:8px;
+  opacity:0;
+  transition:0.3s;
+  font-weight:900;
+}
+.toast.show{
+  opacity:1;
+}
+
+/* WHATSAPP */
+.wa{
+  position:fixed;
+  bottom:18px;
+  right:18px;
+  width:55px;
+  height:55px;
+  background:#25D366;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  text-decoration:none;
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+</style>
+</head>
+
+<body>
+
+<header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
+
+<!-- LOGO -->
+<div class="logo">
+  <div class="logo-box">
+    EL PATRÓN<br>DE LAS OFERTAS
+  </div>
+</div>
+
+<div class="counter" id="counter">👆 Clics: 0</div>
+
+<div id="toast" class="toast">CUPÓN COPIADO ✔</div>
+
+<!-- ⭐ MELI -->
 <div class="section">⭐ CUPÓN EXCLUSIVO MELI+</div>
 
 <div class="card">
@@ -7,16 +162,104 @@
   <button class="btn" onclick="go('MELIMASGOL')">VER CUPÓN</button>
 </div>
 
-<!-- ⚡ RELÁMPAGOS (ACTUALIZADO CON NUEVOS) -->
+<!-- ⚡ RELÁMPAGOS -->
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
 <div id="flashBox"></div>
 
+<!-- 🏦 BANCOS -->
+<div class="section">🏦 CUPONES BANCARIOS 👇</div>
+<div id="banks"></div>
+
+<!-- WHATSAPP -->
+<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x" target="_blank">💬</a>
+
 <script>
+
+const link = "https://meli.la/1mj3itE";
+
+/* CLICS */
+let clicks = localStorage.getItem("clicks") || 0;
+document.getElementById("counter").innerText = "👆 Clics: " + clicks;
+
+/* TOAST */
+function toast(){
+  const t=document.getElementById("toast");
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1200);
+}
+
+/* HORA STATUS RELÁMPAGOS */
+function getStatus(){
+  const h = new Date().getHours();
+  if(h >= 9 && h < 12) return "🟢 ACTIVO";
+  if(h >= 12 && h < 24) return "🟠 POR AGOTARSE";
+  return "🔴 AGOTADO";
+}
+
+/* CLICK */
+function go(code){
+
+  navigator.clipboard.writeText(code).catch(()=>{});
+
+  clicks++;
+  localStorage.setItem("clicks",clicks);
+  document.getElementById("counter").innerText = "👆 Clics: " + clicks;
+
+  toast();
+
+  setTimeout(()=>{
+    window.location.href = link;
+  },500);
+}
+
+/* RELÁMPAGOS (OCULTOS HASTA CLIC) */
 const flash = [
 {n:"SIEMPREFUT",m:"$2,000",d:"$215"},
 {n:"DESCUENTO600",m:"$6,000",d:"$600"},
 {n:"JUEVES10",m:"$500",d:"$100"},
-{n:"JUEVESMIL",m:"$5,000",d:"$1,000"},   // 🔥 NUEVO
-{n:"OCHOMIL",m:"$8,000",d:"$1,500"}     // 🔥 NUEVO
+
+// 🔥 CUPONES NUEVOS AGREGADOS
+{n:"JUEVESMIL",m:"$10,000",d:"$1,000"},
+{n:"OCHOMIL",m:"$8,000",d:"$800"}
 ];
+
+const flashBox=document.getElementById("flashBox");
+
+flash.forEach(f=>{
+  flashBox.innerHTML += `
+  <div class="card flash">
+    <div class="status">${getStatus()}</div>
+    ⚡ ${f.n}
+    <div class="small">📌 Compra mínima: ${f.m} | 💰 Descuento: ${f.d}</div>
+    <button class="btn" onclick="go('${f.n}')">VER CUPÓN</button>
+  </div>`;
+});
+
+/* BANCOS */
+const bancos = [
+["Mercado Pago","$4000","$500","TCMPGOL"],
+["Meses sin tarjeta","$2500","$500","MSTGOL"],
+["BBVA","$4500","$500","BBVAGOL"],
+["HSBC","$3000","$500","HSBCGOL"],
+["Banorte","$3000","$500","BNRTGOL"],
+["Santander","$2500","$500","SANTGOL"],
+["AMEX","$4500","$500","AMEXGOL"],
+["Afirme","$2500","$1000","AFRMGOL"],
+["Mifel","$2500","$750","MIFEGOL"]
+];
+
+const banks=document.getElementById("banks");
+
+bancos.forEach(b=>{
+  banks.innerHTML += `
+  <div class="card">
+    🏦 ${b[0]}
+    <div class="small">📌 Compra mínima: ${b[1]} | 💰 Tope: ${b[2]}</div>
+    <button class="btn" onclick="go('${b[3]}')">VER CUPÓN</button>
+  </div>`;
+});
+
 </script>
+
+</body>
+</html>
