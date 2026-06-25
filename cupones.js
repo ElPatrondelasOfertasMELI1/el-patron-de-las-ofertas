@@ -20,14 +20,4 @@ link:"https://meli.la/12Wui4z",
 activo:true
 }
 
-{
-categoria:"Exclusivo MELI+",
-titulo:"10% OFF",
-descuento:"Tope $1,000",
-minimo:"Compra mínima $10,000",
-codigo:"MELIMEXI",
-link:"https://meli.la/12Wui4z",
-activo:true
-}
-
 ];
