@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>El Patrón de las Ofertas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:'Montserrat', sans-serif;
+  font-family:'Inter', sans-serif;
   background:#f4f4f4;
-  overflow-x:hidden;
   color:#111;
+  overflow-x:hidden;
 }
 
 /* HEADER */
@@ -25,23 +25,23 @@ header{
   font-size:18px;
 }
 
-/* BOTÓN MENÚ */
+/* MENU BOTÓN */
 .menu-btn{
   position:fixed;
   top:15px;
   left:15px;
-  width:50px;
-  height:50px;
+  width:48px;
+  height:48px;
   border-radius:14px;
   background:rgba(255,255,255,0.4);
   backdrop-filter:blur(12px);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:24px;
+  font-size:22px;
   font-weight:900;
-  cursor:pointer;
   z-index:999;
+  cursor:pointer;
 }
 
 /* SIDEBAR CRISTAL */
@@ -52,13 +52,14 @@ header{
   width:270px;
   height:100%;
   background:rgba(0,0,0,0.65);
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(15px);
   padding:15px;
   transition:0.3s;
+  overflow-y:auto;
   z-index:998;
 }
 
-/* BOTONES MENU */
+/* MENU ITEMS */
 .menu-item{
   display:block;
   padding:12px;
@@ -70,11 +71,25 @@ header{
   font-weight:700;
 }
 
+/* LOGO */
+.logo{
+  display:flex;
+  justify-content:center;
+  margin:14px 0;
+}
+
+.logo img{
+  width:160px;
+  border-radius:14px;
+  border:3px solid #ffcc00;
+  box-shadow:0 4px 12px rgba(0,0,0,0.15);
+}
+
 /* SECCIONES */
 .section{
   text-align:center;
   font-weight:900;
-  margin:15px 0 10px;
+  margin:15px 0 8px;
   font-size:16px;
 }
 
@@ -102,7 +117,7 @@ header{
 /* ESTADOS */
 .status{
   font-weight:900;
-  margin-bottom:5px;
+  margin-bottom:6px;
 }
 
 .green{color:#00c853;}
@@ -128,8 +143,10 @@ header{
 
 <body>
 
+<!-- BOTÓN MENÚ -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
+<!-- SIDEBAR -->
 <div class="sidebar" id="menu">
 
   <div class="section" style="color:#ffcc00;">📂 Categorías</div>
@@ -150,12 +167,25 @@ header{
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- CUPONES RELÁMPAGO -->
+<!-- LOGO -->
+<div class="logo">
+  <img src="logo.png.PNG" alt="El Patrón de las Ofertas" onerror="this.style.display='none'">
+</div>
+
+<!-- MELI VIP -->
+<div class="section">⭐ VIP MELI+ PRIORIDAD</div>
+<div class="card">
+  <b>Acceso prioritario a descuentos exclusivos</b>
+  <div>💰 Compra mínima: $4,000 | 🎟️ Descuento: $500</div>
+  <button class="btn" onclick="go('MELIMASGOL')">COPIAR CUPÓN</button>
+</div>
+
+<!-- RELÁMPAGOS -->
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
 <div id="flashBox"></div>
 
 <!-- BANCARIOS -->
-<div class="section">🏦 CUPONES BANCARIOS</div>
+<div class="section">🏦 CUPONES BANCARIOS (ACTIVOS)</div>
 <div id="banks"></div>
 
 <a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
@@ -169,7 +199,7 @@ function toggleMenu(){
 
 let clicks=0;
 
-/* ESTADO AUTOMATICO */
+/* ESTADO AUTOMÁTICO */
 function getStatus(){
   const h=new Date().getHours();
   if(h<4) return "green";
@@ -177,49 +207,49 @@ function getStatus(){
   return "red";
 }
 
-/* COPIAR CUPON */
+/* COPIAR CUPÓN */
 function go(code){
   navigator.clipboard.writeText(code);
   alert("CUPÓN COPIADO ✔");
   window.location.href="https://meli.la/1mj3itE";
 }
 
-/* RELÁMPAGOS OCULTOS */
+/* RELÁMPAGOS */
 const flash=[
-{n:"SIEMPREFUT",m:"$2,000",d:"$215"},
-{n:"DESCUENTO600",m:"$6,000",d:"$600"},
-{n:"JUEVES10",m:"$500",d:"$100"}
+{n:"SIEMPREFUT",m:"2000",d:"215"},
+{n:"DESCUENTO600",m:"6000",d:"600"},
+{n:"JUEVES10",m:"500",d:"100"}
 ];
 
 flash.forEach((f,i)=>{
   document.getElementById("flashBox").innerHTML+=`
   <div class="card">
-    <div class="status ${getStatus()}">● ESTADO</div>
+    <div class="status ${getStatus()}">● ${getStatus().toUpperCase()}</div>
     ⚡ Cupón relámpago #${i+1}
-    <div>📌 ${f.m} | 💰 ${f.d}</div>
+    <div>📌 $${Number(f.m).toLocaleString()} | 💰 $${Number(f.d).toLocaleString()}</div>
     <button class="btn" onclick="go('${f.n}')">COPIAR CUPÓN</button>
   </div>`;
 });
 
-/* BANCOS COMPLETOS */
+/* BANCARIOS */
 const bancos=[
-["Mercado Pago","$4000","$500","TCMPGOL"],
-["Meses sin tarjeta","$2500","$500","MSTGOL"],
-["BBVA","$4500","$500","BBVAGOL"],
-["HSBC","$3000","$500","HSBCGOL"],
-["Banorte","$3000","$500","BNRTGOL"],
-["Santander","$2500","$500","SANTGOL"],
-["AMEX","$4500","$500","AMEXGOL"],
-["Afirme","$2500","$1000","AFRMGOL"],
-["Mifel","$2500","$750","MIFEGOL"],
-["Meli+","$4000","$500","MELIMASGOL"]
+["Mercado Pago","4000","500","TCMPGOL"],
+["Meses sin tarjeta","2500","500","MSTGOL"],
+["BBVA","4500","500","BBVAGOL"],
+["HSBC","3000","500","HSBCGOL"],
+["Banorte","3000","500","BNRTGOL"],
+["Santander","2500","500","SANTGOL"],
+["AMEX","4500","500","AMEXGOL"],
+["Afirme","2500","1000","AFRMGOL"],
+["Mifel","2500","750","MIFEGOL"],
+["Meli+","4000","500","MELIMASGOL"]
 ];
 
 bancos.forEach(b=>{
   document.getElementById("banks").innerHTML+=`
   <div class="card">
     🏦 <b>${b[0]}</b>
-    <div>📌 ${b[1]} | 💰 ${b[2]}</div>
+    <div>📌 $${Number(b[1]).toLocaleString()} | 💰 $${Number(b[2]).toLocaleString()}</div>
     <button class="btn" onclick="go('${b[3]}')">COPIAR CUPÓN</button>
   </div>`;
 });
