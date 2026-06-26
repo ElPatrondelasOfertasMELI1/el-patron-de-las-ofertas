@@ -305,9 +305,19 @@ dailyCoupons.forEach(c=>{
   daily.innerHTML += `
   <div class="flash-box">
     <div class="status">
-      <span class="dot ${s.color}"></span>
-      ${s.text}
-    </div>
+  <span class="dot ${s.color}"></span>
+  ${s.text}
+</div>
+
+<div style="
+  font-size:16px;
+  font-weight:900;
+  margin:6px 0 10px 0;
+  text-align:center;
+  letter-spacing:0.5px;
+">
+  CUPÓN RELÁMPAGO ⚡️
+</div>
 
     📌 Compra mínima: $${c.min.toLocaleString()}<br>
     💰 Descuento máximo: $${c.max.toLocaleString()}
