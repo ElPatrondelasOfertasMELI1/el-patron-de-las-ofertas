@@ -22,7 +22,6 @@ header{
   padding:14px;
   text-align:center;
   font-weight:900;
-  font-size:18px;
 }
 
 /* MENU */
@@ -109,13 +108,13 @@ header{
   margin-top:10px;
 }
 
-/* DINERO PRO */
+/* MONEY */
 .money{
   font-size:17px;
   font-weight:900;
 }
 
-/* ESTADOS */
+/* STATUS */
 .status{
   display:flex;
   align-items:center;
@@ -134,19 +133,19 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
-/* CUPÓN MELI+ AZUL */
+/* VIP MELI+ */
 .vip{
   border:2px solid #1e88e5;
   background:#e3f2fd;
 }
 
-/* CUADRO AMARILLO */
+/* CUPÓN RELÁMPAGO */
 .flash-box{
-  margin:10px;
-  padding:10px;
   border:2px solid #ffcc00;
-  border-radius:12px;
   background:#fffbe6;
+  margin:10px;
+  padding:12px;
+  border-radius:12px;
 }
 
 /* TOAST */
@@ -218,18 +217,18 @@ header{
 <div class="card vip">
   <b>🎟️ Exclusivo usuarios MELI+</b>
   <div class="money">💰 $4,000 | 🎟️ $500 OFF</div>
-  <button class="btn" onclick="go('MELIMASGOL')">APLICAR CUPÓN</button>
+  <button class="btn" onclick="copyCoupon('MELIMASGOL')">COPIAR CUPÓN</button>
 </div>
 
 <!-- CUPONES DEL DÍA -->
-<div class="section">⚡ CUPONES DEL DÍA</div>
+<div class="section">⚡ CUPÓN RELÁMPAGO ⚡️</div>
 <div id="daily"></div>
 
 <!-- BANCARIOS -->
 <div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVOS</div>
 <div id="banks"></div>
 
-<div id="toast" class="toast">APLICAR CUPÓN</div>
+<div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
 <a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
 
@@ -240,21 +239,21 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
-/* TOAST */
-function toast(){
+/* TOAST + COPY + REDIRECT */
+function copyCoupon(code){
+  navigator.clipboard.writeText(code);
+
   const t=document.getElementById("toast");
+  t.innerText="CUPÓN COPIADO ✔";
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"),1200);
+
+  setTimeout(()=>{
+    window.location.href="https://meli.la/1mj3itE";
+  },600);
 }
 
-/* COPIAR */
-function go(code){
-  navigator.clipboard.writeText(code);
-  toast();
-  window.location.href="https://meli.la/1mj3itE";
-}
-
-/* ESTADO POR HORA */
+/* ESTADO HORARIO */
 function getStatus(){
   const h=new Date().getHours();
   if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
@@ -262,35 +261,15 @@ function getStatus(){
   return {text:"AGOTADO", color:"red"};
 }
 
-const status = getStatus();
+const status=getStatus();
 
-/* CUPONES NUEVOS */
-const dailyCoupons = [
-{
-  code:"REBAJAS",
-  min:2000,
-  max:200
-},
-{
-  code:"12APROVECHA",
-  min:1000,
-  max:150
-},
-{
-  code:"VIERNES600",
-  min:6000,
-  max:600
-},
-{
-  code:"CUPON800",
-  min:8000,
-  max:800
-},
-{
-  code:"MILVIERNES",
-  min:10000,
-  max:1000
-}
+/* CUPONES RELÁMPAGO */
+const dailyCoupons=[
+{code:"REBAJAS",min:2000,max:200},
+{code:"12APROVECHA",min:1000,max:150},
+{code:"VIERNES600",min:6000,max:600},
+{code:"CUPON800",min:8000,max:800},
+{code:"MILVIERNES",min:10000,max:1000}
 ];
 
 const daily=document.getElementById("daily");
@@ -298,12 +277,21 @@ const daily=document.getElementById("daily");
 dailyCoupons.forEach((c,i)=>{
   daily.innerHTML+=`
   <div class="card flash-box">
-    <div class="status"><span class="dot ${status.color}"></span> ${status.text}</div>
-    ⚡ Cupón #${i+1}
 
-    <div class="money">📌 $${c.min.toLocaleString()} | 💰 $${c.max.toLocaleString()}</div>
+    <div class="status">
+      <span class="dot ${status.color}"></span>
+      ${status.text}
+    </div>
 
-    <button class="btn" onclick="go('${c.code}')">APLICAR CUPÓN</button>
+    ⚡ CUPÓN RELÁMPAGO #${i+1}
+
+    <div class="money">
+      📌 $${c.min.toLocaleString()} | 💰 $${c.max.toLocaleString()}
+    </div>
+
+    <button class="btn" onclick="copyCoupon('${c.code}')">
+      COPIAR CUPÓN
+    </button>
   </div>`;
 });
 
@@ -328,7 +316,7 @@ bancos.forEach(b=>{
   <div class="card">
     🏦 <b>${b[0]}</b>
     <div class="money">📌 $${b[1].toLocaleString()} | 💰 $${b[2].toLocaleString()}</div>
-    <button class="btn" onclick="go('${b[3]}')">APLICAR CUPÓN</button>
+    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR CUPÓN</button>
   </div>`;
 });
 
