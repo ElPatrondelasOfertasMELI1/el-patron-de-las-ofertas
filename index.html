@@ -53,7 +53,6 @@ header{
   padding:15px;
   transition:0.3s;
   z-index:998;
-  overflow-y:auto;
 }
 
 .menu-item{
@@ -73,28 +72,14 @@ header{
   margin:15px 0 8px;
 }
 
-.bbva-card{
-  margin:10px;
-  padding:16px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#061a3a,#0a4db8,#1e88e5);
-  color:#fff;
-}
-
-.meli-card{
-  margin:10px;
-  padding:16px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#0a4db8,#1e88e5);
-  color:#fff;
-}
-
+/* CARDS */
 .card{
   background:#fff;
   margin:10px;
   padding:14px;
   border-radius:14px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  font-weight:600;
 }
 
 .btn{
@@ -109,6 +94,25 @@ header{
   cursor:pointer;
 }
 
+/* BBVA */
+.bbva-card{
+  margin:10px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#061a3a,#0a4db8,#1e88e5);
+  color:#fff;
+}
+
+/* MELI+ */
+.meli-card{
+  margin:10px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#0a4db8,#1e88e5);
+  color:#fff;
+}
+
+/* FLASH */
 .flash-title{
   font-size:18px;
   font-weight:900;
@@ -123,6 +127,7 @@ header{
   border-radius:12px;
 }
 
+/* STATUS */
 .status{
   display:flex;
   align-items:center;
@@ -135,12 +140,14 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
+/* COUNTDOWN */
 .countdown{
   font-size:16px;
   font-weight:700;
   margin-top:8px;
 }
 
+/* TOAST */
 .toast{
   position:fixed;
   bottom:80px;
@@ -156,6 +163,7 @@ header{
 }
 .toast.show{opacity:1}
 
+/* WHATSAPP */
 .wa{
   position:fixed;
   bottom:18px;
@@ -197,6 +205,11 @@ header{
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
+<!-- LOGO RESTAURADO -->
+<div class="card" style="text-align:center;">
+  <img src="logo.png.PNG" style="width:160px;border-radius:14px;border:3px solid #ffcc00;">
+</div>
+
 <!-- BBVA -->
 <div class="bbva-card">
 💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
@@ -225,6 +238,10 @@ COPIAR CUPÓN
 <!-- RELÁMPAGOS -->
 <div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
 <div id="daily"></div>
+
+<!-- 🏦 BANCARIOS RESTAURADOS -->
+<div class="section flash-title">🏦 CUPONES BANCARIOS 🟢</div>
+<div id="banks"></div>
 
 <div id="toast" class="toast">COPIADO ✔</div>
 
@@ -295,6 +312,28 @@ dailyCoupons.forEach(c=>{
     📌 Compra mínima: $${c.min.toLocaleString()}<br>
     💰 Descuento máximo: $${c.max.toLocaleString()}
     <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
+  </div>`;
+});
+
+/* BANCARIOS RESTAURADOS */
+const bancos=[
+["BBVA",4500,500,"BBVAGOL"],
+["HSBC",3000,500,"HSBCGOL"],
+["Banorte",3000,500,"BNRTGOL"],
+["Santander",2500,500,"SANTGOL"],
+["AMEX",4500,500,"AMEXGOL"],
+["Afirme",2500,1000,"AFRMGOL"],
+["Mifel",2500,750,"MIFEGOL"]
+];
+
+const banks=document.getElementById("banks");
+
+bancos.forEach(b=>{
+  banks.innerHTML+=`
+  <div class="card">
+    🏦 <b>${b[0]}</b><br>
+    📌 Min: $${b[1].toLocaleString()} | 💰 Max: $${b[2].toLocaleString()}
+    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
   </div>`;
 });
 
