@@ -22,10 +22,9 @@ header{
   padding:14px;
   text-align:center;
   font-weight:900;
-  font-size:18px;
 }
 
-/* MENU BOTÓN */
+/* MENU */
 .menu-btn{
   position:fixed;
   top:15px;
@@ -44,7 +43,6 @@ header{
   cursor:pointer;
 }
 
-/* SIDEBAR CRISTAL */
 .sidebar{
   position:fixed;
   top:0;
@@ -55,11 +53,9 @@ header{
   backdrop-filter:blur(15px);
   padding:15px;
   transition:0.3s;
-  overflow-y:auto;
   z-index:998;
 }
 
-/* MENU ITEMS */
 .menu-item{
   display:block;
   padding:12px;
@@ -82,7 +78,6 @@ header{
   width:160px;
   border-radius:14px;
   border:3px solid #ffcc00;
-  box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
 /* SECCIONES */
@@ -90,7 +85,6 @@ header{
   text-align:center;
   font-weight:900;
   margin:15px 0 8px;
-  font-size:16px;
 }
 
 /* CARD */
@@ -114,15 +108,57 @@ header{
   margin-top:10px;
 }
 
+/* CUADRO AMARILLO RELÁMPAGO */
+.flash-box{
+  margin:10px;
+  padding:5px;
+  border:2px solid #ffcc00;
+  border-radius:12px;
+  background:#fffbe6;
+}
+
 /* ESTADOS */
 .status{
   font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:6px;
   margin-bottom:6px;
 }
 
-.green{color:#00c853;}
-.orange{color:#ff9800;}
-.red{color:#e53935;}
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.green{background:#00c853;}
+.orange{background:#ff9800;}
+.red{background:#e53935;}
+
+/* DINERO PRO */
+.money{
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:0.5px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:10px;
+  font-weight:900;
+  opacity:0;
+  transition:0.3s;
+}
+.toast.show{opacity:1}
 
 /* WHATSAPP */
 .wa{
@@ -143,10 +179,8 @@ header{
 
 <body>
 
-<!-- BOTÓN MENÚ -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<!-- SIDEBAR -->
 <div class="sidebar" id="menu">
 
   <div class="section" style="color:#ffcc00;">📂 Categorías</div>
@@ -167,28 +201,29 @@ header{
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- LOGO -->
 <div class="logo">
-  <img src="logo.png.PNG" alt="El Patrón de las Ofertas" onerror="this.style.display='none'">
+  <img src="logo.png.PNG">
 </div>
 
 <!-- MELI VIP -->
-<div class="section">⭐ VIP MELI+ PRIORIDAD</div>
+<div class="section">⭐ VIP MELI+</div>
 <div class="card">
-  <b>Acceso prioritario a descuentos exclusivos</b>
-  <div>💰 Compra mínima: $4,000 | 🎟️ Descuento: $500</div>
-  <button class="btn" onclick="go('MELIMASGOL')">COPIAR CUPÓN</button>
+  <b>Acceso prioritario</b>
+  <div class="money">💰 $4,000 | 🎟️ $500 OFF</div>
+  <button class="btn" onclick="go('MELIMASGOL')">APLICAR CUPÓN</button>
 </div>
 
 <!-- RELÁMPAGOS -->
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
-<div id="flashBox"></div>
+<div class="flash-box" id="flashBox"></div>
 
 <!-- BANCARIOS -->
-<div class="section">🏦 CUPONES BANCARIOS (ACTIVOS)</div>
+<div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVO</div>
 <div id="banks"></div>
 
-<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
+<div id="toast" class="toast">APLICAR CUPÓN</div>
+
+<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x"></a>
 
 <script>
 
@@ -197,9 +232,21 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
-let clicks=0;
+/* TOAST */
+function showToast(){
+  const t=document.getElementById("toast");
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1200);
+}
 
-/* ESTADO AUTOMÁTICO */
+/* COPIAR */
+function go(code){
+  navigator.clipboard.writeText(code);
+  showToast();
+  window.location.href="https://meli.la/1mj3itE";
+}
+
+/* ESTADO RELÁMPAGOS */
 function getStatus(){
   const h=new Date().getHours();
   if(h<4) return "green";
@@ -207,50 +254,43 @@ function getStatus(){
   return "red";
 }
 
-/* COPIAR CUPÓN */
-function go(code){
-  navigator.clipboard.writeText(code);
-  alert("CUPÓN COPIADO ✔");
-  window.location.href="https://meli.la/1mj3itE";
-}
-
 /* RELÁMPAGOS */
 const flash=[
-{n:"SIEMPREFUT",m:"2000",d:"215"},
-{n:"DESCUENTO600",m:"6000",d:"600"},
-{n:"JUEVES10",m:"500",d:"100"}
+{n:"SIEMPREFUT",m:2000,d:215},
+{n:"DESCUENTO600",m:6000,d:600},
+{n:"JUEVES10",m:500,d:100}
 ];
 
 flash.forEach((f,i)=>{
   document.getElementById("flashBox").innerHTML+=`
-  <div class="card">
-    <div class="status ${getStatus()}">● ${getStatus().toUpperCase()}</div>
+  <div class="card flash-box">
+    <div class="status"><span class="dot ${getStatus()}"></span> ${getStatus().toUpperCase()}</div>
     ⚡ Cupón relámpago #${i+1}
-    <div>📌 $${Number(f.m).toLocaleString()} | 💰 $${Number(f.d).toLocaleString()}</div>
-    <button class="btn" onclick="go('${f.n}')">COPIAR CUPÓN</button>
+    <div class="money">📌 $${f.m.toLocaleString()} | 💰 $${f.d.toLocaleString()}</div>
+    <button class="btn" onclick="go('${f.n}')">APLICAR CUPÓN</button>
   </div>`;
 });
 
-/* BANCARIOS */
+/* BANCARIOS (SIEMPRE ACTIVOS) */
 const bancos=[
-["Mercado Pago","4000","500","TCMPGOL"],
-["Meses sin tarjeta","2500","500","MSTGOL"],
-["BBVA","4500","500","BBVAGOL"],
-["HSBC","3000","500","HSBCGOL"],
-["Banorte","3000","500","BNRTGOL"],
-["Santander","2500","500","SANTGOL"],
-["AMEX","4500","500","AMEXGOL"],
-["Afirme","2500","1000","AFRMGOL"],
-["Mifel","2500","750","MIFEGOL"],
-["Meli+","4000","500","MELIMASGOL"]
+["Mercado Pago",4000,500,"TCMPGOL"],
+["Meses sin tarjeta",2500,500,"MSTGOL"],
+["BBVA",4500,500,"BBVAGOL"],
+["HSBC",3000,500,"HSBCGOL"],
+["Banorte",3000,500,"BNRTGOL"],
+["Santander",2500,500,"SANTGOL"],
+["AMEX",4500,500,"AMEXGOL"],
+["Afirme",2500,1000,"AFRMGOL"],
+["Mifel",2500,750,"MIFEGOL"],
+["Meli+",4000,500,"MELIMASGOL"]
 ];
 
 bancos.forEach(b=>{
   document.getElementById("banks").innerHTML+=`
   <div class="card">
     🏦 <b>${b[0]}</b>
-    <div>📌 $${Number(b[1]).toLocaleString()} | 💰 $${Number(b[2]).toLocaleString()}</div>
-    <button class="btn" onclick="go('${b[3]}')">COPIAR CUPÓN</button>
+    <div class="money">📌 $${b[1].toLocaleString()} | 💰 $${b[2].toLocaleString()}</div>
+    <button class="btn" onclick="go('${b[3]}')">APLICAR CUPÓN</button>
   </div>`;
 });
 
