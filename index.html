@@ -100,6 +100,7 @@ header{
   color:#fff;
   font-weight:900;
   margin-top:10px;
+  transition:0.3s;
 }
 
 .money{
@@ -134,7 +135,7 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
-/* ===== BBVA APP PRO CARD ===== */
+/* ===== BBVA MARKETPLACE REAL ===== */
 .bbva-card{
   margin:10px;
   padding:18px;
@@ -144,6 +145,7 @@ header{
   box-shadow:0 12px 30px rgba(0,0,0,0.3);
   position:relative;
   overflow:hidden;
+  border:2px solid rgba(255,255,255,0.15);
 }
 
 .bbva-card::before{
@@ -166,9 +168,7 @@ header{
   position:relative;
 }
 
-.bbva-chip{
-  font-size:28px;
-}
+.bbva-chip{font-size:28px;}
 
 .section-small{
   margin-top:10px;
@@ -183,33 +183,44 @@ header{
   margin:8px 0;
   color:#ffeb3b;
   text-shadow:0 2px 10px rgba(0,0,0,0.35);
-  position:relative;
 }
 
-/* INFO BLOQUE PRO */
+/* 🔥 BLOQUE MARKET REAL */
 .bbva-info{
   margin-top:10px;
   font-size:14px;
-  line-height:1.5;
+  line-height:1.6;
   opacity:0.95;
-  position:relative;
 }
 
-.bbva-info strong{
-  color:#fff;
+.market-badge{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 10px;
+  border-radius:8px;
+  font-weight:900;
+  background:rgba(0,0,0,0.25);
 }
 
+/* BOTÓN DINÁMICO */
 .bbva-btn{
   width:100%;
   padding:12px;
   border-radius:12px;
   border:none;
   font-weight:900;
-  background:#ffffff;
-  color:#0033a0;
   cursor:pointer;
   margin-top:12px;
-  position:relative;
+  transition:0.3s;
+  background:#888;
+  color:#fff;
+}
+
+.bbva-btn.active{
+  background:#ffffff;
+  color:#0033a0;
+  transform:scale(1.02);
+  box-shadow:0 0 15px rgba(255,255,255,0.3);
 }
 
 /* TOAST */
@@ -271,7 +282,7 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<!-- 🔥 BBVA APP PRO -->
+<!-- 🔥 BBVA MARKETPLACE REAL -->
 <div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
 
 <div class="bbva-card">
@@ -286,24 +297,24 @@ header{
 
   <div class="bbva-info">
 
-    <strong>25% con cupón:</strong> BBVAGOLAZO <br><br>
+    <strong>25% con cupón bancario</strong><br><br>
 
-    Usa el cupón <strong>BBVAGOLAZO</strong> al momento de pagar a una sola exhibición con tu Tarjeta de Crédito BBVA. <br><br>
+    Usa este beneficio al momento de pagar con Tarjeta de Crédito BBVA.<br><br>
 
-    Aplica en compras mínimas de <strong>$7,000 MXN</strong>. <br>
-    Descuento topado a <strong>$2,000 MXN por usuario</strong>. <br><br>
+    Aplica en compras mínimas de <strong>$7,000 MXN</strong><br>
+    Descuento máximo: <strong>$2,000 MXN</strong><br><br>
 
-    Válido únicamente el <strong>26 de junio de 2026</strong> de <strong>5:00 p.m. a 6:00 p.m.</strong> (Hora del Centro de México).
+    <span class="market-badge">⚡ VÁLIDO SOLO HOY 5:00 - 6:00 PM</span>
 
   </div>
 
-  <button class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
-    COPIAR CUPÓN
+  <button id="bbvaBtn" class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
+    BLOQUEADO
   </button>
 
 </div>
 
-<!-- VIP MELI+ -->
+<!-- RESTO IGUAL -->
 <div class="section">⭐ VIP MELI+ PRIORIDAD</div>
 <div class="card">
   🎟️ Exclusivo usuarios MELI+
@@ -314,11 +325,9 @@ header{
   <button class="btn" onclick="copyCoupon('MELIMASGOL')">COPIAR CUPÓN</button>
 </div>
 
-<!-- RELÁMPAGOS -->
 <div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡️</div>
 <div id="daily"></div>
 
-<!-- BANCARIOS -->
 <div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVOS</div>
 <div id="banks"></div>
 
@@ -333,6 +342,7 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
+/* COPIAR */
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
 
@@ -345,93 +355,54 @@ function copyCoupon(code){
   },600);
 }
 
+/* MARKETPLACE REAL LOGIC */
+function updateBBVAState(){
+  const now=new Date();
+  const start=new Date(); start.setHours(17,0,0);
+  const end=new Date(); end.setHours(18,0,0);
+
+  const btn=document.getElementById("bbvaBtn");
+
+  if(now>=start && now<=end){
+    btn.classList.add("active");
+    btn.innerHTML="COPIAR CUPÓN";
+  }else{
+    btn.classList.remove("active");
+    btn.innerHTML="BLOQUEADO";
+  }
+}
+setInterval(updateBBVAState,1000);
+updateBBVAState();
+
 /* COUNTDOWN */
 function updateCountdown(){
-  const now = new Date();
+  const now=new Date();
+  const start=new Date(); start.setHours(17,0,0);
+  const end=new Date(); end.setHours(18,0,0);
 
-  const start = new Date();
-  start.setHours(17,0,0);
+  const el=document.getElementById("countdown");
 
-  const end = new Date();
-  end.setHours(18,0,0);
-
-  const el = document.getElementById("countdown");
-
-  if(now < start){
-    const diff = start - now;
-    const h = Math.floor(diff / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    el.innerHTML = `Empieza en ${h}h ${m}m ${s}s`;
+  if(now<start){
+    const diff=start-now;
+    const h=Math.floor(diff/3600000);
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    el.innerHTML=`Empieza en ${h}h ${m}m ${s}s`;
   }
-  else if(now <= end){
-    const diff = end - now;
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-    el.innerHTML = `🔥 ACTIVO - termina en ${m}m ${s}s`;
+  else if(now<=end){
+    const diff=end-now;
+    const m=Math.floor((diff%3600000)/60000);
+    const s=Math.floor((diff%60000)/1000);
+    el.innerHTML=`🔥 ACTIVO - termina en ${m}m ${s}s`;
   }
   else{
-    el.innerHTML = "❌ FINALIZADO";
+    el.innerHTML="❌ FINALIZADO";
   }
 }
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* CUPONES RELÁMPAGOS */
-const dailyCoupons=[
-{code:"REBAJAS",min:2000,max:200},
-{code:"12APROVECHA",min:1000,max:150},
-{code:"VIERNES600",min:6000,max:600},
-{code:"CUPON800",min:8000,max:800},
-{code:"MILVIERNES",min:10000,max:1000}
-];
-
-const daily=document.getElementById("daily");
-
-dailyCoupons.forEach(c=>{
-  const status=getStatus();
-  daily.innerHTML+=`
-  <div class="card flash-box">
-    <div class="status">
-      <span class="dot ${status.color}"></span>
-      ${status.text}
-    </div>
-    <div class="money">
-      📌 Compra mínima: $${c.min.toLocaleString()} <br>
-      💰 Descuento máximo: $${c.max.toLocaleString()}
-    </div>
-    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR CUPÓN</button>
-  </div>`;
-});
-
-/* BANCARIOS */
-const bancos=[
-["Mercado Pago",4000,500,"TCMPGOL"],
-["Meses sin tarjeta",2500,500,"MSTGOL"],
-["BBVA",4500,500,"BBVAGOL"],
-["HSBC",3000,500,"HSBCGOL"],
-["Banorte",3000,500,"BNRTGOL"],
-["Santander",2500,500,"SANTGOL"],
-["AMEX",4500,500,"AMEXGOL"],
-["Afirme",2500,1000,"AFRMGOL"],
-["Mifel",2500,750,"MIFEGOL"],
-["Meli+",4000,500,"MELIMASGOL"]
-];
-
-const banks=document.getElementById("banks");
-
-bancos.forEach(b=>{
-  banks.innerHTML+=`
-  <div class="card">
-    🏦 <b>${b[0]}</b>
-    <div class="money">
-      📌 Compra mínima: $${b[1].toLocaleString()} <br>
-      💰 Descuento máximo: $${b[2].toLocaleString()}
-    </div>
-    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR CUPÓN</button>
-  </div>`;
-});
-
+/* STATUS */
 function getStatus(){
   const h=new Date().getHours();
   if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
