@@ -107,11 +107,10 @@ header{
   font-weight:900;
 }
 
-/* RELÁMPAGOS */
+/* FLASH */
 .flash-title{
   font-size:18px;
   font-weight:900;
-  letter-spacing:1px;
 }
 
 .flash-box{
@@ -122,7 +121,6 @@ header{
   border-radius:12px;
 }
 
-/* STATUS */
 .status{
   display:flex;
   align-items:center;
@@ -131,12 +129,7 @@ header{
   margin-bottom:6px;
 }
 
-.dot{
-  width:10px;
-  height:10px;
-  border-radius:50%;
-}
-
+.dot{width:10px;height:10px;border-radius:50%;}
 .green{background:#00c853;}
 .orange{background:#ff9800;}
 .red{background:#e53935;}
@@ -144,6 +137,14 @@ header{
 .vip{
   border:2px solid #1e88e5;
   background:#e3f2fd;
+}
+
+/* COUNTDOWN */
+.countdown{
+  font-size:22px;
+  font-weight:900;
+  color:#e53935;
+  margin:8px 0;
 }
 
 /* TOAST */
@@ -170,7 +171,6 @@ header{
   width:60px;
   height:60px;
   background:rgba(37,211,102,0.9);
-  backdrop-filter:blur(10px);
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -198,7 +198,6 @@ header{
   <a class="menu-item" href="https://meli.la/22qVGcg">💻 Cómputo</a>
   <a class="menu-item" href="https://meli.la/31NnLmv">👕 Moda</a>
   <a class="menu-item" href="https://meli.la/21wQwRZ">💄 Belleza</a>
-  <a class="menu-item" href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
 </div>
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
@@ -207,7 +206,27 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<!-- VIP -->
+<!-- 🔥 CUPÓN BBVA -->
+<div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
+
+<div class="card vip">
+
+  <div class="section">⏰ Tiempo real</div>
+  <div id="countdown" class="countdown">Cargando...</div>
+
+  💳 <b>Banco:</b> BBVA <br>
+  🛒 <b>Tienda:</b> Mercado Libre <br>
+  ⏰ <b>Horario:</b> 5:00 - 6:00 pm <br><br>
+
+  🎟️ <b>Cupón oculto</b><br>
+  <div style="letter-spacing:4px;font-weight:900;">███████████</div>
+
+  <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
+    COPIAR CUPÓN
+  </button>
+</div>
+
+<!-- VIP MELI+ -->
 <div class="section">⭐ VIP MELI+ PRIORIDAD</div>
 <div class="card vip">
   <b>🎟️ Exclusivo usuarios MELI+</b>
@@ -249,15 +268,37 @@ function copyCoupon(code){
   },600);
 }
 
-/* ESTADO */
-function getStatus(){
-  const h=new Date().getHours();
-  if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
-  if(h>=13 && h<24) return {text:"POR AGOTARSE", color:"orange"};
-  return {text:"AGOTADO", color:"red"};
-}
+/* COUNTDOWN */
+function updateCountdown(){
+  const now = new Date();
 
-const status=getStatus();
+  const start = new Date();
+  start.setHours(17,0,0);
+
+  const end = new Date();
+  end.setHours(18,0,0);
+
+  const el = document.getElementById("countdown");
+
+  if(now < start){
+    const diff = start - now;
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.innerHTML = `Empieza en ${h}h ${m}m ${s}s`;
+  }
+  else if(now <= end){
+    const diff = end - now;
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.innerHTML = `🔥 ACTIVO - termina en ${m}m ${s}s`;
+  }
+  else{
+    el.innerHTML = "❌ FINALIZADO";
+  }
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
 
 /* RELÁMPAGOS */
 const dailyCoupons=[
@@ -273,20 +314,15 @@ const daily=document.getElementById("daily");
 dailyCoupons.forEach(c=>{
   daily.innerHTML+=`
   <div class="card flash-box">
-
     <div class="status">
-      <span class="dot ${status.color}"></span>
-      ${status.text}
+      <span class="dot ${getStatus().color}"></span>
+      ${getStatus().text}
     </div>
-
     <div class="money">
       📌 Compra mínima: $${c.min.toLocaleString()} <br>
       💰 Descuento máximo: $${c.max.toLocaleString()}
     </div>
-
-    <button class="btn" onclick="copyCoupon('${c.code}')">
-      COPIAR CUPÓN
-    </button>
+    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR CUPÓN</button>
   </div>`;
 });
 
@@ -317,6 +353,13 @@ bancos.forEach(b=>{
     <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR CUPÓN</button>
   </div>`;
 });
+
+function getStatus(){
+  const h=new Date().getHours();
+  if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
+  if(h>=13 && h<24) return {text:"POR AGOTARSE", color:"orange"};
+  return {text:"AGOTADO", color:"red"};
+}
 
 </script>
 
