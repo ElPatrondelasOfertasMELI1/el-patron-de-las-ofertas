@@ -107,7 +107,7 @@ header{
   font-weight:900;
 }
 
-/* FLASH */
+/* STATUS */
 .flash-title{
   font-size:18px;
   font-weight:900;
@@ -134,14 +134,14 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
-/* ===== BBVA ORIGINAL STYLE ===== */
+/* ===== BBVA PREMIUM (como te gustó) ===== */
 .bbva-card{
   margin:10px;
   padding:18px;
   border-radius:18px;
   color:#fff;
   background:linear-gradient(135deg,#0033a0,#005bbb,#0072ce);
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  box-shadow:0 12px 30px rgba(0,0,0,0.25);
   position:relative;
   overflow:hidden;
 }
@@ -169,12 +169,6 @@ header{
   font-size:28px;
 }
 
-.section-small{
-  margin-top:10px;
-  font-weight:700;
-  opacity:0.9;
-}
-
 .bbva-countdown{
   font-size:28px;
   font-weight:900;
@@ -183,7 +177,6 @@ header{
   text-shadow:0 2px 10px rgba(0,0,0,0.35);
 }
 
-/* INFO NORMAL */
 .bbva-info{
   margin-top:10px;
   font-size:14px;
@@ -191,8 +184,7 @@ header{
   opacity:0.95;
 }
 
-/* BUTTON */
-.btn-bbva{
+.bbva-btn{
   width:100%;
   padding:12px;
   border-radius:12px;
@@ -227,7 +219,7 @@ header{
   right:18px;
   width:60px;
   height:60px;
-  background:rgba(37,211,102,0.9);
+  background:#25d366;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -263,7 +255,7 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<!-- 🔥 BBVA LIMPIO -->
+<!-- ===== BBVA PREMIUM RESTAURADO ===== -->
 <div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
 
 <div class="bbva-card">
@@ -273,7 +265,6 @@ header{
     <div class="bbva-chip">💳</div>
   </div>
 
-  <div class="section-small">⏰ Tiempo real de activación</div>
   <div id="countdown" class="bbva-countdown">Cargando...</div>
 
   <div class="bbva-info">
@@ -282,23 +273,23 @@ header{
     🛒 Tienda: Mercado Libre <br>
     ⏰ Horario: 5:00 - 6:00 pm <br><br>
 
-    🎟️ 25% de descuento con cupón bancario<br><br>
+    🎟️ 25% OFF CUPÓN EXCLUSIVO<br><br>
 
     Aplica en compras mínimas de $7,000 MXN<br>
-    Descuento máximo: $2,000 MXN<br><br>
+    Descuento máximo $2,000 MXN por usuario<br><br>
 
-    Válido únicamente el 26 de junio de 2026 (5:00 - 6:00 pm)
+    ⚡ Oferta limitada por tiempo
 
   </div>
 
-  <button class="btn-bbva" onclick="copyCoupon('BBVAGOLAZO')">
+  <button class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
     COPIAR CUPÓN
   </button>
 
 </div>
 
-<!-- RESTO IGUAL -->
-<div class="section">⭐ VIP MELI+ PRIORIDAD</div>
+<!-- VIP -->
+<div class="section">⭐ VIP MELI+</div>
 <div class="card">
   🎟️ Exclusivo usuarios MELI+
   <div class="money">
@@ -308,10 +299,12 @@ header{
   <button class="btn" onclick="copyCoupon('MELIMASGOL')">COPIAR CUPÓN</button>
 </div>
 
+<!-- RELÁMPAGOS -->
 <div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
 <div id="daily"></div>
 
-<div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVOS</div>
+<!-- BANCARIOS -->
+<div class="section">🏦 CUPONES BANCARIOS</div>
 <div id="banks"></div>
 
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
@@ -358,13 +351,50 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* STATUS */
-function getStatus(){
-  const h=new Date().getHours();
-  if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
-  if(h>=13 && h<24) return {text:"POR AGOTARSE", color:"orange"};
-  return {text:"AGOTADO", color:"red"};
-}
+/* CUPONES RELÁMPAGOS (TODOS RESTAURADOS) */
+const dailyCoupons=[
+{code:"REBAJAS",min:2000,max:200},
+{code:"12APROVECHA",min:1000,max:150},
+{code:"VIERNES600",min:6000,max:600},
+{code:"CUPON800",min:8000,max:800},
+{code:"MILVIERNES",min:10000,max:1000}
+];
+
+const daily=document.getElementById("daily");
+
+dailyCoupons.forEach(c=>{
+  daily.innerHTML+=`
+  <div class="card flash-box">
+    📌 Compra mínima $${c.min} <br>
+    💰 Descuento máximo $${c.max}
+    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
+  </div>`;
+});
+
+/* CUPONES BANCARIOS RESTAURADOS */
+const bancos=[
+["Mercado Pago",4000,500,"TCMPGOL"],
+["Meses sin tarjeta",2500,500,"MSTGOL"],
+["BBVA",4500,500,"BBVAGOL"],
+["HSBC",3000,500,"HSBCGOL"],
+["Banorte",3000,500,"BNRTGOL"],
+["Santander",2500,500,"SANTGOL"],
+["AMEX",4500,500,"AMEXGOL"],
+["Afirme",2500,1000,"AFRMGOL"],
+["Mifel",2500,750,"MIFEGOL"],
+["Meli+",4000,500,"MELIMASGOL"]
+];
+
+const banks=document.getElementById("banks");
+
+bancos.forEach(b=>{
+  banks.innerHTML+=`
+  <div class="card">
+    🏦 ${b[0]} <br>
+    💰 Min $${b[1]} | Max $${b[2]}
+    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
+  </div>`;
+});
 
 </script>
 
