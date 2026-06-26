@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>El Patrón de las Ofertas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -14,15 +14,19 @@ body{
   background:#f4f4f4;
   color:#111;
   overflow-x:hidden;
+  font-weight:700; /* 🔥 MÁS GRUESO GLOBAL */
 }
 
+/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:14px;
   text-align:center;
   font-weight:900;
+  letter-spacing:0.5px;
 }
 
+/* MENU */
 .menu-btn{
   position:fixed;
   top:15px;
@@ -62,7 +66,7 @@ header{
   border-radius:12px;
   color:#fff;
   text-decoration:none;
-  font-weight:700;
+  font-weight:800; /* 🔥 MÁS GRUESO */
 }
 
 .logo{
@@ -83,12 +87,14 @@ header{
   margin:15px 0 8px;
 }
 
+/* CARDS */
 .card{
   background:#fff;
   margin:10px;
   padding:14px;
   border-radius:14px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  font-weight:800; /* 🔥 MÁS GRUESO */
 }
 
 .btn{
@@ -111,9 +117,10 @@ header{
   background:linear-gradient(135deg,#061a3a,#0a4db8,#1e88e5);
   color:#fff;
   box-shadow:0 10px 25px rgba(0,0,0,0.35);
+  font-weight:800;
 }
 
-/* ⭐ MELI+ RESTAURADO AZUL */
+/* ⭐ MELI+ */
 .meli-card{
   margin:10px;
   padding:16px;
@@ -121,25 +128,25 @@ header{
   background:linear-gradient(135deg,#0a4db8,#1e88e5);
   color:#fff;
   box-shadow:0 10px 25px rgba(0,0,0,0.25);
+  font-weight:800;
 }
 
-/* FLASH RELÁMPAGOS */
+/* RELÁMPAGOS */
 .flash-title{
   font-size:18px;
   font-weight:900;
+  text-align:center;
 }
 
+/* CUADROS AZULES RELÁMPAGOS */
 .flash-box{
-  border:2px solid #ffcc00;
-  background:#fffbe6;
+  background:linear-gradient(135deg,#0a4db8,#1e88e5);
+  color:#fff;
   margin:10px;
-  padding:12px;
-  border-radius:12px;
-}
-
-.money{
-  font-size:17px;
-  font-weight:900;
+  padding:14px;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  font-weight:800;
 }
 
 /* STATUS */
@@ -152,9 +159,16 @@ header{
 }
 
 .dot{width:10px;height:10px;border-radius:50%;}
-.green{background:#00c853;}
-.orange{background:#ff9800;}
-.red{background:#e53935;}
+.green{background:#00e676;}
+.orange{background:#ffb300;}
+.red{background:#ff5252;}
+
+/* COUNTDOWN */
+.countdown{
+  font-size:16px;
+  font-weight:900;
+  margin-top:8px;
+}
 
 /* TOAST */
 .toast{
@@ -214,34 +228,37 @@ header{
 
 <!-- 🔵 BBVA -->
 <div class="bbva-card">
-  <div style="font-size:18px;font-weight:900;">💳 BBVA 25% OFF EXCLUSIVO</div>
+  💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
   🛒 Mercado Libre<br>
   📌 Compra mínima: $7,000 MXN<br>
   💰 Tope de descuento: $2,000 MXN<br>
   💳 Pago a una sola exhibición<br>
-  ⏰ 5:00 - 6:00 PM
+
+  <div id="countdown" class="countdown"></div>
+
+  <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
+    COPIAR CUPÓN Y ABRIR
+  </button>
 </div>
 
-<!-- ⭐ MELI+ RESTAURADO -->
+<!-- ⭐ MELI+ -->
 <div class="meli-card">
-  <div style="font-size:16px;font-weight:900;">🎟️ MELI+ EXCLUSIVO</div>
-
+  🎟️ <b>MELI+ EXCLUSIVO</b><br>
   📌 Compra mínima: $4,000 MXN<br>
   💰 Descuento máximo: $500 MXN<br>
   🛒 Mercado Libre<br>
-  ⚡ Beneficio automático
 
   <button class="btn" onclick="copyCoupon('MELIMASGOL')">
     COPIAR CUPÓN
   </button>
 </div>
 
-<!-- ⚡ CUPONES RELÁMPAGOS -->
-<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡️</div>
+<!-- ⚡ RELÁMPAGOS -->
+<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
 <div id="daily"></div>
 
 <!-- 🏦 BANCARIOS -->
-<div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVOS</div>
+<div class="section">🏦 CUPONES BANCARIOS</div>
 <div id="banks"></div>
 
 <div id="toast" class="toast">COPIADO ✔</div>
@@ -255,6 +272,7 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
+/* COPIAR + REDIRECCIÓN */
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
 
@@ -266,16 +284,30 @@ function copyCoupon(code){
 
   setTimeout(()=>{
     window.location.href="https://meli.la/1mj3itE";
-  },600);
+  },700);
 }
 
-/* STATUS AUTOMÁTICO */
-function getStatus(){
-  const h=new Date().getHours();
-  if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
-  if(h>=13 && h<24) return {text:"POR AGOTARSE", color:"orange"};
-  return {text:"AGOTADO", color:"red"};
+/* COUNTDOWN HH:MM:SS */
+function updateCountdown(){
+  const now=new Date();
+  const start=new Date(); start.setHours(17,0,0);
+  const end=new Date(); end.setHours(18,0,0);
+
+  const el=document.getElementById("countdown");
+
+  const fmt=(ms)=>{
+    const h=Math.floor(ms/3600000);
+    const m=Math.floor((ms%3600000)/60000);
+    const s=Math.floor((ms%60000)/1000);
+    return `${h}h ${m}m ${s}s`;
+  };
+
+  if(now<start) el.innerHTML="Empieza en "+fmt(start-now);
+  else if(now<=end) el.innerHTML="🔥 ACTIVO - termina en "+fmt(end-now);
+  else el.innerHTML="❌ FINALIZADO";
 }
+setInterval(updateCountdown,1000);
+updateCountdown();
 
 /* RELÁMPAGOS */
 const dailyCoupons=[
@@ -289,15 +321,14 @@ const dailyCoupons=[
 const daily=document.getElementById("daily");
 
 dailyCoupons.forEach(c=>{
-  const s=getStatus();
   daily.innerHTML+=`
   <div class="flash-box">
     <div class="status">
-      <span class="dot ${s.color}"></span>
-      ${s.text}
+      <span class="dot ${getStatus().color}"></span>
+      ${getStatus().text}
     </div>
-    📌 Compra mínima: $${c.min.toLocaleString()}<br>
-    💰 Descuento máximo: $${c.max.toLocaleString()}
+    📌 Compra mínima: $${c.min}<br>
+    💰 Descuento máximo: $${c.max}
     <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
   </div>`;
 });
@@ -318,11 +349,17 @@ bancos.forEach(b=>{
   banks.innerHTML+=`
   <div class="card">
     🏦 <b>${b[0]}</b><br>
-    📌 Min: $${b[1]}<br>
-    💰 Max: $${b[2]}
+    📌 Min: $${b[1]} | 💰 Max: $${b[2]}
     <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
   </div>`;
 });
+
+function getStatus(){
+  const h=new Date().getHours();
+  if(h>=9 && h<13) return {text:"ACTIVO",color:"green"};
+  if(h>=13 && h<24) return {text:"POR AGOTARSE",color:"orange"};
+  return {text:"AGOTADO",color:"red"};
+}
 
 </script>
 
