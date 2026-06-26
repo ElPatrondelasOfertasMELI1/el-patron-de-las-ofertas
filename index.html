@@ -16,7 +16,6 @@ body{
   overflow-x:hidden;
 }
 
-/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:14px;
@@ -24,7 +23,6 @@ header{
   font-weight:900;
 }
 
-/* MENU */
 .menu-btn{
   position:fixed;
   top:15px;
@@ -67,7 +65,6 @@ header{
   font-weight:700;
 }
 
-/* LOGO */
 .logo{
   display:flex;
   justify-content:center;
@@ -80,14 +77,12 @@ header{
   border:3px solid #ffcc00;
 }
 
-/* SECCIONES */
 .section{
   text-align:center;
   font-weight:900;
   margin:15px 0 8px;
 }
 
-/* CARD */
 .card{
   background:#fff;
   margin:10px;
@@ -96,7 +91,6 @@ header{
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* BOTÓN */
 .btn{
   width:100%;
   padding:12px;
@@ -108,10 +102,24 @@ header{
   margin-top:10px;
 }
 
-/* MONEY */
 .money{
   font-size:17px;
   font-weight:900;
+}
+
+/* RELÁMPAGOS */
+.flash-title{
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+.flash-box{
+  border:2px solid #ffcc00;
+  background:#fffbe6;
+  margin:10px;
+  padding:12px;
+  border-radius:12px;
 }
 
 /* STATUS */
@@ -133,19 +141,9 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
-/* VIP MELI+ */
 .vip{
   border:2px solid #1e88e5;
   background:#e3f2fd;
-}
-
-/* CUPÓN RELÁMPAGO */
-.flash-box{
-  border:2px solid #ffcc00;
-  background:#fffbe6;
-  margin:10px;
-  padding:12px;
-  border-radius:12px;
 }
 
 /* TOAST */
@@ -178,7 +176,6 @@ header{
   align-items:center;
   justify-content:center;
   font-size:26px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.2);
   text-decoration:none;
 }
 </style>
@@ -186,7 +183,6 @@ header{
 
 <body>
 
-<!-- MENU -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="menu">
@@ -207,21 +203,23 @@ header{
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- LOGO -->
 <div class="logo">
   <img src="logo.png.PNG">
 </div>
 
-<!-- VIP MELI -->
+<!-- VIP -->
 <div class="section">⭐ VIP MELI+ PRIORIDAD</div>
 <div class="card vip">
   <b>🎟️ Exclusivo usuarios MELI+</b>
-  <div class="money">💰 $4,000 | 🎟️ $500 OFF</div>
+  <div class="money">
+    📌 Compra mínima: $4,000 <br>
+    💰 Descuento máximo: $500
+  </div>
   <button class="btn" onclick="copyCoupon('MELIMASGOL')">COPIAR CUPÓN</button>
 </div>
 
-<!-- CUPONES DEL DÍA -->
-<div class="section">⚡ CUPÓN RELÁMPAGO ⚡️</div>
+<!-- RELÁMPAGOS -->
+<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡️</div>
 <div id="daily"></div>
 
 <!-- BANCARIOS -->
@@ -239,12 +237,10 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
-/* TOAST + COPY + REDIRECT */
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
 
   const t=document.getElementById("toast");
-  t.innerText="CUPÓN COPIADO ✔";
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"),1200);
 
@@ -253,7 +249,7 @@ function copyCoupon(code){
   },600);
 }
 
-/* ESTADO HORARIO */
+/* ESTADO */
 function getStatus(){
   const h=new Date().getHours();
   if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
@@ -263,7 +259,7 @@ function getStatus(){
 
 const status=getStatus();
 
-/* CUPONES RELÁMPAGO */
+/* RELÁMPAGOS */
 const dailyCoupons=[
 {code:"REBAJAS",min:2000,max:200},
 {code:"12APROVECHA",min:1000,max:150},
@@ -274,7 +270,7 @@ const dailyCoupons=[
 
 const daily=document.getElementById("daily");
 
-dailyCoupons.forEach((c,i)=>{
+dailyCoupons.forEach(c=>{
   daily.innerHTML+=`
   <div class="card flash-box">
 
@@ -283,10 +279,9 @@ dailyCoupons.forEach((c,i)=>{
       ${status.text}
     </div>
 
-    ⚡ CUPÓN RELÁMPAGO #${i+1}
-
     <div class="money">
-      📌 $${c.min.toLocaleString()} | 💰 $${c.max.toLocaleString()}
+      📌 Compra mínima: $${c.min.toLocaleString()} <br>
+      💰 Descuento máximo: $${c.max.toLocaleString()}
     </div>
 
     <button class="btn" onclick="copyCoupon('${c.code}')">
@@ -295,7 +290,7 @@ dailyCoupons.forEach((c,i)=>{
   </div>`;
 });
 
-/* BANCARIOS SIEMPRE ACTIVOS */
+/* BANCARIOS */
 const bancos=[
 ["Mercado Pago",4000,500,"TCMPGOL"],
 ["Meses sin tarjeta",2500,500,"MSTGOL"],
@@ -315,7 +310,10 @@ bancos.forEach(b=>{
   banks.innerHTML+=`
   <div class="card">
     🏦 <b>${b[0]}</b>
-    <div class="money">📌 $${b[1].toLocaleString()} | 💰 $${b[2].toLocaleString()}</div>
+    <div class="money">
+      📌 Compra mínima: $${b[1].toLocaleString()} <br>
+      💰 Descuento máximo: $${b[2].toLocaleString()}
+    </div>
     <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR CUPÓN</button>
   </div>`;
 });
