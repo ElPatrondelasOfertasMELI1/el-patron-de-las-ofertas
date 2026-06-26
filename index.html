@@ -72,7 +72,6 @@ header{
   margin:15px 0 8px;
 }
 
-/* CARDS */
 .card{
   background:#fff;
   margin:10px;
@@ -181,15 +180,6 @@ header{
   color:white;
   font-weight:900;
   box-shadow:0 0 15px rgba(37,211,102,0.6);
-  animation:pulse 2s infinite;
-  text-align:center;
-  line-height:1.1;
-}
-
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.08);}
-  100%{transform:scale(1);}
 }
 </style>
 </head>
@@ -223,40 +213,23 @@ header{
   <img src="logo.png.PNG" style="width:160px;border-radius:14px;border:3px solid #ffcc00;">
 </div>
 
-<!-- 🔥 CONTADOR NUEVO -->
+<!-- CONTADOR -->
 <div class="card" style="text-align:center;font-weight:900;">
   🔥 Cupones copiados:
   <span id="copyCount">0</span>
 </div>
 
-<!-- BBVA -->
+<!-- BBVA AGOTADO -->
 <div class="bbva-card">
 💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
 🛒 Mercado Libre<br>
 📌 Compra mínima: $7,000 MXN<br>
 💰 Tope de descuento: $2,000 MXN<br><br>
 
-<div style="
-background:rgba(255,255,255,.15);
-padding:12px;
-border-radius:12px;
-text-align:center;
-font-size:22px;
-font-weight:900;">
-🔴 CUPÓN AGOTADO
-</div>
+🔴 CUPÓN AGOTADO<br>
 
-<div style="
-margin-top:10px;
-text-align:center;
-font-size:14px;
-opacity:.95;">
-Este beneficio se agotó por alta demanda.<br>
-Mantente atento a los próximos cupones exclusivos.
-</div>
-
-<button class="btn" style="background:#757575;cursor:not-allowed;" disabled>
-CUPÓN AGOTADO
+<button class="btn" style="background:#555;" disabled>
+AGOTADO
 </button>
 </div>
 
@@ -282,8 +255,8 @@ COPIAR CUPÓN
 <div id="toast" class="toast">COPIADO ✔</div>
 
 <a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">
-  💬 +200K
-  <div style="font-size:9px;">canal ofertas</div>
+💬 +200K
+<div style="font-size:9px;">canal ofertas</div>
 </a>
 
 <script>
@@ -306,7 +279,6 @@ function copyCoupon(code){
   document.getElementById("copyCount").innerText = copyCount;
 
   const t=document.getElementById("toast");
-  t.textContent="CUPÓN COPIADO ✔";
   t.classList.add("show");
 
   setTimeout(()=>t.classList.remove("show"),1200);
@@ -315,28 +287,6 @@ function copyCoupon(code){
     window.location.href="https://meli.la/1mj3itE";
   },700);
 }
-
-/* COUNTDOWN */
-function updateCountdown(){
-  const now=new Date();
-  const start=new Date(); start.setHours(17,0,0);
-  const end=new Date(); end.setHours(18,0,0);
-
-  const el=document.getElementById("countdown");
-
-  const fmt=(ms)=>{
-    const h=Math.floor(ms/3600000);
-    const m=Math.floor((ms%3600000)/60000);
-    const s=Math.floor((ms%60000)/1000);
-    return `${h}h ${m}m ${s}s`;
-  };
-
-  if(now<start) el.innerHTML="Empieza en "+fmt(start-now);
-  else if(now<=end) el.innerHTML="🔥 ACTIVO - termina en "+fmt(end-now);
-  else el.innerHTML="❌ FINALIZADO";
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
 
 /* RELÁMPAGOS */
 const dailyCoupons=[
@@ -354,7 +304,6 @@ dailyCoupons.forEach(c=>{
 
   daily.innerHTML += `
   <div class="flash-box">
-
     <div class="status">
       <span class="dot ${s.color}"></span>
       ${s.text}
@@ -364,7 +313,6 @@ dailyCoupons.forEach(c=>{
     💰 Descuento máximo: $${c.max.toLocaleString()}
 
     <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
-
   </div>`;
 });
 
