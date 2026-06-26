@@ -140,26 +140,42 @@ header{
 
 <body>
 
-<!-- 🎠 CARRUSEL 7.7 MERCADO LIBRE -->
-<div id="slider">
-  <img id="slideImg" src="" style="width:100%;max-height:220px;object-fit:cover;border-radius:10px;">
+<!-- 🎠 CARRUSEL PRO 7.7 -->
+<div class="carousel">
+  <img id="slideImg" src="" style="width:100%;max-height:220px;object-fit:cover;border-radius:12px;transition:opacity 0.6s ease;">
 </div>
+
+<style>
+.carousel{
+  margin:10px;
+}
+</style>
 
 <script>
 const slides = [
-"https://share.google/eJQ0ccXAhHgaG1Hfl",
-"https://share.google/bAhVZqHnwiDRJU19u",
-"https://share.google/VSrEsGXDNzNENv8Gz",
-"https://share.google/QzRZyYHSBdDQetr5S",
-"https://share.google/Zzg2far7HRSbJ2B2i"
+"https://images.unsplash.com/photo-1607083206869-4c7672e72a8a",
+"https://images.unsplash.com/photo-1612810436541-336d7c2c6f9c",
+"https://images.unsplash.com/photo-1580910051074-3eb694886505",
+"https://images.unsplash.com/photo-1591892150943-30d0b2f7c3f2",
+"https://images.unsplash.com/photo-1607082350899-7c3c3f3f6d3e"
 ];
 
 let i = 0;
-document.getElementById("slideImg").src = slides[0];
+const img = document.getElementById("slideImg");
+
+function showSlide(index){
+  img.style.opacity = 0;
+  setTimeout(()=>{
+    img.src = slides[index];
+    img.style.opacity = 1;
+  },300);
+}
+
+showSlide(0);
 
 setInterval(()=>{
   i = (i + 1) % slides.length;
-  document.getElementById("slideImg").src = slides[i];
+  showSlide(i);
 },3000);
 </script>
 
