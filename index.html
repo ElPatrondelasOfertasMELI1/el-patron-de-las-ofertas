@@ -168,37 +168,6 @@ header{
   position:fixed;
   bottom:18px;
   right:18px;
-  width:60px;
-  height:60px;
-  background:rgba(37,211,102,0.9);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:26px;
-  text-decoration:none;
-}
-@keyframes glow {
-  0% { opacity: 0.8; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.01); }
-  100% { opacity: 0.8; transform: scale(1); }
-}
-
-.flash-box{
-  animation: glow 2.2s infinite ease-in-out;
-}
-
-.relampago-text{
-  font-size:16px;
-  font-weight:900;
-  margin:6px 0 10px 0;
-  color:#111;
-  text-shadow:0 0 8px rgba(255,204,0,0.6);
-}
-.wa{
-  position:fixed;
-  bottom:18px;
-  right:18px;
   width:70px;
   height:70px;
   background:rgba(37,211,102,0.95);
@@ -249,9 +218,15 @@ header{
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- LOGO RESTAURADO -->
+<!-- LOGO -->
 <div class="card" style="text-align:center;">
   <img src="logo.png.PNG" style="width:160px;border-radius:14px;border:3px solid #ffcc00;">
+</div>
+
+<!-- 🔥 CONTADOR NUEVO -->
+<div class="card" style="text-align:center;font-weight:900;">
+  🔥 Cupones copiados:
+  <span id="copyCount">0</span>
 </div>
 
 <!-- BBVA -->
@@ -283,7 +258,7 @@ COPIAR CUPÓN
 <div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
 <div id="daily"></div>
 
-<!-- 🏦 BANCARIOS RESTAURADOS -->
+<!-- BANCARIOS -->
 <div class="section flash-title">🏦 CUPONES BANCARIOS 🟢</div>
 <div id="banks"></div>
 
@@ -291,10 +266,14 @@ COPIAR CUPÓN
 
 <a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">
   💬 +200K
-  <div style="font-size:9px; font-weight:700;">canal ofertas</div>
+  <div style="font-size:9px;">canal ofertas</div>
 </a>
 
 <script>
+
+let copyCount = localStorage.getItem("copyCount") || 0;
+copyCount = parseInt(copyCount);
+document.getElementById("copyCount").innerText = copyCount;
 
 function toggleMenu(){
   const m=document.getElementById("menu");
@@ -303,6 +282,11 @@ function toggleMenu(){
 
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
+
+  let copyCount = localStorage.getItem("copyCount") || 0;
+  copyCount = parseInt(copyCount) + 1;
+  localStorage.setItem("copyCount", copyCount);
+  document.getElementById("copyCount").innerText = copyCount;
 
   const t=document.getElementById("toast");
   t.textContent="CUPÓN COPIADO ✔";
@@ -359,11 +343,6 @@ dailyCoupons.forEach(c=>{
       ${s.text}
     </div>
 
-    <!-- 🔥 NUEVO TEXTO GRANDE -->
-  <div class="relampago-text">
-  CUPÓN RELÁMPAGO ⚡️
-</div>
-
     📌 Compra mínima: $${c.min.toLocaleString()}<br>
     💰 Descuento máximo: $${c.max.toLocaleString()}
 
@@ -372,7 +351,7 @@ dailyCoupons.forEach(c=>{
   </div>`;
 });
 
-/* BANCARIOS RESTAURADOS */
+/* BANCARIOS */
 const bancos=[
 ["BBVA",4500,500,"BBVAGOL"],
 ["HSBC",3000,500,"HSBCGOL"],
