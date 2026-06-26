@@ -66,6 +66,7 @@ header{
   font-weight:700;
 }
 
+/* LOGO */
 .logo{
   display:flex;
   justify-content:center;
@@ -101,10 +102,9 @@ header{
   color:#fff;
   font-weight:900;
   margin-top:10px;
-  cursor:pointer;
 }
 
-/* 🔵 BBVA PRO CARD */
+/* 🔵 BBVA FLOTA SIN TAPAR */
 .bbva-card{
   position:fixed;
   bottom:90px;
@@ -112,41 +112,30 @@ header{
   transform:translateX(-50%);
   width:92%;
   max-width:420px;
-  background:linear-gradient(135deg,#061a3a,#0a4db8,#1e88e5);
+  background:linear-gradient(135deg,#072b63,#0a4db8,#1e88e5);
   color:#fff;
-  border-radius:20px;
-  padding:16px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.4);
-  z-index:2000;
-  overflow:hidden;
-}
-
-.bbva-card::before{
-  content:"";
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background:radial-gradient(circle,rgba(255,255,255,0.15),transparent 60%);
-  animation:shine 4s infinite linear;
-}
-
-@keyframes shine{
-  0%{transform:rotate(0deg)}
-  100%{transform:rotate(360deg)}
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.35);
+  z-index:1000;
 }
 
 .bbva-title{
-  font-size:18px;
+  font-size:16px;
   font-weight:900;
 }
 
 .bbva-text{
   font-size:13px;
-  margin-top:8px;
-  line-height:1.4;
   opacity:0.95;
+  margin-top:6px;
+  line-height:1.4;
+}
+
+.bbva-mini{
+  font-size:12px;
+  margin-top:6px;
+  opacity:0.9;
 }
 
 .bbva-tag{
@@ -161,10 +150,38 @@ header{
 
 /* COUNTDOWN */
 .countdown{
-  font-size:20px;
+  font-size:14px;
   font-weight:900;
-  color:#e53935;
+  margin-top:6px;
+  color:#ffeb3b;
 }
+
+/* 🔥 RELÁMPAGOS (RESTAURADO AMARILLO ORIGINAL) */
+.flash-title{
+  font-size:18px;
+  font-weight:900;
+}
+
+.flash-box{
+  border:2px solid #ffcc00;
+  background:#fffbe6;
+  margin:10px;
+  padding:12px;
+  border-radius:12px;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+.dot{width:10px;height:10px;border-radius:50%;}
+.green{background:#00c853;}
+.orange{background:#ff9800;}
+.red{background:#e53935;}
 
 /* TOAST */
 .toast{
@@ -179,7 +196,7 @@ header{
   font-weight:900;
   opacity:0;
   transition:0.3s;
-  z-index:3000;
+  z-index:2000;
 }
 .toast.show{opacity:1}
 
@@ -208,14 +225,12 @@ header{
 
 <div class="sidebar" id="menu">
   <div class="section" style="color:#ffcc00;">📂 Categorías</div>
+
   <a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
   <a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
   <a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
   <a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
   <a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
-  <a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
-  <a class="menu-item" href="https://meli.la/2wvqGN7">🧸 Juguetes</a>
-  <a class="menu-item" href="https://meli.la/22qVGcg">💻 Cómputo</a>
 </div>
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
@@ -224,21 +239,25 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<!-- 🔵 BBVA PRO FLOAT -->
+<!-- 🔵 BBVA FIX FINAL -->
 <div class="bbva-card">
 
   <div class="bbva-title">💳 BBVA 25% OFF EXCLUSIVO</div>
 
   <div class="bbva-text">
-    Beneficio exclusivo con tarjeta de crédito BBVA.<br><br>
-
-    📌 Compra mínima: <b>$7,000 MXN</b><br>
-    🛒 Mercado Libre<br>
-    ⏰ Activo 5:00 PM - 6:00 PM<br>
-    💳 Pago a una sola exhibición
+    Compra mínima: <b>$7,000 MXN</b><br>
+    Tope de descuento: <b>$2,000 MXN</b><br>
+    Pago a una sola exhibición<br>
+    Mercado Libre
   </div>
 
-  <div class="bbva-tag">🔥 SE ACTIVA AUTOMÁTICAMENTE</div>
+  <div class="bbva-mini">
+    ⏰ Activo: 5:00 PM - 6:00 PM
+  </div>
+
+  <div id="countdown" class="countdown">Cargando...</div>
+
+  <div class="bbva-tag">🔥 BENEFICIO AUTOMÁTICO</div>
 
   <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
     COPIAR BENEFICIO
@@ -246,11 +265,11 @@ header{
 </div>
 
 <!-- 🔥 RELÁMPAGOS -->
-<div class="section">⚡ CUPONES RELÁMPAGOS ⚡</div>
+<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡️</div>
 <div id="daily"></div>
 
 <!-- 🏦 BANCARIOS -->
-<div class="section">🏦 CUPONES BANCARIOS</div>
+<div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVOS</div>
 <div id="banks"></div>
 
 <div id="toast" class="toast">COPIADO ✔</div>
@@ -278,6 +297,33 @@ function copyCoupon(code){
   },600);
 }
 
+/* COUNTDOWN BBVA */
+function updateCountdown(){
+  const now=new Date();
+
+  const start=new Date();
+  start.setHours(17,0,0);
+
+  const end=new Date();
+  end.setHours(18,0,0);
+
+  const el=document.getElementById("countdown");
+
+  if(now<start){
+    const d=start-now;
+    el.innerHTML="Empieza en "+Math.floor(d/60000)+"m";
+  }
+  else if(now<=end){
+    const d=end-now;
+    el.innerHTML="🔥 ACTIVO - termina en "+Math.floor(d/60000)+"m";
+  }
+  else{
+    el.innerHTML="❌ FINALIZADO";
+  }
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
 /* RELÁMPAGOS */
 const dailyCoupons=[
 {code:"REBAJAS",min:2000,max:200},
@@ -291,16 +337,15 @@ const daily=document.getElementById("daily");
 
 dailyCoupons.forEach(c=>{
   daily.innerHTML+=`
-  <div class="card">
-    📌 Compra mínima: $${c.min.toLocaleString()} <br>
-    💰 Descuento máximo: $${c.max.toLocaleString()}
+  <div class="card flash-box">
+    📌 Compra mínima: $${c.min}<br>
+    💰 Descuento máximo: $${c.max}
     <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
   </div>`;
 });
 
 /* BANCARIOS */
 const bancos=[
-["Mercado Pago",4000,500,"TCMPGOL"],
 ["BBVA",4500,500,"BBVAGOL"],
 ["HSBC",3000,500,"HSBCGOL"],
 ["Banorte",3000,500,"BNRTGOL"],
