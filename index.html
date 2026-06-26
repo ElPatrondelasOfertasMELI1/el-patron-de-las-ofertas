@@ -178,6 +178,23 @@ header{
   font-size:26px;
   text-decoration:none;
 }
+@keyframes glow {
+  0% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.01); }
+  100% { opacity: 0.8; transform: scale(1); }
+}
+
+.flash-box{
+  animation: glow 2.2s infinite ease-in-out;
+}
+
+.relampago-text{
+  font-size:16px;
+  font-weight:900;
+  margin:6px 0 10px 0;
+  color:#111;
+  text-shadow:0 0 8px rgba(255,204,0,0.6);
+}
 </style>
 </head>
 
@@ -313,14 +330,9 @@ dailyCoupons.forEach(c=>{
     </div>
 
     <!-- 🔥 NUEVO TEXTO GRANDE -->
-    <div style="
-      font-size:16px;
-      font-weight:900;
-      margin:6px 0 10px 0;
-      color:#111;
-    ">
-      CUPÓN RELÁMPAGO ⚡️
-    </div>
+  <div class="relampago-text">
+  CUPÓN RELÁMPAGO ⚡️
+</div>
 
     📌 Compra mínima: $${c.min.toLocaleString()}<br>
     💰 Descuento máximo: $${c.max.toLocaleString()}
