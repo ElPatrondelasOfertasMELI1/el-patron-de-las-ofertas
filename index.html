@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Patrón de las Ofertas PRO MAX</title>
+<title>El Patrón de las Ofertas</title>
+
+<!-- TIPOGRAFÍA PROFESIONAL -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
 
 <style>
 body{
   margin:0;
-  font-family:Arial;
+  font-family:'Poppins', sans-serif;
   background:#f4f4f4;
+  overflow-x:hidden;
+  color:#111;
 }
 
 /* HEADER */
@@ -21,26 +26,26 @@ header{
   font-size:18px;
 }
 
-/* ☰ BOTÓN CRISTAL FLOTANTE */
+/* BOTÓN MENÚ CRISTAL */
 .menu-btn{
   position:fixed;
   top:15px;
   left:15px;
-  width:50px;
-  height:50px;
+  width:48px;
+  height:48px;
   border-radius:14px;
-  background:rgba(255,255,255,0.25);
+  background:rgba(255,255,255,0.35);
   backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.4);
+  border:1px solid rgba(255,255,255,0.5);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
+  font-size:24px;
   cursor:pointer;
   z-index:999;
 }
 
-/* MENU */
+/* SIDEBAR */
 .sidebar{
   position:fixed;
   top:0;
@@ -53,10 +58,12 @@ header{
   transition:0.3s;
   z-index:998;
   overflow-y:auto;
+  box-shadow:none;
 }
 
 .sidebar h3{
   color:#ffcc00;
+  font-weight:900;
 }
 
 .sidebar a{
@@ -64,6 +71,7 @@ header{
   color:#fff;
   padding:10px 0;
   text-decoration:none;
+  font-weight:500;
 }
 
 /* LOGO */
@@ -74,39 +82,9 @@ header{
 }
 
 .logo img{
-  width:180px;
+  width:170px;
   border-radius:12px;
   border:3px solid #ffcc00;
-}
-
-/* CARRUSEL */
-.carousel{
-  width:100%;
-  overflow:hidden;
-}
-
-.carousel-track{
-  display:flex;
-  animation:slide 22s infinite;
-}
-
-.carousel-track a{
-  min-width:100%;
-}
-
-.carousel img{
-  width:100%;
-  display:block;
-}
-
-@keyframes slide{
-  0%{transform:translateX(0)}
-  16%{transform:translateX(-100%)}
-  33%{transform:translateX(-200%)}
-  50%{transform:translateX(-300%)}
-  66%{transform:translateX(-400%)}
-  83%{transform:translateX(-500%)}
-  100%{transform:translateX(0)}
 }
 
 /* CONTADOR */
@@ -115,23 +93,25 @@ header{
   background:#111;
   color:#fff;
   padding:8px;
-  font-weight:bold;
+  font-weight:700;
 }
 
 /* SECCIONES */
 .section{
   text-align:center;
   font-weight:900;
-  margin:15px 0 5px;
+  margin:15px 0 8px;
+  font-size:15px;
+  letter-spacing:0.5px;
 }
 
 /* CARD */
 .card{
   background:#fff;
   margin:10px;
-  padding:12px;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  padding:14px;
+  border-radius:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
 
 /* BOTÓN */
@@ -139,11 +119,25 @@ header{
   width:100%;
   padding:12px;
   border:0;
-  border-radius:8px;
+  border-radius:10px;
   background:#00c853;
   color:#fff;
   font-weight:900;
-  margin-top:8px;
+  margin-top:10px;
+}
+
+/* ⚡ RELÁMPAGOS (AMARILLO COMO PEDISTE) */
+.flash-box{
+  margin:10px;
+  border:2px solid #ffcc00;
+  border-radius:12px;
+  padding:5px;
+  background:#fffbe6;
+}
+
+/* OCULTAR CODIGOS */
+.hidden{
+  display:none;
 }
 
 /* WHATSAPP */
@@ -166,96 +160,86 @@ header{
 
 <body>
 
-<!-- BOTÓN MENÚ -->
+<!-- MENÚ -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<!-- SIDEBAR (CATEGORÍAS EXACTAS TUYAS) -->
 <div class="sidebar" id="menu">
   <h3>📂 Categorías</h3>
-
-  <a href="https://meli.la/1wmWhqC">📱 Celulares</a>
-  <a href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
-  <a href="https://meli.la/2AGTYez">🔧 Herramienta</a>
-  <a href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
-  <a href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
-  <a href="https://meli.la/2QLzQzB">🎮 Gaming</a>
-  <a href="https://meli.la/2wvqGN7">🧸 Juguetes</a>
-  <a href="https://meli.la/22qVGcg">💻 Cómputo</a>
-  <a href="https://meli.la/31NnLmv">👕 Moda</a>
-  <a href="https://meli.la/21wQwRZ">💄 Belleza</a>
-  <a href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
+  <a href="#">📱 Celulares</a>
+  <a href="#">🛏️ Colchones</a>
+  <a href="#">🔧 Herramientas</a>
+  <a href="#">🚗 Vehículos</a>
+  <a href="#">🏠 Electrodomésticos</a>
+  <a href="#">🎮 Gaming</a>
+  <a href="#">🧸 Juguetes</a>
+  <a href="#">💻 Cómputo</a>
+  <a href="#">👕 Moda</a>
+  <a href="#">💄 Belleza</a>
 </div>
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- CARRUSEL REAL FUNCIONAL -->
-<div class="carousel">
-  <div class="carousel-track">
-
-    <a href="https://meli.la/1wmWhqC"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_897654-MLA.webp"></a>
-    <a href="https://meli.la/1ZJDgik"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_123456-MLA.webp"></a>
-    <a href="https://meli.la/2AGTYez"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_223344-MLA.webp"></a>
-    <a href="https://meli.la/2Phn6fn"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_334455-MLA.webp"></a>
-    <a href="https://meli.la/1MLzcHN"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_445566-MLA.webp"></a>
-    <a href="https://meli.la/2QLzQzB"><img src="https://http2.mlstatic.com/D_NQ_NP_2X_556677-MLA.webp"></a>
-
-  </div>
-</div>
-
-<!-- LOGO CORREGIDO -->
 <div class="logo">
   <img src="logo.png.PNG">
 </div>
 
-<!-- ⭐ CUPONES RESTAURADOS EXACTAMENTE -->
-<div class="section">⭐ CUPÓN MELI+</div>
+<div class="counter" id="counter">👆 Clics: 0</div>
+
+<!-- ⭐ MELI+ MEJORADO -->
+<div class="section">⭐ CUPÓN MELI+ EXCLUSIVO</div>
 <div class="card">
-  SOLO MELI+
+  <b>Beneficio exclusivo para usuarios seleccionados</b>
+  <p style="font-size:13px;">Descuentos especiales en miles de productos dentro de Mercado Libre.</p>
   <button class="btn" onclick="go('MELIMASGOL')">VER CUPÓN</button>
 </div>
 
-<div class="section">⚡ RELÁMPAGOS</div>
-<div id="flashBox"></div>
+<!-- ⚡ RELÁMPAGOS -->
+<div class="section">⚡ CUPONES RELÁMPAGO</div>
+<div class="flash-box" id="flashBox"></div>
 
-<div class="section">🏦 BANCOS</div>
+<!-- 🏦 BANCARIOS -->
+<div class="section">🏦 CUPONES BANCARIOS 👇</div>
 <div id="banks"></div>
 
-<!-- WHATSAPP -->
 <a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
 
 <script>
 
-const link="https://meli.la/1mj3itE";
-
-/* MENÚ */
 function toggleMenu(){
   const m=document.getElementById("menu");
   m.style.left = (m.style.left==="0px") ? "-270px" : "0px";
 }
 
-/* CLICK CUPONES */
+const link="https://meli.la/1mj3itE";
+
+let clicks=0;
+
 function go(code){
   navigator.clipboard.writeText(code);
+  clicks++;
+  document.getElementById("counter").innerText="👆 Clics: "+clicks;
   window.location.href=link;
 }
 
-/* RELÁMPAGOS (ORIGINAL RESTAURADO) */
+/* ⚡ RELÁMPAGOS (CODIGO OCULTO) */
 const flash=[
 {n:"SIEMPREFUT",m:"$2000",d:"$215"},
 {n:"DESCUENTO600",m:"$6000",d:"$600"},
 {n:"JUEVES10",m:"$500",d:"$100"}
 ];
 
+const flashBox=document.getElementById("flashBox");
+
 flash.forEach(f=>{
-  document.getElementById("flashBox").innerHTML += `
+  flashBox.innerHTML+=`
   <div class="card">
-    ⚡ ${f.n}
-    <div>📌 ${f.m} | 💰 ${f.d}</div>
+    ⚡ <b>${f.n}</b>
+    <div style="font-size:13px;">📌 ${f.m} | 💰 ${f.d}</div>
     <button class="btn" onclick="go('${f.n}')">VER CUPÓN</button>
   </div>`;
 });
 
-/* BANCOS RESTAURADOS */
+/* 🏦 BANCOS */
 const bancos=[
 ["Mercado Pago","$4000","$500","TCMPGOL"],
 ["Meses sin tarjeta","$2500","$500","MSTGOL"],
@@ -268,11 +252,13 @@ const bancos=[
 ["Mifel","$2500","$750","MIFEGOL"]
 ];
 
+const banks=document.getElementById("banks");
+
 bancos.forEach(b=>{
-  document.getElementById("banks").innerHTML += `
+  banks.innerHTML+=`
   <div class="card">
-    🏦 ${b[0]}
-    <div>📌 ${b[1]} | 💰 ${b[2]}</div>
+    🏦 <b>${b[0]}</b>
+    <div style="font-size:13px;">📌 ${b[1]} | 💰 ${b[2]}</div>
     <button class="btn" onclick="go('${b[3]}')">VER CUPÓN</button>
   </div>`;
 });
