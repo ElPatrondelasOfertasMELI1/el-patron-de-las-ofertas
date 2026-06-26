@@ -72,6 +72,28 @@ header{
   margin:15px 0 8px;
 }
 
+/* CARDS */
+.card{
+  background:#fff;
+  margin:10px;
+  padding:14px;
+  border-radius:14px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  font-weight:600;
+}
+
+.btn{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:10px;
+  background:#00c853;
+  color:#fff;
+  font-weight:700;
+  margin-top:10px;
+  cursor:pointer;
+}
+
 /* BBVA */
 .bbva-card{
   margin:10px;
@@ -90,20 +112,7 @@ header{
   color:#fff;
 }
 
-/* BOTÓN */
-.btn{
-  width:100%;
-  padding:12px;
-  border:0;
-  border-radius:10px;
-  background:#00c853;
-  color:#fff;
-  font-weight:700;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-/* RELÁMPAGOS */
+/* FLASH */
 .flash-title{
   font-size:18px;
   font-weight:900;
@@ -128,15 +137,17 @@ header{
 
 .dot{width:10px;height:10px;border-radius:50%;}
 .green{background:#00c853;}
-.orange{background:#000;}
+.orange{background:#ff9800;}
 .red{background:#e53935;}
 
+/* COUNTDOWN */
 .countdown{
   font-size:16px;
   font-weight:700;
   margin-top:8px;
 }
 
+/* TOAST */
 .toast{
   position:fixed;
   bottom:80px;
@@ -152,6 +163,7 @@ header{
 }
 .toast.show{opacity:1}
 
+/* WHATSAPP */
 .wa{
   position:fixed;
   bottom:18px;
@@ -193,22 +205,30 @@ header{
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
+<!-- LOGO RESTAURADO -->
+<div class="card" style="text-align:center;">
+  <img src="logo.png.PNG" style="width:160px;border-radius:14px;border:3px solid #ffcc00;">
+</div>
+
 <!-- BBVA -->
 <div class="bbva-card">
-💳 BBVA 25% OFF EXCLUSIVO<br>
+💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
+🛒 Mercado Libre<br>
 📌 Compra mínima: $7,000 MXN<br>
-💰 Tope: $2,000 MXN
+💰 Tope de descuento: $2,000 MXN<br>
+
+<div id="countdown" class="countdown"></div>
 
 <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
-COPIAR CUPÓN
+COPIAR CUPÓN Y ABRIR
 </button>
 </div>
 
 <!-- MELI+ -->
 <div class="meli-card">
-🎟️ MELI+ EXCLUSIVO<br>
+🎟️ <b>MELI+ EXCLUSIVO</b><br>
 📌 Compra mínima: $4,000 MXN<br>
-💰 Descuento máximo: $500 MXN
+💰 Descuento máximo: $500 MXN<br>
 
 <button class="btn" onclick="copyCoupon('MELIMASGOL')">
 COPIAR CUPÓN
@@ -218,6 +238,10 @@ COPIAR CUPÓN
 <!-- RELÁMPAGOS -->
 <div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
 <div id="daily"></div>
+
+<!-- 🏦 BANCARIOS RESTAURADOS -->
+<div class="section flash-title">🏦 CUPONES BANCARIOS 🟢</div>
+<div id="banks"></div>
 
 <div id="toast" class="toast">COPIADO ✔</div>
 
@@ -251,7 +275,6 @@ function updateCountdown(){
   const end=new Date(); end.setHours(18,0,0);
 
   const el=document.getElementById("countdown");
-  if(!el) return;
 
   const fmt=(ms)=>{
     const h=Math.floor(ms/3600000);
@@ -267,39 +290,50 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* 🔥 TODOS LOS CUPONES RESTAURADOS */
+/* RELÁMPAGOS */
 const dailyCoupons=[
 {code:"REBAJAS",min:2000,max:200},
 {code:"12APROVECHA",min:1000,max:150},
 {code:"VIERNES600",min:6000,max:600},
 {code:"CUPON800",min:8000,max:800},
-{code:"MILVIERNES",min:10000,max:1000},
-{code:"SUPERDEAL",min:5000,max:700},
-{code:"HOTSALE",min:3000,max:400}
+{code:"MILVIERNES",min:10000,max:1000}
 ];
 
 const daily=document.getElementById("daily");
 
 dailyCoupons.forEach(c=>{
   const s=getStatus();
-
   daily.innerHTML+=`
   <div class="flash-box">
-
     <div class="status">
       <span class="dot ${s.color}"></span>
       ${s.text}
     </div>
-
     📌 Compra mínima: $${c.min.toLocaleString()}<br>
     💰 Descuento máximo: $${c.max.toLocaleString()}
-
     <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
+  </div>`;
+});
 
-    <div style="margin-top:8px;font-size:12px;font-weight:900;">
-      CUPÓN RELÁMPAGO ⚡️
-    </div>
+/* BANCARIOS RESTAURADOS */
+const bancos=[
+["BBVA",4500,500,"BBVAGOL"],
+["HSBC",3000,500,"HSBCGOL"],
+["Banorte",3000,500,"BNRTGOL"],
+["Santander",2500,500,"SANTGOL"],
+["AMEX",4500,500,"AMEXGOL"],
+["Afirme",2500,1000,"AFRMGOL"],
+["Mifel",2500,750,"MIFEGOL"]
+];
 
+const banks=document.getElementById("banks");
+
+bancos.forEach(b=>{
+  banks.innerHTML+=`
+  <div class="card">
+    🏦 <b>${b[0]}</b><br>
+    📌 Min: $${b[1].toLocaleString()} | 💰 Max: $${b[2].toLocaleString()}
+    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
   </div>`;
 });
 
