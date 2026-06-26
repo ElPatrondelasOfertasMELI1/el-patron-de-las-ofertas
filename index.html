@@ -359,5 +359,65 @@ bancos.forEach(b=>{
 
 </script>
 
+<script>
+
+/* LINK PRINCIPAL */
+const link = "https://meli.la/1mj3itE";
+
+/* CLICS */
+let clicks = localStorage.getItem("clicks") || 0;
+document.getElementById("counter").innerText = "👆 Clics: " + clicks;
+
+/* TOAST */
+function toast(){
+  const t = document.getElementById("toast");
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1200);
+}
+
+/* CLICK PRINCIPAL (NO MODIFICADO) */
+function go(code){
+
+  navigator.clipboard.writeText(code).catch(()=>{});
+
+  clicks++;
+  localStorage.setItem("clicks",clicks);
+  document.getElementById("counter").innerText = "👆 Clics: " + clicks;
+
+  toast();
+
+  setTimeout(()=>{
+    window.location.href = link;
+  },500);
+}
+
+/* STATUS RELÁMPAGOS */
+function getStatus(){
+  const h = new Date().getHours();
+  if(h >= 9 && h < 12) return "🟢 ACTIVO";
+  if(h >= 12 && h < 24) return "🟠 POR AGOTARSE";
+  return "🔴 AGOTADO";
+}
+
+/* RELÁMPAGOS */
+const flashBox = document.getElementById("flashBox");
+
+flash.forEach(f=>{
+  flashBox.innerHTML += `
+  <div class="card flash">
+    <div class="status">${getStatus()}</div>
+
+    ⚡ CUPÓN RELÁMPAGO
+
+    <div class="small">
+      📌 Compra mínima: ${f.m} | 💰 Descuento: ${f.d}
+    </div>
+
+    <button class="btn" onclick="go('${f.n}')">VER CUPÓN</button>
+  </div>`;
+});
+
+</script>
+
 </body>
 </html>
