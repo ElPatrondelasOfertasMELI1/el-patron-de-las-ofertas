@@ -14,10 +14,9 @@ body{
   background:#f4f4f4;
   color:#111;
   overflow-x:hidden;
-  font-weight:600; /* 🔧 MÁS LIGERO */
+  font-weight:600;
 }
 
-/* TITULOS (NO CAMBIADOS) */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:14px;
@@ -25,13 +24,6 @@ header{
   font-weight:900;
 }
 
-.section{
-  text-align:center;
-  font-weight:900; /* 🔥 SE MANTIENE FUERTE */
-  margin:15px 0 8px;
-}
-
-/* MENU */
 .menu-btn{
   position:fixed;
   top:15px;
@@ -61,6 +53,7 @@ header{
   padding:15px;
   transition:0.3s;
   z-index:998;
+  overflow-y:auto;
 }
 
 .menu-item{
@@ -74,14 +67,34 @@ header{
   font-weight:600;
 }
 
-/* CARDS */
+.section{
+  text-align:center;
+  font-weight:900;
+  margin:15px 0 8px;
+}
+
+.bbva-card{
+  margin:10px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#061a3a,#0a4db8,#1e88e5);
+  color:#fff;
+}
+
+.meli-card{
+  margin:10px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#0a4db8,#1e88e5);
+  color:#fff;
+}
+
 .card{
   background:#fff;
   margin:10px;
   padding:14px;
   border-radius:14px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  font-weight:600;
 }
 
 .btn{
@@ -96,29 +109,6 @@ header{
   cursor:pointer;
 }
 
-/* BBVA */
-.bbva-card{
-  margin:10px;
-  padding:16px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#061a3a,#0a4db8,#1e88e5);
-  color:#fff;
-  box-shadow:0 10px 25px rgba(0,0,0,0.35);
-  font-weight:600;
-}
-
-/* MELI+ */
-.meli-card{
-  margin:10px;
-  padding:16px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#0a4db8,#1e88e5);
-  color:#fff;
-  box-shadow:0 10px 25px rgba(0,0,0,0.25);
-  font-weight:600;
-}
-
-/* RELÁMPAGOS (AMARILLO ORIGINAL) */
 .flash-title{
   font-size:18px;
   font-weight:900;
@@ -127,20 +117,17 @@ header{
 
 .flash-box{
   border:2px solid #ffcc00;
-  background:#fffbe6; /* 🔥 AMARILLO ORIGINAL */
+  background:#fffbe6;
   margin:10px;
   padding:12px;
   border-radius:12px;
-  font-weight:600;
 }
 
-/* STATUS */
 .status{
   display:flex;
   align-items:center;
   gap:6px;
   font-weight:700;
-  margin-bottom:6px;
 }
 
 .dot{width:10px;height:10px;border-radius:50%;}
@@ -148,14 +135,12 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
-/* COUNTDOWN */
 .countdown{
   font-size:16px;
   font-weight:700;
   margin-top:8px;
 }
 
-/* TOAST */
 .toast{
   position:fixed;
   bottom:80px;
@@ -168,11 +153,9 @@ header{
   font-weight:700;
   opacity:0;
   transition:0.3s;
-  z-index:2000;
 }
 .toast.show{opacity:1}
 
-/* WHATSAPP */
 .wa{
   position:fixed;
   bottom:18px;
@@ -186,7 +169,6 @@ header{
   justify-content:center;
   font-size:26px;
   text-decoration:none;
-  z-index:999;
 }
 </style>
 </head>
@@ -195,31 +177,49 @@ header{
 
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
+<div class="sidebar" id="menu">
+
+<div class="section">📂 Categorías</div>
+
+<a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
+<a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
+<a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
+<a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
+<a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
+<a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
+<a class="menu-item" href="https://meli.la/2wvqGN7">🧸 Juguetes</a>
+<a class="menu-item" href="https://meli.la/22qVGcg">💻 Cómputo</a>
+<a class="menu-item" href="https://meli.la/31NnLmv">👕 Moda</a>
+<a class="menu-item" href="https://meli.la/21wQwRZ">💄 Belleza</a>
+<a class="menu-item" href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
+
+</div>
+
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
 <!-- BBVA -->
 <div class="bbva-card">
-  💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
-  🛒 Mercado Libre<br>
-  📌 Compra mínima: $7,000 MXN<br>
-  💰 Tope de descuento: $2,000 MXN<br>
+💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
+🛒 Mercado Libre<br>
+📌 Compra mínima: $7,000 MXN<br>
+💰 Tope de descuento: $2,000 MXN<br>
 
-  <div id="countdown" class="countdown"></div>
+<div id="countdown" class="countdown"></div>
 
-  <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
-    COPIAR CUPÓN Y ABRIR
-  </button>
+<button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
+COPIAR CUPÓN Y ABRIR
+</button>
 </div>
 
 <!-- MELI+ -->
 <div class="meli-card">
-  🎟️ <b>MELI+ EXCLUSIVO</b><br>
-  📌 Compra mínima: $4,000 MXN<br>
-  💰 Descuento máximo: $500 MXN<br>
+🎟️ <b>MELI+ EXCLUSIVO</b><br>
+📌 Compra mínima: $4,000 MXN<br>
+💰 Descuento máximo: $500 MXN<br>
 
-  <button class="btn" onclick="copyCoupon('MELIMASGOL')">
-    COPIAR CUPÓN
-  </button>
+<button class="btn" onclick="copyCoupon('MELIMASGOL')">
+COPIAR CUPÓN
+</button>
 </div>
 
 <!-- RELÁMPAGOS -->
@@ -231,6 +231,11 @@ header{
 <a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
 
 <script>
+
+function toggleMenu(){
+  const m=document.getElementById("menu");
+  m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
+}
 
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
@@ -246,7 +251,7 @@ function copyCoupon(code){
   },700);
 }
 
-/* COUNTDOWN HH:MM:SS */
+/* COUNTDOWN */
 function updateCountdown(){
   const now=new Date();
   const start=new Date(); start.setHours(17,0,0);
@@ -268,12 +273,13 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* RELÁMPAGOS AMARILLOS + FORMATO $ */
+/* RELÁMPAGOS */
 const dailyCoupons=[
 {code:"REBAJAS",min:2000,max:200},
 {code:"12APROVECHA",min:1000,max:150},
 {code:"VIERNES600",min:6000,max:600},
-{code:"CUPON800",min:8000,max:800}
+{code:"CUPON800",min:8000,max:800},
+{code:"MILVIERNES",min:10000,max:1000}
 ];
 
 const daily=document.getElementById("daily");
