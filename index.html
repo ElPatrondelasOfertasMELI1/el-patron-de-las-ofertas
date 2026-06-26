@@ -140,26 +140,23 @@ header{
 
 <body>
 
-<!-- 🎠 BANNER 7.7 MERCADO LIBRE -->
+<!-- 🎠 CARRUSEL 7.7 MERCADO LIBRE -->
 <div id="slider">
-  <img id="slideImg" src="https://http2.mlstatic.com/D_NQ_7X_7.webp" style="width:100%;max-height:220px;object-fit:cover;">
+  <img id="slideImg" src="" style="width:100%;max-height:220px;object-fit:cover;border-radius:10px;">
 </div>
-
-<style>
-#slider{
-  width:100%;
-  overflow:hidden;
-}
-</style>
 
 <script>
 const slides = [
-"https://http2.mlstatic.com/D_NQ_7X_7.webp",
-"https://http2.mlstatic.com/D_NQ_7X_8.webp",
-"https://http2.mlstatic.com/D_NQ_7X_9.webp"
+"https://share.google/eJQ0ccXAhHgaG1Hfl",
+"https://share.google/bAhVZqHnwiDRJU19u",
+"https://share.google/VSrEsGXDNzNENv8Gz",
+"https://share.google/QzRZyYHSBdDQetr5S",
+"https://share.google/Zzg2far7HRSbJ2B2i"
 ];
 
 let i = 0;
+document.getElementById("slideImg").src = slides[0];
+
 setInterval(()=>{
   i = (i + 1) % slides.length;
   document.getElementById("slideImg").src = slides[i];
