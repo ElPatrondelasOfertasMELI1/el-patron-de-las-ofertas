@@ -140,6 +140,32 @@ header{
 
 <body>
 
+<!-- 🎠 BANNER 7.7 MERCADO LIBRE -->
+<div id="slider">
+  <img id="slideImg" src="https://http2.mlstatic.com/D_NQ_7X_7.webp" style="width:100%;max-height:220px;object-fit:cover;">
+</div>
+
+<style>
+#slider{
+  width:100%;
+  overflow:hidden;
+}
+</style>
+
+<script>
+const slides = [
+"https://http2.mlstatic.com/D_NQ_7X_7.webp",
+"https://http2.mlstatic.com/D_NQ_7X_8.webp",
+"https://http2.mlstatic.com/D_NQ_7X_9.webp"
+];
+
+let i = 0;
+setInterval(()=>{
+  i = (i + 1) % slides.length;
+  document.getElementById("slideImg").src = slides[i];
+},3000);
+</script>
+
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
 <!-- LOGO -->
