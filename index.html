@@ -134,13 +134,13 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
-/* ===== BBVA TARJETA PREMIUM ===== */
+/* ===== BBVA APP PRO CARD ===== */
 .bbva-card{
   margin:10px;
   padding:18px;
   border-radius:18px;
   color:#fff;
-  background:linear-gradient(135deg,#002f87,#0057c2,#007bff);
+  background:linear-gradient(135deg,#002a7a,#0053c7,#007bff);
   box-shadow:0 12px 30px rgba(0,0,0,0.3);
   position:relative;
   overflow:hidden;
@@ -186,10 +186,17 @@ header{
   position:relative;
 }
 
-.bbva-hidden{
-  letter-spacing:5px;
-  font-size:18px;
-  margin-top:5px;
+/* INFO BLOQUE PRO */
+.bbva-info{
+  margin-top:10px;
+  font-size:14px;
+  line-height:1.5;
+  opacity:0.95;
+  position:relative;
+}
+
+.bbva-info strong{
+  color:#fff;
 }
 
 .bbva-btn{
@@ -201,7 +208,7 @@ header{
   background:#ffffff;
   color:#0033a0;
   cursor:pointer;
-  margin-top:10px;
+  margin-top:12px;
   position:relative;
 }
 
@@ -264,7 +271,7 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<!-- 🔥 CUPÓN BBVA MEJORADO (SIN ROMPER NADA) -->
+<!-- 🔥 BBVA APP PRO -->
 <div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
 
 <div class="bbva-card">
@@ -274,15 +281,21 @@ header{
     <div class="bbva-chip">💳</div>
   </div>
 
-  <div class="section-small">⏰ Tiempo real</div>
+  <div class="section-small">⏰ Tiempo real de activación</div>
   <div id="countdown" class="bbva-countdown">Cargando...</div>
 
-  💳 <b>Banco:</b> BBVA <br>
-  🛒 <b>Tienda:</b> Mercado Libre <br>
-  ⏰ <b>Horario:</b> 5:00 - 6:00 pm <br><br>
+  <div class="bbva-info">
 
-  🎟️ <b>Cupón oculto</b><br>
-  <div class="bbva-hidden">████████████</div>
+    <strong>25% con cupón:</strong> BBVAGOLAZO <br><br>
+
+    Usa el cupón <strong>BBVAGOLAZO</strong> al momento de pagar a una sola exhibición con tu Tarjeta de Crédito BBVA. <br><br>
+
+    Aplica en compras mínimas de <strong>$7,000 MXN</strong>. <br>
+    Descuento topado a <strong>$2,000 MXN por usuario</strong>. <br><br>
+
+    Válido únicamente el <strong>26 de junio de 2026</strong> de <strong>5:00 p.m. a 6:00 p.m.</strong> (Hora del Centro de México).
+
+  </div>
 
   <button class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
     COPIAR CUPÓN
@@ -332,7 +345,7 @@ function copyCoupon(code){
   },600);
 }
 
-/* COUNTDOWN (NO TOCADO) */
+/* COUNTDOWN */
 function updateCountdown(){
   const now = new Date();
 
@@ -364,7 +377,7 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* CUPONES RELÁMPAGOS (igual que antes) */
+/* CUPONES RELÁMPAGOS */
 const dailyCoupons=[
 {code:"REBAJAS",min:2000,max:200},
 {code:"12APROVECHA",min:1000,max:150},
@@ -391,7 +404,7 @@ dailyCoupons.forEach(c=>{
   </div>`;
 });
 
-/* BANCARIOS (igual que antes) */
+/* BANCARIOS */
 const bancos=[
 ["Mercado Pago",4000,500,"TCMPGOL"],
 ["Meses sin tarjeta",2500,500,"MSTGOL"],
