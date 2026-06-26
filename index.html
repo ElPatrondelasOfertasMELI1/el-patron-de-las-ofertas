@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>El Patrón de las Ofertas</title>
 
-<!-- TIPOGRAFÍA PROFESIONAL -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -14,7 +13,6 @@ body{
   font-family:'Poppins', sans-serif;
   background:#f4f4f4;
   overflow-x:hidden;
-  color:#111;
 }
 
 /* HEADER */
@@ -23,7 +21,6 @@ header{
   padding:14px;
   text-align:center;
   font-weight:900;
-  font-size:18px;
 }
 
 /* BOTÓN MENÚ CRISTAL */
@@ -31,11 +28,11 @@ header{
   position:fixed;
   top:15px;
   left:15px;
-  width:48px;
-  height:48px;
+  width:50px;
+  height:50px;
   border-radius:14px;
-  background:rgba(255,255,255,0.35);
-  backdrop-filter:blur(10px);
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(12px);
   border:1px solid rgba(255,255,255,0.5);
   display:flex;
   align-items:center;
@@ -45,33 +42,32 @@ header{
   z-index:999;
 }
 
-/* SIDEBAR */
+/* SIDEBAR CRISTAL (SIN RALLA NEGRA) */
 .sidebar{
   position:fixed;
   top:0;
-  left:-270px;
-  width:260px;
+  left:-280px;
+  width:270px;
   height:100%;
-  background:#111;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(15px);
   color:#fff;
   padding:15px;
   transition:0.3s;
   z-index:998;
   overflow-y:auto;
-  box-shadow:none;
 }
 
-.sidebar h3{
-  color:#ffcc00;
-  font-weight:900;
-}
-
-.sidebar a{
+/* BOTONES CRISTAL MENU */
+.menu-item{
   display:block;
+  margin:10px 0;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.12);
   color:#fff;
-  padding:10px 0;
   text-decoration:none;
-  font-weight:500;
+  font-weight:600;
 }
 
 /* LOGO */
@@ -87,31 +83,26 @@ header{
   border:3px solid #ffcc00;
 }
 
-/* CONTADOR */
-.counter{
-  text-align:center;
-  background:#111;
-  color:#fff;
-  padding:8px;
-  font-weight:700;
-}
-
 /* SECCIONES */
 .section{
   text-align:center;
   font-weight:900;
   margin:15px 0 8px;
-  font-size:15px;
-  letter-spacing:0.5px;
 }
 
-/* CARD */
+/* CARD ANIMADA */
 .card{
   background:#fff;
   margin:10px;
   padding:14px;
   border-radius:12px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  animation:fadeIn .4s ease-in-out;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(10px)}
+  to{opacity:1; transform:translateY(0)}
 }
 
 /* BOTÓN */
@@ -126,18 +117,21 @@ header{
   margin-top:10px;
 }
 
-/* ⚡ RELÁMPAGOS (AMARILLO COMO PEDISTE) */
-.flash-box{
-  margin:10px;
-  border:2px solid #ffcc00;
-  border-radius:12px;
-  padding:5px;
-  background:#fffbe6;
+/* ESTADOS */
+.status{
+  font-weight:900;
+  margin-bottom:5px;
 }
 
-/* OCULTAR CODIGOS */
-.hidden{
-  display:none;
+.green{color:#00c853;}
+.orange{color:#ff9800;}
+.red{color:#e53935;}
+
+/* MELI */
+.meli-info{
+  font-size:13px;
+  margin-top:5px;
+  color:#444;
 }
 
 /* WHATSAPP */
@@ -153,28 +147,29 @@ header{
   align-items:center;
   justify-content:center;
   font-size:26px;
-  text-decoration:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MENÚ -->
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="menu">
+
   <h3>📂 Categorías</h3>
-  <a href="#">📱 Celulares</a>
-  <a href="#">🛏️ Colchones</a>
-  <a href="#">🔧 Herramientas</a>
-  <a href="#">🚗 Vehículos</a>
-  <a href="#">🏠 Electrodomésticos</a>
-  <a href="#">🎮 Gaming</a>
-  <a href="#">🧸 Juguetes</a>
-  <a href="#">💻 Cómputo</a>
-  <a href="#">👕 Moda</a>
-  <a href="#">💄 Belleza</a>
+
+  <a class="menu-item" href="#">📱 Celulares</a>
+  <a class="menu-item" href="#">🛏️ Colchones</a>
+  <a class="menu-item" href="#">🔧 Herramientas</a>
+  <a class="menu-item" href="#">🚗 Vehículos</a>
+  <a class="menu-item" href="#">🏠 Electrodomésticos</a>
+  <a class="menu-item" href="#">🎮 Gaming</a>
+  <a class="menu-item" href="#">🧸 Juguetes</a>
+  <a class="menu-item" href="#">💻 Cómputo</a>
+  <a class="menu-item" href="#">👕 Moda</a>
+  <a class="menu-item" href="#">💄 Belleza</a>
+
 </div>
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
@@ -183,21 +178,21 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<div class="counter" id="counter">👆 Clics: 0</div>
-
-<!-- ⭐ MELI+ MEJORADO -->
-<div class="section">⭐ CUPÓN MELI+ EXCLUSIVO</div>
+<!-- MELI+ -->
+<div class="section">⭐ CUPÓN MELI+</div>
 <div class="card">
-  <b>Beneficio exclusivo para usuarios seleccionados</b>
-  <p style="font-size:13px;">Descuentos especiales en miles de productos dentro de Mercado Libre.</p>
-  <button class="btn" onclick="go('MELIMASGOL')">VER CUPÓN</button>
+  <b>Descuento especial activo</b>
+  <div class="meli-info">
+    Compra mínima: $4,000 | Descuento: $500
+  </div>
+  <button class="btn" onclick="go('MELIMASGOL')">COPIAR CUPÓN</button>
 </div>
 
-<!-- ⚡ RELÁMPAGOS -->
+<!-- RELÁMPAGOS -->
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
-<div class="flash-box" id="flashBox"></div>
+<div id="flashBox"></div>
 
-<!-- 🏦 BANCARIOS -->
+<!-- BANCOS -->
 <div class="section">🏦 CUPONES BANCARIOS 👇</div>
 <div id="banks"></div>
 
@@ -205,61 +200,58 @@ header{
 
 <script>
 
+let clicks=0;
+
 function toggleMenu(){
   const m=document.getElementById("menu");
-  m.style.left = (m.style.left==="0px") ? "-270px" : "0px";
+  m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
-const link="https://meli.la/1mj3itE";
-
-let clicks=0;
+function getStatus(){
+  const h=new Date().getHours();
+  if(h < 4) return "green";
+  if(h < 8) return "orange";
+  return "red";
+}
 
 function go(code){
   navigator.clipboard.writeText(code);
-  clicks++;
-  document.getElementById("counter").innerText="👆 Clics: "+clicks;
-  window.location.href=link;
+
+  alert("CUPÓN COPIADO ✔");
+
+  window.location.href="https://meli.la/1mj3itE";
 }
 
-/* ⚡ RELÁMPAGOS (CODIGO OCULTO) */
+/* RELÁMPAGOS OCULTOS */
 const flash=[
-{n:"SIEMPREFUT",m:"$2000",d:"$215"},
-{n:"DESCUENTO600",m:"$6000",d:"$600"},
+{n:"SIEMPREFUT",m:"$2,000",d:"$215"},
+{n:"DESCUENTO600",m:"$6,000",d:"$600"},
 {n:"JUEVES10",m:"$500",d:"$100"}
 ];
 
-const flashBox=document.getElementById("flashBox");
-
 flash.forEach(f=>{
-  flashBox.innerHTML+=`
+  document.getElementById("flashBox").innerHTML+=`
   <div class="card">
-    ⚡ <b>${f.n}</b>
-    <div style="font-size:13px;">📌 ${f.m} | 💰 ${f.d}</div>
-    <button class="btn" onclick="go('${f.n}')">VER CUPÓN</button>
+    <div class="status ${getStatus()}">● ESTADO</div>
+    ⚡ ${f.n}
+    <div>📌 ${f.m} | 💰 ${f.d}</div>
+    <button class="btn" onclick="go('${f.n}')">COPIAR CUPÓN</button>
   </div>`;
 });
 
-/* 🏦 BANCOS */
+/* BANCOS */
 const bancos=[
-["Mercado Pago","$4000","$500","TCMPGOL"],
-["Meses sin tarjeta","$2500","$500","MSTGOL"],
-["BBVA","$4500","$500","BBVAGOL"],
-["HSBC","$3000","$500","HSBCGOL"],
-["Banorte","$3000","$500","BNRTGOL"],
-["Santander","$2500","$500","SANTGOL"],
-["AMEX","$4500","$500","AMEXGOL"],
-["Afirme","$2500","$1000","AFRMGOL"],
-["Mifel","$2500","$750","MIFEGOL"]
+["Mercado Pago","4,000","500","TCMPGOL"],
+["BBVA","4,500","500","BBVAGOL"],
+["HSBC","3,000","500","HSBCGOL"]
 ];
 
-const banks=document.getElementById("banks");
-
 bancos.forEach(b=>{
-  banks.innerHTML+=`
+  document.getElementById("banks").innerHTML+=`
   <div class="card">
-    🏦 <b>${b[0]}</b>
-    <div style="font-size:13px;">📌 ${b[1]} | 💰 ${b[2]}</div>
-    <button class="btn" onclick="go('${b[3]}')">VER CUPÓN</button>
+    🏦 ${b[0]}
+    <div>📌 ${b[1]} | 💰 ${b[2]}</div>
+    <button class="btn" onclick="go('${b[3]}')">COPIAR CUPÓN</button>
   </div>`;
 });
 
