@@ -100,9 +100,10 @@ header{
   color:#fff;
   font-weight:900;
   margin-top:10px;
+  cursor:pointer;
 }
 
-/* 🔵 BBVA ESTABLE (NO FLOTA) */
+/* 🔵 BBVA */
 .bbva-card{
   margin:10px;
   padding:16px;
@@ -112,36 +113,17 @@ header{
   box-shadow:0 10px 25px rgba(0,0,0,0.35);
 }
 
-.bbva-title{
-  font-size:18px;
-  font-weight:900;
-}
-
-.bbva-info{
-  font-size:13px;
-  margin-top:8px;
-  line-height:1.5;
-}
-
-.bbva-tag{
-  display:inline-block;
-  margin-top:10px;
-  padding:4px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.2);
-  font-size:12px;
-  font-weight:700;
-}
-
-/* COUNTDOWN */
-.countdown{
-  font-size:18px;
-  font-weight:900;
-  margin-top:10px;
+/* ⭐ MELI+ RESTAURADO AZUL */
+.meli-card{
+  margin:10px;
+  padding:16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#0a4db8,#1e88e5);
   color:#fff;
+  box-shadow:0 10px 25px rgba(0,0,0,0.25);
 }
 
-/* FLASH ORIGINAL */
+/* FLASH RELÁMPAGOS */
 .flash-title{
   font-size:18px;
   font-weight:900;
@@ -159,6 +141,20 @@ header{
   font-size:17px;
   font-weight:900;
 }
+
+/* STATUS */
+.status{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+.dot{width:10px;height:10px;border-radius:50%;}
+.green{background:#00c853;}
+.orange{background:#ff9800;}
+.red{background:#e53935;}
 
 /* TOAST */
 .toast{
@@ -216,37 +212,39 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<!-- 🔵 BBVA ESTABLE EN INICIO -->
+<!-- 🔵 BBVA -->
 <div class="bbva-card">
+  <div style="font-size:18px;font-weight:900;">💳 BBVA 25% OFF EXCLUSIVO</div>
+  🛒 Mercado Libre<br>
+  📌 Compra mínima: $7,000 MXN<br>
+  💰 Tope de descuento: $2,000 MXN<br>
+  💳 Pago a una sola exhibición<br>
+  ⏰ 5:00 - 6:00 PM
+</div>
 
-  <div class="bbva-title">💳 BBVA 25% OFF EXCLUSIVO</div>
+<!-- ⭐ MELI+ RESTAURADO -->
+<div class="meli-card">
+  <div style="font-size:16px;font-weight:900;">🎟️ MELI+ EXCLUSIVO</div>
 
-  <div class="bbva-info">
-    🛒 Mercado Libre<br>
-    📌 Compra mínima: $7,000 MXN<br>
-    💰 Tope de descuento: $2,000 MXN<br>
-    💳 Pago a una sola exhibición<br>
-    ⏰ Activo: 5:00:00 PM - 6:00:00 PM
-  </div>
+  📌 Compra mínima: $4,000 MXN<br>
+  💰 Descuento máximo: $500 MXN<br>
+  🛒 Mercado Libre<br>
+  ⚡ Beneficio automático
 
-  <div id="countdown" class="countdown">Cargando...</div>
-
-  <div class="bbva-tag">🔥 BENEFICIO AUTOMÁTICO</div>
-
-  <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
+  <button class="btn" onclick="copyCoupon('MELIMASGOL')">
     COPIAR CUPÓN
   </button>
 </div>
 
-<!-- RELÁMPAGOS -->
-<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
+<!-- ⚡ CUPONES RELÁMPAGOS -->
+<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡️</div>
 <div id="daily"></div>
 
-<!-- BANCARIOS -->
-<div class="section">🏦 CUPONES BANCARIOS</div>
+<!-- 🏦 BANCARIOS -->
+<div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVOS</div>
 <div id="banks"></div>
 
-<div id="toast" class="toast">CUPÓN COPIADO ✔</div>
+<div id="toast" class="toast">COPIADO ✔</div>
 
 <a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
 
@@ -257,52 +255,27 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
-/* COPIAR + REDIRIGIR A MELI */
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
 
   const t=document.getElementById("toast");
-  t.textContent = "CUPÓN COPIADO ✔";
+  t.textContent="CUPÓN COPIADO ✔";
   t.classList.add("show");
 
   setTimeout(()=>t.classList.remove("show"),1200);
 
   setTimeout(()=>{
     window.location.href="https://meli.la/1mj3itE";
-  },700);
+  },600);
 }
 
-/* COUNTDOWN */
-function updateCountdown(){
-  const now=new Date();
-
-  const start=new Date();
-  start.setHours(17,0,0);
-
-  const end=new Date();
-  end.setHours(18,0,0);
-
-  const el=document.getElementById("countdown");
-
-  function fmt(ms){
-    const h=Math.floor(ms/3600000);
-    const m=Math.floor((ms%3600000)/60000);
-    const s=Math.floor((ms%60000)/1000);
-    return `${h}h ${m}m ${s}s`;
-  }
-
-  if(now<start){
-    el.innerHTML="Empieza en "+fmt(start-now);
-  }
-  else if(now<=end){
-    el.innerHTML="🔥 ACTIVO - termina en "+fmt(end-now);
-  }
-  else{
-    el.innerHTML="❌ FINALIZADO";
-  }
+/* STATUS AUTOMÁTICO */
+function getStatus(){
+  const h=new Date().getHours();
+  if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
+  if(h>=13 && h<24) return {text:"POR AGOTARSE", color:"orange"};
+  return {text:"AGOTADO", color:"red"};
 }
-setInterval(updateCountdown,1000);
-updateCountdown();
 
 /* RELÁMPAGOS */
 const dailyCoupons=[
@@ -316,11 +289,16 @@ const dailyCoupons=[
 const daily=document.getElementById("daily");
 
 dailyCoupons.forEach(c=>{
+  const s=getStatus();
   daily.innerHTML+=`
   <div class="flash-box">
+    <div class="status">
+      <span class="dot ${s.color}"></span>
+      ${s.text}
+    </div>
     📌 Compra mínima: $${c.min.toLocaleString()}<br>
     💰 Descuento máximo: $${c.max.toLocaleString()}
-    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR CUPÓN</button>
+    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
   </div>`;
 });
 
@@ -331,8 +309,7 @@ const bancos=[
 ["Banorte",3000,500,"BNRTGOL"],
 ["Santander",2500,500,"SANTGOL"],
 ["AMEX",4500,500,"AMEXGOL"],
-["Afirme",2500,1000,"AFRMGOL"],
-["Meli+",4000,500,"MELIMASGOL"]
+["Afirme",2500,1000,"AFRMGOL"]
 ];
 
 const banks=document.getElementById("banks");
