@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Patrón de las Ofertas</title>
+<title>El Patrón de las Ofertas - Black Friday</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
@@ -11,16 +11,18 @@
 body{
   margin:0;
   font-family:'Inter', sans-serif;
-  background:#f4f4f4;
-  color:#111;
+  background:#0b0b0b;
+  color:#fff;
   overflow-x:hidden;
 }
 
 header{
-  background:linear-gradient(90deg,#ffe600,#ffcc00);
+  background:linear-gradient(90deg,#ff0000,#000000);
   padding:14px;
   text-align:center;
   font-weight:900;
+  color:#fff;
+  letter-spacing:1px;
 }
 
 .menu-btn{
@@ -30,8 +32,8 @@ header{
   width:48px;
   height:48px;
   border-radius:14px;
-  background:rgba(255,255,255,0.4);
-  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(10px);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -39,6 +41,7 @@ header{
   font-weight:900;
   z-index:999;
   cursor:pointer;
+  color:#fff;
 }
 
 .sidebar{
@@ -47,7 +50,7 @@ header{
   left:-280px;
   width:270px;
   height:100%;
-  background:rgba(0,0,0,0.65);
+  background:rgba(0,0,0,0.9);
   backdrop-filter:blur(15px);
   padding:15px;
   transition:0.3s;
@@ -58,7 +61,7 @@ header{
   display:block;
   padding:12px;
   margin:8px 0;
-  background:rgba(255,255,255,0.12);
+  background:rgba(255,0,0,0.15);
   border-radius:12px;
   color:#fff;
   text-decoration:none;
@@ -74,21 +77,23 @@ header{
 .logo img{
   width:160px;
   border-radius:14px;
-  border:3px solid #ffcc00;
+  border:2px solid #ff0000;
 }
 
 .section{
   text-align:center;
   font-weight:900;
   margin:15px 0 8px;
+  color:#ff4444;
 }
 
 .card{
-  background:#fff;
+  background:#111;
   margin:10px;
   padding:14px;
   border-radius:14px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  box-shadow:0 0 20px rgba(255,0,0,0.15);
+  border:1px solid rgba(255,0,0,0.3);
 }
 
 .btn{
@@ -96,11 +101,10 @@ header{
   padding:12px;
   border:0;
   border-radius:10px;
-  background:#00c853;
+  background:#ff0000;
   color:#fff;
   font-weight:900;
   margin-top:10px;
-  transition:0.3s;
 }
 
 .money{
@@ -108,119 +112,42 @@ header{
   font-weight:900;
 }
 
-/* STATUS */
-.flash-title{
-  font-size:18px;
-  font-weight:900;
-}
-
-.flash-box{
-  border:2px solid #ffcc00;
-  background:#fffbe6;
-  margin:10px;
-  padding:12px;
-  border-radius:12px;
-}
-
-.status{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-weight:900;
-  margin-bottom:6px;
-}
-
-.dot{width:10px;height:10px;border-radius:50%;}
-.green{background:#00c853;}
-.orange{background:#ff9800;}
-.red{background:#e53935;}
-
-/* ===== BBVA MARKETPLACE REAL ===== */
+/* BBVA BLACK FRIDAY */
 .bbva-card{
   margin:10px;
   padding:18px;
   border-radius:18px;
   color:#fff;
-  background:linear-gradient(135deg,#002a7a,#0053c7,#007bff);
-  box-shadow:0 12px 30px rgba(0,0,0,0.3);
+  background:linear-gradient(135deg,#000000,#001a66,#0033cc);
+  box-shadow:0 0 25px rgba(255,0,0,0.4);
   position:relative;
   overflow:hidden;
-  border:2px solid rgba(255,255,255,0.15);
-}
-
-.bbva-card::before{
-  content:"";
-  position:absolute;
-  top:-50%;
-  left:-50%;
-  width:200%;
-  height:200%;
-  background:radial-gradient(circle,rgba(255,255,255,0.18),transparent 60%);
-  transform:rotate(25deg);
-}
-
-.bbva-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  font-weight:900;
-  font-size:22px;
-  position:relative;
-}
-
-.bbva-chip{font-size:28px;}
-
-.section-small{
-  margin-top:10px;
-  font-weight:700;
-  opacity:0.9;
-  position:relative;
 }
 
 .bbva-countdown{
   font-size:28px;
   font-weight:900;
-  margin:8px 0;
-  color:#ffeb3b;
-  text-shadow:0 2px 10px rgba(0,0,0,0.35);
+  color:#ff0000;
+  text-shadow:0 0 10px #ff0000;
 }
 
-/* 🔥 BLOQUE MARKET REAL */
-.bbva-info{
-  margin-top:10px;
-  font-size:14px;
-  line-height:1.6;
-  opacity:0.95;
-}
-
-.market-badge{
-  display:inline-block;
-  margin-top:8px;
-  padding:6px 10px;
-  border-radius:8px;
-  font-weight:900;
-  background:rgba(0,0,0,0.25);
-}
-
-/* BOTÓN DINÁMICO */
-.bbva-btn{
-  width:100%;
+/* FLASH ALERT */
+.flash-box{
+  border:1px solid #ff0000;
+  background:#1a0000;
+  margin:10px;
   padding:12px;
   border-radius:12px;
-  border:none;
-  font-weight:900;
-  cursor:pointer;
-  margin-top:12px;
-  transition:0.3s;
-  background:#888;
-  color:#fff;
 }
 
-.bbva-btn.active{
-  background:#ffffff;
-  color:#0033a0;
-  transform:scale(1.02);
-  box-shadow:0 0 15px rgba(255,255,255,0.3);
+/* STATUS */
+.dot{width:10px;height:10px;border-radius:50%;}
+.green{background:#00ff66;}
+.orange{background:#ff8800;}
+.red{background:#ff0000;}
+
+.btn:active{
+  transform:scale(0.97);
 }
 
 /* TOAST */
@@ -229,7 +156,7 @@ header{
   bottom:80px;
   left:50%;
   transform:translateX(-50%);
-  background:#111;
+  background:#000;
   color:#fff;
   padding:10px 16px;
   border-radius:10px;
@@ -239,14 +166,13 @@ header{
 }
 .toast.show{opacity:1}
 
-/* WHATSAPP */
 .wa{
   position:fixed;
   bottom:18px;
   right:18px;
   width:60px;
   height:60px;
-  background:rgba(37,211,102,0.9);
+  background:#25d366;
   border-radius:50%;
   display:flex;
   align-items:center;
@@ -262,78 +188,62 @@ header{
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="menu">
-  <div class="section" style="color:#ffcc00;">📂 Categorías</div>
+  <div class="section">CATEGORÍAS BLACK FRIDAY</div>
 
-  <a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
-  <a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
-  <a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
-  <a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
-  <a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
-  <a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
-  <a class="menu-item" href="https://meli.la/2wvqGN7">🧸 Juguetes</a>
-  <a class="menu-item" href="https://meli.la/22qVGcg">💻 Cómputo</a>
-  <a class="menu-item" href="https://meli.la/31NnLmv">👕 Moda</a>
-  <a class="menu-item" href="https://meli.la/21wQwRZ">💄 Belleza</a>
+  <a class="menu-item" href="#">📱 Celulares</a>
+  <a class="menu-item" href="#">🛏️ Colchones</a>
+  <a class="menu-item" href="#">🔧 Herramienta</a>
+  <a class="menu-item" href="#">🚗 Vehículos</a>
+  <a class="menu-item" href="#">🏠 Hogar</a>
+  <a class="menu-item" href="#">🎮 Gaming</a>
+  <a class="menu-item" href="#">🧸 Juguetes</a>
+  <a class="menu-item" href="#">💻 Cómputo</a>
 </div>
 
-<header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
+<header>⚫ BLACK FRIDAY - EL PATRÓN DE LAS OFERTAS ⚫</header>
 
 <div class="logo">
   <img src="logo.png.PNG">
 </div>
 
-<!-- 🔥 BBVA MARKETPLACE REAL -->
-<div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
+<!-- BBVA -->
+<div class="section">🔥 BBVA BLACK FRIDAY</div>
 
 <div class="bbva-card">
 
   <div class="bbva-top">
     <div>BBVA</div>
-    <div class="bbva-chip">💳</div>
+    <div>💳</div>
   </div>
 
-  <div class="section-small">⏰ Tiempo real de activación</div>
   <div id="countdown" class="bbva-countdown">Cargando...</div>
 
   <div class="bbva-info">
+    <strong>25% OFF CUPÓN BBVAGOLAZO</strong><br><br>
 
-    <strong>25% con cupón bancario</strong><br><br>
+    Compra mínima: $7,000 MXN<br>
+    Tope de descuento: $2,000 MXN<br><br>
 
-    Usa este beneficio al momento de pagar con Tarjeta de Crédito BBVA.<br><br>
-
-    Aplica en compras mínimas de <strong>$7,000 MXN</strong><br>
-    Descuento máximo: <strong>$2,000 MXN</strong><br><br>
-
-    <span class="market-badge">⚡ VÁLIDO SOLO HOY 5:00 - 6:00 PM</span>
-
+    ⚠ Solo activo en ventana Black Friday
   </div>
 
-  <button id="bbvaBtn" class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
-    BLOQUEADO
+  <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
+    COPIAR CUPÓN
   </button>
 
 </div>
 
-<!-- RESTO IGUAL -->
-<div class="section">⭐ VIP MELI+ PRIORIDAD</div>
-<div class="card">
-  🎟️ Exclusivo usuarios MELI+
-  <div class="money">
-    📌 Compra mínima: $4,000 <br>
-    💰 Descuento máximo: $500
-  </div>
-  <button class="btn" onclick="copyCoupon('MELIMASGOL')">COPIAR CUPÓN</button>
-</div>
-
-<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡️</div>
+<!-- CUPONES RELÁMPAGO (TODOS RESTAURADOS) -->
+<div class="section">⚡ CUPONES RELÁMPAGO BLACK FRIDAY</div>
 <div id="daily"></div>
 
-<div class="section">🏦 CUPONES BANCARIOS 🟢 ACTIVOS</div>
+<!-- BANCARIOS COMPLETOS -->
+<div class="section">🏦 CUPONES BANCARIOS</div>
 <div id="banks"></div>
 
-<div id="toast" class="toast">CUPÓN COPIADO ✔</div>
+<div id="toast" class="toast">COPIADO ✔</div>
 
-<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
+<a class="wa" href="#">💬</a>
 
 <script>
 
@@ -342,37 +252,12 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
-/* COPIAR */
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
-
   const t=document.getElementById("toast");
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"),1200);
-
-  setTimeout(()=>{
-    window.location.href="https://meli.la/1mj3itE";
-  },600);
 }
-
-/* MARKETPLACE REAL LOGIC */
-function updateBBVAState(){
-  const now=new Date();
-  const start=new Date(); start.setHours(17,0,0);
-  const end=new Date(); end.setHours(18,0,0);
-
-  const btn=document.getElementById("bbvaBtn");
-
-  if(now>=start && now<=end){
-    btn.classList.add("active");
-    btn.innerHTML="COPIAR CUPÓN";
-  }else{
-    btn.classList.remove("active");
-    btn.innerHTML="BLOQUEADO";
-  }
-}
-setInterval(updateBBVAState,1000);
-updateBBVAState();
 
 /* COUNTDOWN */
 function updateCountdown(){
@@ -383,32 +268,62 @@ function updateCountdown(){
   const el=document.getElementById("countdown");
 
   if(now<start){
-    const diff=start-now;
-    const h=Math.floor(diff/3600000);
-    const m=Math.floor((diff%3600000)/60000);
-    const s=Math.floor((diff%60000)/1000);
-    el.innerHTML=`Empieza en ${h}h ${m}m ${s}s`;
-  }
-  else if(now<=end){
-    const diff=end-now;
-    const m=Math.floor((diff%3600000)/60000);
-    const s=Math.floor((diff%60000)/1000);
-    el.innerHTML=`🔥 ACTIVO - termina en ${m}m ${s}s`;
-  }
-  else{
-    el.innerHTML="❌ FINALIZADO";
+    const d=start-now;
+    el.innerHTML=`Empieza en ${Math.floor(d/3600000)}h`;
+  }else if(now<=end){
+    const d=end-now;
+    el.innerHTML=`🔥 ACTIVO ${Math.floor(d/60000)}m`;
+  }else{
+    el.innerHTML="FINALIZADO";
   }
 }
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* STATUS */
-function getStatus(){
-  const h=new Date().getHours();
-  if(h>=9 && h<13) return {text:"ACTIVO", color:"green"};
-  if(h>=13 && h<24) return {text:"POR AGOTARSE", color:"orange"};
-  return {text:"AGOTADO", color:"red"};
-}
+/* TODOS LOS CUPONES RESTAURADOS */
+const dailyCoupons=[
+{code:"REBAJAS",min:2000,max:200},
+{code:"12APROVECHA",min:1000,max:150},
+{code:"VIERNES600",min:6000,max:600},
+{code:"CUPON800",min:8000,max:800},
+{code:"MILVIERNES",min:10000,max:1000}
+];
+
+const daily=document.getElementById("daily");
+
+dailyCoupons.forEach(c=>{
+  daily.innerHTML+=`
+  <div class="card flash-box">
+    📌 Compra mínima $${c.min} <br>
+    💰 Descuento máximo $${c.max}
+    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
+  </div>`;
+});
+
+/* TODOS LOS BANCOS RESTAURADOS */
+const bancos=[
+["Mercado Pago",4000,500,"TCMPGOL"],
+["Meses sin tarjeta",2500,500,"MSTGOL"],
+["BBVA",4500,500,"BBVAGOL"],
+["HSBC",3000,500,"HSBCGOL"],
+["Banorte",3000,500,"BNRTGOL"],
+["Santander",2500,500,"SANTGOL"],
+["AMEX",4500,500,"AMEXGOL"],
+["Afirme",2500,1000,"AFRMGOL"],
+["Mifel",2500,750,"MIFEGOL"],
+["Meli+",4000,500,"MELIMASGOL"]
+];
+
+const banks=document.getElementById("banks");
+
+bancos.forEach(b=>{
+  banks.innerHTML+=`
+  <div class="card">
+    🏦 ${b[0]} <br>
+    💰 Min $${b[1]} | Max $${b[2]}
+    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
+  </div>`;
+});
 
 </script>
 
