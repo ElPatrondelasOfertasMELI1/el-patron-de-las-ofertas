@@ -107,7 +107,7 @@ header{
   font-weight:900;
 }
 
-/* FLASH */
+/* STATUS */
 .flash-title{
   font-size:18px;
   font-weight:900;
@@ -134,17 +134,75 @@ header{
 .orange{background:#ff9800;}
 .red{background:#e53935;}
 
-.vip{
-  border:2px solid #1e88e5;
-  background:#e3f2fd;
+/* ===== BBVA TARJETA PREMIUM ===== */
+.bbva-card{
+  margin:10px;
+  padding:18px;
+  border-radius:18px;
+  color:#fff;
+  background:linear-gradient(135deg,#002f87,#0057c2,#007bff);
+  box-shadow:0 12px 30px rgba(0,0,0,0.3);
+  position:relative;
+  overflow:hidden;
 }
 
-/* COUNTDOWN */
-.countdown{
-  font-size:22px;
+.bbva-card::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle,rgba(255,255,255,0.18),transparent 60%);
+  transform:rotate(25deg);
+}
+
+.bbva-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
   font-weight:900;
-  color:#e53935;
+  font-size:22px;
+  position:relative;
+}
+
+.bbva-chip{
+  font-size:28px;
+}
+
+.section-small{
+  margin-top:10px;
+  font-weight:700;
+  opacity:0.9;
+  position:relative;
+}
+
+.bbva-countdown{
+  font-size:28px;
+  font-weight:900;
   margin:8px 0;
+  color:#ffeb3b;
+  text-shadow:0 2px 10px rgba(0,0,0,0.35);
+  position:relative;
+}
+
+.bbva-hidden{
+  letter-spacing:5px;
+  font-size:18px;
+  margin-top:5px;
+}
+
+.bbva-btn{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  font-weight:900;
+  background:#ffffff;
+  color:#0033a0;
+  cursor:pointer;
+  margin-top:10px;
+  position:relative;
 }
 
 /* TOAST */
@@ -206,30 +264,36 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<!-- 🔥 CUPÓN BBVA -->
+<!-- 🔥 CUPÓN BBVA MEJORADO (SIN ROMPER NADA) -->
 <div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
 
-<div class="card vip">
+<div class="bbva-card">
 
-  <div class="section">⏰ Tiempo real</div>
-  <div id="countdown" class="countdown">Cargando...</div>
+  <div class="bbva-top">
+    <div>BBVA</div>
+    <div class="bbva-chip">💳</div>
+  </div>
+
+  <div class="section-small">⏰ Tiempo real</div>
+  <div id="countdown" class="bbva-countdown">Cargando...</div>
 
   💳 <b>Banco:</b> BBVA <br>
   🛒 <b>Tienda:</b> Mercado Libre <br>
   ⏰ <b>Horario:</b> 5:00 - 6:00 pm <br><br>
 
   🎟️ <b>Cupón oculto</b><br>
-  <div style="letter-spacing:4px;font-weight:900;">███████████</div>
+  <div class="bbva-hidden">████████████</div>
 
-  <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
+  <button class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
     COPIAR CUPÓN
   </button>
+
 </div>
 
 <!-- VIP MELI+ -->
 <div class="section">⭐ VIP MELI+ PRIORIDAD</div>
-<div class="card vip">
-  <b>🎟️ Exclusivo usuarios MELI+</b>
+<div class="card">
+  🎟️ Exclusivo usuarios MELI+
   <div class="money">
     📌 Compra mínima: $4,000 <br>
     💰 Descuento máximo: $500
@@ -268,7 +332,7 @@ function copyCoupon(code){
   },600);
 }
 
-/* COUNTDOWN */
+/* COUNTDOWN (NO TOCADO) */
 function updateCountdown(){
   const now = new Date();
 
@@ -300,7 +364,7 @@ function updateCountdown(){
 setInterval(updateCountdown,1000);
 updateCountdown();
 
-/* RELÁMPAGOS */
+/* CUPONES RELÁMPAGOS (igual que antes) */
 const dailyCoupons=[
 {code:"REBAJAS",min:2000,max:200},
 {code:"12APROVECHA",min:1000,max:150},
@@ -312,11 +376,12 @@ const dailyCoupons=[
 const daily=document.getElementById("daily");
 
 dailyCoupons.forEach(c=>{
+  const status=getStatus();
   daily.innerHTML+=`
   <div class="card flash-box">
     <div class="status">
-      <span class="dot ${getStatus().color}"></span>
-      ${getStatus().text}
+      <span class="dot ${status.color}"></span>
+      ${status.text}
     </div>
     <div class="money">
       📌 Compra mínima: $${c.min.toLocaleString()} <br>
@@ -326,7 +391,7 @@ dailyCoupons.forEach(c=>{
   </div>`;
 });
 
-/* BANCARIOS */
+/* BANCARIOS (igual que antes) */
 const bancos=[
 ["Mercado Pago",4000,500,"TCMPGOL"],
 ["Meses sin tarjeta",2500,500,"MSTGOL"],
