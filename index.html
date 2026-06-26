@@ -1,289 +1,30 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Patrón de las Ofertas</title>
+<!-- AGREGA ESTO DENTRO DEL <body> justo DESPUÉS del <header> -->
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
-
-<style>
-body{
-  margin:0;
-  font-family:'Inter', sans-serif;
-  background:#f4f4f4;
-  color:#111;
-  overflow-x:hidden;
-}
-
-/* ===== TODO TU CSS SE MANTIENE IGUAL ===== */
-
-header{
-  background:linear-gradient(90deg,#ffe600,#ffcc00);
-  padding:14px;
-  text-align:center;
-  font-weight:900;
-}
-
-.menu-btn{
-  position:fixed;
-  top:15px;
-  left:15px;
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  background:rgba(255,255,255,0.4);
-  backdrop-filter:blur(12px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:22px;
-  font-weight:900;
-  z-index:999;
-  cursor:pointer;
-}
-
-.sidebar{
-  position:fixed;
-  top:0;
-  left:-280px;
-  width:270px;
-  height:100%;
-  background:rgba(0,0,0,0.65);
-  backdrop-filter:blur(15px);
-  padding:15px;
-  transition:0.3s;
-  z-index:998;
-}
-
-.menu-item{
-  display:block;
-  padding:12px;
-  margin:8px 0;
-  background:rgba(255,255,255,0.12);
-  border-radius:12px;
-  color:#fff;
-  text-decoration:none;
-  font-weight:700;
-}
-
-.logo{
-  display:flex;
-  justify-content:center;
-  margin:14px 0;
-}
-
-.logo img{
-  width:160px;
-  border-radius:14px;
-  border:3px solid #ffcc00;
-}
-
-.section{
-  text-align:center;
-  font-weight:900;
-  margin:15px 0 8px;
-}
-
-.card{
-  background:#fff;
-  margin:10px;
-  padding:14px;
-  border-radius:14px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
-}
-
-.btn{
-  width:100%;
-  padding:12px;
-  border:0;
-  border-radius:10px;
-  background:#00c853;
-  color:#fff;
-  font-weight:900;
-  margin-top:10px;
-}
-
-/* BBVA */
-.bbva-card{
-  margin:10px;
-  padding:18px;
-  border-radius:18px;
-  color:#fff;
-  background:linear-gradient(135deg,#002a7a,#0053c7,#007bff);
-}
-
-.bbva-btn{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  font-weight:900;
-  background:#fff;
-  color:#0033a0;
-  cursor:pointer;
-  margin-top:12px;
-}
-
-/* TOAST */
-.toast{
-  position:fixed;
-  bottom:80px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#111;
-  color:#fff;
-  padding:10px 16px;
-  border-radius:10px;
-  font-weight:900;
-  opacity:0;
-  transition:0.3s;
-}
-.toast.show{opacity:1}
-
-</style>
-</head>
-
-<body>
-
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
-
-<div class="sidebar" id="menu">
-  <div class="section" style="color:#ffcc00;">📂 Categorías</div>
-  <a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
-  <a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
-  <a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
-  <a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
-</div>
-
-<header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
-
-<div class="logo">
-  <img src="logo.png.PNG">
-</div>
-
-<!-- BBVA -->
 <div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
 
-<div class="bbva-card">
+<div class="card vip">
 
-  <div style="display:flex;justify-content:space-between;font-weight:900;font-size:22px;">
-    <div>BBVA</div>
-    <div>💳</div>
+  <div style="font-size:18px;font-weight:900;">
+    ⏰ Inicia en / Activa ahora:
   </div>
 
-  <div id="countdown" style="font-size:26px;font-weight:900;color:#ffeb3b;margin:10px 0;">Cargando...</div>
-
-  <div style="font-size:14px;line-height:1.5;">
-    25% BBVA<br>
-    Min $7,000 | Max $2,000<br>
-    5:00 - 6:00 PM
+  <div id="countdown" style="font-size:22px;font-weight:900;color:#e53935;margin:8px 0;">
+    Cargando...
   </div>
 
-  <button class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
+  <b>🔥 Promo exclusiva 25% OFF</b><br><br>
+
+  💳 <b>Banco:</b> BBVA <br>
+  🛒 <b>Tienda:</b> Mercado Libre <br>
+  ⏰ <b>Horario:</b> 5:00 - 6:00 pm (1 hora) <br><br>
+
+  🎟️ <b>Cupón exclusivo (oculto)</b><br>
+  <div style="letter-spacing:3px;font-weight:900;">
+    ███████████
+  </div>
+
+  <button class="btn" onclick="copyCoupon('BBVAGOLAZO')">
     COPIAR CUPÓN
   </button>
 
 </div>
-
-<!-- VIP -->
-<div class="section">⭐ VIP MELI+ PRIORIDAD</div>
-<div class="card">
-  🎟️ MELI+
-  <div>Min $4,000 | Max $500</div>
-  <button class="btn" onclick="copyCoupon('MELIMASGOL')">COPIAR</button>
-</div>
-
-<!-- RELÁMPAGOS -->
-<div class="section">⚡ CUPONES RELÁMPAGOS</div>
-<div id="daily"></div>
-
-<!-- BANCOS -->
-<div class="section">🏦 CUPONES BANCARIOS</div>
-<div id="banks"></div>
-
-<div id="toast" class="toast">COPIADO ✔</div>
-
-<script>
-
-/* MENU */
-function toggleMenu(){
-  const m=document.getElementById("menu");
-  m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
-}
-
-/* COPIAR */
-function copyCoupon(code){
-  navigator.clipboard.writeText(code);
-  const t=document.getElementById("toast");
-  t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),1200);
-}
-
-/* BBVA SIEMPRE ACTIVO */
-setInterval(()=>{
-  document.querySelector(".bbva-btn").innerText="COPIAR CUPÓN";
-},1000);
-
-/* COUNTDOWN */
-function updateCountdown(){
-  const now=new Date();
-  const start=new Date(); start.setHours(17,0,0);
-  const end=new Date(); end.setHours(18,0,0);
-
-  const el=document.getElementById("countdown");
-
-  if(now<start){
-    el.innerHTML="Empieza pronto";
-  } else if(now<=end){
-    el.innerHTML="🔥 ACTIVO";
-  } else {
-    el.innerHTML="FINALIZADO";
-  }
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-/* RELÁMPAGOS */
-const dailyCoupons=[
-{code:"REBAJAS",min:2000,max:200},
-{code:"VIERNES600",min:6000,max:600},
-{code:"CUPON800",min:8000,max:800},
-{code:"MILVIERNES",min:10000,max:1000}
-];
-
-const daily=document.getElementById("daily");
-
-dailyCoupons.forEach(c=>{
-  daily.innerHTML+=`
-  <div class="card">
-    <b>${c.code}</b><br>
-    Min $${c.min} | Max $${c.max}
-    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
-  </div>`;
-});
-
-/* BANCOS */
-const bancos=[
-["BBVA",7000,2000,"BBVAGOLAZO"],
-["Santander",4000,1000,"SANTGOL"],
-["HSBC",3000,500,"HSBCGOL"],
-["Banorte",3000,500,"BNRTGOL"],
-["Amex",4500,1000,"AMEXGOL"]
-];
-
-const banks=document.getElementById("banks");
-
-bancos.forEach(b=>{
-  banks.innerHTML+=`
-  <div class="card">
-    <b>${b[0]}</b><br>
-    Min $${b[1]} | Max $${b[2]}
-    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
-  </div>`;
-});
-
-</script>
-
-</body>
-</html>
