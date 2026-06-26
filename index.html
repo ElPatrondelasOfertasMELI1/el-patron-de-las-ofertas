@@ -303,15 +303,30 @@ const daily=document.getElementById("daily");
 
 dailyCoupons.forEach(c=>{
   const s=getStatus();
-  daily.innerHTML+=`
+
+  daily.innerHTML += `
   <div class="flash-box">
+
     <div class="status">
       <span class="dot ${s.color}"></span>
       ${s.text}
     </div>
+
+    <!-- 🔥 NUEVO TEXTO GRANDE -->
+    <div style="
+      font-size:16px;
+      font-weight:900;
+      margin:6px 0 10px 0;
+      color:#111;
+    ">
+      CUPÓN RELÁMPAGO ⚡️
+    </div>
+
     📌 Compra mínima: $${c.min.toLocaleString()}<br>
     💰 Descuento máximo: $${c.max.toLocaleString()}
+
     <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
+
   </div>`;
 });
 
