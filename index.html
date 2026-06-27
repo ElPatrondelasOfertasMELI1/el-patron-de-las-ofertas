@@ -15,7 +15,18 @@ body{
   color:#111;
 }
 
-/* HEADER PRO */
+/* TIPOGRAFÍA PRO */
+h1,h2,h3{
+  font-weight:900;
+  color:#0b0b0b;
+}
+
+body,div,p,span{
+  font-size:15px;
+  font-weight:500;
+}
+
+/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:16px;
@@ -23,47 +34,83 @@ header{
   font-weight:900;
   font-size:18px;
   letter-spacing:1px;
+  color:#000;
 }
 
-/* LOGO PRO */
+/* LOGO */
 .logo{
   display:flex;
   justify-content:center;
   margin:18px 0;
 }
 .logo img{
-  width:170px;
+  width:165px;
   border-radius:18px;
   box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* CATEGORÍAS */
-.menu{
+/* ☰ HAMBURGUESA CRISTAL */
+.menu-btn{
+  position:fixed;
+  top:18px;
+  left:18px;
+  width:52px;
+  height:52px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(18px);
+  border:1px solid rgba(255,255,255,0.4);
   display:flex;
-  overflow-x:auto;
-  gap:10px;
-  padding:10px;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  z-index:999;
+  cursor:pointer;
 }
-.menu a{
-  min-width:120px;
-  text-align:center;
-  background:#fff;
-  padding:10px;
+
+.menu-btn span{
+  width:22px;
+  height:2.5px;
+  background:#111;
+  border-radius:2px;
+}
+
+/* SIDEBAR CRISTAL */
+.sidebar{
+  position:fixed;
+  top:0;
+  left:-300px;
+  width:280px;
+  height:100%;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(25px);
+  border-right:1px solid rgba(255,255,255,0.3);
+  padding:15px;
+  transition:0.3s;
+  z-index:998;
+}
+
+.menu-item{
+  display:block;
+  padding:12px;
+  margin:8px 0;
+  background:rgba(255,255,255,0.3);
   border-radius:12px;
-  font-weight:700;
-  text-decoration:none;
   color:#111;
-  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  text-decoration:none;
+  font-weight:700;
 }
 
 /* SECCIONES */
 .section{
+  text-align:center;
   font-weight:900;
-  padding:10px 14px;
+  margin:15px 0 8px;
   font-size:16px;
 }
 
-/* TARJETAS PRO */
+/* CARDS */
 .card{
   background:#fff;
   margin:10px 14px;
@@ -72,26 +119,26 @@ header{
   box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
-/* BOTÓN PRO */
+/* BOTÓN */
 .btn{
   width:100%;
   padding:12px;
-  border:none;
+  border:0;
   border-radius:12px;
-  font-weight:900;
   background:#00c853;
   color:#fff;
-  cursor:pointer;
+  font-weight:800;
   margin-top:10px;
+  cursor:pointer;
 }
 
-/* RELÁMPAGOS AMARILLO PRO */
+/* RELÁMPAGO AMARILLO */
 .flash{
   background:#fff8cc;
   border-left:6px solid #ffcc00;
 }
 
-/* MELI+ AZUL PRO */
+/* MELI+ AZUL */
 .meli{
   background:linear-gradient(135deg,#0047ab,#007bff);
   color:#fff;
@@ -99,11 +146,6 @@ header{
   padding:14px;
   margin:10px 14px;
   box-shadow:0 10px 20px rgba(0,0,0,0.2);
-}
-
-/* CUPÓN OCULTO */
-.hidden-code{
-  display:none;
 }
 
 /* TOAST */
@@ -127,22 +169,33 @@ header{
 
 <body>
 
-<header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
-
-<!-- LOGO PRO -->
-<div class="logo">
-  <img src="logo.png.PNG">
+<!-- ☰ BOTÓN -->
+<div class="menu-btn" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
 
-<!-- CATEGORÍAS -->
-<div class="menu">
-  <a href="https://meli.la/1wmWhqC">📱 Celulares</a>
-  <a href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
-  <a href="https://meli.la/2AGTYez">🔧 Herramienta</a>
-  <a href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
-  <a href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
-  <a href="https://meli.la/2QLzQzB">🎮 Gaming</a>
-  <a href="https://meli.la/1dF2gmK">🔥 Ofertas</a>
+<!-- 📂 MENÚ CRISTAL -->
+<div class="sidebar" id="menu">
+
+<h3>📂 Categorías</h3>
+
+<a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
+<a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
+<a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
+<a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
+<a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
+<a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
+<a class="menu-item" href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
+
+</div>
+
+<header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
+
+<!-- LOGO -->
+<div class="logo">
+  <img src="logo.png.PNG">
 </div>
 
 <!-- MELI+ -->
@@ -156,63 +209,58 @@ header{
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
 
 <div class="card flash">
-🔒 Compra mínima: $1,000<br>
-💰 Descuento máximo: $150
+12APROVECHA | Min $1,000 | Tope $150
 <button class="btn" onclick="copy('12APROVECHA')">COPIAR</button>
 </div>
 
 <div class="card flash">
-🔒 Compra mínima: $15,000<br>
-💰 Descuento máximo: $1500
-<button class="btn" onclick="copy('CUPONPRUEVA')">COPIAR</button>
-</div>
-
-<div class="card flash">
-🔒 Compra mínima: $2,000<br>
-💰 Descuento máximo: $200
+REBAJAS | Min $2,000 | Tope $200
 <button class="btn" onclick="copy('REBAJAS')">COPIAR</button>
 </div>
 
 <div class="card flash">
-🔒 Compra mínima: $6,000<br>
-💰 Descuento máximo: $600
+VIERNES600 | Min $6,000 | Tope $600
 <button class="btn" onclick="copy('VIERNES600')">COPIAR</button>
 </div>
 
 <div class="card flash">
-🔒 Compra mínima: $8,000<br>
-💰 Descuento máximo: $800
+CUPON800 | Min $8,000 | Tope $800
 <button class="btn" onclick="copy('CUPON800')">COPIAR</button>
 </div>
 
 <div class="card flash">
-🔒 Compra mínima: $10,000<br>
-💰 Descuento máximo: $1,000
+MILVIERNES | Min $10,000 | Tope $1,000
 <button class="btn" onclick="copy('MILVIERNES')">COPIAR</button>
 </div>
 
 <!-- BANCARIOS -->
 <div class="section">🏦 CUPONES BANCARIOS</div>
 
-<div class="card">BBVA | 10% OFF <button class="btn" onclick="copy('BBVAGOL')">COPIAR</button></div>
-<div class="card">HSBC | 10% OFF <button class="btn" onclick="copy('HSBCGOL')">COPIAR</button></div>
-<div class="card">Banorte | 10% OFF <button class="btn" onclick="copy('BNRTGOL')">COPIAR</button></div>
-<div class="card">Santander | 10% OFF <button class="btn" onclick="copy('SANTGOL')">COPIAR</button></div>
-<div class="card">AMEX | 10% OFF <button class="btn" onclick="copy('AMEXGOL')">COPIAR</button></div>
+<div class="card">BBVA | BBVAGOL <button class="btn" onclick="copy('BBVAGOL')">COPIAR</button></div>
+<div class="card">HSBC | HSBCGOL <button class="btn" onclick="copy('HSBCGOL')">COPIAR</button></div>
+<div class="card">Banorte | BNRTGOL <button class="btn" onclick="copy('BNRTGOL')">COPIAR</button></div>
+<div class="card">Santander | SANTGOL <button class="btn" onclick="copy('SANTGOL')">COPIAR</button></div>
+<div class="card">AMEX | AMEXGOL <button class="btn" onclick="copy('AMEXGOL')">COPIAR</button></div>
 
+<!-- TOAST -->
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
 <script>
 
-/* COPIAR + OCULTAR CÓDIGO */
+/* MENÚ */
+function toggleMenu(){
+  const m=document.getElementById("menu");
+  m.style.left = (m.style.left==="0px") ? "-300px" : "0px";
+}
+
+/* COPIAR */
 function copy(code){
   navigator.clipboard.writeText(code);
 
-  document.getElementById("toast").classList.add("show");
+  const t=document.getElementById("toast");
+  t.classList.add("show");
 
-  setTimeout(()=>{
-    document.getElementById("toast").classList.remove("show");
-  },1200);
+  setTimeout(()=>t.classList.remove("show"),1200);
 
   setTimeout(()=>{
     window.location.href="https://meli.la/1mj3itE";
