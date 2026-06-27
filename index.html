@@ -282,43 +282,85 @@ $2,000 | $210 OFF
 
 <script>
 
+const REDIRECT_URL = "https://meli.la/1mj3itE";
+
+/* MENU */
 function toggleMenu(){
   const m=document.getElementById("menu");
   m.style.left = (m.style.left==="0px") ? "-300px" : "0px";
 }
 
+/* COPIAR + REDIRIGIR */
 function copy(code,id){
   navigator.clipboard.writeText(code);
 
+  // contador
   let val = localStorage.getItem(id) || 0;
   val++;
   localStorage.setItem(id,val);
 
-  document.getElementById("count-"+id).innerText="Copias: "+val;
+  const counter = document.getElementById("count-"+id);
+  if(counter) counter.innerText = "Copias: "+val;
 
+  // toast
   const t=document.getElementById("toast");
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"),1200);
+
+  // redirección correcta
+  setTimeout(()=>{
+    window.location.href = REDIRECT_URL;
+  },600);
 }
 
-/* ⏰ MELI+ SIEMPRE ACTIVO HASTA 1 JULIO 2026 */
-function updateStatus(){
-  const now=new Date();
-  const limit=new Date("2026-07-01T00:00:00");
 
-  document.querySelectorAll(".badge").forEach(b=>{
-    if(now < limit){
-      b.textContent="🟢 ACTIVO";
-      b.className="badge active";
-    } else {
-      b.textContent="🔴 AGOTADO";
-      b.className="badge expired";
+/* ⏰ ESTADOS CORRECTOS RELÁMPAGO */
+function updateStatus(){
+  const h = new Date().getHours();
+  const badges = document.querySelectorAll(".badge");
+
+  badges.forEach(b=>{
+    if(h >= 9 && h <= 11){
+      b.textContent = "🟢 ACTIVO";
+      b.className = "badge active";
+    }
+    else if(h >= 12 && h <= 23){
+      b.textContent = "🟠 POR AGOTARSE";
+      b.className = "badge warning";
+    }
+    else{
+      b.textContent = "🔴 AGOTADO";
+      b.className = "badge expired";
     }
   });
 }
 
+
+/* 🟣 MELI+ Y BANCARIOS SIEMPRE ACTIVOS HASTA 1 JULIO 2026 */
+function updateGlobalStatus(){
+  const now = new Date();
+  const limit = new Date("2026-07-01T00:00:00");
+
+  document.querySelectorAll(".meli .badge, .card:not(.flash) .badge").forEach(b=>{
+    if(now < limit){
+      b.textContent = "🟢 ACTIVO";
+      b.className = "badge active";
+    } else {
+      b.textContent = "🔴 AGOTADO";
+      b.className = "badge expired";
+    }
+  });
+}
+
+
+/* INIT */
 updateStatus();
-setInterval(updateStatus,60000);
+updateGlobalStatus();
+
+setInterval(()=>{
+  updateStatus();
+  updateGlobalStatus();
+},60000);
 
 </script>
 
