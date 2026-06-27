@@ -861,6 +861,78 @@ mostrarResultado();
 
 }
 
+/* =========================
+   🖥️ MOSTRAR RESULTADO
+========================= */
+
+function mostrarResultado(){
+
+const contenedor = document.getElementById("resultadoSimulador");
+
+contenedor.style.display = "block";
+
+contenedor.innerHTML = `
+
+💲 <b>Precio original:</b> $${resultadoActual.precio.toLocaleString()}<br><br>
+
+🎟️ <b>Descuento Mercado Libre:</b> -$${resultadoActual.descuentoML.toLocaleString()}<br>
+
+💳 <b>Descuento bancario:</b> -$${resultadoActual.descuentoBanco.toLocaleString()}<br>
+
+<hr>
+
+💸 <b>Ahorro total:</b> $${(resultadoActual.descuentoML + resultadoActual.descuentoBanco).toLocaleString()}<br><br>
+
+🔥 <strong>Precio Final: $${resultadoActual.total.toLocaleString()}</strong><br><br>
+
+${evaluarConveniencia()}
+
+`;
+
+/* mostrar botón comprar */
+document.getElementById("comprarBtn").style.display = "block";
+
+}
+
+/* =========================
+   🟢 CONVENIENCIA
+========================= */
+
+function evaluarConveniencia(){
+
+const ahorro = resultadoActual.precio - resultadoActual.total;
+
+const porcentaje = (ahorro / resultadoActual.precio) * 100;
+
+if(porcentaje >= 20){
+return "🟢 <b>¡MUY BUENA OFERTA!</b>";
+}
+
+if(porcentaje >= 10){
+return "🟡 <b>Oferta aceptable</b>";
+}
+
+return "🔴 <b>Poca diferencia, revisa otros cupones</b>";
+
+}
+
+/* =========================
+   🛒 BOTÓN COMPRAR
+========================= */
+
+function comprarProducto(){
+
+if(!resultadoActual.link){
+alert("Pega un enlace válido del producto");
+return;
+}
+
+window.open(resultadoActual.link, "_blank");
+
+}
+
+</script>
+
 </script>
 
 </body>
