@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>El Patrón de las Ofertas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -14,7 +14,6 @@ body{
   background:#f4f4f4;
   color:#111;
   overflow-x:hidden;
-  font-weight:600;
 }
 
 header{
@@ -37,7 +36,7 @@ header{
   align-items:center;
   justify-content:center;
   font-size:22px;
-  font-weight:700;
+  font-weight:900;
   z-index:999;
   cursor:pointer;
 }
@@ -63,7 +62,19 @@ header{
   border-radius:12px;
   color:#fff;
   text-decoration:none;
-  font-weight:600;
+  font-weight:700;
+}
+
+.logo{
+  display:flex;
+  justify-content:center;
+  margin:14px 0;
+}
+
+.logo img{
+  width:160px;
+  border-radius:14px;
+  border:3px solid #ffcc00;
 }
 
 .section{
@@ -78,7 +89,6 @@ header{
   padding:14px;
   border-radius:14px;
   box-shadow:0 4px 10px rgba(0,0,0,0.08);
-  font-weight:600;
 }
 
 .btn{
@@ -88,7 +98,7 @@ header{
   border-radius:10px;
   background:#00c853;
   color:#fff;
-  font-weight:700;
+  font-weight:900;
   margin-top:10px;
   cursor:pointer;
 }
@@ -96,54 +106,22 @@ header{
 /* BBVA */
 .bbva-card{
   margin:10px;
-  padding:16px;
+  padding:18px;
   border-radius:18px;
-  background:linear-gradient(135deg,#061a3a,#0a4db8,#1e88e5);
   color:#fff;
+  background:linear-gradient(135deg,#002a7a,#0053c7,#007bff);
 }
 
-/* MELI+ */
-.meli-card{
-  margin:10px;
-  padding:16px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#0a4db8,#1e88e5);
-  color:#fff;
-}
-
-/* FLASH */
-.flash-title{
-  font-size:18px;
-  font-weight:900;
-  text-align:center;
-}
-
-.flash-box{
-  border:2px solid #ffcc00;
-  background:#fffbe6;
-  margin:10px;
+.bbva-btn{
+  width:100%;
   padding:12px;
   border-radius:12px;
-}
-
-/* STATUS */
-.status{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  font-weight:700;
-}
-
-.dot{width:10px;height:10px;border-radius:50%;}
-.green{background:#00c853;}
-.orange{background:#ff9800;}
-.red{background:#e53935;}
-
-/* COUNTDOWN */
-.countdown{
-  font-size:16px;
-  font-weight:700;
-  margin-top:8px;
+  border:none;
+  font-weight:900;
+  background:#fff;
+  color:#0033a0;
+  cursor:pointer;
+  margin-top:12px;
 }
 
 /* TOAST */
@@ -156,30 +134,25 @@ header{
   color:#fff;
   padding:10px 16px;
   border-radius:10px;
-  font-weight:700;
+  font-weight:900;
   opacity:0;
   transition:0.3s;
 }
 .toast.show{opacity:1}
 
-/* WHATSAPP */
 .wa{
   position:fixed;
   bottom:18px;
   right:18px;
-  width:70px;
-  height:70px;
-  background:rgba(37,211,102,0.95);
+  width:60px;
+  height:60px;
+  background:rgba(37,211,102,0.9);
   border-radius:50%;
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  font-size:16px;
+  font-size:26px;
   text-decoration:none;
-  color:white;
-  font-weight:900;
-  box-shadow:0 0 15px rgba(37,211,102,0.6);
 }
 </style>
 </head>
@@ -189,159 +162,139 @@ header{
 <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
 <div class="sidebar" id="menu">
-
-<div class="section">📂 Categorías</div>
-
-<a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
-<a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
-<a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
-<a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
-<a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
-<a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
-<a class="menu-item" href="https://meli.la/2wvqGN7">🧸 Juguetes</a>
-<a class="menu-item" href="https://meli.la/22qVGcg">💻 Cómputo</a>
-<a class="menu-item" href="https://meli.la/31NnLmv">👕 Moda</a>
-<a class="menu-item" href="https://meli.la/21wQwRZ">💄 Belleza</a>
-<a class="menu-item" href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
-
+  <div class="section" style="color:#ffcc00;">📂 Categorías</div>
+  <a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
+  <a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
+  <a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
+  <a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
 </div>
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- LOGO -->
-<div class="card" style="text-align:center;">
-  <img src="logo.png.PNG" style="width:160px;border-radius:14px;border:3px solid #ffcc00;">
+<div class="logo">
+  <img src="logo.png.PNG">
 </div>
 
-<!-- CONTADOR -->
-<div class="card" style="text-align:center;font-weight:900;">
-  🔥 Cupones copiados:
-  <span id="copyCount">0</span>
+<!-- BBVA -->
+<div class="section">🔥 PROMO EXCLUSIVA BBVA 🔥</div>
+
+<div class="bbva-card">
+
+  <div style="display:flex;justify-content:space-between;font-weight:900;font-size:22px;">
+    <div>BBVA</div>
+    <div>💳</div>
+  </div>
+
+  <div id="countdown" style="font-size:26px;font-weight:900;color:#ffeb3b;margin:10px 0;">Cargando...</div>
+
+  <div style="font-size:14px;line-height:1.5;">
+    25% BBVA<br>
+    Min $7,000 | Max $2,000<br>
+    5:00 - 6:00 PM
+  </div>
+
+  <button class="bbva-btn" onclick="copyCoupon('BBVAGOLAZO')">
+    COPIAR CUPÓN
+  </button>
+
 </div>
 
-<!-- MELI+ -->
-<div class="meli-card">
-🎟️ <b>MELI+ EXCLUSIVO</b><br>
-📌 Compra mínima: $4,000 MXN<br>
-💰 Descuento máximo: $500 MXN<br>
-
-<button class="btn" onclick="copyCoupon('MELIMASGOL')">
-COPIAR CUPÓN
-</button>
+<!-- VIP -->
+<div class="section">⭐ VIP MELI+</div>
+<div class="card">
+  🎟️ MELI+
+  <div>Min $4,000 | Max $500</div>
+  <button class="btn" onclick="copyCoupon('MELIMASGOL')">COPIAR</button>
 </div>
 
-<!-- RELÁMPAGOS -->
-<div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
-<div id="daily"></div>
-
-<!-- BANCARIOS -->
-<div class="section flash-title">🏦 CUPONES BANCARIOS 🟢</div>
-<div id="banks"></div>
+<!-- CUPONES -->
+<div class="section">⚡ CUPONES</div>
+<div id="cupones"></div>
 
 <div id="toast" class="toast">COPIADO ✔</div>
 
-<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">
-💬 +200K
-<div style="font-size:9px;">canal ofertas</div>
-</a>
+<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">💬</a>
 
 <script>
 
-let copyCount = localStorage.getItem("copyCount") || 0;
-copyCount = parseInt(copyCount);
-document.getElementById("copyCount").innerText = copyCount;
-
+/* MENU */
 function toggleMenu(){
   const m=document.getElementById("menu");
   m.style.left = (m.style.left==="0px") ? "-280px" : "0px";
 }
 
+/* COPIAR */
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
-
-  let copyCount = localStorage.getItem("copyCount") || 0;
-  copyCount = parseInt(copyCount) + 1;
-  localStorage.setItem("copyCount", copyCount);
-  document.getElementById("copyCount").innerText = copyCount;
-
   const t=document.getElementById("toast");
   t.classList.add("show");
-
   setTimeout(()=>t.classList.remove("show"),1200);
-
-  setTimeout(()=>{
-    window.location.href="https://meli.la/1mj3itE";
-  },700);
+  setTimeout(()=>window.location.href="https://meli.la/1mj3itE",600);
 }
 
-/* RELÁMPAGOS */
-const dailyCoupons=[
-{code:"MUNDIAL10",min:2000,max:210}
-{code:"REBAJAS",min:2000,max:200},
-{code:"12APROVECHA",min:1000,max:150},
-{code:"VIERNES600",min:6000,max:600},
-{code:"CUPON800",min:8000,max:800},
-{code:"MILVIERNES",min:10000,max:1000}
+/* BBVA SIEMPRE ACTIVO */
+setInterval(()=>{
+  document.querySelector(".bbva-btn").innerText="COPIAR CUPÓN";
+},1000);
 
-];
+/* COUNTDOWN */
+function updateCountdown(){
+  const now=new Date();
+  const start=new Date(); start.setHours(17,0,0);
+  const end=new Date(); end.setHours(18,0,0);
 
-const daily=document.getElementById("daily");
+  const el=document.getElementById("countdown");
 
-dailyCoupons.forEach(c=>{
-  const s=getStatus();
-
-  daily.innerHTML += `
-  <div class="flash-box">
-    <div class="status">
-  <span class="dot ${s.color}"></span>
-  ${s.text}
-</div>
-
-<div style="
-  font-size:16px;
-  font-weight:900;
-  margin:6px 0 10px 0;
-  text-align:center;
-  letter-spacing:0.5px;
-">
-  CUPÓN RELÁMPAGO ⚡️
-</div>
-
-    📌 Compra mínima: $${c.min.toLocaleString()}<br>
-    💰 Descuento máximo: $${c.max.toLocaleString()}
-
-    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
-  </div>`;
-});
-
-/* BANCARIOS */
-const bancos=[
-["BBVA",4500,500,"BBVAGOL"],
-["HSBC",3000,500,"HSBCGOL"],
-["Banorte",3000,500,"BNRTGOL"],
-["Santander",2500,500,"SANTGOL"],
-["AMEX",4500,500,"AMEXGOL"],
-["Afirme",2500,1000,"AFRMGOL"],
-["Mifel",2500,750,"MIFEGOL"]
-];
-
-const banks=document.getElementById("banks");
-
-bancos.forEach(b=>{
-  banks.innerHTML+=`
-  <div class="card">
-    🏦 <b>${b[0]}</b><br>
-    📌 Min: $${b[1].toLocaleString()} | 💰 Max: $${b[2].toLocaleString()}
-    <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
-  </div>`;
-});
-
-function getStatus(){
-  const h=new Date().getHours();
-  if(h>=9 && h<13) return {text:"ACTIVO",color:"green"};
-  if(h>=13 && h<24) return {text:"POR AGOTARSE",color:"orange"};
-  return {text:"AGOTADO",color:"red"};
+  if(now<start){
+    el.innerHTML="Empieza pronto";
+  } else if(now<=end){
+    el.innerHTML="🔥 ACTIVO";
+  } else {
+    el.innerHTML="FINALIZADO";
+  }
 }
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+/* 🔥 SISTEMA PRO DE CUPONES (SOLO EDITAS AQUÍ) */
+const CUPONES = `
+REBAJAS|2000|200
+VIERNES600|6000|600
+CUPON800|8000|800
+MILVIERNES|10000|1000
+SANTGOL|4000|1000
+HSBCGOL|3000|500
+BNRTGOL|3000|500
+AMEXGOL|4500|1000
+AFRMGOL|2500|1000
+MIFEGOL|2500|750
+`;
+
+/* PARSER */
+function parseCoupons(text){
+  return text.trim().split("\n").map(line=>{
+    const [code,min,max] = line.split("|");
+    return {code,min,max};
+  });
+}
+
+/* RENDER */
+function renderCoupons(){
+  const box=document.getElementById("cupones");
+  box.innerHTML="";
+
+  parseCoupons(CUPONES).forEach(c=>{
+    box.innerHTML += `
+      <div class="card">
+        <b>${c.code}</b><br>
+        Min $${Number(c.min).toLocaleString()} | Max $${Number(c.max).toLocaleString()}
+        <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
+      </div>
+    `;
+  });
+}
+
+renderCoupons();
 
 </script>
 
