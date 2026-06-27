@@ -749,65 +749,115 @@ setInterval(()=>{
 
 <script>
 
+/* =========================
+   🧠 BASE DE CUPONES
+   EDITA SOLO ESTA PARTE
+========================= */
+
+const cuponesML = [
+  {nombre:"Sin cupón", tipo:"fijo", valor:0, minimo:0},
+
+  {nombre:"Aplica cupón de $100", tipo:"fijo", valor:100, minimo:1000},
+  {nombre:"Aplica cupón de $300", tipo:"fijo", valor:300, minimo:2000},
+  {nombre:"Aplica cupón de $500", tipo:"fijo", valor:500, minimo:3000},
+  {nombre:"Aplica cupón de $800", tipo:"fijo", valor:800, minimo:5000},
+  {nombre:"Aplica cupón de $1000", tipo:"fijo", valor:1000, minimo:8000},
+
+  {nombre:"10% OFF (tope $210)", tipo:"porcentaje", valor:10, tope:210, minimo:2000}
+];
+
+const cuponesBanco = [
+  {nombre:"Ninguno", valor:0, minimo:0},
+
+  {nombre:"Aplica cupón bancario de $300", valor:300, minimo:1000},
+  {nombre:"Aplica cupón bancario de $500", valor:500, minimo:2000},
+  {nombre:"Aplica cupón bancario de $1000", valor:1000, minimo:5000},
+  {nombre:"Aplica cupón bancario de $2000", valor:2000, minimo:8000}
+];
+
+/* =========================
+   🔥 VARIABLES GLOBALES
+========================= */
+
+let resultadoActual = {
+  precio:0,
+  descuentoML:0,
+  descuentoBanco:0,
+  total:0,
+  link:""
+};
+
+/* =========================
+   🧮 FUNCIONES PRINCIPALES
+========================= */
+
 function calcularPrecio(){
 
 const precio = parseFloat(document.getElementById("precioProducto").value);
-const cuponML = parseFloat(document.getElementById("cuponML").value);
-const cuponBanco = parseFloat(document.getElementById("cuponBanco").value);
+const mlIndex = document.getElementById("cuponML").value;
+const bancoIndex = document.getElementById("cuponBanco").value;
+const link = document.getElementById("linkProducto").value.trim();
 
-if(isNaN(precio) || precio<=0){
-
-alert("Ingresa un precio válido.");
+if(isNaN(precio) || precio <= 0){
+alert("Ingresa un precio válido");
 return;
+}
+
+let cuponML = cuponesML[mlIndex];
+let cuponBanco = cuponesBanco[bancoIndex];
+
+/* =========================
+   🎟️ VALIDAR CUPÓN ML
+========================= */
+
+let descuentoML = 0;
+
+if(precio >= cuponML.minimo){
+
+if(cuponML.tipo === "fijo"){
+descuentoML = cuponML.valor;
+}
+
+if(cuponML.tipo === "porcentaje"){
+descuentoML = (precio * cuponML.valor) / 100;
+
+if(cuponML.tope && descuentoML > cuponML.tope){
+descuentoML = cuponML.tope;
+}
 
 }
 
-let total = precio;
-
-total -= cuponML;
-total -= cuponBanco;
-
-if(total<0){
-total=0;
 }
 
-const ahorro = precio-total;
+/* =========================
+   💳 VALIDAR BANCO
+========================= */
 
-document.getElementById("resultadoSimulador").style.display="block";
+let subtotal = precio - descuentoML;
 
-document.getElementById("resultadoSimulador").innerHTML=`
+let descuentoBanco = 0;
 
-<b>💲 Precio original:</b> $${precio.toLocaleString()}<br>
-
-<b>🎟️ Cupón Mercado Libre:</b> -$${cuponML.toLocaleString()}<br>
-
-<b>💳 Cupón Bancario:</b> -$${cuponBanco.toLocaleString()}<br>
-
-<hr>
-
-<b>💸 Ahorro total:</b> $${ahorro.toLocaleString()}<br><br>
-
-<strong>🔥 Precio Final: $${total.toLocaleString()}</strong>
-
-`;
-
-document.getElementById("comprarBtn").style.display="block";
-
+if(subtotal >= cuponBanco.minimo){
+descuentoBanco = cuponBanco.valor;
 }
 
-function comprarProducto(){
+/* =========================
+   🔥 RESULTADO FINAL
+========================= */
 
-const link=document.getElementById("linkProducto").value.trim();
+let total = precio - descuentoML - descuentoBanco;
 
-if(link===""){
+if(total < 0) total = 0;
 
-alert("Pega primero el enlace del producto.");
+resultadoActual = {
+precio,
+descuentoML,
+descuentoBanco,
+total,
+link
+};
 
-return;
-
-}
-
-window.open(link,"_blank");
+mostrarResultado();
 
 }
 
