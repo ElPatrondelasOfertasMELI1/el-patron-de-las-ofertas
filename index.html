@@ -17,7 +17,6 @@ body{
   font-weight:700;
 }
 
-/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:16px;
@@ -26,7 +25,6 @@ header{
   font-size:18px;
 }
 
-/* LOGO */
 .logo{
   display:flex;
   justify-content:center;
@@ -35,7 +33,6 @@ header{
 .logo img{
   width:160px;
   border-radius:18px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* MENU */
@@ -89,7 +86,7 @@ header{
   margin:15px 0;
 }
 
-/* CARD GENERAL */
+/* CARD */
 .card{
   background:#fff;
   margin:10px 14px;
@@ -99,7 +96,7 @@ header{
   position:relative;
 }
 
-/* 🔥 RELÁMPAGO AMARILLO CON GLOW */
+/* RELÁMPAGO */
 .flash{
   background:#fff8cc;
   border-left:6px solid #ffcc00;
@@ -125,7 +122,7 @@ header{
   cursor:pointer;
 }
 
-/* BADGE (YA NO TAPAR TEXTO) */
+/* BADGE */
 .badge{
   position:absolute;
   top:10px;
@@ -135,14 +132,13 @@ header{
   font-size:11px;
   font-weight:900;
   color:#fff;
-  opacity:0.95;
 }
 
 .active{background:#00c853;}
 .warning{background:#ff9800;}
 .expired{background:#e53935;}
 
-/* CONTADOR COPIAS */
+/* CONTADOR */
 .counter{
   font-size:12px;
   font-weight:800;
@@ -159,7 +155,6 @@ header{
   margin:10px 14px;
 }
 
-/* TOAST */
 .toast{
   position:fixed;
   bottom:80px;
@@ -184,10 +179,20 @@ header{
 </div>
 
 <div class="sidebar" id="menu">
+
 <h3>📂 Categorías</h3>
-<a class="menu-item">📱 Celulares</a>
-<a class="menu-item">🛏️ Colchones</a>
-<a class="menu-item">🎮 Gaming</a>
+<a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
+<a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
+<a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
+<a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
+<a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
+<a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
+<a class="menu-item" href="https://meli.la/2wvqGN7">🧸 Juguetes</a>
+<a class="menu-item" href="https://meli.la/22qVGcg">💻 Cómputo</a>
+<a class="menu-item" href="https://meli.la/31NnLmv">👗 Moda</a>
+<a class="menu-item" href="https://meli.la/21wQwRZ">💄 Belleza</a>
+<a class="menu-item" href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
+
 </div>
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
@@ -196,11 +201,10 @@ header{
   <img src="logo.png.PNG">
 </div>
 
-<div class="section">⭐ MELI+ EXCLUSIVO</div>
+<div class="section">⭐ MELI+ EXCLUSIVO (activo hasta 1 julio 2026)</div>
 
 <div class="card meli">
-<div class="title">MELI+ CUPÓN OCULTO</div>
-10% OFF | Mín $4,000 | Tope $500
+🎟️ MELIMASGOL | 10% OFF | Mín $4,000 | Tope $500
 <button class="btn" onclick="copy('MELIMASGOL','meli')">COPIAR CUPÓN</button>
 <div class="counter" id="count-meli">Copias: 0</div>
 <span class="badge"></span>
@@ -208,7 +212,6 @@ header{
 
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
 
-<!-- FLASH CARDS -->
 <div class="card flash">
 <div class="title">CUPÓN RELÁMPAGO ⚡</div>
 Min $1,000 | Tope $150
@@ -257,6 +260,24 @@ $2,000 | $210 OFF
 <span class="badge"></span>
 </div>
 
+<div class="section">🏦 CUPONES BANCARIOS</div>
+
+<div class="card">Mercado Pago | 10% OFF | Mín $4,000 | Tope $500 <button class="btn" onclick="copy('TCMPGOL','b1')">COPIAR</button><div class="counter" id="count-b1">Copias: 0</div></div>
+
+<div class="card">MP Meses sin tarjeta | 10% OFF | Mín $2,500 | Tope $500 <button class="btn" onclick="copy('MSTGOL','b2')">COPIAR</button><div class="counter" id="count-b2">Copias: 0</div></div>
+
+<div class="card">Banamex | 10% OFF | Mín $3,500 | Tope $500 <button class="btn" onclick="copy('BNMXGOL26','b3')">COPIAR</button><div class="counter" id="count-b3">Copias: 0</div></div>
+
+<div class="card">BBVA | 10% OFF | Mín $4,500 | Tope $500 <button class="btn" onclick="copy('BBVAGOL','b4')">COPIAR</button><div class="counter" id="count-b4">Copias: 0</div></div>
+
+<div class="card">HSBC | 10% OFF | Mín $3,000 | Tope $500 <button class="btn" onclick="copy('HSBCGOL','b5')">COPIAR</button><div class="counter" id="count-b5">Copias: 0</div></div>
+
+<div class="card">Banorte | 10% OFF | Mín $3,000 | Tope $500 <button class="btn" onclick="copy('BNRTGOL','b6')">COPIAR</button><div class="counter" id="count-b6">Copias: 0</div></div>
+
+<div class="card">Santander | 10% OFF | Mín $2,500 | Tope $500 <button class="btn" onclick="copy('SANTGOL','b7')">COPIAR</button><div class="counter" id="count-b7">Copias: 0</div></div>
+
+<div class="card">AMEX | 10% OFF | Mín $4,500 | Tope $500 <button class="btn" onclick="copy('AMEXGOL','b8')">COPIAR</button><div class="counter" id="count-b8">Copias: 0</div></div>
+
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
 <script>
@@ -266,31 +287,29 @@ function toggleMenu(){
   m.style.left = (m.style.left==="0px") ? "-300px" : "0px";
 }
 
-/* 📊 COPIAS */
 function copy(code,id){
   navigator.clipboard.writeText(code);
 
-  const el=document.getElementById("count-"+id);
-  let val=localStorage.getItem(id) || 0;
+  let val = localStorage.getItem(id) || 0;
   val++;
   localStorage.setItem(id,val);
-  el.innerText="Copias: "+val;
+
+  document.getElementById("count-"+id).innerText="Copias: "+val;
 
   const t=document.getElementById("toast");
   t.classList.add("show");
   setTimeout(()=>t.classList.remove("show"),1200);
 }
 
-/* ⏰ ESTADO REAL RELÁMPAGO */
+/* ⏰ MELI+ SIEMPRE ACTIVO HASTA 1 JULIO 2026 */
 function updateStatus(){
-  const h=new Date().getHours();
+  const now=new Date();
+  const limit=new Date("2026-07-01T00:00:00");
+
   document.querySelectorAll(".badge").forEach(b=>{
-    if(h>=9 && h<=11){
+    if(now < limit){
       b.textContent="🟢 ACTIVO";
       b.className="badge active";
-    } else if(h>=12 && h<=23){
-      b.textContent="🟠 POR AGOTARSE";
-      b.className="badge warning";
     } else {
       b.textContent="🔴 AGOTADO";
       b.className="badge expired";
