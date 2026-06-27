@@ -208,18 +208,16 @@ header{
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- LOGO -->
 <div class="card" style="text-align:center;">
   <img src="logo.png.PNG" style="width:160px;border-radius:14px;border:3px solid #ffcc00;">
 </div>
 
-<!-- CONTADOR -->
 <div class="card" style="text-align:center;font-weight:900;">
   🔥 Cupones copiados:
   <span id="copyCount">0</span>
 </div>
 
-<!-- BBVA AGOTADO -->
+<!-- BBVA -->
 <div class="bbva-card">
 💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
 🛒 Mercado Libre<br>
@@ -228,14 +226,7 @@ header{
 
 🔴 CUPÓN AGOTADO POR ALTA DEMANDA<br>
 
-<div style="margin-top:8px;font-size:13px;opacity:0.95;line-height:1.4;">
-Este beneficio BBVA 25% OFF se agotó en pocos minutos debido a la alta demanda.<br>
-Te recomendamos estar atento a próximos lanzamientos exclusivos.
-</div>
-
-<button class="btn" style="background:#555;" disabled>
-AGOTADO
-</button>
+<button class="btn" style="background:#555;" disabled>AGOTADO</button>
 </div>
 
 <!-- MELI+ -->
@@ -249,11 +240,33 @@ COPIAR CUPÓN
 </button>
 </div>
 
-<!-- RELÁMPAGOS -->
+<!-- 🔥 CUPÓN NUEVO RELÁMPAGO -->
+<div class="flash-box" id="cuponMundial">
+
+  <div class="status" id="statusMundial">
+    <span class="dot green" id="dotMundial"></span>
+    ACTIVO
+  </div>
+
+  <div style="font-size:18px;font-weight:900;margin:6px 0 10px;text-align:center;">
+    CUPÓN RELÁMPAGO NUEVO ⚡️
+  </div>
+
+  🔥 <b>Cupón Nuevo 10% OFF</b><br>
+  📌 Compra mínima: $2,000 MXN<br>
+  💰 Tope de descuento: $210 MXN<br>
+  🎟️ Cupón: <b>MUNDIAL10</b><br><br>
+
+  ⏰ Se agota automáticamente a las 12:00
+
+  <button class="btn" id="btnMundial" onclick="copyCoupon('MUNDIAL10')">
+    COPIAR CUPÓN
+  </button>
+</div>
+
 <div class="section flash-title">⚡ CUPONES RELÁMPAGOS ⚡</div>
 <div id="daily"></div>
 
-<!-- BANCARIOS -->
 <div class="section flash-title">🏦 CUPONES BANCARIOS 🟢</div>
 <div id="banks"></div>
 
@@ -285,7 +298,6 @@ function copyCoupon(code){
 
   const t=document.getElementById("toast");
   t.classList.add("show");
-
   setTimeout(()=>t.classList.remove("show"),1200);
 
   setTimeout(()=>{
@@ -310,22 +322,13 @@ dailyCoupons.forEach(c=>{
   daily.innerHTML += `
   <div class="flash-box">
     <div class="status">
-  <span class="dot ${s.color}"></span>
-  ${s.text}
-</div>
+      <span class="dot ${s.color}"></span>
+      ${s.text}
+    </div>
 
-<div style="
-  font-size:16px;
-  font-weight:900;
-  margin:6px 0 10px 0;
-  text-align:center;
-  letter-spacing:0.5px;
-">
-  CUPÓN RELÁMPAGO ⚡️
-</div>
-
-    📌 Compra mínima: $${c.min.toLocaleString()}<br>
-    💰 Descuento máximo: $${c.max.toLocaleString()}
+    CUPÓN RELÁMPAGO ⚡️<br>
+    📌 Min: $${c.min}<br>
+    💰 Max: $${c.max}
 
     <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
   </div>`;
@@ -348,7 +351,7 @@ bancos.forEach(b=>{
   banks.innerHTML+=`
   <div class="card">
     🏦 <b>${b[0]}</b><br>
-    📌 Min: $${b[1].toLocaleString()} | 💰 Max: $${b[2].toLocaleString()}
+    📌 Min: $${b[1]} | 💰 Max: $${b[2]}
     <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
   </div>`;
 });
@@ -359,6 +362,43 @@ function getStatus(){
   if(h>=13 && h<24) return {text:"POR AGOTARSE",color:"orange"};
   return {text:"AGOTADO",color:"red"};
 }
+
+/* 🔥 AUTO AGOTADO 12:00 */
+function checkMundialCoupon(){
+  const now = new Date();
+  const h = now.getHours();
+
+  if(h >= 12){
+    const btn = document.getElementById("btnMundial");
+    const dot = document.getElementById("dotMundial");
+    const status = document.getElementById("statusMundial");
+    const box = document.getElementById("cuponMundial");
+
+    if(btn){
+      btn.disabled = true;
+      btn.innerText = "AGOTADO";
+      btn.style.background = "#555";
+      btn.onclick = null;
+    }
+
+    if(dot){
+      dot.classList.remove("green");
+      dot.classList.add("red");
+    }
+
+    if(status){
+      status.innerHTML = `<span class="dot red"></span> AGOTADO`;
+    }
+
+    if(box){
+      box.style.opacity = "0.7";
+      box.style.filter = "grayscale(1)";
+    }
+  }
+}
+
+checkMundialCoupon();
+setInterval(checkMundialCoupon, 60000);
 
 </script>
 
