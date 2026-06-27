@@ -15,7 +15,6 @@ body{
   color:#111;
 }
 
-/* TIPOGRAFÍA PRO */
 h1,h2,h3{
   font-weight:900;
   color:#0b0b0b;
@@ -26,7 +25,6 @@ body,div,p,span{
   font-weight:500;
 }
 
-/* HEADER */
 header{
   background:linear-gradient(90deg,#ffe600,#ffcc00);
   padding:16px;
@@ -37,7 +35,6 @@ header{
   color:#000;
 }
 
-/* LOGO */
 .logo{
   display:flex;
   justify-content:center;
@@ -49,7 +46,7 @@ header{
   box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* ☰ HAMBURGUESA CRISTAL */
+/* MENU */
 .menu-btn{
   position:fixed;
   top:18px;
@@ -68,7 +65,6 @@ header{
   z-index:999;
   cursor:pointer;
 }
-
 .menu-btn span{
   width:22px;
   height:2.5px;
@@ -76,7 +72,6 @@ header{
   border-radius:2px;
 }
 
-/* SIDEBAR CRISTAL */
 .sidebar{
   position:fixed;
   top:0;
@@ -102,7 +97,6 @@ header{
   font-weight:700;
 }
 
-/* SECCIONES */
 .section{
   text-align:center;
   font-weight:900;
@@ -110,16 +104,15 @@ header{
   font-size:16px;
 }
 
-/* CARDS */
 .card{
   background:#fff;
   margin:10px 14px;
   padding:14px;
   border-radius:16px;
   box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  position:relative;
 }
 
-/* BOTÓN */
 .btn{
   width:100%;
   padding:12px;
@@ -132,13 +125,28 @@ header{
   cursor:pointer;
 }
 
-/* RELÁMPAGO AMARILLO */
+/* ESTADOS */
+.badge{
+  position:absolute;
+  top:10px;
+  right:10px;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:900;
+  color:#fff;
+}
+
+.active{background:#00c853;}
+.warning{background:#ff9800;}
+.expired{background:#e53935;}
+
 .flash{
   background:#fff8cc;
   border-left:6px solid #ffcc00;
 }
 
-/* MELI+ AZUL */
+/* MELI+ */
 .meli{
   background:linear-gradient(135deg,#0047ab,#007bff);
   color:#fff;
@@ -169,18 +177,12 @@ header{
 
 <body>
 
-<!-- ☰ BOTÓN -->
 <div class="menu-btn" onclick="toggleMenu()">
-  <span></span>
-  <span></span>
-  <span></span>
+  <span></span><span></span><span></span>
 </div>
 
-<!-- 📂 MENÚ CRISTAL -->
 <div class="sidebar" id="menu">
-
 <h3>📂 Categorías</h3>
-
 <a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
 <a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
 <a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
@@ -188,57 +190,59 @@ header{
 <a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
 <a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
 <a class="menu-item" href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
-
 </div>
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<!-- LOGO -->
 <div class="logo">
   <img src="logo.png.PNG">
 </div>
 
-<!-- MELI+ -->
 <div class="section">⭐ MELI+ EXCLUSIVO</div>
 <div class="meli">
 🎟️ MELIMASGOL<br>
 10% OFF | Mín $4,000 | Tope $500
 </div>
 
-<!-- RELÁMPAGOS -->
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
 
-<div class="card flash">
-CUPON RELAMPAGO ⚡️ | Min $00 | Tope $00
-<button class="btn" onclick="copy('CUPONPRUEVA')">COPIAR</button>
-</div>
-
-<div class="card flash">
+<div class="card flash coupon">
+<span class="badge" data-time="flash"></span>
 12APROVECHA | Min $1,000 | Tope $150
 <button class="btn" onclick="copy('12APROVECHA')">COPIAR</button>
 </div>
 
-<div class="card flash">
+<div class="card flash coupon">
+<span class="badge" data-time="flash"></span>
 REBAJAS | Min $2,000 | Tope $200
 <button class="btn" onclick="copy('REBAJAS')">COPIAR</button>
 </div>
 
-<div class="card flash">
+<div class="card flash coupon">
+<span class="badge" data-time="flash"></span>
 VIERNES600 | Min $6,000 | Tope $600
 <button class="btn" onclick="copy('VIERNES600')">COPIAR</button>
 </div>
 
-<div class="card flash">
+<div class="card flash coupon">
+<span class="badge" data-time="flash"></span>
 CUPON800 | Min $8,000 | Tope $800
 <button class="btn" onclick="copy('CUPON800')">COPIAR</button>
 </div>
 
-<div class="card flash">
+<div class="card flash coupon">
+<span class="badge" data-time="flash"></span>
 MILVIERNES | Min $10,000 | Tope $1,000
 <button class="btn" onclick="copy('MILVIERNES')">COPIAR</button>
 </div>
 
-<!-- BANCARIOS -->
+<!-- NUEVO -->
+<div class="card flash coupon">
+<span class="badge" data-time="flash"></span>
+🔥 MUNDIAL10 | Min $2,000 | $210 OFF
+<button class="btn" onclick="copy('MUNDIAL10')">COPIAR</button>
+</div>
+
 <div class="section">🏦 CUPONES BANCARIOS</div>
 
 <div class="card">BBVA | BBVAGOL <button class="btn" onclick="copy('BBVAGOL')">COPIAR</button></div>
@@ -247,18 +251,15 @@ MILVIERNES | Min $10,000 | Tope $1,000
 <div class="card">Santander | SANTGOL <button class="btn" onclick="copy('SANTGOL')">COPIAR</button></div>
 <div class="card">AMEX | AMEXGOL <button class="btn" onclick="copy('AMEXGOL')">COPIAR</button></div>
 
-<!-- TOAST -->
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
 <script>
 
-/* MENÚ */
 function toggleMenu(){
   const m=document.getElementById("menu");
   m.style.left = (m.style.left==="0px") ? "-300px" : "0px";
 }
 
-/* COPIAR */
 function copy(code){
   navigator.clipboard.writeText(code);
 
@@ -271,6 +272,28 @@ function copy(code){
     window.location.href="https://meli.la/1mj3itE";
   },600);
 }
+
+/* ESTADOS POR HORA */
+function updateStatus(){
+  const hour = new Date().getHours();
+  const badges = document.querySelectorAll(".badge");
+
+  badges.forEach(b=>{
+    if(hour >= 9 && hour <= 11){
+      b.textContent="🟢 ACTIVO";
+      b.className="badge active";
+    } else if(hour >= 12 && hour <= 23){
+      b.textContent="🟠 POR AGOTARSE";
+      b.className="badge warning";
+    } else {
+      b.textContent="🔴 AGOTADO";
+      b.className="badge expired";
+    }
+  });
+}
+
+updateStatus();
+setInterval(updateStatus,60000);
 
 </script>
 
