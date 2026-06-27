@@ -209,8 +209,63 @@ border-radius:14px;
 box-sizing:border-box;
 }
 
+/* ===== BOTÓN FLOTANTE WHATSAPP ===== */
+
+.whatsapp-float{
+position:fixed;
+bottom:20px;
+right:20px;
+width:65px;
+height:65px;
+background:#25D366;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 8px 25px rgba(0,0,0,.3);
+z-index:9999;
+text-decoration:none;
+animation:whatsappPulse 2s infinite;
+}
+
+.whatsapp-float img{
+width:36px;
+height:36px;
+}
+
+.whatsapp-text{
+position:absolute;
+right:75px;
+background:#25D366;
+color:#fff;
+padding:10px 14px;
+border-radius:30px;
+font-weight:900;
+font-size:14px;
+white-space:nowrap;
+box-shadow:0 6px 18px rgba(0,0,0,.2);
+}
+
+@keyframes whatsappPulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.08);}
+100%{transform:scale(1);}
+}
+
 </style>
 </head>
+
+<a class="whatsapp-float"
+href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x"
+target="_blank">
+
+<div class="whatsapp-text">
+🔥 Canal con +200 mil seguidores
+</div>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
+
+</a>
 
 <body>
 
