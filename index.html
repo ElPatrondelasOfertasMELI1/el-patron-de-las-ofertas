@@ -1,3 +1,5 @@
+Guarda mi pagina
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -219,45 +221,34 @@ header{
   <span id="copyCount">0</span>
 </div>
 
-<!-- BBVA -->
+<!-- BBVA AGOTADO -->
 <div class="bbva-card">
-💳 BBVA 25% OFF EXCLUSIVO<br>
-🔴 CUPÓN AGOTADO<br>
+💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
+🛒 Mercado Libre<br>
+📌 Compra mínima: $7,000 MXN<br>
+💰 Tope de descuento: $2,000 MXN<br><br>
 
-<button class="btn" style="background:#555;" disabled>AGOTADO</button>
+🔴 CUPÓN AGOTADO POR ALTA DEMANDA<br>
+
+<div style="margin-top:8px;font-size:13px;opacity:0.95;line-height:1.4;">
+Este beneficio BBVA 25% OFF se agotó en pocos minutos debido a la alta demanda.<br>
+Te recomendamos estar atento a próximos lanzamientos exclusivos.
+</div>
+
+<button class="btn" style="background:#555;" disabled>
+AGOTADO
+</button>
 </div>
 
 <!-- MELI+ -->
 <div class="meli-card">
-🎟️ MELI+ EXCLUSIVO<br>
+🎟️ <b>MELI+ EXCLUSIVO</b><br>
+📌 Compra mínima: $4,000 MXN<br>
+💰 Descuento máximo: $500 MXN<br>
 
 <button class="btn" onclick="copyCoupon('MELIMASGOL')">
 COPIAR CUPÓN
 </button>
-</div>
-
-<!-- 🔥 NUEVO CUPÓN RELÁMPAGO (AGREGADO) -->
-<div class="flash-box" id="cuponMundial">
-
-  <div class="status" id="statusMundial">
-    <span class="dot green" id="dotMundial"></span>
-    ACTIVO
-  </div>
-
-  <div style="font-size:18px;font-weight:900;text-align:center;margin:6px 0;">
-    CUPÓN RELÁMPAGO NUEVO ⚡️
-  </div>
-
-  🔥 Cupón 10% OFF<br>
-  📌 Mínimo $2,000<br>
-  💰 Tope $210<br>
-  🎟️ MUNDIAL10<br><br>
-
-  ⏰ Se agota automáticamente a las 12:00
-
-  <button class="btn" id="btnMundial" onclick="copyCoupon('MUNDIAL10')">
-    COPIAR CUPÓN
-  </button>
 </div>
 
 <!-- RELÁMPAGOS -->
@@ -270,9 +261,9 @@ COPIAR CUPÓN
 
 <div id="toast" class="toast">COPIADO ✔</div>
 
-<a class="wa"
-href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">
+<a class="wa" href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x">
 💬 +200K
+<div style="font-size:9px;">canal ofertas</div>
 </a>
 
 <script>
@@ -289,12 +280,14 @@ function toggleMenu(){
 function copyCoupon(code){
   navigator.clipboard.writeText(code);
 
-  copyCount++;
+  let copyCount = localStorage.getItem("copyCount") || 0;
+  copyCount = parseInt(copyCount) + 1;
   localStorage.setItem("copyCount", copyCount);
   document.getElementById("copyCount").innerText = copyCount;
 
   const t=document.getElementById("toast");
   t.classList.add("show");
+
   setTimeout(()=>t.classList.remove("show"),1200);
 
   setTimeout(()=>{
@@ -311,6 +304,35 @@ const dailyCoupons=[
 {code:"MILVIERNES",min:10000,max:1000}
 ];
 
+const daily=document.getElementById("daily");
+
+dailyCoupons.forEach(c=>{
+  const s=getStatus();
+
+  daily.innerHTML += `
+  <div class="flash-box">
+    <div class="status">
+  <span class="dot ${s.color}"></span>
+  ${s.text}
+</div>
+
+<div style="
+  font-size:16px;
+  font-weight:900;
+  margin:6px 0 10px 0;
+  text-align:center;
+  letter-spacing:0.5px;
+">
+  CUPÓN RELÁMPAGO ⚡️
+</div>
+
+    📌 Compra mínima: $${c.min.toLocaleString()}<br>
+    💰 Descuento máximo: $${c.max.toLocaleString()}
+
+    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
+  </div>`;
+});
+
 /* BANCARIOS */
 const bancos=[
 ["BBVA",4500,500,"BBVAGOL"],
@@ -322,53 +344,23 @@ const bancos=[
 ["Mifel",2500,750,"MIFEGOL"]
 ];
 
-const daily=document.getElementById("daily");
-
-dailyCoupons.forEach(c=>{
-  daily.innerHTML+=`
-  <div class="flash-box">
-    ⚡ ${c.code}<br>
-    📌 Min ${c.min} | 💰 Max ${c.max}
-    <button class="btn" onclick="copyCoupon('${c.code}')">COPIAR</button>
-  </div>`;
-});
-
 const banks=document.getElementById("banks");
 
 bancos.forEach(b=>{
   banks.innerHTML+=`
   <div class="card">
-    🏦 ${b[0]}<br>
-    Min ${b[1]} | Max ${b[2]}
+    🏦 <b>${b[0]}</b><br>
+    📌 Min: $${b[1].toLocaleString()} | 💰 Max: $${b[2].toLocaleString()}
     <button class="btn" onclick="copyCoupon('${b[3]}')">COPIAR</button>
   </div>`;
 });
 
-/* 🔥 AUTO AGOTADO 12:00 (AGREGADO) */
-function checkMundialCoupon(){
+function getStatus(){
   const h=new Date().getHours();
-
-  const btn=document.getElementById("btnMundial");
-  const dot=document.getElementById("dotMundial");
-  const status=document.getElementById("statusMundial");
-
-  if(h<12){
-    btn.disabled=false;
-    btn.innerText="COPIAR CUPÓN";
-    dot.className="dot green";
-    status.innerHTML="🟢 ACTIVO";
-  }
-
-  if(h>=12){
-    btn.disabled=true;
-    btn.innerText="AGOTADO";
-    dot.className="dot red";
-    status.innerHTML="🔴 AGOTADO";
-  }
+  if(h>=9 && h<13) return {text:"ACTIVO",color:"green"};
+  if(h>=13 && h<24) return {text:"POR AGOTARSE",color:"orange"};
+  return {text:"AGOTADO",color:"red"};
 }
-
-checkMundialCoupon();
-setInterval(checkMundialCoupon,60000);
 
 </script>
 
