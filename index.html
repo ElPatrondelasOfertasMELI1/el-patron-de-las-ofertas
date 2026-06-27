@@ -221,25 +221,6 @@ header{
   <span id="copyCount">0</span>
 </div>
 
-<!-- BBVA AGOTADO -->
-<div class="bbva-card">
-💳 <b>BBVA 25% OFF EXCLUSIVO</b><br>
-🛒 Mercado Libre<br>
-📌 Compra mínima: $7,000 MXN<br>
-💰 Tope de descuento: $2,000 MXN<br><br>
-
-🔴 CUPÓN AGOTADO POR ALTA DEMANDA<br>
-
-<div style="margin-top:8px;font-size:13px;opacity:0.95;line-height:1.4;">
-Este beneficio BBVA 25% OFF se agotó en pocos minutos debido a la alta demanda.<br>
-Te recomendamos estar atento a próximos lanzamientos exclusivos.
-</div>
-
-<button class="btn" style="background:#555;" disabled>
-AGOTADO
-</button>
-</div>
-
 <!-- MELI+ -->
 <div class="meli-card">
 🎟️ <b>MELI+ EXCLUSIVO</b><br>
@@ -297,11 +278,13 @@ function copyCoupon(code){
 
 /* RELÁMPAGOS */
 const dailyCoupons=[
+{code:"MUNDIAL10",min:2000,max:210}
 {code:"REBAJAS",min:2000,max:200},
 {code:"12APROVECHA",min:1000,max:150},
 {code:"VIERNES600",min:6000,max:600},
 {code:"CUPON800",min:8000,max:800},
 {code:"MILVIERNES",min:10000,max:1000}
+
 ];
 
 const daily=document.getElementById("daily");
