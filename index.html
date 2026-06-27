@@ -252,6 +252,119 @@ box-shadow:0 6px 18px rgba(0,0,0,.2);
 100%{transform:scale(1);}
 }
 
+/* ============================= */
+/* 🧮 SIMULADOR DE PRECIO FINAL */
+/* ============================= */
+
+.simulador-precio{
+background:#fff;
+margin:25px 15px;
+padding:20px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.12);
+text-align:center;
+border:2px solid #ffe600;
+}
+
+.simulador-precio h2{
+margin:0;
+font-size:24px;
+color:#333;
+font-weight:800;
+}
+
+.simu-texto{
+margin:10px 0 20px;
+color:#666;
+font-size:15px;
+}
+
+.simulador-precio input,
+.simulador-precio select{
+
+width:100%;
+padding:14px;
+margin:10px 0;
+border:2px solid #ddd;
+border-radius:12px;
+font-size:16px;
+box-sizing:border-box;
+outline:none;
+transition:.25s;
+
+}
+
+.simulador-precio input:focus,
+.simulador-precio select:focus{
+
+border-color:#ffe600;
+
+}
+
+.simulador-precio h3{
+
+margin-top:18px;
+margin-bottom:8px;
+text-align:left;
+color:#333;
+font-size:17px;
+
+}
+
+.simulador-precio button{
+
+width:100%;
+padding:15px;
+margin-top:18px;
+border:none;
+border-radius:12px;
+background:#00a650;
+color:#fff;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+transition:.25s;
+
+}
+
+.simulador-precio button:hover{
+
+transform:scale(1.02);
+
+}
+
+#resultadoSimulador{
+
+margin-top:22px;
+padding:18px;
+background:#f8f8f8;
+border-radius:15px;
+display:none;
+text-align:left;
+line-height:1.9;
+
+}
+
+#resultadoSimulador strong{
+
+font-size:22px;
+color:#00a650;
+
+}
+
+#comprarBtn{
+
+background:#3483fa;
+display:none;
+
+}
+
+#comprarBtn:hover{
+
+background:#2968c8;
+
+}
+
 </style>
 </head>
 
@@ -397,6 +510,105 @@ Min $10,000 | Descuento $1,000
 
 <div id="toast" class="toast">CUPÓN COPIADO ✔</div>
 
+<!-- ========================= -->
+<!-- 🧮 SIMULADOR DE PRECIO -->
+<!-- ========================= -->
+
+<section class="simulador-precio">
+
+<h2>🧮 Simulador de Precio Final</h2>
+<p class="simu-texto">
+Calcula cuánto pagarás aplicando los cupones disponibles.
+</p>
+
+<input
+type="url"
+id="linkProducto"
+placeholder="🔗 Pega aquí el enlace del producto (opcional)"
+>
+
+<input
+type="number"
+id="precioProducto"
+placeholder="💲 Precio actual del producto"
+>
+
+<h3>🎟️ Cupón Mercado Libre</h3>
+
+<select id="cuponML">
+<option value="0">Sin cupón</option>
+
+<option value="100">
+Aplica cupón de $100
+</option>
+
+<option value="210">
+Aplica cupón de $210
+</option>
+
+<option value="300">
+Aplica cupón de $300
+</option>
+
+<option value="500">
+Aplica cupón de $500
+</option>
+
+<option value="800">
+Aplica cupón de $800
+</option>
+
+<option value="1000">
+Aplica cupón de $1,000
+</option>
+
+</select>
+
+<h3>💳 Cupón Bancario</h3>
+
+<select id="cuponBanco">
+
+<option value="0">
+Ninguno
+</option>
+
+<option value="300">
+Aplica cupón bancario de $300
+</option>
+
+<option value="500">
+Aplica cupón bancario de $500
+</option>
+
+<option value="800">
+Aplica cupón bancario de $800
+</option>
+
+<option value="1000">
+Aplica cupón bancario de $1,000
+</option>
+
+<option value="2000">
+Aplica cupón bancario de $2,000
+</option>
+
+</select>
+
+<button onclick="calcularPrecio()">
+🧮 Calcular Precio Final
+</button>
+
+<div id="resultadoSimulador"></div>
+
+<button
+id="comprarBtn"
+style="display:none;"
+onclick="comprarProducto()">
+🛒 Comprar en Mercado Libre
+</button>
+
+</section>
+
 <div class="section">💙 BENEFICIOS MERCADO PAGO</div>
 
 <div class="mp-card">
@@ -532,6 +744,72 @@ setInterval(()=>{
   updateStatus();
   updateGlobalStatus();
 },60000);
+
+</script>
+
+<script>
+
+function calcularPrecio(){
+
+const precio = parseFloat(document.getElementById("precioProducto").value);
+const cuponML = parseFloat(document.getElementById("cuponML").value);
+const cuponBanco = parseFloat(document.getElementById("cuponBanco").value);
+
+if(isNaN(precio) || precio<=0){
+
+alert("Ingresa un precio válido.");
+return;
+
+}
+
+let total = precio;
+
+total -= cuponML;
+total -= cuponBanco;
+
+if(total<0){
+total=0;
+}
+
+const ahorro = precio-total;
+
+document.getElementById("resultadoSimulador").style.display="block";
+
+document.getElementById("resultadoSimulador").innerHTML=`
+
+<b>💲 Precio original:</b> $${precio.toLocaleString()}<br>
+
+<b>🎟️ Cupón Mercado Libre:</b> -$${cuponML.toLocaleString()}<br>
+
+<b>💳 Cupón Bancario:</b> -$${cuponBanco.toLocaleString()}<br>
+
+<hr>
+
+<b>💸 Ahorro total:</b> $${ahorro.toLocaleString()}<br><br>
+
+<strong>🔥 Precio Final: $${total.toLocaleString()}</strong>
+
+`;
+
+document.getElementById("comprarBtn").style.display="block";
+
+}
+
+function comprarProducto(){
+
+const link=document.getElementById("linkProducto").value.trim();
+
+if(link===""){
+
+alert("Pega primero el enlace del producto.");
+
+return;
+
+}
+
+window.open(link,"_blank");
+
+}
 
 </script>
 
