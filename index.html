@@ -677,92 +677,55 @@ setInterval(()=>{
   updateGlobalStatus();
 },60000);
 
-function actualizarBanorte(){
-
-const ahora=new Date();
-
-const inicio=new Date();
-inicio.setHours(19,0,0,0);
-
-const fin=new Date();
-fin.setHours(20,0,0,0);
-
-const timer=document.getElementById("banorteTimer");
-const estado=document.getElementById("banorteEstado");
-
-if(!timer)return;
-
-let destino;
-
-if(ahora<inicio){
-
-destino=inicio;
-estado.innerHTML="⏳ Inicia a las 7:00 PM";
-
-}else if(ahora<fin){
-
-destino=fin;
-estado.innerHTML="🟢 PROMOCIÓN ACTIVA";
-
-}else{
-
-timer.innerHTML="00:00:00";
-estado.innerHTML="🔴 Promoción finalizada";
-
-return;
-
-}
-
-let dif=destino-ahora;
-
-let h=Math.floor(dif/1000/60/60);
-let m=Math.floor((dif/1000/60)%60);
-let s=Math.floor((dif/1000)%60);
-
-timer.innerHTML=
-String(h).padStart(2,"0")+":"+
-String(m).padStart(2,"0")+":"+
-String(s).padStart(2,"0");
-
-}
-
-actualizarBanorte();
-
-setInterval(actualizarBanorte,1000);
-
-</script>
-
 <script>
 
 function actualizarBanorte(){
 
-const ahora = new Date();
+  const ahora = new Date();
 
-let objetivo = new Date();
+  // Hora de Ciudad de México
+  const cdmx = new Date(
+    ahora.toLocaleString("en-US", {
+      timeZone: "America/Mexico_City"
+    })
+  );
 
-objetivo.setHours(19,0,0,0); // 7:00 PM
+  let objetivo = new Date(cdmx);
 
-// Si ya pasaron las 7 PM, cuenta hacia mañana
-if(ahora >= objetivo){
-    objetivo.setDate(objetivo.getDate()+1);
+  objetivo.setHours(19,0,0,0); // 7:00 PM
+
+  // Si ya pasaron las 8 PM, prepara el contador para mañana
+  if(cdmx.getHours() >= 20){
+      objetivo.setDate(objetivo.getDate()+1);
+      objetivo.setHours(19,0,0,0);
+  }
+
+  // Si ya son entre 7 y 8 PM
+  if(cdmx.getHours() >= 19 && cdmx.getHours() < 20){
+
+      document.getElementById("banorteTimer").innerHTML="🟢 ACTIVO";
+
+      document.getElementById("banorteEstado").innerHTML=
+      "🔥 El cupón está disponible ahora";
+
+      return;
+  }
+
+  let diferencia = objetivo - cdmx;
+
+  let horas = Math.floor(diferencia/3600000);
+  let minutos = Math.floor((diferencia%3600000)/60000);
+  let segundos = Math.floor((diferencia%60000)/1000);
+
+  document.getElementById("banorteTimer").innerHTML =
+      String(horas).padStart(2,"0")+":"+
+      String(minutos).padStart(2,"0")+":"+
+      String(segundos).padStart(2,"0");
+
 }
-
-const diferencia = objetivo - ahora;
-
-const horas = Math.floor(diferencia/1000/60/60);
-const minutos = Math.floor((diferencia/1000/60)%60);
-const segundos = Math.floor((diferencia/1000)%60);
-
-document.getElementById("banorteTimer").innerHTML =
-String(horas).padStart(2,"0")+":"+
-String(minutos).padStart(2,"0")+":"+
-String(segundos).padStart(2,"0");
-
-}
-
-actualizarBanorte();
 
 setInterval(actualizarBanorte,1000);
+actualizarBanorte();
 
 </script>
 
