@@ -401,21 +401,6 @@ Min $10,000 | Descuento $1,000
 
 <div class="card" style="background:#111;color:#fff;text-align:center;">
 
-<div class="section">🔍 BUSCADOR DE OFERTAS</div>
-
-<div class="card">
-
-<div class="title">🔥 Encuentra la mejor oferta</div>
-
-<input id="buscarProducto"
-type="text"
-placeholder="Ejemplo: iPhone 16, PS5, Xiaomi..."
-style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box;">
-
-<button class="btn" onclick="buscarOferta()">
-🔍 BUSCAR EN MERCADO LIBRE
-</button>
-
 </div>
 
 </section>
@@ -557,25 +542,6 @@ setInterval(()=>{
 },60000);
 
 </script>
-
-function buscarOferta(){
-
-const texto = document.getElementById("buscarProducto").value.trim();
-
-if(texto==""){
-alert("Escribe lo que buscas");
-return;
-}
-
-const busqueda = encodeURIComponent(texto);
-
-// Cambia esta URL por la de tu enlace de afiliado si tienes una que soporte búsquedas.
-window.open(
-"https://listado.mercadolibre.com.mx/" + busqueda,
-"_blank"
-);
-
-}
 
 </body>
 </html>
