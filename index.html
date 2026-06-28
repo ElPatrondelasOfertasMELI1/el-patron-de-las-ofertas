@@ -681,51 +681,40 @@ setInterval(()=>{
 
 function actualizarBanorte(){
 
-  const ahora = new Date();
+    const ahora = new Date();
 
-  // Hora de Ciudad de México
-  const cdmx = new Date(
-    ahora.toLocaleString("en-US", {
-      timeZone: "America/Mexico_City"
-    })
-  );
+    const objetivo = new Date(
+        ahora.getFullYear(),
+        ahora.getMonth(),
+        ahora.getDate(),
+        19,0,0
+    );
 
-  let objetivo = new Date(cdmx);
+    if(ahora.getTime() >= objetivo.getTime()){
+        objetivo.setDate(objetivo.getDate()+1);
+    }
 
-  objetivo.setHours(19,0,0,0); // 7:00 PM
+    let diferencia = objetivo.getTime() - ahora.getTime();
 
-  // Si ya pasaron las 8 PM, prepara el contador para mañana
-  if(cdmx.getHours() >= 20){
-      objetivo.setDate(objetivo.getDate()+1);
-      objetivo.setHours(19,0,0,0);
-  }
+    const horas = Math.floor(diferencia / (1000*60*60));
 
-  // Si ya son entre 7 y 8 PM
-  if(cdmx.getHours() >= 19 && cdmx.getHours() < 20){
+    diferencia %= (1000*60*60);
 
-      document.getElementById("banorteTimer").innerHTML="🟢 ACTIVO";
+    const minutos = Math.floor(diferencia / (1000*60));
 
-      document.getElementById("banorteEstado").innerHTML=
-      "🔥 El cupón está disponible ahora";
+    diferencia %= (1000*60);
 
-      return;
-  }
+    const segundos = Math.floor(diferencia / 1000);
 
-  let diferencia = objetivo - cdmx;
-
-  let horas = Math.floor(diferencia/3600000);
-  let minutos = Math.floor((diferencia%3600000)/60000);
-  let segundos = Math.floor((diferencia%60000)/1000);
-
-  document.getElementById("banorteTimer").innerHTML =
-      String(horas).padStart(2,"0")+":"+
-      String(minutos).padStart(2,"0")+":"+
-      String(segundos).padStart(2,"0");
+    document.getElementById("banorteTimer").innerHTML =
+        String(horas).padStart(2,"0")+":"+
+        String(minutos).padStart(2,"0")+":"+
+        String(segundos).padStart(2,"0");
 
 }
 
-setInterval(actualizarBanorte,1000);
 actualizarBanorte();
+setInterval(actualizarBanorte,1000);
 
 </script>
 
