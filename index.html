@@ -349,23 +349,6 @@ target="_blank">
   <img src="logo.png.PNG">
 </div>
 
-<div class="card" id="estadisticas">
-
-<h2 style="text-align:center;">
-📊 Estadísticas
-</h2>
-
-<p>📋 Cupones copiados:
-<b id="totalCopias">0</b></p>
-
-<p>🏦 Bancarios copiados:
-<b id="totalBancos">0</b></p>
-
-<p>⚡ Relámpagos copiados:
-<b id="totalFlash">0</b></p>
-
-</div>
-
 <!-- ===== CUPÓN VIP BBVA ===== -->
 <div class="card" style="
 background:linear-gradient(135deg,#0033A0,#0057D9,#007BFF);
@@ -475,11 +458,7 @@ Copias: 0
 <span class="badge"></span>
 </div>
 
-<button class="acordeon-btn" onclick="abrirAcordeon('relampagos')">
-⚡ CUPONES RELÁMPAGO ▼
-</button>
-
-<div id="relampagos" class="acordeon-contenido">
+<div class="section">⚡ CUPONES RELÁMPAGO</div>
 
 <!-- PEGA AQUÍ TODOS LOS CUPONES RELÁMPAGO -->
 
@@ -699,8 +678,6 @@ setTimeout(()=>{
 window.location.href=REDIRECT_URL;
 },600);
 
-actualizarEstadisticas();
-
 }
 
   // contador
@@ -824,59 +801,6 @@ function iniciarTemporizadorBBVA(){
 }
 
 iniciarTemporizadorBBVA();
-
-function abrirAcordeon(id){
-
-    const contenido = document.getElementById(id);
-
-    if(contenido.classList.contains("show")){
-        contenido.classList.remove("show");
-    }else{
-        contenido.classList.add("show");
-    }
-
-}
-
-function actualizarEstadisticas(){
-
-let total=0;
-let bancos=0;
-let flash=0;
-
-for(let i=0;i<localStorage.length;i++){
-
-const key=localStorage.key(i);
-
-const val=parseInt(localStorage.getItem(key));
-
-if(!isNaN(val)){
-
-total+=val;
-
-if(key.startsWith("b"))
-bancos+=val;
-
-if(key.startsWith("c"))
-flash+=val;
-
-}
-
-}
-
-const total = document.getElementById("totalCopias");
-const bancos = document.getElementById("totalBancos");
-const flash = document.getElementById("totalFlash");
-
-if(total) total.innerHTML = totalCopias;
-if(bancos) bancos.innerHTML = totalBancos;
-if(flash) flash.innerHTML = totalFlash;
-}
-
-actualizarEstadisticas();
-
-function abrirAcordeon(id){
-    document.getElementById(id).classList.toggle("show");
-}
 
 </script>
 
