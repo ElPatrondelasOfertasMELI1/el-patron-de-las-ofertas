@@ -863,13 +863,20 @@ flash+=val;
 
 }
 
-document.getElementById("totalCopias").innerHTML=total;
-document.getElementById("totalBancos").innerHTML=bancos;
-document.getElementById("totalFlash").innerHTML=flash;
+const total = document.getElementById("totalCopias");
+const bancos = document.getElementById("totalBancos");
+const flash = document.getElementById("totalFlash");
 
+if(total) total.innerHTML = totalCopias;
+if(bancos) bancos.innerHTML = totalBancos;
+if(flash) flash.innerHTML = totalFlash;
 }
 
 actualizarEstadisticas();
+
+function abrirAcordeon(id){
+    document.getElementById(id).classList.toggle("show");
+}
 
 </script>
 
