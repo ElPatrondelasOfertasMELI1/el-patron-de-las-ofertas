@@ -283,6 +283,28 @@ background:#f8f8f8;
 display:block;
 }
 
+/* ===== ANIMACIÓN COPIAR ===== */
+
+@keyframes copiarOK{
+0%{transform:scale(.8);opacity:0;}
+50%{transform:scale(1.1);opacity:1;}
+100%{transform:scale(1);opacity:1;}
+}
+
+.toast{
+animation:copiarOK .35s;
+}
+
+.btn:active{
+transform:scale(.96);
+}
+
+.card:hover{
+transform:translateY(-3px);
+transition:.25s;
+box-shadow:0 12px 28px rgba(0,0,0,.15);
+}
+
 </style>
 </head>
 
@@ -325,6 +347,23 @@ target="_blank">
 
 <div class="logo">
   <img src="logo.png.PNG">
+</div>
+
+<div class="card" id="estadisticas">
+
+<h2 style="text-align:center;">
+📊 Estadísticas
+</h2>
+
+<p>📋 Cupones copiados:
+<b id="totalCopias">0</b></p>
+
+<p>🏦 Bancarios copiados:
+<b id="totalBancos">0</b></p>
+
+<p>⚡ Relámpagos copiados:
+<b id="totalFlash">0</b></p>
+
 </div>
 
 <!-- ===== CUPÓN VIP BBVA ===== -->
@@ -630,7 +669,41 @@ function toggleMenu(){
 
 /* COPIAR + REDIRIGIR */
 function copy(code,id){
-  navigator.clipboard.writeText(code);
+
+navigator.clipboard.writeText(code);
+
+let val=localStorage.getItem(id)||0;
+val++;
+
+localStorage.setItem(id,val);
+
+const counter=document.getElementById("count-"+id);
+
+if(counter){
+counter.innerHTML="📋 Copias: "+val;
+}
+
+const t=document.getElementById("toast");
+
+t.innerHTML="✅ Cupón copiado";
+
+t.classList.add("show");
+
+if(navigator.vibrate){
+navigator.vibrate(100);
+}
+
+setTimeout(()=>{
+t.classList.remove("show");
+},1200);
+
+setTimeout(()=>{
+window.location.href=REDIRECT_URL;
+},600);
+
+actualizarEstadisticas();
+
+}
 
   // contador
   let val = localStorage.getItem(id) || 0;
@@ -765,6 +838,40 @@ function abrirAcordeon(id){
     }
 
 }
+
+function actualizarEstadisticas(){
+
+let total=0;
+let bancos=0;
+let flash=0;
+
+for(let i=0;i<localStorage.length;i++){
+
+const key=localStorage.key(i);
+
+const val=parseInt(localStorage.getItem(key));
+
+if(!isNaN(val)){
+
+total+=val;
+
+if(key.startsWith("b"))
+bancos+=val;
+
+if(key.startsWith("c"))
+flash+=val;
+
+}
+
+}
+
+document.getElementById("totalCopias").innerHTML=total;
+document.getElementById("totalBancos").innerHTML=bancos;
+document.getElementById("totalFlash").innerHTML=flash;
+
+}
+
+actualizarEstadisticas();
 
 </script>
 
