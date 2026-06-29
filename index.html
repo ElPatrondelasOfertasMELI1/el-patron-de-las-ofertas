@@ -436,16 +436,8 @@ Copias: 0
 <span class="badge"></span>
 </div>
 
-<div class="acordeon">
-
-<button class="acordeon-btn"
-onclick="abrirSeccion('relampagos')">
-
+<button class="acordeon-btn" onclick="abrirAcordeon('relampagos')">
 ⚡ CUPONES RELÁMPAGO ▼
-
-<button class="acordeon-btn" onclick="abrirAcordeon('relampago')">
-⚡ CUPONES RELÁMPAGO
-<span>▼</span>
 </button>
 
 <div id="relampagos" class="acordeon-contenido">
@@ -762,6 +754,17 @@ function iniciarTemporizadorBBVA(){
 
 iniciarTemporizadorBBVA();
 
+function abrirAcordeon(id){
+
+    const contenido = document.getElementById(id);
+
+    if(contenido.classList.contains("show")){
+        contenido.classList.remove("show");
+    }else{
+        contenido.classList.add("show");
+    }
+
+}
 
 </script>
 
