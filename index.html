@@ -646,166 +646,60 @@ setInterval(()=>{
   updateGlobalStatus();
 },60000);
 
-/* ==========================
-   CUPÓN VIP BBVA
-==========================*/
-function actualizarBBVA(){
-    const ahora = new Date();
-    // Hora oficial CDMX
-    const cdmx = new Date(
-        ahora.toLocaleString("en-US",{
-            timeZone:"America/Mexico_City"
-        })
-    );
-    // Promoción:
-    // 29 junio 2026
-    // 6:00 PM - 7:00 PM
-    const inicio = new Date(2026,5,29,18,0,0);
-    const fin    = new Date(2026,5,29,19,0,0);
-    // Antes de iniciar
-    if(cdmx < inicio){
-        let diferencia = inicio - cdmx;
-        let horas = Math.floor(diferencia/3600000);
-        let minutos = Math.floor((diferencia%3600000)/60000);
-        let segundos = Math.floor((diferencia%60000)/1000);
-        document.getElementById("bbvaTimer").innerHTML =
+<script>
+function iniciarTemporizadorBBVA(){
+
+    function actualizar(){
+
+        // Hora actual
+        const ahora = new Date();
+
+        // Hora de inicio (29 junio 2026 18:00 CDMX)
+        const inicio = new Date("2026-06-29T18:00:00-06:00");
+
+        // Hora final
+        const fin = new Date("2026-06-29T19:00:00-06:00");
+
+        let diferencia;
+
+        if(ahora < inicio){
+
+            diferencia = inicio - ahora;
+            document.getElementById("bbvaEstado").innerHTML =
+            "🟡 Disponible a las 6:00 PM";
+
+        }else if(ahora >= inicio && ahora < fin){
+
+            diferencia = fin - ahora;
+            document.getElementById("bbvaEstado").innerHTML =
+            "🟢 Cupón ACTIVO";
+
+        }else{
+
+            document.getElementById("bbvaTimer").innerHTML="00:00:00";
+            document.getElementById("bbvaEstado").innerHTML=
+            "🔴 Cupón Finalizado";
+            return;
+
+        }
+
+        const horas=Math.floor(diferencia/1000/60/60);
+        const minutos=Math.floor((diferencia/1000/60)%60);
+        const segundos=Math.floor((diferencia/1000)%60);
+
+        document.getElementById("bbvaTimer").innerHTML=
             String(horas).padStart(2,"0")+":"+
             String(minutos).padStart(2,"0")+":"+
             String(segundos).padStart(2,"0");
-        document.getElementById("bbvaEstado").innerHTML =
-            "⌛ El cupón se activa automáticamente a las 6:00 PM";
-        return;
+
     }
-    // Activo
-    if(cdmx >= inicio && cdmx < fin){
-        let diferencia = fin - cdmx;
-        let minutos = Math.floor(diferencia/60000);
-        let segundos = Math.floor((diferencia%60000)/1000);
-        document.getElementById("bbvaTimer").innerHTML =
-            "🟢 ACTIVO";
-        document.getElementById("bbvaEstado").innerHTML =
-            "🔥 Disponible hasta las 7:00 PM";
-        return;
-    }
-    // Finalizado
-    document.getElementById("bbvaTimer").innerHTML="00:00:00";
-    document.getElementById("bbvaEstado").innerHTML=
-    "🔴 Promoción finalizada";
-}
-actualizarBBVA();
-setInterval(actualizarBBVA,1000);
 
-/* ===============================
-   CUPÓN EXCLUSIVO BBVA
-================================*/
-
-const BBVA_CODE = "BBVAGOOL";
-const BBVA_REDIRECT = REDIRECT_URL; // usa tu enlace de afiliado
-
-function copiarBBVA(){
-
-navigator.clipboard.writeText(BBVA_CODE);
-
-const toast=document.getElementById("toast");
-toast.innerHTML="✅ Cupón BBVA copiado";
-toast.classList.add("show");
-
-setTimeout(()=>{
-toast.classList.remove("show");
-},1500);
-
-setTimeout(()=>{
-window.location.href=BBVA_REDIRECT;
-},700);
+    actualizar();
+    setInterval(actualizar,1000);
 
 }
 
-/* ===============================
-   TEMPORIZIZADOR BBVA
-================================*/
-
-function actualizarBBVA(){
-
-const ahora=new Date();
-
-/* Hora CDMX */
-const mexico=new Date(
-ahora.toLocaleString("en-US",{
-timeZone:"America/Mexico_City"
-})
-);
-
-/* 29 junio 2026 6:00 PM */
-const inicio=new Date(2026,5,29,18,0,0);
-
-/* 29 junio 2026 7:00 PM */
-const fin=new Date(2026,5,29,19,0,0);
-
-const estado=document.getElementById("bbvaEstado");
-const tiempo=document.getElementById("bbvaTiempo");
-const boton=document.getElementById("bbvaBtn");
-
-if(!estado) return;
-
-/* Antes de iniciar */
-if(mexico<inicio){
-
-let diff=inicio-mexico;
-
-let h=Math.floor(diff/1000/60/60);
-let m=Math.floor((diff/1000/60)%60);
-let s=Math.floor((diff/1000)%60);
-
-estado.innerHTML="🟡 Disponible a las 6:00 PM";
-tiempo.innerHTML=
-"Faltan: "+
-String(h).padStart(2,"0")+":"+
-String(m).padStart(2,"0")+":"+
-String(s).padStart(2,"0");
-
-boton.disabled=true;
-boton.style.opacity=".6";
-
-return;
-
-}
-
-/* Activo */
-
-if(mexico>=inicio && mexico<fin){
-
-let diff=fin-mexico;
-
-let m=Math.floor(diff/1000/60);
-let s=Math.floor((diff/1000)%60);
-
-estado.innerHTML="🟢 ACTIVO";
-tiempo.innerHTML=
-"Finaliza en "+
-String(m).padStart(2,"0")+":"+
-String(s).padStart(2,"0");
-
-boton.disabled=false;
-boton.style.opacity="1";
-
-return;
-
-}
-
-/* Terminado */
-
-estado.innerHTML="🔴 FINALIZADO";
-tiempo.innerHTML="Esta promoción terminó.";
-
-boton.disabled=true;
-boton.style.opacity=".6";
-
-}
-
-actualizarBBVA();
-
-setInterval(actualizarBBVA,1000);
-
+iniciarTemporizadorBBVA();
 </script>
 
 </body>
