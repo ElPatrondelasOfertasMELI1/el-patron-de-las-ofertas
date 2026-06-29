@@ -254,71 +254,6 @@ box-shadow:0 6px 18px rgba(0,0,0,.2);
 
 }
 
-.banorte-vip{
-position:relative;
-margin:14px;
-padding:22px;
-border-radius:22px;
-overflow:hidden;
-background:linear-gradient(135deg,#d4002a,#a60022);
-color:#fff;
-box-shadow:0 0 20px rgba(212,0,42,.45);
-animation:banorteGlow 2s infinite alternate;
-}
-
-.banorte-vip::before{
-content:"";
-position:absolute;
-top:-60%;
-left:-60%;
-width:220%;
-height:220%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
-transform:rotate(25deg);
-animation:shine 4s linear infinite;
-}
-
-@keyframes shine{
-0%{left:-180%;}
-100%{left:180%;}
-}
-
-@keyframes banorteGlow{
-from{box-shadow:0 0 15px rgba(212,0,42,.4);}
-to{box-shadow:0 0 35px rgba(255,215,0,.7);}
-}
-
-.banorte-title{
-font-size:36px;
-font-weight:900;
-text-align:center;
-}
-
-.banorte-sub{
-text-align:center;
-font-size:18px;
-margin-top:8px;
-}
-
-.banorte-timer{
-margin-top:18px;
-padding:14px;
-border-radius:14px;
-background:#fff;
-color:#d4002a;
-font-size:34px;
-font-weight:900;
-text-align:center;
-}
-
-.estadoBanorte{
-margin-top:10px;
-text-align:center;
-font-size:16px;
-font-weight:900;
-color:#ffe600;
-}
-
 </style>
 </head>
 
@@ -380,84 +315,7 @@ border-radius:30px;
 font-size:13px;
 font-weight:900;
 margin-bottom:12px;">
-👑 CUPÓN VIP EXCLUSIVO BANORTE
-</div>
 
-<h1 style="
-margin:0;
-font-size:46px;
-font-weight:900;
-text-align:center;">
-🏦 BANORTE
-</h1>
-
-<div style="
-font-size:68px;
-font-weight:900;
-text-align:center;
-margin:8px 0;">
-25% OFF
-</div>
-
-<div style="
-text-align:center;
-font-size:20px;
-font-weight:800;
-margin-bottom:18px;">
-Cupón exclusivo pagando a una sola exhibición con tu Tarjeta de Crédito o Dévito
-</div>
-
-<div style="
-background:rgba(255,255,255,.15);
-padding:14px;
-border-radius:16px;
-line-height:1.9;
-font-size:17px;
-font-weight:800;">
-
-💳 Banco: <b>Banorte</b><br>
-
-💰 Compra mínima:
-<b>$7,000</b><br>
-
-🎁 Descuento:
-<b>25% OFF</b><br>
-
-🔥 Tope de descuento:
-<b>$2,000</b><br>
-
-⏰ Horario:
-<b>7:00 PM - 8:00 PM</b>
-
-</div>
-
-<div id="banorteTimer" style="
-margin:18px 0;
-background:#fff;
-color:#C40000;
-padding:18px;
-border-radius:18px;
-font-size:42px;
-font-weight:900;
-text-align:center;">
-00:00:00
-</div>
-
-<div style="
-text-align:center;
-font-size:18px;
-font-weight:900;
-margin-bottom:18px;">
-⌛ El cupón se activa automáticamente a las 7:00 PM
-</div>
-
-<button class="btn" onclick="copy('BNRTGOLAZO','banorte')">
-COPIAR CUPÓN
-</button>
-
-<div class="counter" id="count-banorte">
-Copias: 0
-</div>
 
 </div>
 
@@ -676,43 +534,6 @@ setInterval(()=>{
   updateStatus();
   updateGlobalStatus();
 },60000);
-
-function actualizarBanorte(){
-
-    const ahora = new Date();
-
-    const objetivo = new Date(
-        ahora.getFullYear(),
-        ahora.getMonth(),
-        ahora.getDate(),
-        19,0,0
-    );
-
-    if(ahora.getTime() >= objetivo.getTime()){
-        objetivo.setDate(objetivo.getDate()+1);
-    }
-
-    let diferencia = objetivo.getTime() - ahora.getTime();
-
-    const horas = Math.floor(diferencia / (1000*60*60));
-
-    diferencia %= (1000*60*60);
-
-    const minutos = Math.floor(diferencia / (1000*60));
-
-    diferencia %= (1000*60);
-
-    const segundos = Math.floor(diferencia / 1000);
-
-    document.getElementById("banorteTimer").innerHTML =
-        String(horas).padStart(2,"0")+":"+
-        String(minutos).padStart(2,"0")+":"+
-        String(segundos).padStart(2,"0");
-
-}
-
-actualizarBanorte();
-setInterval(actualizarBanorte,1000);
 
 </script>
 
