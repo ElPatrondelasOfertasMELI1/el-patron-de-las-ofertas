@@ -617,7 +617,6 @@ function toggleMenu(){
 
 /* COPIAR + REDIRIGIR */
 
-
 function copy(code,id){
 
 navigator.clipboard.writeText(code);
@@ -627,13 +626,14 @@ val++;
 
 localStorage.setItem(id,val);
 
-const counter=document.getElementById("count-"+id);
+const counter = document.getElementById("count-"+id);
 
 if(counter){
 counter.innerHTML="Copias: "+val;
 }
 
 const t=document.getElementById("toast");
+t.innerHTML="✅ CUPÓN COPIADO";
 t.classList.add("show");
 
 setTimeout(()=>{
@@ -644,25 +644,6 @@ setTimeout(()=>{
 window.location.href=REDIRECT_URL;
 },600);
 
-}
-
-  // contador
-  let val = localStorage.getItem(id) || 0;
-  val++;
-  localStorage.setItem(id,val);
-
-  const counter = document.getElementById("count-"+id);
-  if(counter) counter.innerText = "Copias: "+val;
-
-  // toast
-  const t=document.getElementById("toast");
-  t.classList.add("show");
-  setTimeout(()=>t.classList.remove("show"),1200);
-
-  // redirección correcta
-  setTimeout(()=>{
-    window.location.href = REDIRECT_URL;
-  },600);
 }
 
 
