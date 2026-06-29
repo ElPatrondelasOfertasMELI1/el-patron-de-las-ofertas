@@ -254,35 +254,6 @@ box-shadow:0 6px 18px rgba(0,0,0,.2);
 
 }
 
-.acordeon{
-margin:15px 14px;
-background:#fff;
-border-radius:18px;
-overflow:hidden;
-box-shadow:0 6px 20px rgba(0,0,0,.08);
-}
-
-.acordeon-btn{
-width:100%;
-padding:18px;
-background:#ffe600;
-border:0;
-font-size:18px;
-font-weight:900;
-cursor:pointer;
-text-align:left;
-}
-
-.acordeon-contenido{
-display:none;
-padding:10px;
-background:#f8f8f8;
-}
-
-.acordeon-contenido.show{
-display:block;
-}
-
 /* ===== ANIMACIÓN COPIAR ===== */
 
 @keyframes copiarOK{
@@ -438,7 +409,7 @@ style="
 margin-top:20px;
 font-size:20px;
 background:#00C853;">
-📋 COPIAR CUPÓN
+COPIAR CUPÓN
 </button>
 <div class="counter"
 id="count-bbva">
@@ -645,11 +616,13 @@ function toggleMenu(){
 }
 
 /* COPIAR + REDIRIGIR */
+
+
 function copy(code,id){
 
 navigator.clipboard.writeText(code);
 
-let val=localStorage.getItem(id)||0;
+let val = Number(localStorage.getItem(id) || 0);
 val++;
 
 localStorage.setItem(id,val);
@@ -657,18 +630,11 @@ localStorage.setItem(id,val);
 const counter=document.getElementById("count-"+id);
 
 if(counter){
-counter.innerHTML="📋 Copias: "+val;
+counter.innerHTML="Copias: "+val;
 }
 
 const t=document.getElementById("toast");
-
-t.innerHTML="✅ Cupón copiado";
-
 t.classList.add("show");
-
-if(navigator.vibrate){
-navigator.vibrate(100);
-}
 
 setTimeout(()=>{
 t.classList.remove("show");
