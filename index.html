@@ -298,6 +298,104 @@ target="_blank">
   <img src="logo.png.PNG">
 </div>
 
+<!-- ===== CUPÓN VIP BBVA ===== -->
+<div class="card" style="
+background:linear-gradient(135deg,#0033A0,#0057D9,#007BFF);
+color:#fff;
+border-radius:22px;
+padding:20px;
+box-shadow:0 12px 30px rgba(0,70,180,.45);
+border:3px solid #9fd0ff;">
+<div style="
+display:inline-block;
+background:#FFD54F;
+color:#000;
+padding:8px 18px;
+border-radius:999px;
+font-weight:900;
+font-size:18px;
+margin-bottom:18px;">
+👑 CUPÓN VIP EXCLUSIVO BBVA
+</div>
+<div style="
+text-align:center;
+font-size:60px;
+font-weight:900;
+margin-bottom:5px;">
+💳 BBVA
+</div>
+<div style="
+text-align:center;
+font-size:72px;
+font-weight:900;
+line-height:1;">
+25% OFF
+</div>
+<div style="
+text-align:center;
+font-size:20px;
+font-weight:800;
+margin-top:18px;">
+Cupón exclusivo pagando a una sola exhibición
+con tu Tarjeta de Crédito BBVA
+</div>
+<div style="
+background:rgba(255,255,255,.12);
+padding:18px;
+border-radius:18px;
+margin-top:22px;
+line-height:2;
+font-size:18px;
+font-weight:800;">
+💳 Banco: <b>BBVA</b><br>
+💰 Compra mínima:
+<b>$7,000</b><br>
+🎁 Descuento:
+<b>25% OFF</b><br>
+🔥 Tope de descuento:
+<b>$2,000</b><br>
+🗓️ Vigencia:
+<b>29 de junio de 2026</b><br>
+🕕 Horario:
+<b>6:00 PM - 7:00 PM (CDMX)</b>
+</div>
+<div id="bbvaTimer"
+style="
+background:#fff;
+color:#D50000;
+padding:18px;
+border-radius:18px;
+font-size:54px;
+font-weight:900;
+text-align:center;
+margin-top:22px;">
+00:00:00
+</div>
+<div id="bbvaEstado"
+style="
+text-align:center;
+font-size:24px;
+font-weight:900;
+margin-top:18px;
+color:#FFE082;">
+⌛ El cupón se activa automáticamente a las 6:00 PM
+</div>
+<button
+class="btn"
+onclick="copy('BBVAGOOL','bbva')"
+style="
+margin-top:20px;
+font-size:20px;
+background:#00C853;">
+📋 COPIAR CUPÓN
+</button>
+<div class="counter"
+id="count-bbva">
+Copias: 0
+</div>
+</div>
+<!-- ===== FIN CUPÓN VIP BBVA ===== -->
+
 <div class="section">⭐ MELI+ EXCLUSIVO (activo hasta 1 julio 2026)</div>
 
 <div class="card meli">
@@ -547,6 +645,166 @@ setInterval(()=>{
   updateStatus();
   updateGlobalStatus();
 },60000);
+
+/* ==========================
+   CUPÓN VIP BBVA
+==========================*/
+function actualizarBBVA(){
+    const ahora = new Date();
+    // Hora oficial CDMX
+    const cdmx = new Date(
+        ahora.toLocaleString("en-US",{
+            timeZone:"America/Mexico_City"
+        })
+    );
+    // Promoción:
+    // 29 junio 2026
+    // 6:00 PM - 7:00 PM
+    const inicio = new Date(2026,5,29,18,0,0);
+    const fin    = new Date(2026,5,29,19,0,0);
+    // Antes de iniciar
+    if(cdmx < inicio){
+        let diferencia = inicio - cdmx;
+        let horas = Math.floor(diferencia/3600000);
+        let minutos = Math.floor((diferencia%3600000)/60000);
+        let segundos = Math.floor((diferencia%60000)/1000);
+        document.getElementById("bbvaTimer").innerHTML =
+            String(horas).padStart(2,"0")+":"+
+            String(minutos).padStart(2,"0")+":"+
+            String(segundos).padStart(2,"0");
+        document.getElementById("bbvaEstado").innerHTML =
+            "⌛ El cupón se activa automáticamente a las 6:00 PM";
+        return;
+    }
+    // Activo
+    if(cdmx >= inicio && cdmx < fin){
+        let diferencia = fin - cdmx;
+        let minutos = Math.floor(diferencia/60000);
+        let segundos = Math.floor((diferencia%60000)/1000);
+        document.getElementById("bbvaTimer").innerHTML =
+            "🟢 ACTIVO";
+        document.getElementById("bbvaEstado").innerHTML =
+            "🔥 Disponible hasta las 7:00 PM";
+        return;
+    }
+    // Finalizado
+    document.getElementById("bbvaTimer").innerHTML="00:00:00";
+    document.getElementById("bbvaEstado").innerHTML=
+    "🔴 Promoción finalizada";
+}
+actualizarBBVA();
+setInterval(actualizarBBVA,1000);
+
+/* ===============================
+   CUPÓN EXCLUSIVO BBVA
+================================*/
+
+const BBVA_CODE = "BBVAGOOL";
+const BBVA_REDIRECT = REDIRECT_URL; // usa tu enlace de afiliado
+
+function copiarBBVA(){
+
+navigator.clipboard.writeText(BBVA_CODE);
+
+const toast=document.getElementById("toast");
+toast.innerHTML="✅ Cupón BBVA copiado";
+toast.classList.add("show");
+
+setTimeout(()=>{
+toast.classList.remove("show");
+},1500);
+
+setTimeout(()=>{
+window.location.href=BBVA_REDIRECT;
+},700);
+
+}
+
+/* ===============================
+   TEMPORIZIZADOR BBVA
+================================*/
+
+function actualizarBBVA(){
+
+const ahora=new Date();
+
+/* Hora CDMX */
+const mexico=new Date(
+ahora.toLocaleString("en-US",{
+timeZone:"America/Mexico_City"
+})
+);
+
+/* 29 junio 2026 6:00 PM */
+const inicio=new Date(2026,5,29,18,0,0);
+
+/* 29 junio 2026 7:00 PM */
+const fin=new Date(2026,5,29,19,0,0);
+
+const estado=document.getElementById("bbvaEstado");
+const tiempo=document.getElementById("bbvaTiempo");
+const boton=document.getElementById("bbvaBtn");
+
+if(!estado) return;
+
+/* Antes de iniciar */
+if(mexico<inicio){
+
+let diff=inicio-mexico;
+
+let h=Math.floor(diff/1000/60/60);
+let m=Math.floor((diff/1000/60)%60);
+let s=Math.floor((diff/1000)%60);
+
+estado.innerHTML="🟡 Disponible a las 6:00 PM";
+tiempo.innerHTML=
+"Faltan: "+
+String(h).padStart(2,"0")+":"+
+String(m).padStart(2,"0")+":"+
+String(s).padStart(2,"0");
+
+boton.disabled=true;
+boton.style.opacity=".6";
+
+return;
+
+}
+
+/* Activo */
+
+if(mexico>=inicio && mexico<fin){
+
+let diff=fin-mexico;
+
+let m=Math.floor(diff/1000/60);
+let s=Math.floor((diff/1000)%60);
+
+estado.innerHTML="🟢 ACTIVO";
+tiempo.innerHTML=
+"Finaliza en "+
+String(m).padStart(2,"0")+":"+
+String(s).padStart(2,"0");
+
+boton.disabled=false;
+boton.style.opacity="1";
+
+return;
+
+}
+
+/* Terminado */
+
+estado.innerHTML="🔴 FINALIZADO";
+tiempo.innerHTML="Esta promoción terminó.";
+
+boton.disabled=true;
+boton.style.opacity=".6";
+
+}
+
+actualizarBBVA();
+
+setInterval(actualizarBBVA,1000);
 
 </script>
 
