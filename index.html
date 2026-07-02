@@ -282,6 +282,8 @@ target="_blank">
 
 </a>
 
+<div id="toast" class="toast">✅ CUPÓN COPIADO</div>
+
 <body>
 
 <div class="menu-btn" onclick="toggleMenu()">
@@ -452,7 +454,6 @@ window.location.href=REDIRECT_URL;
 
 }
 
-
 /* ⏰ ESTADOS CORRECTOS RELÁMPAGO */
 function updateStatus(){
   const h = new Date().getHours();
@@ -473,10 +474,6 @@ function updateStatus(){
     }
   });
 }
-
-/* INIT */
-updateStatus();
-updateGlobalStatus();
 
 setInterval(()=>{
   updateStatus();
