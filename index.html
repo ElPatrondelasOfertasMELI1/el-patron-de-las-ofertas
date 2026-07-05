@@ -415,7 +415,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$4,000</p>
 <p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('TCMP77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -423,7 +423,7 @@ Min $8,000 | Descuento $1,000
 <p><b>15% OFF</b></p>
 <p>Compra mínima<br>$2,500</p>
 <p>Tope: <b>$650</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('MESES77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -431,7 +431,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$4,500</p>
 <p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('BBVA77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -439,7 +439,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$3,000</p>
 <p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('BNMX77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -447,7 +447,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$3,000</p>
 <p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('BNRT77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -455,7 +455,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$4,500</p>
 <p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('HSBC77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -463,7 +463,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$2,500</p>
 <p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('SANT77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -471,7 +471,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$4,500</p>
 <p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('AMEX77')">📋 COPIAR CUPÓN</button>
 </div>
 
 <div class="bank-card">
@@ -479,7 +479,7 @@ Min $8,000 | Descuento $1,000
 <p><b>10% OFF</b></p>
 <p>Compra mínima<br>$2,500</p>
 <p>Tope: <b>$1,000</b></p>
-<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+<button class="bank-btn" onclick="copyBank('AFRM77')">📋 COPIAR CUPÓN</button>
 </div>
 
 </div>
@@ -554,20 +554,9 @@ function toggleMenu(){
 
 /* COPIAR + REDIRIGIR */
 
-function copy(code,id){
+function copyBank(code){
 
 navigator.clipboard.writeText(code);
-
-let val = Number(localStorage.getItem(id) || 0);
-val++;
-
-localStorage.setItem(id,val);
-
-const counter = document.getElementById("count-"+id);
-
-if(counter){
-counter.innerHTML="Copias: "+val;
-}
 
 const t=document.getElementById("toast");
 t.innerHTML="✅ CUPÓN COPIADO";
