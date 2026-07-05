@@ -138,14 +138,6 @@ header{
 .warning{background:#ff9800;}
 .expired{background:#e53935;}
 
-/* CONTADOR */
-.counter{
-  font-size:12px;
-  font-weight:800;
-  margin-top:6px;
-  color:#333;
-}
-
 .toast{
   position:fixed;
   bottom:80px;
@@ -362,48 +354,39 @@ target="_blank">
 
 <div class="section">⚡ CUPONES RELÁMPAGO</div>
 
-<!-- PEGA AQUÍ TODOS LOS CUPONES RELÁMPAGO -->
-
 <div class="card flash">
-<div class="title">CUPÓN RELÁMPAGO ⚡</div>
-Min $800 | Descuento $100
-<button class="btn" onclick="copy('VIENEYA77','c1')">COPIAR</button>
-<div class="counter" id="count-c1">Copias: 0</div>
-<span class="badge"></span>
+    <div class="title">CUPÓN RELÁMPAGO ⚡</div>
+    Min $800 | Descuento $100
+    <button class="btn" onclick="copy('VIENEYA77')">📋 COPIAR CUPÓN</button>
+    <span class="badge"></span>
 </div>
 
 <div class="card flash">
-<div class="title">CUPÓN RELÁMPAGO ⚡</div>
-Min $3,000 | Descuento $375
-<button class="btn" onclick="copy('NOSFUIMOS77','c1')">COPIAR</button>
-<div class="counter" id="count-c1">Copias: 0</div>
-<span class="badge"></span>
+    <div class="title">CUPÓN RELÁMPAGO ⚡</div>
+    Min $3,000 | Descuento $375
+    <button class="btn" onclick="copy('NOSFUIMOS77')">📋 COPIAR CUPÓN</button>
+    <span class="badge"></span>
 </div>
 
 <div class="card flash">
-<div class="title">CUPÓN RELÁMPAGO ⚡</div>
-Min $5,000 | Descuento $500
-<button class="btn" onclick="copy('COMPRALO77','c1')">COPIAR</button>
-<div class="counter" id="count-c1">Copias: 0</div>
-<span class="badge"></span>
+    <div class="title">CUPÓN RELÁMPAGO ⚡</div>
+    Min $5,000 | Descuento $500
+    <button class="btn" onclick="copy('COMPRALO77')">📋 COPIAR CUPÓN</button>
+    <span class="badge"></span>
 </div>
 
 <div class="card flash">
-<div class="title">CUPÓN RELÁMPAGO ⚡</div>
-Min $7,000 | Descuento $750
-<button class="btn" onclick="copy('77LLEGAYA','c1')">COPIAR</button>
-<div class="counter" id="count-c1">Copias: 0</div>
-<span class="badge"></span>
+    <div class="title">CUPÓN RELÁMPAGO ⚡</div>
+    Min $7,000 | Descuento $750
+    <button class="btn" onclick="copy('77LLEGAYA')">📋 COPIAR CUPÓN</button>
+    <span class="badge"></span>
 </div>
 
 <div class="card flash">
-<div class="title">CUPÓN RELÁMPAGO ⚡</div>
-Min $8,000 | Descuento $1,000
-<button class="btn" onclick="copy('YACASIES77','c1')">COPIAR</button>
-<div class="counter" id="count-c1">Copias: 0</div>
-<span class="badge"></span>
-</div>
-
+    <div class="title">CUPÓN RELÁMPAGO ⚡</div>
+    Min $8,000 | Descuento $1,000
+    <button class="btn" onclick="copy('YACASIES77')">📋 COPIAR CUPÓN</button>
+    <span class="badge"></span>
 </div>
 
 <div class="section">🏦 CUPONES BANCARIOS</div>
@@ -554,35 +537,20 @@ function toggleMenu(){
 
 /* COPIAR + REDIRIGIR */
 
-function copy(code,id){
+function copy(code){
 
 navigator.clipboard.writeText(code);
-
-if(id){
-
-let val=Number(localStorage.getItem(id)||0);
-val++;
-
-localStorage.setItem(id,val);
-
-const counter=document.getElementById("count-"+id);
-
-if(counter){
-counter.innerHTML="Copias: "+val;
-}
-
-}
 
 const t=document.getElementById("toast");
 t.innerHTML="✅ CUPÓN COPIADO";
 t.classList.add("show");
 
-setTimeout(function(){
-t.classList.remove("show");
+setTimeout(()=>{
+    t.classList.remove("show");
 },1200);
 
-setTimeout(function(){
-window.location.href=REDIRECT_URL;
+setTimeout(()=>{
+    window.location.href=REDIRECT_URL;
 },600);
 
 }
