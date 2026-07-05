@@ -612,6 +612,24 @@ setInterval(()=>{
   updateStatus();
 },60000);
 
+function copyBank(code){
+
+navigator.clipboard.writeText(code);
+
+const t=document.getElementById("toast");
+t.innerHTML="✅ CUPÓN BANCARIO COPIADO";
+t.classList.add("show");
+
+setTimeout(()=>{
+t.classList.remove("show");
+},1200);
+
+setTimeout(()=>{
+window.location.href=REDIRECT_URL;
+},600);
+
+}
+
 </script>
 
 </body>
