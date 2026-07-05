@@ -554,9 +554,22 @@ function toggleMenu(){
 
 /* COPIAR + REDIRIGIR */
 
-function copyBank(code){
+function copy(code,id=null){
 
 navigator.clipboard.writeText(code);
+
+if(id){
+let val = Number(localStorage.getItem(id) || 0);
+val++;
+
+localStorage.setItem(id,val);
+
+const counter=document.getElementById("count-"+id);
+
+if(counter){
+counter.innerHTML="Copias: "+val;
+}
+}
 
 const t=document.getElementById("toast");
 t.innerHTML="✅ CUPÓN COPIADO";
