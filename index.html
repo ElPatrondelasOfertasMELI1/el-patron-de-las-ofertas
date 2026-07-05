@@ -267,6 +267,53 @@ transition:.25s;
 box-shadow:0 12px 28px rgba(0,0,0,.15);
 }
 
+/* ===== CUPONES BANCARIOS ===== */
+
+.bank-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+gap:12px;
+margin:12px 14px;
+}
+
+.bank-card{
+background:#fff;
+border-radius:16px;
+padding:16px;
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+text-align:center;
+}
+
+.bank-card .bank{
+font-size:18px;
+font-weight:900;
+margin-bottom:8px;
+}
+
+.bank-card p{
+margin:5px 0;
+font-size:14px;
+font-weight:700;
+line-height:1.4;
+}
+
+.bank-btn{
+width:100%;
+margin-top:12px;
+padding:12px;
+border:none;
+border-radius:12px;
+background:#00c853;
+color:#fff;
+font-weight:900;
+cursor:pointer;
+font-size:15px;
+}
+
+.bank-btn:hover{
+opacity:.92;
+}
+
 </style>
 </head>
 
@@ -357,6 +404,88 @@ Min $8,000 | Descuento $1,000
 <span class="badge"></span>
 </div>
 
+</div>
+
+<div class="section">🏦 CUPONES BANCARIOS</div>
+
+<div class="bank-grid">
+
+<div class="bank-card">
+<div class="bank">🟡 Mercado Pago</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$4,000</p>
+<p>Tope: <b>$500</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">🟢 Meses Sin Tarjeta</div>
+<p><b>15% OFF</b></p>
+<p>Compra mínima<br>$2,500</p>
+<p>Tope: <b>$650</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">💙 BBVA</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$4,500</p>
+<p>Tope: <b>$500</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">❤️ Banamex</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$3,000</p>
+<p>Tope: <b>$500</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">🔴 Banorte</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$3,000</p>
+<p>Tope: <b>$500</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">❤️ HSBC</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$4,500</p>
+<p>Tope: <b>$500</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">🔴 Santander</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$2,500</p>
+<p>Tope: <b>$500</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">💳 American Express</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$4,500</p>
+<p>Tope: <b>$500</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+<div class="bank-card">
+<div class="bank">🟢 Afirme</div>
+<p><b>10% OFF</b></p>
+<p>Compra mínima<br>$2,500</p>
+<p>Tope: <b>$1,000</b></p>
+<button class="bank-btn" onclick="window.location.href=REDIRECT_URL">IR A MERCADO LIBRE</button>
+</div>
+
+</div>
+
+<div class="card" style="background:#e8f5e9;border-left:6px solid #00c853;text-align:center;">
+<b> Todos los cupones bancarios son combinables con los cupones relámpago.</b>
 </div>
 
 <div class="section">💙 BENEFICIOS MERCADO PAGO</div>
