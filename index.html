@@ -408,87 +408,6 @@ target="_blank">
     <span class="badge"></span>
 </div>
 
-<div class="section">🏦 CUPONES BANCARIOS</div>
-
-<div class="bank-grid">
-
-<div class="bank-card">
-<div class="bank">🟡 Mercado Pago</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$4,000</p>
-<p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="copyBank('TCMP77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">🟢 Meses Sin Tarjeta</div>
-<p><b>15% OFF</b></p>
-<p>Compra mínima<br>$2,500</p>
-<p>Tope: <b>$650</b></p>
-<button class="bank-btn" onclick="copyBank('MESES77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">💙 BBVA</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$4,500</p>
-<p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="copyBank('BBVA77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">❤️ Banamex</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$3,000</p>
-<p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="copyBank('BNMX77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">🔴 Banorte</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$3,000</p>
-<p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="copyBank('BNRT77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">❤️ HSBC</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$4,500</p>
-<p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="copyBank('HSBC77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">🔴 Santander</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$2,500</p>
-<p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="copyBank('SANT77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">💳 American Express</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$4,500</p>
-<p>Tope: <b>$500</b></p>
-<button class="bank-btn" onclick="copyBank('AMEX77')">📋 COPIAR CUPÓN</button>
-</div>
-
-<div class="bank-card">
-<div class="bank">🟢 Afirme</div>
-<p><b>10% OFF</b></p>
-<p>Compra mínima<br>$2,500</p>
-<p>Tope: <b>$1,000</b></p>
-<button class="bank-btn" onclick="copyBank('AFRM77')">📋 COPIAR CUPÓN</button>
-</div>
-
-</div>
-
-<div class="card" style="background:#e8f5e9;border-left:6px solid #00c853;text-align:center;">
-<b> Todos los cupones bancarios son combinables con los cupones relámpago.</b>
-</div>
 
 <div class="section">💙 BENEFICIOS MERCADO PAGO</div>
 
@@ -617,7 +536,53 @@ window.location.href=REDIRECT_URL;
 
 }
 
-</script>
+async function copy(code,id,categoria){
+
+navigator.clipboard.writeText(code);
+
+const ref = doc(db,"contadores","global");
+
+await updateDoc(ref,{
+total: increment(1),
+[categoria]: increment(1)
+});
+
+const t=document.getElementById("toast");
+t.innerHTML="✅ CUPÓN COPIADO";
+t.classList.add("show");
+
+setTimeout(()=>{
+t.classList.remove("show");
+},1200);
+
+setTimeout(()=>{
+window.location.href=REDIRECT_URL;
+},600);
+
+}
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+updateDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
+authDomain: "patronofertasweb.firebaseapp.com",
+projectId: "patronofertasweb",
+storageBucket: "patronofertasweb.firebasestorage.app",
+messagingSenderId: "292338334268",
+appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+<script type="module">
 
 </body>
 </html>
