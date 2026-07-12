@@ -463,35 +463,22 @@ VER TERMINALES
 
 </div>
 
-<script>
+<script type="module">
 
 const REDIRECT_URL = "https://mercadolibre.com/sec/2P5U37F";
 
 /* MENU */
-function toggleMenu(){
+window.toggleMenu = function(){
+
   const m=document.getElementById("menu");
-  m.style.left = (m.style.left==="0px") ? "-300px" : "0px";
+
+  m.style.left = (m.style.left==="0px") 
+  ? "-300px" 
+  : "0px";
+
 }
 
 /* COPIAR + REDIRIGIR */
-
-function copy(code){
-
-navigator.clipboard.writeText(code);
-
-const t=document.getElementById("toast");
-t.innerHTML="✅ CUPÓN COPIADO";
-t.classList.add("show");
-
-setTimeout(()=>{
-    t.classList.remove("show");
-},1200);
-
-setTimeout(()=>{
-    window.location.href=REDIRECT_URL;
-},600);
-
-}
 
 /* ⏰ ESTADOS CORRECTOS RELÁMPAGO */
 function updateStatus(){
@@ -514,52 +501,10 @@ function updateStatus(){
   });
 }
 
+updateStatus();
 setInterval(()=>{
   updateStatus();
 },60000);
-
-function copyBank(code){
-
-navigator.clipboard.writeText(code);
-
-const t=document.getElementById("toast");
-t.innerHTML="✅ CUPÓN BANCARIO COPIADO";
-t.classList.add("show");
-
-setTimeout(()=>{
-t.classList.remove("show");
-},1200);
-
-setTimeout(()=>{
-window.location.href=REDIRECT_URL;
-},600);
-
-}
-
-async function copy(code,id,categoria){
-
-navigator.clipboard.writeText(code);
-
-const ref = doc(db,"contadores","global");
-
-await updateDoc(ref,{
-total: increment(1),
-[categoria]: increment(1)
-});
-
-const t=document.getElementById("toast");
-t.innerHTML="✅ CUPÓN COPIADO";
-t.classList.add("show");
-
-setTimeout(()=>{
-t.classList.remove("show");
-},1200);
-
-setTimeout(()=>{
-window.location.href=REDIRECT_URL;
-},600);
-
-}
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
@@ -581,8 +526,33 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+window.copy = async function(code){
 
-<script type="module">
+    await navigator.clipboard.writeText(code);
+
+    const ref = doc(db,"contadores","global");
+
+    await updateDoc(ref,{
+ total: increment(1),
+ relampago: increment(1),
+ ultimoClick: new Date()
+});
+
+    const t=document.getElementById("toast");
+    t.innerHTML="✅ CUPÓN COPIADO";
+    t.classList.add("show");
+
+    setTimeout(()=>{
+        t.classList.remove("show");
+    },1200);
+
+    setTimeout(()=>{
+        window.location.href=REDIRECT_URL;
+    },600);
+
+}
+
+</script>
 
 </body>
 </html>
