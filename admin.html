@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Panel Admin - El Patrón de las Ofertas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:Inter,sans-serif;
+background:#f2f3f5;
+color:#000;
+}
+
+header{
+background:#ffe600;
+padding:20px;
+text-align:center;
+font-size:22px;
+font-weight:900;
+}
+
+.login{
+padding:30px;
+text-align:center;
+}
+
+input{
+padding:15px;
+border-radius:12px;
+border:0;
+width:80%;
+font-size:16px;
+}
+
+button{
+margin-top:15px;
+padding:14px;
+border:0;
+border-radius:12px;
+background:#00c853;
+color:white;
+font-weight:900;
+width:85%;
+}
+
+#panel{
+display:none;
+}
+
+
+.grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+padding:15px;
+
+}
+
+
+.card{
+
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:0 5px 15px #ddd;
+text-align:center;
+
+}
+
+
+.numero{
+
+font-size:30px;
+font-weight:900;
+
+}
+
+
+.grafica{
+
+margin:15px;
+background:white;
+padding:20px;
+border-radius:18px;
+
+}
+
+
+.barra{
+
+height:25px;
+background:#00c853;
+margin:8px 0;
+border-radius:10px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+⚡ PANEL ADMINISTRADOR ⚡
+<br>
+EL PATRÓN DE LAS OFERTAS
+</header>
+
+
+
+<div class="login" id="login">
+
+<h2>🔐 Acceso</h2>
+
+<input id="pass" type="password" placeholder="Contraseña">
+
+<br>
+
+<button onclick="entrar()">
+ENTRAR
+</button>
+
+</div>
+
+
+
+<div id="panel">
+
+
+<div class="grid">
+
+
+<div class="card">
+👆 TOTAL CLICS
+<div class="numero" id="total">
+0
+</div>
+</div>
+
+
+<div class="card">
+⚡ RELÁMPAGO
+<div class="numero" id="relampago">
+0
+</div>
+</div>
+
+
+<div class="card">
+💎 EXCLUSIVOS
+<div class="numero" id="exclusivos">
+0
+</div>
+</div>
+
+
+<div class="card">
+🏦 BANCARIOS
+<div class="numero" id="bancarios">
+0
+</div>
+</div>
+
+
+</div>
+
+
+
+<div class="grafica">
+
+<h3>
+📈 ACTIVIDAD
+</h3>
+
+
+<div>
+Hoy
+</div>
+
+<div class="barra" id="barra"></div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+<script type="module">
+
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
+import {
+
+getFirestore,
+
+doc,
+
+onSnapshot
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
+
+authDomain: "patronofertasweb.firebaseapp.com",
+
+projectId: "patronofertasweb",
+
+storageBucket: "patronofertasweb.firebasestorage.app",
+
+messagingSenderId: "292338334268",
+
+appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+
+window.entrar=function(){
+
+
+let clave=document.getElementById("pass").value;
+
+
+
+if(clave==="ADMIN2026"){
+
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("panel").style.display="block";
+
+
+cargarDatos();
+
+
+}
+
+else{
+
+alert("Contraseña incorrecta");
+
+}
+
+
+}
+
+
+
+
+
+function cargarDatos(){
+
+
+const ref=doc(db,"contadores","global");
+
+
+
+onSnapshot(ref,(snap)=>{
+
+
+const data=snap.data();
+
+
+
+document.getElementById("total").innerHTML=data.total || 0;
+
+
+document.getElementById("relampago").innerHTML=data.relampago || 0;
+
+
+document.getElementById("exclusivos").innerHTML=data.exclusivos || 0;
+
+
+document.getElementById("bancarios").innerHTML=data.bancarios || 0;
+
+
+
+let total=data.total || 1;
+
+
+document.getElementById("barra").style.width=
+
+Math.min(total/100,100)+"%";
+
+
+});
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
