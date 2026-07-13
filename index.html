@@ -769,20 +769,27 @@ fetch("https://ipapi.co/json/")
 
 window.copy = async function(code,categoria){
 
-    // Copiar cupón
-    await navigator.clipboard.writeText(code);
+    // Intentar copiar el cupón
+    try{
+        await navigator.clipboard.writeText(code);
 
-    // Aviso
-    const t=document.getElementById("toast");
+        const t=document.getElementById("toast");
+        t.innerHTML="✅ CUPÓN COPIADO";
+        t.classList.add("show");
 
-    t.innerHTML="✅ CUPÓN COPIADO";
-    t.classList.add("show");
+        setTimeout(()=>{
+            t.classList.remove("show");
+        },1500);
 
-    setTimeout(()=>{
-        t.classList.remove("show");
-    },1500);
+    }catch(e){
 
-    // Contador general
+        // Si el navegador no permite copiar (Safari/WhatsApp)
+        prompt("Copia este cupón:", code);
+
+    }
+
+    // ===== CONTADOR GENERAL =====
+
     const ref = doc(db,"contadores","global");
 
     let datos={
@@ -803,7 +810,7 @@ window.copy = async function(code,categoria){
 
     await updateDoc(ref,datos);
 
-    // ===== CONTADOR INDIVIDUAL DEL CUPÓN =====
+    // ===== CONTADOR INDIVIDUAL =====
 
     const cuponRef = doc(db,"cupones",code);
 
@@ -817,23 +824,11 @@ window.copy = async function(code,categoria){
 
     });
 
-    // Redirección
+    // ===== REDIRECCIÓN =====
 
     setTimeout(()=>{
         window.location.href=REDIRECT_URL;
     },700);
-
-}
-
-
-
-    // Esperar un poco antes de enviar a Mercado Libre
-    setTimeout(()=>{
-
-        window.location.href = REDIRECT_URL;
-
-    },700);
-
 
 }
 
