@@ -716,7 +716,7 @@ const hoy = new Date().toISOString().split("T")[0];
 
 const visitaRef = doc(db,"visitas","contador");
 
-const visitaSnap = await getDoc(visitaRef);
+getDoc(visitaRef).then(async (visitaSnap)=>{
 
 if(!visitaSnap.exists() || visitaSnap.data().fecha !== hoy){
 
@@ -755,33 +755,35 @@ else{
 
 }
 
+});
 
 localStorage.setItem("fechaVisita",hoy);
 
 // ===== REGIÓN DEL VISITANTE =====
 
+setTimeout(()=>{
+
 fetch("https://ipapi.co/json/")
-.then(res => res.json())
-.then(data => {
+.then(res=>res.json())
+.then(data=>{
 
-  const estado = data.region || "Desconocido";
+const estado=data.region || "Desconocido";
 
-  const regionRef = doc(db,"regiones",estado);
+const regionRef=doc(db,"regiones",estado);
 
+updateDoc(regionRef,{
+visitas:increment(1)
+}).catch(()=>{
 
-  updateDoc(regionRef,{
-    visitas: increment(1)
-  }).catch(()=>{
-
-    // Si la región no existe, la crea
-    setDoc(regionRef,{
-      visitas: 1
-    });
-
-  });
-
+setDoc(regionRef,{
+visitas:1
+});
 
 });
+
+});
+
+},3000);
 
 window.copy = async function(code,categoria){
 
@@ -827,8 +829,8 @@ document.activeElement.blur();
         datos.bancarios=increment(1);
     }
 
-    await updateDoc(ref,datos);
-
+    updateDoc(ref,datos);
+    
     // ===== CONTADOR INDIVIDUAL =====
 
     const cuponRef = doc(db,"cupones",code);
