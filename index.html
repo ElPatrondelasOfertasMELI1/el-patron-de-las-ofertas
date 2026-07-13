@@ -728,6 +728,7 @@ doc,
 onSnapshot,
 collection,
 getDocs,
+getDoc,
 updateDoc,
 setDoc,
 increment
@@ -749,28 +750,46 @@ const db = getFirestore(app);
 
 const hoy = new Date().toISOString().split("T")[0];
 
-const ultimaVisita = localStorage.getItem("fechaVisita");
-
-
-if(ultimaVisita !== hoy){
-
 const visitaRef = doc(db,"visitas","contador");
 
+const visitaSnap = await getDoc(visitaRef);
 
-setDoc(visitaRef,{
-total:increment(1),
-fecha:hoy
-},{merge:true});
+if(!visitaSnap.exists() || visitaSnap.data().fecha !== hoy){
 
+    // Reinicia contador del día nuevo
+    await setDoc(visitaRef,{
+        total:1,
+        fecha:hoy
+    });
 
-// Guardar historial del día
+    // Guarda historial
+    const historialRef = doc(db,"visitas_historial",hoy);
 
-const historialRef = doc(db,"visitas_historial",hoy);
+    await setDoc(historialRef,{
+        total:1
+    });
 
+}
+else{
 
-setDoc(historialRef,{
-total:increment(1)
-},{merge:true});
+    // Solo cuenta nuevos visitantes del mismo día
+    const ultimaVisita = localStorage.getItem("fechaVisita");
+
+    if(ultimaVisita !== hoy){
+
+        await updateDoc(visitaRef,{
+            total:increment(1)
+        });
+
+        const historialRef = doc(db,"visitas_historial",hoy);
+
+        await setDoc(historialRef,{
+            total:increment(1)
+        },{merge:true});
+
+    }
+
+}
 
 
 localStorage.setItem("fechaVisita",hoy);
