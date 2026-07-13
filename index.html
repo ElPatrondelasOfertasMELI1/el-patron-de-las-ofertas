@@ -744,6 +744,7 @@ window.copy = async function(code,categoria){
 
     await navigator.clipboard.writeText(code);
 
+
     const ref = doc(db,"contadores","global");
 
 
@@ -769,17 +770,33 @@ window.copy = async function(code,categoria){
 
     await updateDoc(ref,datos);
 
+
     const t=document.getElementById("toast");
+
     t.innerHTML="✅ CUPÓN COPIADO";
+
     t.classList.add("show");
 
-    setTimeout(()=>{
-        t.classList.remove("show");
-    },1200);
 
     setTimeout(()=>{
-        window.location.href=REDIRECT_URL;
-    },600);
+
+        t.classList.remove("show");
+
+    },1200);
+
+
+
+    // abrir Mercado Libre sin bloquear la página
+
+    setTimeout(()=>{
+
+        window.open(
+        REDIRECT_URL,
+        "_blank"
+        );
+
+    },300);
+
 
 }
 
