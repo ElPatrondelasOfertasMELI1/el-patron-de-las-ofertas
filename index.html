@@ -703,6 +703,13 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Limpiar mensaje al cargar página
+window.addEventListener("load",()=>{
+    const t=document.getElementById("toast");
+    t.classList.remove("show");
+    t.innerHTML="";
+});
+
 // ===== VISITANTES DIARIOS + HISTORIAL =====
 
 const hoy = new Date().toISOString().split("T")[0];
@@ -789,8 +796,9 @@ document.activeElement.blur();
         t.classList.add("show");
 
         setTimeout(()=>{
-            t.classList.remove("show");
-        },1500);
+    t.classList.remove("show");
+    t.innerHTML="";
+},1200);
 
     }catch(e){
 
