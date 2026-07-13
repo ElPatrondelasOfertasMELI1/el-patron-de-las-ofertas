@@ -746,10 +746,9 @@ const db = getFirestore(app);
 
 const visitaRef = doc(db,"visitas","contador");
 
-updateDoc(visitaRef,{
+setDoc(visitaRef,{
   total: increment(1)
-});
-
+},{merge:true});
 
 // ===== REGIÓN DEL VISITANTE =====
 
