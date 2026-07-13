@@ -776,6 +776,40 @@ fetch("https://ipapi.co/json/")
 
 });
 
+// ===== CONTADOR DE VISITANTES =====
+
+const visitaRef = doc(db,"visitas","contador");
+
+updateDoc(visitaRef,{
+  total: increment(1)
+});
+
+
+// ===== REGIÓN DEL VISITANTE =====
+
+fetch("https://ipapi.co/json/")
+.then(res => res.json())
+.then(data => {
+
+  const estado = data.region || "Desconocido";
+
+  const regionRef = doc(db,"regiones",estado);
+
+
+  updateDoc(regionRef,{
+    visitas: increment(1)
+  }).catch(()=>{
+
+    // Si la región no existe, la crea
+    setDoc(regionRef,{
+      visitas: 1
+    });
+
+  });
+
+
+});
+
 window.copy = async function(code,categoria){
 
     // Copiar cupón
