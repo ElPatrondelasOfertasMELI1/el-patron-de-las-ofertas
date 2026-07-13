@@ -331,17 +331,19 @@ box-shadow:0 12px 28px rgba(0,0,0,.15);
 
 .bank-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-gap:12px;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px;
 margin:12px 14px;
 }
 
 .bank-card{
 background:#fff;
 border-radius:16px;
-padding:16px;
+padding:12px;
 box-shadow:0 6px 18px rgba(0,0,0,.08);
 text-align:center;
+min-height:190px;
+box-sizing:border-box;
 }
 
 .bank-card .bank{
@@ -776,6 +778,8 @@ fetch("https://ipapi.co/json/")
 
 window.copy = async function(code,categoria){
 
+document.activeElement.blur();
+
     // Intentar copiar el cupón
     try{
         await navigator.clipboard.writeText(code);
@@ -834,8 +838,8 @@ window.copy = async function(code,categoria){
     // ===== REDIRECCIÓN =====
 
     setTimeout(()=>{
-        window.location.href=REDIRECT_URL;
-    },200);
+    window.location.href = REDIRECT_URL;
+},50);
 
 }
 
