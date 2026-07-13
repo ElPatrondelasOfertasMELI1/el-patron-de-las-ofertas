@@ -881,6 +881,8 @@ if(code==="MELIMAS7OLA"){
 
 if(ahorro > 0){
 
+if(!localStorage.getItem(clave)){
+
 updateDoc(ahorroRef,{
 total:increment(ahorro)
 }).catch(async()=>{
@@ -890,6 +892,10 @@ total:ahorro
 });
 
 });
+
+localStorage.setItem(clave,"ok");
+
+}
 
 }
     
