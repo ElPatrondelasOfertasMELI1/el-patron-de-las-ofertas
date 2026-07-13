@@ -772,45 +772,58 @@ window.copy = async function(code,categoria){
     // Copiar cupón
     await navigator.clipboard.writeText(code);
 
-
-    // Mostrar aviso inmediatamente
+    // Aviso
     const t=document.getElementById("toast");
 
     t.innerHTML="✅ CUPÓN COPIADO";
     t.classList.add("show");
 
-
-    // Ocultar mensaje
     setTimeout(()=>{
         t.classList.remove("show");
     },1500);
 
-
-
-    // Guardar contador Firebase
+    // Contador general
     const ref = doc(db,"contadores","global");
 
-    let datos = {
-        total: increment(1)
+    let datos={
+        total:increment(1)
     };
 
-
     if(categoria==="relampago"){
-        datos.relampago = increment(1);
+        datos.relampago=increment(1);
     }
-
 
     if(categoria==="exclusivo"){
-        datos.exclusivos = increment(1);
+        datos.exclusivos=increment(1);
     }
-
 
     if(categoria==="bancario"){
-        datos.bancarios = increment(1);
+        datos.bancarios=increment(1);
     }
 
+    await updateDoc(ref,datos);
 
-    updateDoc(ref,datos);
+    // ===== CONTADOR INDIVIDUAL DEL CUPÓN =====
+
+    const cuponRef = doc(db,"cupones",code);
+
+    updateDoc(cuponRef,{
+        copias:increment(1)
+    }).catch(async()=>{
+
+        await setDoc(cuponRef,{
+            copias:1
+        });
+
+    });
+
+    // Redirección
+
+    setTimeout(()=>{
+        window.location.href=REDIRECT_URL;
+    },700);
+
+}
 
 
 
