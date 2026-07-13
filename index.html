@@ -742,13 +742,20 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ===== CONTADOR DE VISITANTES =====
+// ===== CONTADOR DE VISITANTES ÚNICOS =====
+
+if(!localStorage.getItem("visitaRegistrada")){
 
 const visitaRef = doc(db,"visitas","contador");
 
 setDoc(visitaRef,{
   total: increment(1)
 },{merge:true});
+
+
+localStorage.setItem("visitaRegistrada","si");
+
+}
 
 // ===== REGIÓN DEL VISITANTE =====
 
