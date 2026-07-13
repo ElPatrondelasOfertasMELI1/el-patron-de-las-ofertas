@@ -303,7 +303,9 @@ getFirestore,
 doc,
 onSnapshot,
 collection,
-getDocs
+getDocs,
+getDoc,
+updateDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
@@ -407,8 +409,8 @@ document.getElementById("login").style.display="none";
 
 document.getElementById("panel").style.display="block";
 
-
 cargarDatos();
+cargarHistorial();
 
 // ===== HISTORIAL ÚLTIMOS 3 DÍAS =====
 
@@ -416,84 +418,52 @@ async function cargarHistorial(){
 
 const ref = collection(db,"visitas_historial");
 
-const snap = await getDocs(ref);
+const ref = collection(db,"visitas_historial");
+
+onSnapshot(ref,(snap)=>{
 
 let datos=[];
 
-
 snap.forEach(doc=>{
-
-datos.push({
-
-fecha:doc.id,
-total:doc.data().total || 0
-
+    datos.push({
+        fecha:doc.id,
+        total:doc.data().total || 0
+    });
 });
 
-});
-
-
-datos.sort((a,b)=> b.fecha.localeCompare(a.fecha));
-
+datos.sort((a,b)=>b.fecha.localeCompare(a.fecha));
 
 let html="";
 let grafica="";
 
-
-let max = Math.max(...datos.map(x=>x.total),1);
-
-
+let max=Math.max(...datos.map(x=>x.total),1);
 
 datos.slice(0,3).forEach(d=>{
 
-
-html += `
-
+html+=`
 <p>
-📅 ${d.fecha}
-<br>
+📅 ${d.fecha}<br>
 👥 <b>${d.total} visitantes</b>
 </p>
-
 `;
-
 
 let porcentaje=(d.total/max)*100;
 
-
-grafica +=`
-
+grafica+=`
 <div class="barra-dia">
-
-<span>
-${d.fecha} (${d.total})
-</span>
-
-
+<span>${d.fecha} (${d.total})</span>
 <div class="fondo-barra">
-
-<div class="relleno-barra"
-style="width:${porcentaje}%">
-
+<div class="relleno-barra" style="width:${porcentaje}%"></div>
 </div>
-
 </div>
-
-</div>
-
 `;
-
 
 });
 
-
 document.getElementById("historial").innerHTML=html;
-
-
 document.getElementById("graficaDias").innerHTML=grafica;
 
-
-}
+});
 
 // TOTAL DE VISITANTES
 
