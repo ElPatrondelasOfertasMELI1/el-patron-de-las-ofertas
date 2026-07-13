@@ -103,6 +103,44 @@ border-radius:10px;
 
 }
 
+.barra-dia{
+
+margin:12px 0;
+
+}
+
+.barra-dia span{
+
+display:block;
+font-weight:900;
+margin-bottom:5px;
+
+}
+
+
+.fondo-barra{
+
+background:#eee;
+height:25px;
+border-radius:12px;
+overflow:hidden;
+
+}
+
+
+.relleno-barra{
+
+height:100%;
+background:#00c853;
+border-radius:12px;
+text-align:right;
+padding-right:8px;
+color:white;
+font-size:13px;
+font-weight:900;
+
+}
+
 </style>
 
 </head>
@@ -218,6 +256,30 @@ Hoy
 <div class="grafica">
 
 <h3>
+📊 ÚLTIMOS 3 DÍAS
+</h3>
+
+<div id="historial">
+Cargando...
+</div>
+
+</div>
+
+<div class="grafica">
+
+<h3>
+📈 VISITAS ÚLTIMOS 3 DÍAS
+</h3>
+
+<div id="graficaDias">
+Cargando...
+</div>
+
+</div>
+
+<div class="grafica">
+
+<h3>
 🌎 REGIONES
 </h3>
 
@@ -241,9 +303,8 @@ getFirestore,
 doc,
 onSnapshot,
 collection,
-updateDoc
+getDocs
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 
 
 
@@ -348,6 +409,91 @@ document.getElementById("panel").style.display="block";
 
 
 cargarDatos();
+
+// ===== HISTORIAL ÚLTIMOS 3 DÍAS =====
+
+async function cargarHistorial(){
+
+const ref = collection(db,"visitas_historial");
+
+const snap = await getDocs(ref);
+
+let datos=[];
+
+
+snap.forEach(doc=>{
+
+datos.push({
+
+fecha:doc.id,
+total:doc.data().total || 0
+
+});
+
+});
+
+
+datos.sort((a,b)=> b.fecha.localeCompare(a.fecha));
+
+
+let html="";
+let grafica="";
+
+
+let max = Math.max(...datos.map(x=>x.total),1);
+
+
+
+datos.slice(0,3).forEach(d=>{
+
+
+html += `
+
+<p>
+📅 ${d.fecha}
+<br>
+👥 <b>${d.total} visitantes</b>
+</p>
+
+`;
+
+
+let porcentaje=(d.total/max)*100;
+
+
+grafica +=`
+
+<div class="barra-dia">
+
+<span>
+${d.fecha} (${d.total})
+</span>
+
+
+<div class="fondo-barra">
+
+<div class="relleno-barra"
+style="width:${porcentaje}%">
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+
+});
+
+
+document.getElementById("historial").innerHTML=html;
+
+
+document.getElementById("graficaDias").innerHTML=grafica;
+
+
+}
 
 // TOTAL DE VISITANTES
 
