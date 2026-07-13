@@ -289,7 +289,17 @@ Cargando...
 
 </div>
 
+<div class="grafica">
 
+<h3>
+🎟️ CUPONES MÁS COPIADOS
+</h3>
+
+<div id="cupones">
+Cargando...
+</div>
+
+</div>
 
 <script type="module">
 
@@ -392,6 +402,20 @@ window.entrar = function(){
             exclusivos:0
         });
 
+const cuponesRef = collection(db,"cupones");
+
+const snap = await getDocs(cuponesRef);
+
+for (const d of snap.docs){
+
+    await updateDoc(doc(db,"cupones",d.id),{
+
+        copias:0
+
+    });
+
+}
+
         alert("✅ Contadores reiniciados correctamente.");
 
     }
@@ -402,9 +426,10 @@ window.entrar = function(){
 
         document.getElementById("login").style.display="none";
         document.getElementById("panel").style.display="block";
-
+        
         cargarDatos();
-        cargarHistorial();
+cargarHistorial();
+cargarRankingCupones();
 
   }else{
 
@@ -480,8 +505,47 @@ data.total || 0;
 
 }
 
-function cargarDatos(){
+async function cargarRankingCupones(){
 
+const ref = collection(db,"cupones");
+
+onSnapshot(ref,(snap)=>{
+
+let datos=[];
+
+snap.forEach(doc=>{
+
+datos.push({
+nombre:doc.id,
+copias:doc.data().copias || 0
+});
+
+});
+
+datos.sort((a,b)=>b.copias-a.copias);
+
+let html="";
+
+datos.forEach((c,i)=>{
+
+const puesto=["🥇","🥈","🥉","4️⃣","5️⃣","6️⃣"][i] || "⭐";
+
+html+=`
+<div class="card">
+${puesto} <b>${c.nombre}</b><br>
+${c.copias} copias
+</div>
+`;
+
+});
+
+document.getElementById("cupones").innerHTML = html;
+
+});
+
+}
+
+function cargarDatos(){
 
 const ref=doc(db,"contadores","global");
 
