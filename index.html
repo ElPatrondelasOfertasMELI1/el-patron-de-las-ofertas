@@ -240,6 +240,15 @@ font-size:16px;
 
 /* ===== MERCADO PAGO ===== */
 
+.mp-card{
+background:linear-gradient(135deg,#00B1EA,#009EE3);
+color:#fff;
+margin:10px 14px;
+padding:14px;
+border-radius:16px;
+box-shadow:0 8px 20px rgba(0,158,227,.30);
+}
+
 .mp-card .title{
 color:#fff;
 font-size:18px;
@@ -248,6 +257,7 @@ margin-bottom:8px;
 }
 
 .mp-card p{
+color:#fff;
 margin:4px 0;
 font-size:14px;
 font-weight:700;
@@ -460,6 +470,25 @@ background-position:200% 0;
 }
 }
 
+.gana100{
+display:flex;
+justify-content:center;
+margin-top:-8px;
+margin-bottom:15px;
+}
+
+.gana100 a{
+background:#009EE3;
+color:#fff;
+padding:10px 18px;
+border-radius:30px;
+text-decoration:none;
+font-weight:900;
+font-size:14px;
+box-shadow:0 6px 15px rgba(0,158,227,.35);
+animation:whatsappPulse 2s infinite;
+}
+
 </style>
 </head>
 
@@ -504,6 +533,16 @@ target="_blank">
 
 <div class="logo">
   <img src="logo.png.PNG">
+</div>
+
+<div class="logo">
+<img src="logo.png.PNG">
+</div>
+
+<div class="gana100">
+<a href="#mercadopago">
+💰 Gana $100 con Mercado Pago
+</a>
 </div>
 
 <!-- ===== OFERTAS DESTACADAS DEL DÍA ===== -->
@@ -738,7 +777,9 @@ onclick="copy('MELISUPER','relampago')">
 
 </div>
 
-<div class="section">💙 BENEFICIOS MERCADO PAGO</div>
+<div class="section" id="mercadopago">
+💙 BENEFICIOS MERCADO PAGO
+</div>
 
 <div class="mp-card">
 
