@@ -725,9 +725,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebas
 import {
 getFirestore,
 doc,
+onSnapshot,
+collection,
+getDocs,
 updateDoc,
-increment,
-setDoc
+setDoc,
+increment
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -742,18 +745,35 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ===== CONTADOR DE VISITANTES ÚNICOS =====
+// ===== VISITANTES DIARIOS + HISTORIAL =====
 
-if(!localStorage.getItem("visitaRegistrada")){
+const hoy = new Date().toISOString().split("T")[0];
+
+const ultimaVisita = localStorage.getItem("fechaVisita");
+
+
+if(ultimaVisita !== hoy){
 
 const visitaRef = doc(db,"visitas","contador");
 
+
 setDoc(visitaRef,{
-  total: increment(1)
+total:increment(1),
+fecha:hoy
 },{merge:true});
 
 
-localStorage.setItem("visitaRegistrada","si");
+// Guardar historial del día
+
+const historialRef = doc(db,"visitas_historial",hoy);
+
+
+setDoc(historialRef,{
+total:increment(1)
+},{merge:true});
+
+
+localStorage.setItem("fechaVisita",hoy);
 
 }
 
