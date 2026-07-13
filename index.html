@@ -25,21 +25,58 @@ header{
   font-size:18px;
 }
 
-.logo{
+/* ===== ENCABEZADO ===== */
+
+.hero{
 display:flex;
-justify-content:center;
-margin:15px 0 10px;
+align-items:center;
+gap:14px;
+padding:16px;
+margin:12px 14px;
+background:#fff;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
 
-.logo img{
-width:115px;
-height:115px;
+.hero-logo{
+width:78px;
+height:78px;
 border-radius:50%;
-border:6px solid #ffe600;
+border:4px solid #ffe600;
 background:#fff;
-padding:8px;
-box-shadow:0 8px 22px rgba(0,0,0,.18);
+padding:4px;
 object-fit:cover;
+flex-shrink:0;
+}
+
+.hero-info{
+flex:1;
+}
+
+.hero-info h2{
+margin:0;
+font-size:20px;
+font-weight:900;
+line-height:1.1;
+}
+
+.hero-info p{
+margin:6px 0 12px;
+font-size:13px;
+color:#666;
+font-weight:700;
+}
+
+.hero-btn{
+display:inline-block;
+background:#009EE3;
+color:#fff;
+padding:9px 16px;
+border-radius:30px;
+font-size:13px;
+font-weight:900;
+text-decoration:none;
+box-shadow:0 6px 15px rgba(0,158,227,.30);
 }
 
 .ahorro-bar{
@@ -477,23 +514,6 @@ background-position:200% 0;
 }
 }
 
-.gana100{
-display:flex;
-justify-content:center;
-margin-bottom:18px;
-}
-
-.gana100 a{
-background:#009EE3;
-color:#fff;
-padding:10px 18px;
-border-radius:30px;
-text-decoration:none;
-font-size:14px;
-font-weight:900;
-box-shadow:0 6px 15px rgba(0,158,227,.3);
-}
-
 </style>
 </head>
 
@@ -536,18 +556,22 @@ target="_blank">
 
 <header>⚡ EL PATRÓN DE LAS OFERTAS ⚡</header>
 
-<div class="logo">
-  <img src="logo.png.PNG">
-</div>
+<div class="hero">
 
-<div class="logo">
-<img src="logo.png.PNG">
-</div>
+    <img src="logo.png.PNG" class="hero-logo">
 
-<div class="gana100">
-<a href="#mercadopago">
-💰 Gana $100 con Mercado Pago
-</a>
+    <div class="hero-info">
+
+        <h2>El Patrón de las Ofertas</h2>
+
+        <p>🔥 Cupones • Ofertas • Descuentos diarios</p>
+
+        <a href="#mercadopago" class="hero-btn">
+            💰 Gana $100 con Mercado Pago
+        </a>
+
+    </div>
+
 </div>
 
 <!-- ===== OFERTAS DESTACADAS DEL DÍA ===== -->
