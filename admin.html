@@ -406,22 +406,17 @@ window.entrar = function(){
         cargarDatos();
         cargarHistorial();
 
-    }else{
+  }else{
 
-        alert("Contraseña incorrecta");
-
-    }
+    alert("Contraseña incorrecta");
 
 }
 
-cargarDatos();
-cargarHistorial();
+};
 
 // ===== HISTORIAL ÚLTIMOS 3 DÍAS =====
 
 async function cargarHistorial(){
-
-const ref = collection(db,"visitas_historial");
 
 const ref = collection(db,"visitas_historial");
 
@@ -484,19 +479,6 @@ data.total || 0;
 });
 
 }
-
-else{
-
-alert("Contraseña incorrecta");
-
-}
-
-
-}
-
-
-
-
 
 function cargarDatos(){
 
