@@ -403,6 +403,33 @@ display:block;
 text-align:center;
 }
 
+.flash{
+background:linear-gradient(135deg,#fff8c4,#ffe66d);
+border:2px solid #ffb300;
+box-shadow:0 0 15px rgba(255,193,7,.6);
+animation:flashGlow 1.5s infinite alternate;
+}
+
+@keyframes flashGlow{
+0%{
+box-shadow:0 0 10px rgba(255,193,7,.4);
+transform:translateY(0);
+}
+100%{
+box-shadow:0 0 25px rgba(255,193,7,.9);
+transform:translateY(-2px);
+}
+}
+
+@keyframes parpadeo{
+0%,100%{
+color:#000;
+}
+50%{
+color:#ff6f00;
+}
+}
+
 </style>
 </head>
 
@@ -451,8 +478,8 @@ target="_blank">
 
 <!-- ===== OFERTAS DESTACADAS DEL DÍA ===== -->
 
-<div class="section">
-🔥 OFERTAS RELÁMPAGO
+<div class="section" style="font-size:24px;animation:parpadeo 1s infinite;">
+⚡🔥 OFERTAS RELÁMPAGO 🔥⚡
 </div>
 
 <div class="bank-grid">
