@@ -743,23 +743,25 @@ const db = getFirestore(app);
 
 window.copy = async function(code,categoria){
 
-    // Copiar inmediatamente
+    // Copiar cupón
     await navigator.clipboard.writeText(code);
 
 
-    // Mostrar mensaje sin bloquear
+    // Mostrar aviso inmediatamente
     const t=document.getElementById("toast");
 
     t.innerHTML="✅ CUPÓN COPIADO";
     t.classList.add("show");
 
+
+    // Ocultar mensaje
     setTimeout(()=>{
         t.classList.remove("show");
-    },1200);
+    },1500);
 
 
 
-    // Contador Firebase en segundo plano
+    // Guardar contador Firebase
     const ref = doc(db,"contadores","global");
 
     let datos = {
@@ -786,11 +788,13 @@ window.copy = async function(code,categoria){
 
 
 
-    // Abrir Mercado Libre sin detener la página
-    window.open(
-        REDIRECT_URL,
-        "_blank"
-    );
+    // Esperar un poco antes de enviar a Mercado Libre
+    setTimeout(()=>{
+
+        window.location.href = REDIRECT_URL;
+
+    },700);
+
 
 }
 
