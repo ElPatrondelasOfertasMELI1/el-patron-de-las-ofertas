@@ -740,13 +740,27 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 window.copy = async function(code,categoria){
 
+    // Copiar inmediatamente
     await navigator.clipboard.writeText(code);
 
 
-    const ref = doc(db,"contadores","global");
+    // Mostrar mensaje sin bloquear
+    const t=document.getElementById("toast");
 
+    t.innerHTML="✅ CUPÓN COPIADO";
+    t.classList.add("show");
+
+    setTimeout(()=>{
+        t.classList.remove("show");
+    },1200);
+
+
+
+    // Contador Firebase en segundo plano
+    const ref = doc(db,"contadores","global");
 
     let datos = {
         total: increment(1)
@@ -768,31 +782,15 @@ window.copy = async function(code,categoria){
     }
 
 
-    await updateDoc(ref,datos);
-
-
-    const t=document.getElementById("toast");
-
-    t.innerHTML="✅ CUPÓN COPIADO";
-
-    t.classList.add("show");
-
-
-    setTimeout(()=>{
-
-        t.classList.remove("show");
-
-    },1200);
+    updateDoc(ref,datos);
 
 
 
-  // abrir Mercado Libre rápidamente
-
-setTimeout(()=>{
-
-window.location.href = REDIRECT_URL;
-
-},300);
+    // Abrir Mercado Libre sin detener la página
+    window.open(
+        REDIRECT_URL,
+        "_blank"
+    );
 
 }
 
