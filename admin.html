@@ -370,44 +370,49 @@ document.getElementById("regiones").innerHTML = html;
 });
 
 
-window.entrar=function(){
+window.entrar = function(){
 
-window.reiniciarContadores = async function(){
+    window.reiniciarContadores = async function(){
 
-const clave = prompt("Escribe la contraseña para reiniciar:");
+        const clave = prompt("Escribe la contraseña para reiniciar:");
 
-if(clave !== "Admin2026"){
-alert("Contraseña incorrecta");
-return;
+        if(clave !== "Admin2026"){
+            alert("Contraseña incorrecta");
+            return;
+        }
+
+        if(!confirm("¿Seguro que deseas reiniciar todos los contadores?")) return;
+
+        const ref = doc(db,"contadores","global");
+
+        await updateDoc(ref,{
+            total:0,
+            relampago:0,
+            bancarios:0,
+            exclusivos:0
+        });
+
+        alert("✅ Contadores reiniciados correctamente.");
+
+    }
+
+    let clave = document.getElementById("pass").value;
+
+    if(clave==="Admin2026"){
+
+        document.getElementById("login").style.display="none";
+        document.getElementById("panel").style.display="block";
+
+        cargarDatos();
+        cargarHistorial();
+
+    }else{
+
+        alert("Contraseña incorrecta");
+
+    }
+
 }
-
-const confirmar = confirm("¿Seguro que deseas reiniciar todos los contadores?");
-
-if(!confirmar) return;
-
-const ref = doc(db,"contadores","global");
-
-await updateDoc(ref,{
-total:0,
-relampago:0,
-bancarios:0,
-exclusivos:0
-});
-
-alert("✅ Contadores reiniciados correctamente.");
-
-}
-
-let clave=document.getElementById("pass").value;
-
-
-
-if(clave==="Admin2026"){
-
-
-document.getElementById("login").style.display="none";
-
-document.getElementById("panel").style.display="block";
 
 cargarDatos();
 cargarHistorial();
