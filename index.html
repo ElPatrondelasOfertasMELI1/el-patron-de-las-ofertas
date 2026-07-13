@@ -786,17 +786,13 @@ window.copy = async function(code,categoria){
 
 
 
-    // abrir Mercado Libre sin bloquear la página
+  // abrir Mercado Libre rápidamente
 
-    setTimeout(()=>{
+setTimeout(()=>{
 
-        window.open(
-        REDIRECT_URL,
-        "_blank"
-        );
+window.location.href = REDIRECT_URL;
 
-    },300);
-
+},300);
 
 }
 
