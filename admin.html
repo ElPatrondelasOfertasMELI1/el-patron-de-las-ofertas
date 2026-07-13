@@ -140,6 +140,21 @@ ENTRAR
 
 <div class="grid">
 
+<button onclick="reiniciarContadores()"
+style="
+background:#e53935;
+color:#fff;
+font-weight:900;
+margin:15px;
+width:calc(100% - 30px);
+padding:16px;
+border:none;
+border-radius:15px;
+font-size:17px;
+cursor:pointer;
+">
+🔄 REINICIAR CONTADORES
+</button>
 
 <div class="card">
 👆 TOTAL CLICS
@@ -209,10 +224,9 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import {
 
 getFirestore,
-
 doc,
-
-onSnapshot
+onSnapshot,
+updateDoc
 
 }
 
@@ -249,6 +263,31 @@ const db = getFirestore(app);
 
 window.entrar=function(){
 
+window.reiniciarContadores = async function(){
+
+const clave = prompt("Escribe la contraseña para reiniciar:");
+
+if(clave !== "admin2026"){
+alert("Contraseña incorrecta");
+return;
+}
+
+const confirmar = confirm("¿Seguro que deseas reiniciar todos los contadores?");
+
+if(!confirmar) return;
+
+const ref = doc(db,"contadores","global");
+
+await updateDoc(ref,{
+total:0,
+relampago:0,
+bancarios:0,
+exclusivos:0
+});
+
+alert("✅ Contadores reiniciados correctamente.");
+
+}
 
 let clave=document.getElementById("pass").value;
 
