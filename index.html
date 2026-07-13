@@ -883,6 +883,12 @@ if(ahorro > 0){
 
 updateDoc(ahorroRef,{
 total:increment(ahorro)
+}).catch(async()=>{
+
+await setDoc(ahorroRef,{
+total:ahorro
+});
+
 });
 
 }
