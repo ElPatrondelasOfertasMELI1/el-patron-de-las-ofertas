@@ -140,6 +140,13 @@ ENTRAR
 
 <div class="grid">
 
+<div class="card">
+👥 TOTAL VISITANTES
+<div class="numero" id="visitantes">
+0
+</div>
+</div>
+
 <button onclick="reiniciarContadores()"
 style="
 background:#e53935;
@@ -222,15 +229,11 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 
 import {
-
 getFirestore,
 doc,
 onSnapshot,
-updateDoc
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+collection
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 
@@ -303,6 +306,18 @@ document.getElementById("panel").style.display="block";
 
 cargarDatos();
 
+// TOTAL DE VISITANTES
+
+const visitantesRef = doc(db,"visitas","contador");
+
+onSnapshot(visitantesRef,(snap)=>{
+
+const data = snap.data();
+
+document.getElementById("visitantes").innerHTML =
+data.total || 0;
+
+});
 
 }
 
