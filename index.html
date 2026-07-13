@@ -35,6 +35,22 @@ header{
   border-radius:18px;
 }
 
+.ahorro-bar{
+margin:12px 14px;
+padding:15px;
+background:#00c853;
+color:#fff;
+border-radius:15px;
+text-align:center;
+font-size:16px;
+font-weight:900;
+box-shadow:0 6px 18px rgba(0,200,83,.35);
+}
+
+.ahorro-bar b{
+font-size:24px;
+}
+
 /* ===== CUPÓN VIP MELI+ ===== */
 
 .vip-card{
@@ -420,6 +436,12 @@ target="_blank">
 
 <div class="logo">
   <img src="logo.png.PNG">
+</div>
+
+<div class="ahorro-bar">
+💰 La comunidad ya ahorró aproximadamente:
+<br>
+<b id="ahorro">$0 MXN</b>
 </div>
 
 <!-- ===== CUPÓN EXCLUSIVO MELI+ ===== -->
@@ -831,6 +853,40 @@ document.activeElement.blur();
 
     updateDoc(ref,datos);
     
+    // SUMAR AHORRO GENERADO
+
+const ahorroRef = doc(db,"estadisticas","ahorro");
+
+let ahorro = 0;
+
+if(code==="HAZTUCOMPRA"){
+    ahorro = 75;
+}
+
+if(code==="SUPERMELI10"){
+    ahorro = 275;
+}
+
+if(code==="COMPRASSUPER"){
+    ahorro = 500;
+}
+
+if(code==="MELISUPER"){
+    ahorro = 1000;
+}
+
+if(code==="MELIMAS7OLA"){
+    ahorro = 500;
+}
+
+if(ahorro > 0){
+
+updateDoc(ahorroRef,{
+total:increment(ahorro)
+});
+
+}
+    
     // ===== CONTADOR INDIVIDUAL =====
 
     const cuponRef = doc(db,"cupones",code);
@@ -852,6 +908,34 @@ document.activeElement.blur();
 },50);
 
 }
+
+// ===== AHORRO TOTAL COMUNIDAD =====
+
+const ahorroRef = doc(db,"estadisticas","ahorro");
+
+onSnapshot(ahorroRef,(snap)=>{
+
+const data = snap.data();
+
+const total = data?.total || 0;
+
+let actual = 0;
+
+const contador = setInterval(()=>{
+
+actual += Math.ceil(total / 40);
+
+if(actual >= total){
+actual = total;
+clearInterval(contador);
+}
+
+document.getElementById("ahorro").innerHTML =
+"$" + actual.toLocaleString("es-MX") + " MXN";
+
+},25);
+
+});
 
 </script>
 
