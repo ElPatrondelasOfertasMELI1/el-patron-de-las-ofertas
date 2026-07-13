@@ -705,8 +705,6 @@ import {
 getFirestore,
 doc,
 onSnapshot,
-collection,
-getDocs,
 getDoc,
 updateDoc,
 setDoc,
@@ -779,8 +777,6 @@ else{
 
 });
 
-localStorage.setItem("fechaVisita",hoy);
-
 // ===== REGIÓN DEL VISITANTE =====
 
 setTimeout(()=>{
@@ -851,35 +847,46 @@ document.activeElement.blur();
         datos.bancarios=increment(1);
     }
 
-    updateDoc(ref,datos);
+    updateDoc(ref,datos).catch(async()=>{
+
+await setDoc(ref,{
+total:1,
+relampago: categoria==="relampago" ? 1 : 0,
+exclusivos: categoria==="exclusivo" ? 1 : 0,
+bancarios: categoria==="bancario" ? 1 : 0
+});
+
+});
     
-    // SUMAR AHORRO GENERADO
+    // ===== CONTADOR INDIVIDUAL =====
+
+    const cuponRef = doc(db,"cupones",code);
+
+    updateDoc(cuponRef,{
+        copias:increment(1)
+    }).catch(async()=>{
+
+        await setDoc(cuponRef,{
+            copias:1
+        });
+
+    });
+
+// ===== AHORRO GENERADO =====
 
 const ahorroRef = doc(db,"estadisticas","ahorro");
 
 let ahorro = 0;
 
-if(code==="HAZTUCOMPRA"){
-    ahorro = 75;
-}
-
-if(code==="SUPERMELI10"){
-    ahorro = 275;
-}
-
-if(code==="COMPRASSUPER"){
-    ahorro = 500;
-}
-
-if(code==="MELISUPER"){
-    ahorro = 1000;
-}
-
-if(code==="MELIMAS7OLA"){
-    ahorro = 500;
-}
+if(code==="HAZTUCOMPRA") ahorro = 75;
+if(code==="SUPERMELI10") ahorro = 275;
+if(code==="COMPRASSUPER") ahorro = 500;
+if(code==="MELISUPER") ahorro = 1000;
+if(code==="MELIMAS7OLA") ahorro = 500;
 
 if(ahorro > 0){
+
+const clave = "ahorro_" + code + "_" + hoy;
 
 if(!localStorage.getItem(clave)){
 
@@ -898,20 +905,6 @@ localStorage.setItem(clave,"ok");
 }
 
 }
-    
-    // ===== CONTADOR INDIVIDUAL =====
-
-    const cuponRef = doc(db,"cupones",code);
-
-    updateDoc(cuponRef,{
-        copias:increment(1)
-    }).catch(async()=>{
-
-        await setDoc(cuponRef,{
-            copias:1
-        });
-
-    });
 
     // ===== REDIRECCIÓN =====
 
@@ -921,31 +914,16 @@ localStorage.setItem(clave,"ok");
 
 }
 
-// ===== AHORRO TOTAL COMUNIDAD =====
+// ===== MOSTRAR AHORRO TOTAL =====
 
-const ahorroRef = doc(db,"estadisticas","ahorro");
+const ahorroTotalRef = doc(db,"estadisticas","ahorro");
 
-onSnapshot(ahorroRef,(snap)=>{
+onSnapshot(ahorroTotalRef,(snap)=>{
 
-const data = snap.data();
-
-const total = data?.total || 0;
-
-let actual = 0;
-
-const contador = setInterval(()=>{
-
-actual += Math.ceil(total / 40);
-
-if(actual >= total){
-actual = total;
-clearInterval(contador);
-}
+const total = snap.data()?.total || 0;
 
 document.getElementById("ahorro").innerHTML =
-"$" + actual.toLocaleString("es-MX") + " MXN";
-
-},25);
+"$" + total.toLocaleString("es-MX") + " MXN";
 
 });
 
