@@ -364,6 +364,8 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 const app = initializeApp(firebaseConfig);
 
+const db = getFirestore(app);
+
 window.cambiarEstado = async function(estado){
 
 const ref = doc(db,"configuracion","estadoCupones");
