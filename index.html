@@ -630,8 +630,8 @@ user-select:none;
 .flash-slide img{
 
 width:100%;
-height:220px;
-object-fit:cover;
+height:230px;
+object-fit:contain;
 border-radius:15px;
 background:white;
 
@@ -1299,194 +1299,51 @@ document.getElementById("ahorro").innerHTML =
 
 });
 
-let flashIndex = 0;
-let flashTimer;
+// ===== CARRUSEL OFERTAS RESPONSIVO =====
 
-const flashTrack = document.getElementById("flashTrack");
-const flashSlides = document.querySelectorAll(".flash-slide");
+let posicion = 0;
+let timer = null;
+
+const track = document.getElementById("ofertasPublicas");
+const dotsBox = document.getElementById("flashDots");
+
+let inicioX = 0;
+let inicioY = 0;
+
 
 function moverCarrusel(){
 
-flashIndex++;
+const total = document.querySelectorAll(".flash-slide").length;
 
-if(flashIndex >= flashSlides.length){
-flashIndex = 0;
-}
+if(total===0)return;
 
-flashTrack.style.transform =
-"translateX(-" + (flashIndex * 100) + "%)";
+posicion++;
 
-}
-
-function iniciarCarrusel(){
-
-flashTimer=setInterval(moverCarrusel,4000);
-
-}
-
-iniciarCarrusel();
-
-flashTrack.addEventListener("touchstart",()=>{
-
-clearInterval(flashTimer);
-
-});
-
-flashTrack.addEventListener("touchend",()=>{
-
-iniciarCarrusel();
-
-});
-  
-</script>
-
-<script type="module">
-
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-const firebaseConfig = {
-
-apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
-
-authDomain:"patronofertasweb.firebaseapp.com",
-
-projectId:"patronofertasweb",
-
-storageBucket:"patronofertasweb.firebasestorage.app",
-
-messagingSenderId:"292338334268",
-
-appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-
-
-let posicion=0;
-let timer;
-
-
-onSnapshot(collection(db,"ofertas"),(snap)=>{
-
-
-let html="";
-let puntos="";
-
-
-snap.forEach((d,index)=>{
-
-
-let o=d.data();
-
-
-
-html+=`
-
-<div class="flash-slide"
-onclick="window.open('${o.link}','_blank')">
-
-
-${o.imagen ?
-`
-<img src="${o.imagen}">
-`
-:
-""
-}
-
-
-<h3>
-${o.titulo}
-</h3>
-
-
-<div class="flash-old">
-❌ Antes:
-<s>$${o.precioAntes}</s>
-</div>
-
-
-<div class="flash-price">
-🔥 $${o.precioActual}
-</div>
-
-
-<div class="flash-btn">
-🛒 VER OFERTA
-</div>
-
-
-</div>
-
-
-`;
-
-
-
-puntos+=`
-
-<div class="flash-dot ${index===0?'active':''}"
-onclick="irOferta(${index})">
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-document.getElementById("ofertasPublicas").innerHTML=html;
-
-document.getElementById("flashDots").innerHTML=puntos;
-
-
+if(posicion>=total){
 posicion=0;
+}
 
 actualizarCarrusel();
 
-
-iniciarAuto();
-
-
-});
-
-
+}
 
 
 
 function actualizarCarrusel(){
 
-
-document.getElementById("ofertasPublicas").style.transform=
-
-`translate3d(-${posicion*100}%,0,0)`
-
+track.style.transform =
+`translate3d(-${posicion * 100}%,0,0)`;
 
 
 document.querySelectorAll(".flash-dot")
-.forEach((d,i)=>{
+.forEach((dot,i)=>{
 
-d.classList.toggle("active",i===posicion);
+dot.classList.toggle(
+"active",
+i===posicion
+);
 
 });
-
 
 }
 
@@ -1494,78 +1351,28 @@ d.classList.toggle("active",i===posicion);
 
 function iniciarAuto(){
 
-
 clearInterval(timer);
 
-
-timer=setInterval(()=>{
-
-
-let total=document.querySelectorAll(".flash-slide").length;
-
-
-posicion++;
-
-
-if(posicion>=total){
-
-posicion=0;
+timer=setInterval(
+moverCarrusel,
+3000
+);
 
 }
 
 
-actualizarCarrusel();
-
-
-
-},3000);
-
-
-}
-
-
-
-
-
-window.irOferta=function(i){
-
-
-posicion=i;
-
-actualizarCarrusel();
-
-iniciarAuto();
-
-
-};
-
-
-
-
-// DESLIZAR CON EL DEDO
-
-
-let inicio=0;
-
-
-const carrusel=document.getElementById("ofertasPublicas");
-
-
-carrusel.addEventListener("touchstart",(e)=>{
-
-let inicioX=0;
-let inicioY=0;
-
-
-carrusel.addEventListener("touchstart",(e)=>{
+track.addEventListener("touchstart",(e)=>{
 
 inicioX=e.touches[0].clientX;
 inicioY=e.touches[0].clientY;
 
-});
+clearInterval(timer);
+
+},{passive:true});
 
 
-carrusel.addEventListener("touchend",(e)=>{
+
+track.addEventListener("touchend",(e)=>{
 
 
 let finX=e.changedTouches[0].clientX;
@@ -1577,13 +1384,12 @@ let movimientoY=inicioY-finY;
 
 
 
-// Solo mueve carrusel si el movimiento es más horizontal que vertical
-
 if(Math.abs(movimientoX)>Math.abs(movimientoY)
 && Math.abs(movimientoX)>50){
 
 
-let total=document.querySelectorAll(".flash-slide").length;
+const total =
+document.querySelectorAll(".flash-slide").length;
 
 
 if(movimientoX>0){
@@ -1593,11 +1399,12 @@ posicion++;
 }
 
 
-if(movimientoX<0){
+else{
 
 posicion--;
 
 }
+
 
 
 if(posicion<0){
@@ -1620,8 +1427,25 @@ actualizarCarrusel();
 }
 
 
-});
+iniciarAuto();
 
+
+},{passive:true});
+
+
+
+window.irOferta=function(i){
+
+posicion=i;
+
+actualizarCarrusel();
+
+iniciarAuto();
+
+};
+  
 </script>
+
+
 
 </body>
