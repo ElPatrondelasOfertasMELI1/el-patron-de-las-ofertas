@@ -1307,11 +1307,6 @@ document.getElementById("ahorro").innerHTML =
 
 // ===== CARGAR OFERTAS DESDE ADMIN FIREBASE =====
 
-import {
-collection,
-onSnapshot
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 
 const contenedor = document.getElementById("ofertasPublicas");
 const puntos = document.getElementById("flashDots");
@@ -1338,7 +1333,9 @@ ofertas.push(o);
 
 
 ofertas.forEach((o,i)=>{
-
+  
+actualizarCarrusel();
+iniciarAuto();
 
 contenedor.innerHTML += `
 
