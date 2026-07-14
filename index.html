@@ -584,6 +584,82 @@ text-decoration:none;
 
 }
 
+/* ===== OFERTAS PARA TI ===== */
+
+.recomendado{
+
+margin:15px 14px;
+background:#fff;
+border-radius:20px;
+padding:15px;
+box-shadow:0 8px 20px rgba(0,0,0,.10);
+
+}
+
+.recomendado-title{
+
+font-size:20px;
+font-weight:900;
+margin-bottom:12px;
+
+}
+
+
+.recomendado-box{
+
+display:flex;
+gap:12px;
+overflow-x:auto;
+
+}
+
+.recomendado-box::-webkit-scrollbar{
+display:none;
+}
+
+
+.reco-card{
+
+min-width:150px;
+background:#f7f7f7;
+border-radius:15px;
+padding:10px;
+text-align:center;
+
+}
+
+
+.reco-card img{
+
+width:100%;
+height:120px;
+object-fit:contain;
+
+}
+
+
+.reco-card b{
+
+font-size:14px;
+font-weight:900;
+
+}
+
+
+.reco-btn{
+
+display:block;
+margin-top:8px;
+background:#00c853;
+color:white;
+padding:8px;
+border-radius:10px;
+text-decoration:none;
+font-weight:900;
+font-size:13px;
+
+}
+  
 </style>
 </head>
 
@@ -719,7 +795,46 @@ href="#">
 
 </div>
 
+<!-- ===== OFERTAS PARA TI ===== -->
 
+<div class="recomendado">
+
+<div class="recomendado-title">
+🎯 Ofertas para ti
+</div>
+
+
+<div class="recomendado-box" id="recomendados">
+
+
+<div class="reco-card">
+
+<img src="IMG_9774.jpeg">
+
+<b>👟 Tenis</b>
+
+<a class="reco-btn"
+href="https://meli.la/2wKB7Jo">
+VER
+</a>
+
+</div>
+
+
+
+<div class="reco-card">
+
+<img src="IMG_9772.jpeg">
+
+<b>🎒 Mochilas</b>
+
+<a class="reco-btn"
+href="https://meli.la/2iVPve4">
+VER
+</a>
+
+</div>
+  
 </div>
 
 </div>
@@ -1262,6 +1377,44 @@ iniciarCarrusel();
 
 });
 
+// ===== SISTEMA DE INTERESES =====
+
+const enlacesCategorias = document.querySelectorAll(".menu-item");
+
+
+enlacesCategorias.forEach(link=>{
+
+
+link.addEventListener("click",()=>{
+
+
+let categoria = link.innerText;
+
+
+localStorage.setItem(
+"interesUsuario",
+categoria
+);
+
+
+});
+
+
+});
+
+
+
+// Mostrar interés guardado
+
+const interes = localStorage.getItem("interesUsuario");
+
+
+if(interes){
+
+console.log("Usuario interesado en:", interes);
+
+}
+  
 </script>
 
 </body>
