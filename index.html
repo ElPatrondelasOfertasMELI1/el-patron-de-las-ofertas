@@ -593,6 +593,31 @@ text-decoration:none;
 
 }
   
+.flash-carousel{
+overflow:hidden;
+touch-action:pan-y;
+}
+
+.flash-track{
+display:flex;
+gap:14px;
+transition:transform .4s ease;
+touch-action:pan-y;
+}
+
+.flash-slide{
+min-width:100%;
+user-select:none;
+-webkit-user-select:none;
+touch-action:pan-y;
+}
+
+.flash-link{
+text-decoration:none;
+color:#000;
+display:block;
+}
+  
 </style>
 </head>
 
@@ -662,8 +687,7 @@ target="_blank">
 
 <div class="flash-track" id="flashTrack">
 
-
-<div class="flash-slide" onclick="window.open('https://meli.la/2wKB7Jo','_blank')">
+<div class="flash-slide">
 
 <img src="IMG_9774.jpeg">
 
@@ -685,7 +709,7 @@ target="_blank">
 
 </div>
 
-<div class="flash-slide" onclick="window.open('https://meli.la/2MfuoQg','_blank')">
+<div class="flash-slide">
 
 <img src="IMG_9789.jpeg">
 
@@ -707,8 +731,8 @@ target="_blank">
 
 </div>
 
-<div class="flash-slide" onclick="window.open('https://meli.la/2wkoXuK','_blank')">
-
+<div class="flash-slide">
+  
 <img src="IMG_9790.jpeg">
 
 <h3>💥 Oferta Imperdible</h3>
@@ -729,7 +753,7 @@ target="_blank">
 
 </div>
 
-<div class="flash-slide" onclick="window.open('https://meli.la/2iVPve4','_blank')">
+<div class="flash-slide">
 
 <img src="IMG_9772.jpeg">
 
