@@ -663,7 +663,7 @@ target="_blank">
 <div class="flash-track" id="flashTrack">
 
 
-<div class="flash-slide">
+<div class="flash-slide" onclick="window.open('https://meli.la/2wKB7Jo','_blank')">
 
 <img src="IMG_9774.jpeg">
 
@@ -685,7 +685,7 @@ target="_blank">
 
 </div>
 
-<div class="flash-slide">
+<div class="flash-slide" onclick="window.open('https://meli.la/2MfuoQg','_blank')">
 
 <img src="IMG_9789.jpeg">
 
@@ -707,7 +707,7 @@ target="_blank">
 
 </div>
 
-<div class="flash-slide">
+<div class="flash-slide" onclick="window.open('https://meli.la/2wkoXuK','_blank')">
 
 <img src="IMG_9790.jpeg">
 
@@ -729,7 +729,7 @@ target="_blank">
 
 </div>
 
-<div class="flash-slide">
+<div class="flash-slide" onclick="window.open('https://meli.la/2iVPve4','_blank')">
 
 <img src="IMG_9772.jpeg">
 
@@ -1304,6 +1304,10 @@ let flashTimer;
 const flashTrack = document.getElementById("flashTrack");
 const flashSlides = document.querySelectorAll(".flash-slide");
 
+let startX = 0;
+let endX = 0;
+
+
 function moverCarrusel(){
 
 flashIndex++;
@@ -1313,9 +1317,10 @@ flashIndex = 0;
 }
 
 flashTrack.style.transform =
-"translateX(-" + (flashIndex * 100) + "%)";
+`translateX(-${flashIndex * 100}%)`;
 
 }
+
 
 function iniciarCarrusel(){
 
@@ -1323,21 +1328,51 @@ flashTimer=setInterval(moverCarrusel,4000);
 
 }
 
-iniciarCarrusel();
 
-
-flashTrack.addEventListener("touchstart",()=>{
+flashTrack.addEventListener("touchstart",(e)=>{
 
 clearInterval(flashTimer);
 
+startX=e.touches[0].clientX;
+
 });
 
 
-flashTrack.addEventListener("touchend",()=>{
+flashTrack.addEventListener("touchend",(e)=>{
+
+endX=e.changedTouches[0].clientX;
+
+
+if(startX-endX > 50){
+flashIndex++;
+}
+
+
+if(endX-startX > 50){
+flashIndex--;
+}
+
+
+if(flashIndex < 0){
+flashIndex=flashSlides.length-1;
+}
+
+
+if(flashIndex >= flashSlides.length){
+flashIndex=0;
+}
+
+
+flashTrack.style.transform =
+`translateX(-${flashIndex * 100}%)`;
+
 
 iniciarCarrusel();
 
 });
+
+
+iniciarCarrusel();
   
 </script>
 
