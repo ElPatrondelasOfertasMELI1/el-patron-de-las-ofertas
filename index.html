@@ -1333,9 +1333,6 @@ ofertas.push(o);
 
 
 ofertas.forEach((o,i)=>{
-  
-actualizarCarrusel();
-iniciarAuto();
 
 contenedor.innerHTML += `
 
@@ -1384,7 +1381,8 @@ onclick="irOferta(${i})">
 
 });
 
-
+actualizarCarrusel();
+iniciarAuto();
 
 });
 
