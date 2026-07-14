@@ -978,30 +978,6 @@ window.toggleMenu = function(){
 /* COPIAR + REDIRIGIR */
 
 /* ⏰ ESTADOS CORRECTOS RELÁMPAGO */
-function updateStatus(){
-  const h = new Date().getHours();
-  const badges = document.querySelectorAll(".badge");
-
-  badges.forEach(b=>{
-    if(h >= 9 && h <= 11){
-      b.textContent = "🟢 ACTIVO";
-      b.className = "badge active";
-    }
-    else if(h >= 12 && h <= 23){
-      b.textContent = "🟠 POR AGOTARSE";
-      b.className = "badge warning";
-    }
-    else{
-      b.textContent = "🔴 AGOTADO";
-      b.className = "badge expired";
-    }
-  });
-}
-
-updateStatus();
-setInterval(()=>{
-  updateStatus();
-},60000);
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
@@ -1026,6 +1002,41 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// ===== ESTADO DE CUPONES DESDE PANEL ADMIN =====
+
+const estadoRef = doc(db,"configuracion","estadoCupones");
+
+onSnapshot(estadoRef,(snap)=>{
+
+const estado = snap.data()?.estado || "activo";
+
+document.querySelectorAll(".badge").forEach(b=>{
+
+if(estado==="activo"){
+
+b.textContent="🟢 ACTIVO";
+b.className="badge active";
+
+}
+
+if(estado==="agotarse"){
+
+b.textContent="🟠 POR AGOTARSE";
+b.className="badge warning";
+
+}
+
+if(estado==="agotado"){
+
+b.textContent="🔴 AGOTADO";
+b.className="badge expired";
+
+}
+
+});
+
+});
 
 // Limpiar mensaje al cargar página
 window.addEventListener("load",()=>{
