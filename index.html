@@ -751,6 +751,59 @@ onclick="copy('MELIMAS7OLA','exclusivo')">
 
 <div class="bank-grid">
 
+<!-- CUPÓN 1 -->
+<div class="bank-card flash">
+
+<span class="badge"></span>
+
+<div class="bank">
+⚡ CUPÓN RELÁMPAGO
+</div>
+
+<p>
+💰 $350 OFF
+</p>
+
+<p>
+Compra mínima: $3,500
+<br>
+Tope: $350
+</p>
+
+<button class="bank-btn"
+onclick="copy('QUIENGANAHOY','relampago')">
+📋 COPIAR CUPÓN
+</button>
+
+</div>
+
+<!-- CUPÓN 2 -->
+<div class="bank-card flash">
+
+<span class="badge"></span>
+
+<div class="bank">
+⚡ CUPÓN RELÁMPAGO
+</div>
+
+<p>
+💰 $150 OFF
+</p>
+
+<p>
+Compra mínima: $1,500
+<br>
+Tope: $150
+</p>
+
+<button class="bank-btn"
+onclick="copy('GOOL10','relampago')">
+📋 COPIAR CUPÓN
+</button>
+
+</div>
+
+<!-- CUPÓN 3 -->
 <div class="bank-card flash">
 
 <span class="badge"></span>
@@ -764,18 +817,45 @@ onclick="copy('MELIMAS7OLA','exclusivo')">
 </p>
 
 <p>
-Compra mínima: $600
+Compra mínima: $6,500
 <br>
-Tope: $75
+Tope: $812
 </p>
 
 <button class="bank-btn"
-onclick="copy('HAZTUCOMPRA','relampago')">
+onclick="copy('PARTIDO10','relampago')">
 📋 COPIAR CUPÓN
 </button>
 
 </div>
 
+<!-- CUPÓN 4 -->
+<div class="bank-card flash">
+
+<span class="badge"></span>
+
+<div class="bank">
+⚡ CUPÓN RELÁMPAGO
+</div>
+
+<p>
+💰 $900 OFF
+</p>
+
+<p>
+Compra mínima: $9,000
+<br>
+Tope: $900
+</p>
+
+<button class="bank-btn"
+onclick="copy('CAMISETA10','relampago')">
+📋 COPIAR CUPÓN
+</button>
+
+</div>
+
+<!-- CUPÓN 5 -->
 <div class="bank-card flash">
 
 <span class="badge"></span>
@@ -789,59 +869,13 @@ onclick="copy('HAZTUCOMPRA','relampago')">
 </p>
 
 <p>
-Compra mínima: $2,200
+Compra mínima: $700
 <br>
-Tope: $275
+Tope: $88
 </p>
 
 <button class="bank-btn"
-onclick="copy('SUPERMELI10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $500 OFF
-</p>
-
-<p>
-Compra mínima: $5,000
-</p>
-
-<button class="bank-btn"
-onclick="copy('COMPRASSUPER','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $1,000 OFF
-</p>
-
-<p>
-Compra mínima: $10,000
-</p>
-
-<button class="bank-btn"
-onclick="copy('MELISUPER','relampago')">
+onclick="copy('GANADOR10','relampago')">
 📋 COPIAR CUPÓN
 </button>
 
@@ -1127,11 +1161,11 @@ const ahorroRef = doc(db,"estadisticas","ahorro");
 
 let ahorro = 0;
 
-if(code==="HAZTUCOMPRA") ahorro = 75;
-if(code==="SUPERMELI10") ahorro = 275;
-if(code==="COMPRASSUPER") ahorro = 500;
-if(code==="MELISUPER") ahorro = 1000;
-if(code==="MELIMAS7OLA") ahorro = 500;
+if(code==="QUIENGANAHOY") ahorro = 350;
+if(code==="GOOL10") ahorro = 150;
+if(code==="PARTIDO10") ahorro = 812;
+if(code==="CAMISETA10") ahorro = 900;
+if(code==="GANADOR10") ahorro = 88;
 
 if(ahorro > 0){
 
