@@ -248,6 +248,322 @@ margin-left:95px;
 
 </head>
 
+<script type="module">
+
+
+import {
+
+collection,
+
+addDoc,
+
+onSnapshot,
+
+deleteDoc,
+
+doc,
+
+serverTimestamp
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+
+
+// ==========================
+// SUBIR IMAGEN A BIBLIOTECA
+// ==========================
+
+
+window.subirImagen=function(){
+
+
+let archivo=
+document.getElementById("archivoImagen").files[0];
+
+
+
+if(!archivo){
+
+alert("Selecciona una imagen");
+
+return;
+
+}
+
+
+
+let lector=new FileReader();
+
+
+
+lector.onload=async function(){
+
+
+
+await addDoc(
+
+collection(db,"imagenes"),
+
+{
+
+
+nombre:archivo.name,
+
+
+imagen:lector.result,
+
+
+fecha:serverTimestamp()
+
+
+}
+
+
+);
+
+
+
+alert("✅ Imagen guardada");
+
+
+document.getElementById("archivoImagen").value="";
+
+
+};
+
+
+
+lector.readAsDataURL(archivo);
+
+
+
+};
+
+
+
+
+
+
+
+// ==========================
+// MOSTRAR GALERIA
+// ==========================
+
+
+onSnapshot(
+
+collection(db,"imagenes"),
+
+(snap)=>{
+
+
+let html="";
+
+
+
+snap.forEach(d=>{
+
+
+let img=d.data();
+
+
+
+html+=`
+
+<div class="card">
+
+
+<img src="${img.imagen}"
+
+style="
+width:100%;
+border-radius:15px;
+">
+
+
+<br>
+
+
+<b>${img.nombre}</b>
+
+
+
+<br>
+
+
+<button class="delete"
+
+onclick="borrarImagen('${d.id}')">
+
+🗑 Eliminar
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById("galeria").innerHTML=
+
+html || "Sin imágenes";
+
+
+
+}
+
+);
+
+
+
+
+
+
+
+// ==========================
+// BORRAR IMAGEN
+// ==========================
+
+
+window.borrarImagen=async function(id){
+
+
+if(confirm("¿Eliminar imagen?")){
+
+
+await deleteDoc(
+
+doc(db,"imagenes",id)
+
+);
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+
+
+// ==========================
+// MERCADO PAGO
+// ==========================
+
+
+
+window.guardarMercadoPago=async function(){
+
+
+
+let titulo=
+document.getElementById("tituloMP").value;
+
+
+
+let texto=
+document.getElementById("textoMP").value;
+
+
+
+let link=
+document.getElementById("linkMP").value;
+
+
+
+await setDoc(
+
+doc(db,"configuracion","mercadopago"),
+
+{
+
+
+titulo,
+
+texto,
+
+link
+
+
+}
+
+
+);
+
+
+
+alert("✅ Mercado Pago actualizado");
+
+
+};
+
+
+
+
+
+
+
+// ==========================
+// CARGAR MERCADO PAGO
+// ==========================
+
+
+
+onSnapshot(
+
+doc(db,"configuracion","mercadopago"),
+
+(snap)=>{
+
+
+if(snap.exists()){
+
+
+let d=snap.data();
+
+
+
+document.getElementById("tituloMP").value=
+d.titulo || "";
+
+
+
+document.getElementById("textoMP").value=
+d.texto || "";
+
+
+
+document.getElementById("linkMP").value=
+d.link || "";
+
+
+}
+
+
+}
+
+);
+
+
+
+
+</script>
 
 <body>
 
