@@ -1,1434 +1,1601 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Patrón de las Ofertas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+Admin | El Patrón de las Ofertas
+</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
 
 <style>
 
+*{
+box-sizing:border-box;
+}
+
+
 body{
-  margin:0;
-  font-family:'Inter', sans-serif;
-  background:#f2f3f5;
-  color:#000;
-  font-weight:700;
-}
 
-/* ===== ENCABEZADO ===== */
-
-.hero{
-display:flex;
-align-items:center;
-gap:14px;
-padding:16px;
-margin:12px 14px;
-background:#fff;
-border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-}
-
-.hero-logo{
-width:78px;
-height:78px;
-border-radius:50%;
-border:4px solid #ffe600;
-background:#fff;
-padding:4px;
-object-fit:cover;
-flex-shrink:0;
-}
-
-.hero-info{
-flex:1;
-}
-
-.hero-info h2{
 margin:0;
-font-size:20px;
-font-weight:900;
-line-height:1.1;
-}
 
-.hero-info p{
-margin:6px 0 12px;
-font-size:13px;
-color:#666;
+font-family:'Inter',sans-serif;
+
+background:#f2f3f5;
+
+color:#000;
+
 font-weight:700;
-}
-
-.hero-btn{
-display:inline-block;
-background:#009EE3;
-color:#fff;
-padding:9px 16px;
-border-radius:30px;
-font-size:13px;
-font-weight:900;
-text-decoration:none;
-box-shadow:0 6px 15px rgba(0,158,227,.30);
-}
-
-.ahorro-bar{
-margin:12px 14px;
-padding:15px;
-background:#00c853;
-color:#fff;
-border-radius:15px;
-text-align:center;
-font-size:16px;
-font-weight:900;
-box-shadow:0 6px 18px rgba(0,200,83,.35);
-}
-
-.ahorro-bar b{
-font-size:24px;
-}
-
-/* ===== CUPÓN VIP MELI+ ===== */
-
-.vip-card{
-
-margin:15px 14px;
-padding:20px;
-border-radius:20px;
-background:linear-gradient(135deg,#111,#333);
-color:white;
-text-align:center;
-box-shadow:0 10px 25px rgba(0,0,0,.35);
-position:relative;
-border:3px solid #ffe600;
 
 }
 
 
-.vip-title{
 
-font-size:22px;
-font-weight:900;
-margin-bottom:15px;
+/* BOTÓN MENU */
 
-}
-
-
-.vip-badge{
-
-position:absolute;
-top:12px;
-right:12px;
-background:#ffe600;
-color:#000;
-padding:6px 12px;
-border-radius:20px;
-font-size:12px;
-font-weight:900;
-
-}
-
-
-.vip-card p{
-
-font-size:16px;
-margin:8px;
-
-}
-
-
-.vip-btn{
-
-width:100%;
-padding:14px;
-margin-top:15px;
-border:none;
-border-radius:14px;
-background:#ffe600;
-color:#000;
-font-weight:900;
-font-size:16px;
-
-}
-
-/* MENU */
 .menu-btn{
-  position:fixed;
-  top:18px;
-  left:18px;
-  width:52px;
-  height:52px;
-  border-radius:16px;
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(18px);
-  border:1px solid rgba(255,255,255,0.4);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:5px;
-  z-index:999;
-  cursor:pointer;
+
+position:fixed;
+
+top:15px;
+
+left:15px;
+
+width:55px;
+
+height:55px;
+
+background:#ffe600;
+
+border-radius:16px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+gap:5px;
+
+z-index:999;
+
+cursor:pointer;
+
 }
-.menu-btn span{width:22px;height:2.5px;background:#000;border-radius:2px;}
+
+
+.menu-btn span{
+
+width:25px;
+
+height:3px;
+
+background:#000;
+
+border-radius:5px;
+
+}
+
+
+
+/* MENU LATERAL */
+
 
 .sidebar{
-  position:fixed;
-  top:0;
-  left:-300px;
-  width:280px;
-  height:100%;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(25px);
-  padding:15px;
-  transition:0.3s;
-  z-index:998;
+
+position:fixed;
+
+top:0;
+
+left:-300px;
+
+width:280px;
+
+height:100%;
+
+background:white;
+
+padding:20px;
+
+transition:.3s;
+
+z-index:998;
+
+box-shadow:5px 0 20px rgba(0,0,0,.15);
+
 }
+
+
+.sidebar h2{
+
+margin-top:50px;
+
+font-weight:900;
+
+}
+
+
 
 .menu-item{
-  display:block;
-  padding:12px;
-  margin:8px 0;
-  background:rgba(255,255,255,0.3);
-  border-radius:12px;
-  font-weight:800;
-  text-decoration:none;
-  color:#000;
-}
 
-.section{
-  text-align:center;
-  font-weight:900;
-  margin:15px 0;
-}
+display:block;
 
-/* CARD */
-.card{
-  background:#fff;
-  margin:10px 14px;
-  padding:14px;
-  border-radius:16px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
-  position:relative;
-}
+background:#f2f2f2;
 
-/* RELÁMPAGO */
-.flash{
-  background:#fff8cc;
-  border-left:6px solid #ffcc00;
-  box-shadow:0 0 12px rgba(255,204,0,0.35);
-}
-
-/* TITULO */
-.title{
-  font-weight:900;
-  margin-bottom:6px;
-}
-
-/* BOTON */
-.btn{
-  width:100%;
-  padding:12px;
-  border:0;
-  border-radius:12px;
-  background:#00c853;
-  color:#fff;
-  font-weight:900;
-  margin-top:10px;
-  cursor:pointer;
-}
-
-/* BADGE */
-.badge{
-position:absolute;
-top:0;
-left:0;
-right:0;
-
-padding:6px 0;
-
-border-radius:14px 14px 0 0;
-
-font-size:12px;
-font-weight:900;
-text-align:center;
-
-color:#fff;
-
-z-index:2;
-box-shadow:none;
-}
-
-.active{background:#00c853;}
-.warning{background:#ff9800;}
-.expired{background:#e53935;}
-
-.toast{
-  position:fixed;
-  top:45%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:#111;
-  color:#fff;
-  padding:14px 22px;
-  border-radius:14px;
-  font-weight:900;
-  font-size:16px;
-  z-index:99999;
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-}
-
-.toast.show{
-  opacity:1;
-}
-
-/* ===== MERCADO PAGO ===== */
-
-.mp-card{
-background:linear-gradient(135deg,#00B1EA,#009EE3);
-color:#fff;
-margin:10px 14px;
 padding:14px;
-border-radius:16px;
-box-shadow:0 8px 20px rgba(0,158,227,.30);
-}
 
-.mp-card .title{
-color:#fff;
-font-size:18px;
-font-weight:900;
-margin-bottom:8px;
-}
+margin:10px 0;
 
-.mp-card p{
-color:#fff;
-margin:4px 0;
-font-size:14px;
-font-weight:700;
-line-height:1.35;
-}
+border-radius:14px;
 
-.mp-btn{
-display:block;
-width:100%;
-padding:10px;
-margin-top:10px;
-background:#fff;
-color:#009EE3;
 text-decoration:none;
-text-align:center;
-font-weight:900;
-font-size:15px;
-border-radius:10px;
-box-sizing:border-box;
-}
 
-/* ===== BOTÓN FLOTANTE WHATSAPP ===== */
-
-.whatsapp-float{
-position:fixed;
-bottom:20px;
-right:20px;
-width:65px;
-height:65px;
-background:#25D366;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-box-shadow:0 8px 25px rgba(0,0,0,.3);
-z-index:9999;
-text-decoration:none;
-animation:whatsappPulse 2s infinite;
-}
-
-.whatsapp-float img{
-width:36px;
-height:36px;
-}
-
-.whatsapp-text{
-position:absolute;
-right:75px;
-background:#25D366;
-color:#fff;
-padding:10px 14px;
-border-radius:30px;
-font-weight:900;
-font-size:14px;
-white-space:nowrap;
-box-shadow:0 6px 18px rgba(0,0,0,.2);
-}
-
-@keyframes whatsappPulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.08);}
-100%{transform:scale(1);}
-}
-
-/* ===== ANIMACIÓN COPIAR ===== */
-
-@keyframes copiarOK{
-0%{transform:scale(.8);opacity:0;}
-50%{transform:scale(1.1);opacity:1;}
-100%{transform:scale(1);opacity:1;}
-}
-
-.toast{
-animation:copiarOK .35s;
-}
-
-.btn:active{
-transform:scale(.96);
-}
-
-.card:hover{
-transform:translateY(-3px);
-transition:.25s;
-box-shadow:0 12px 28px rgba(0,0,0,.15);
-}
-
-/* ===== CUPONES BANCARIOS ===== */
-
-.bank-grid{
-display:grid;
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:10px;
-margin:12px 14px;
-}
-
-.bank-card{
-background:#fff;
-border-radius:16px;
-padding:42px 12px 12px;
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-text-align:center;
-min-height:190px;
-box-sizing:border-box;
-}
-
-.bank-card .bank{
-font-size:18px;
-font-weight:900;
-margin-bottom:8px;
-}
-
-.bank-card p{
-margin:5px 0;
-font-size:14px;
-font-weight:700;
-line-height:1.4;
-}
-
-.bank-btn{
-width:100%;
-margin-top:12px;
-padding:12px;
-border:none;
-border-radius:12px;
-background:#00c853;
-color:#fff;
-font-weight:900;
-cursor:pointer;
-font-size:15px;
-}
-
-.bank-btn:hover{
-opacity:.92;
-}
-
-.card img{
-object-fit:cover;
-max-height:250px;
-}
-
-.card a{
-text-decoration:none;
-display:block;
-text-align:center;
-}
-
-.flash{
-background:linear-gradient(135deg,#fff8c4,#ffe66d);
-border:2px solid #ffb300;
-box-shadow:0 0 15px rgba(255,193,7,.6);
-animation:flashGlow 1.5s infinite alternate;
-}
-
-@keyframes flashGlow{
-0%{
-box-shadow:0 0 10px rgba(255,193,7,.4);
-transform:translateY(0);
-}
-100%{
-box-shadow:0 0 25px rgba(255,193,7,.9);
-transform:translateY(-2px);
-}
-}
-
-@keyframes parpadeo{
-0%,100%{
 color:#000;
-}
-50%{
-color:#ff6f00;
-}
-}
 
-/* ===== BARRA DE AHORRO ===== */
-
-.ahorro-mini{
-margin:12px 14px 18px;
-}
-
-.ahorro-texto{
-font-size:14px;
 font-weight:900;
-margin-bottom:6px;
-color:#222;
+
 }
 
-.ahorro-linea{
+
+
+
+/* CONTENIDO */
+
+
+main{
+
+padding:20px;
+
+padding-top:90px;
+
+}
+
+
+
+.header{
+
+background:white;
+
+border-radius:20px;
+
+padding:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+
+.header h1{
+
+margin:0;
+
+font-size:25px;
+
+font-weight:900;
+
+}
+
+
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+
+
+.box{
+
+background:white;
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+
+.box h2{
+
+margin-top:0;
+
+font-weight:900;
+
+}
+
+
+
+input,
+textarea,
+select{
+
+
 width:100%;
-height:8px;
-background:#d8d8d8;
-border-radius:20px;
-overflow:hidden;
+
+padding:13px;
+
+margin:7px 0;
+
+border-radius:12px;
+
+border:1px solid #ddd;
+
+font-size:15px;
+
+font-weight:700;
+
 }
 
-.ahorro-progreso{
+
+button{
+
+
 width:100%;
-height:100%;
-background:linear-gradient(90deg,#00c853,#64dd17);
-border-radius:20px;
-animation:cargarAhorro 2s linear infinite;
-background-size:200% 100%;
+
+padding:13px;
+
+border:0;
+
+border-radius:12px;
+
+background:#00c853;
+
+color:white;
+
+font-weight:900;
+
+cursor:pointer;
+
 }
 
-@keyframes cargarAhorro{
-0%{
-background-position:0% 0;
-}
-100%{
-background-position:200% 0;
-}
+
+.delete{
+
+background:#e53935;
+
 }
 
-/* ===== CARRUSEL AUTOMÁTICO RELÁMPAGO ===== */
 
-.flash-carousel{
-margin:15px 14px;
-overflow:hidden;
+.lista{
+
+margin-top:15px;
+
 }
 
-.flash-track{
-display:flex;
-gap:14px;
-transition:transform .5s ease;
-}
 
-.flash-slide{
+.item{
 
-min-width:100%;
-background:linear-gradient(135deg,#fff8cc,#ffe66d);
-border:2px solid #ffb300;
-border-radius:20px;
+background:#f5f5f5;
+
 padding:12px;
-box-sizing:border-box;
-box-shadow:0 8px 20px rgba(255,193,7,.35);
+
+border-radius:12px;
+
+margin-bottom:10px;
 
 }
 
 
-.flash-slide img{
+
+img{
 
 width:100%;
-height:220px;
-object-fit:cover;
-background:#fff;
+
 border-radius:15px;
 
 }
 
-.flash-slide h3{
-
-font-size:18px;
-font-weight:900;
-margin:8px 0;
-
-}
 
 
-.flash-old{
 
-color:#555;
-font-size:14px;
+@media(max-width:700px){
+
+.grid{
+
+grid-template-columns:1fr;
 
 }
 
-
-.flash-price{
-
-font-size:24px;
-font-weight:900;
-color:#00c853;
-margin:5px 0;
-
 }
 
+/* =========================
+   BUSCADOR Y PRODUCTOS
+========================= */
 
-.flash-btn{
+.search{
 
-display:block;
-margin-top:10px;
-padding:12px;
-background:#00c853;
-color:#fff;
+width:100%;
+padding:14px;
 border-radius:14px;
-text-align:center;
+border:1px solid #ddd;
+margin-bottom:12px;
+
+}
+
+
+.product-card{
+
+background:#fff;
+
+padding:15px;
+
+border-radius:18px;
+
+margin-top:10px;
+
+box-shadow:0 5px 15px #0001;
+
+}
+
+
+.product-card img{
+
+width:100%;
+
+height:180px;
+
+object-fit:cover;
+
+}
+
+
+.badge{
+
+display:inline-block;
+
+padding:6px 12px;
+
+border-radius:20px;
+
+font-size:12px;
+
 font-weight:900;
-text-decoration:none;
+
+background:#ffe600;
 
 }
-  
-.flash-carousel{
-margin:15px 14px;
-overflow:hidden;
-touch-action:pan-x;
+
+
+.edit{
+
+background:#009ee3;
+
+margin-top:8px;
+
 }
 
-.flash-track{
-display:flex;
-gap:14px;
-transition:transform .4s ease;
-will-change:transform;
-touch-action:pan-x;
-cursor:grab;
-}
-
-.flash-track:active{
-cursor:grabbing;
-}
-
-.flash-slide{
-min-width:100%;
-flex-shrink:0;
-user-select:none;
--webkit-user-select:none;
-cursor:pointer;
--webkit-tap-highlight-color:transparent;
-}
-
-.flash-track{
-display:flex;
-gap:14px;
-transition:transform .4s ease;
-will-change:transform;
-}
-
-.flash-slide{
-min-width:100%;
-flex-shrink:0;
-user-select:none;
--webkit-user-select:none;
-}
-
-.flash-link{
-text-decoration:none;
-color:#000;
-display:block;
-}
-  
-.flash-slide{
-height:420px;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-}
-  
 </style>
+
+
 </head>
 
-<a class="whatsapp-float"
-href="https://whatsapp.com/channel/0029Vb7W8ijKrWQpUEGkJe1x"
-target="_blank">
-
-<div class="whatsapp-text">
-🔥 Canal con +200 mil seguidores
-</div>
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-
-</a>
-
-<div id="toast" class="toast">✅ CUPÓN COPIADO</div>
 
 <body>
 
-<div class="menu-btn" onclick="toggleMenu()">
-  <span></span><span></span><span></span>
+
+<div class="menu-btn" onclick="abrirMenu()">
+
+<span></span>
+<span></span>
+<span></span>
+
 </div>
+
+
 
 <div class="sidebar" id="menu">
 
-<h3>📂 Categorías</h3>
-<a class="menu-item" href="https://meli.la/1wmWhqC">📱 Celulares</a>
-<a class="menu-item" href="https://meli.la/1ZJDgik">🛏️ Colchones</a>
-<a class="menu-item" href="https://meli.la/2AGTYez">🔧 Herramienta</a>
-<a class="menu-item" href="https://meli.la/2Phn6fn">🚗 Vehículos</a>
-<a class="menu-item" href="https://meli.la/1MLzcHN">🏠 Electrodoméstico</a>
-<a class="menu-item" href="https://meli.la/2QLzQzB">🎮 Gaming</a>
-<a class="menu-item" href="https://meli.la/2wvqGN7">🧸 Juguetes</a>
-<a class="menu-item" href="https://meli.la/22qVGcg">💻 Cómputo</a>
-<a class="menu-item" href="https://meli.la/31NnLmv">👗 Moda</a>
-<a class="menu-item" href="https://meli.la/21wQwRZ">💄 Belleza</a>
-<a class="menu-item" href="https://meli.la/1dF2gmK">🔥 Ofertas imperdibles</a>
 
-</div>
+<h2>
+⚡ Panel Admin
+</h2>
 
-<div class="hero">
 
-    <img src="logo.png.PNG" class="hero-logo">
-
-    <div class="hero-info">
-
-        <h2>El Patrón de las Ofertas</h2>
-
-        <p>🔥 Cupones • Ofertas • Descuentos diarios</p>
-
-        <a href="#mercadopago" class="hero-btn">
-            💰 Gana $100 con Mercado Pago
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ===== OFERTAS RELÁMPAGO AUTOMÁTICAS ===== -->
-
-<div class="section" style="font-size:24px;animation:parpadeo 1s infinite;">
-⚡🔥 OFERTAS RELÁMPAGO 🔥⚡
-</div>
-
-
-<div class="flash-carousel">
-
-<div class="flash-track" id="flashTrack">
-
-
-<div class="flash-slide" onclick="window.open('https://meli.la/2wKB7Jo','_blank')">
-
-<img src="IMG_9774.jpeg">
-
-<h3>👟 Tenis Air 1 Hombre</h3>
-
-<div class="flash-old">
-❌ Antes: <s>$407.03</s>
-</div>
-
-<div class="flash-price">
-🔥 $281.26
-</div>
-
-<div class="flash-btn">
-🛒 VER OFERTA
-</div>
-
-</div>
-
-
-<div class="flash-slide" onclick="window.open('https://meli.la/2MfuoQg','_blank')">
-
-<img src="IMG_9789.jpeg">
-
-<h3>🎮 Nintendo Switch Neon Blue & Neon Red Joy-Con</h3>
-
-<div class="flash-old">
-❌ Antes: <s>$5,970.40</s>
-</div>
-
-<div class="flash-price">
-🔥 $4,795.57
-</div>
-
-<div class="flash-btn">
-🛒 VER OFERTA
-</div>
-
-</div>
-
-
-<div class="flash-slide" onclick="window.open('https://meli.la/2wkoXuK','_blank')">
-
-<img src="IMG_9790.jpeg">
-
-<h3>💥 Oferta Imperdible</h3>
-
-<div class="flash-old">
-❌ Antes: <s>$799</s>
-</div>
-
-<div class="flash-price">
-🔥 $498.75
-</div>
-
-<div class="flash-btn">
-🛒 VER OFERTA
-</div>
-
-</div>
-
-
-<div class="flash-slide" onclick="window.open('https://meli.la/2iVPve4','_blank')">
-
-<img src="IMG_9772.jpeg">
-
-<h3>🎒 Mochila Matein</h3>
-
-<div class="flash-old">
-❌ Antes: <s>$756.90</s>
-</div>
-
-<div class="flash-price">
-🔥 $288.30
-</div>
-
-<div class="flash-btn">
-🛒 VER OFERTA
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-<div class="ahorro-mini">
-
-    <div class="ahorro-texto">
-        💰 Nuestra comunidad ya ha ahorrado
-        <b id="ahorro">$0 MXN</b>
-    </div>
-
-    <div class="ahorro-linea">
-        <div class="ahorro-progreso"></div>
-    </div>
-
-</div>
-
-<!-- ===== CUPÓN EXCLUSIVO MELI+ ===== -->
-
-<div class="section">
-💎 CUPÓN EXCLUSIVO MELI+
-</div>
-
-
-<div class="vip-card">
-
-
-<div class="vip-title">
-👑 MELI+
-</div>
-
-
-<div class="vip-badge">
-EXCLUSIVO
-</div>
-
-
-<p>
-🔥 <b>$500 OFF</b>
-</p>
-
-
-<p>
-Compra mínima: <b>$4,000</b>
-</p>
-
-
-<p>
-💎 Solo usuarios Meli+
-</p>
-
-
-<button class="vip-btn"
-onclick="copy('MELIMAS7OLA','exclusivo')">
-
-📋 COPIAR CUPÓN
-
-</button>
-
-
-</div>
-
-<!-- ===== CUPONES RELÁMPAGO ===== -->
-
-<div class="section">
-⚡ CUPONES RELÁMPAGO
-</div>
-
-<div class="bank-grid">
-
-<!-- CUPÓN 1 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $350 OFF
-</p>
-
-<p>
-Compra mínima: $3,500
-<br>
-Tope: $350
-</p>
-
-<button class="bank-btn"
-onclick="copy('QUIENGANAHOY','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 2 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $150 OFF
-</p>
-
-<p>
-Compra mínima: $1,500
-<br>
-Tope: $150
-</p>
-
-<button class="bank-btn"
-onclick="copy('GOOL10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 3 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-🔥 10% OFF
-</p>
-
-<p>
-Compra mínima: $6,500
-<br>
-Tope: $812
-</p>
-
-<button class="bank-btn"
-onclick="copy('PARTIDO10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 4 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $900 OFF
-</p>
-
-<p>
-Compra mínima: $9,000
-<br>
-Tope: $900
-</p>
-
-<button class="bank-btn"
-onclick="copy('CAMISETA10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 5 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-🔥 10% OFF
-</p>
-
-<p>
-Compra mínima: $700
-<br>
-Tope: $88
-</p>
-
-<button class="bank-btn"
-onclick="copy('GANADOR10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-</div>
-
-<div class="section" id="mercadopago">
-💙 BENEFICIOS MERCADO PAGO
-</div>
-
-<div class="mp-card">
-
-<div class="title">
-🎁 $100 de regalo para nuevos usuarios
-</div>
-
-<p>
-Recibe <b>$100 de descuento</b> en tu primer pago con Mercado Pago.
-</p>
-
-<p>
-💰 Compra mínima: <b>$200</b>
-</p>
-
-<p>
-⏰ Disponible durante tus primeros 7 días.
-</p>
-
-<a class="mp-btn"
-href="https://mpago.li/2oMftfC"
-target="_blank">
-
-OBTENER BENEFICIO
-
+<a class="menu-item" href="#inicio">
+🏠 Inicio
 </a>
 
-</div>
 
-<div class="mp-card">
-
-<div class="title">
-💳 Terminales Mercado Pago Point
-</div>
-
-<p>
-Empieza a aceptar tarjetas y recibe tu dinero al instante.
-</p>
-
-<p>
-Ideal para emprendedores, negocios y ventas en cualquier lugar.
-</p>
-
-<a class="mp-btn"
-href="https://mpago.li/2nyHAwL"
-target="_blank">
-
-VER TERMINALES
-
+<a class="menu-item" href="#cupones">
+🎟 Cupones
 </a>
 
+
+<a class="menu-item" href="#categorias">
+📂 Categorías
+</a>
+
+
+<a class="menu-item" href="#imagenes">
+🖼 Biblioteca
+</a>
+
+
+<a class="menu-item" href="#mercadopago">
+💙 Mercado Pago
+</a>
+
+
 </div>
+
+
+
+<main>
+
+
+<div class="header" id="inicio">
+
+
+<h1>
+⚡ El Patrón de las Ofertas
+</h1>
+
+
+<p>
+Panel administrador conectado a Firebase
+</p>
+
+
+</div>
+
+
+<div class="grid">
+
+<!-- =========================
+     CUPONES
+========================= -->
+
+<div class="box">
+
+<h2>
+🔥 Productos Carrusel
+</h2>
+
+
+<input id="buscarProducto"
+class="search"
+placeholder="Buscar producto">
+
+
+<input id="nombreProducto"
+placeholder="Nombre del producto">
+
+
+<input id="imagenProducto"
+placeholder="URL imagen">
+
+
+<input id="precioAntes"
+placeholder="Precio anterior">
+
+
+<input id="precioActual"
+placeholder="Precio actual">
+
+
+<input id="linkProducto"
+placeholder="Link Mercado Libre">
+
+
+
+<button onclick="guardarProducto()">
+
+➕ Agregar al carrusel
+
+</button>
+
+
+
+<div id="listaProductos">
+
+Cargando...
+
+</div>
+
+
+</div>
+
+<div class="box" id="cupones">
+
+
+<h2>
+🎟 Administrar Cupones
+</h2>
+
+
+
+<input id="codigoCupon"
+placeholder="Código del cupón">
+
+
+<input id="descuentoCupon"
+placeholder="Ejemplo: $500 OFF">
+
+
+<input id="minimoCupon"
+placeholder="Compra mínima">
+
+
+<input id="linkCupon"
+placeholder="Link Mercado Libre">
+
+
+
+<select id="tipoCupon">
+
+
+<option value="relampago">
+⚡ Relámpago
+</option>
+
+
+<option value="bancario">
+🏦 Bancario
+</option>
+
+
+<option value="exclusivo">
+💎 Meli+ Exclusivo
+</option>
+
+
+</select>
+
+
+
+<select id="estadoCupon">
+
+
+<option value="activo">
+🟢 Activo
+</option>
+
+
+<option value="agotarse">
+🟠 Por agotarse
+</option>
+
+
+<option value="agotado">
+🔴 Agotado
+</option>
+
+
+</select>
+
+
+
+
+<button onclick="guardarCupon()">
+
+💾 Guardar Cupón
+
+</button>
+
+
+
+<div class="lista" id="listaCupones">
+
+Cargando cupones...
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- =========================
+     CATEGORÍAS
+========================= -->
+
+
+<div class="box" id="categorias">
+
+
+<h2>
+📂 Administrar Categorías
+</h2>
+
+
+
+<input id="nombreCategoria"
+placeholder="Nombre categoría">
+
+
+<input id="emojiCategoria"
+placeholder="Emoji">
+
+
+<input id="linkCategoria"
+placeholder="Link Mercado Libre">
+
+
+
+<button onclick="guardarCategoria()">
+
+➕ Agregar Categoría
+
+</button>
+
+
+
+
+<div class="lista" id="listaCategorias">
+
+Cargando categorías...
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- =========================
+     BIBLIOTECA IMÁGENES
+========================= -->
+
+
+<div class="box" id="imagenes">
+
+
+<h2>
+🖼 Biblioteca de imágenes
+</h2>
+
+
+
+<input 
+type="file"
+id="archivoImagen"
+accept="image/*">
+
+
+
+<button onclick="subirImagen()">
+
+📤 Subir imagen
+
+</button>
+
+
+
+<div class="lista" id="galeria">
+
+Cargando imágenes...
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+     MERCADO PAGO
+========================= -->
+
+
+<div class="box" id="mercadopago">
+
+
+<h2>
+💙 Mercado Pago
+</h2>
+
+
+
+<input 
+id="tituloMP"
+placeholder="Título beneficio">
+
+
+
+<textarea 
+id="textoMP"
+placeholder="Descripción">
+
+</textarea>
+
+
+
+<input 
+id="linkMP"
+placeholder="Link Mercado Pago">
+
+
+
+<button onclick="guardarMercadoPago()">
+
+💾 Guardar Mercado Pago
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+</main>
+
+
+
+<script>
+
+
+function abrirMenu(){
+
+let menu=document.getElementById("menu");
+
+
+if(menu.style.left==="0px"){
+
+menu.style.left="-300px";
+
+}else{
+
+menu.style.left="0px";
+
+}
+
+}
+
+
+</script>
 
 <script type="module">
 
-const REDIRECT_URL = "https://meli.la/1mj3itE";
+// ===============================
+// FIREBASE
+// ===============================
 
-/* MENU */
-window.toggleMenu = function(){
 
-  const m=document.getElementById("menu");
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-  m.style.left = (m.style.left==="0px") 
-  ? "-300px" 
-  : "0px";
-
-}
-
-/* COPIAR + REDIRIGIR */
-
-/* ⏰ ESTADOS CORRECTOS RELÁMPAGO */
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
+
 getFirestore,
+collection,
 doc,
-onSnapshot,
-getDoc,
-updateDoc,
 setDoc,
-increment
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+addDoc,
+deleteDoc,
+onSnapshot,
+serverTimestamp
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+import {
+
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL,
+deleteObject
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+
+
+
+
 
 const firebaseConfig = {
+
+
 apiKey: "AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
-authDomain: "patronofertasweb.firebaseapp.com",
-projectId: "patronofertasweb",
-storageBucket: "patronofertasweb.firebasestorage.app",
-messagingSenderId: "292338334268",
-appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
+
+authDomain:
+"patronofertasweb.firebaseapp.com",
+
+projectId:
+"patronofertasweb",
+
+storageBucket:
+"patronofertasweb.firebasestorage.app",
+
+messagingSenderId:
+"292338334268",
+
+appId:
+"1:292338334268:web:9dbbafe00dd23ebb72e139"
+
+
 };
 
+
+
+
+
 const app = initializeApp(firebaseConfig);
+
+
 const db = getFirestore(app);
 
-// ===== ESTADO DE CUPONES DESDE PANEL ADMIN =====
 
-const estadoRef = doc(db,"configuracion","estadoCupones");
+const storage = getStorage(app);
 
-onSnapshot(estadoRef,(snap)=>{
 
-const estado = snap.data()?.estado || "activo";
 
-document.querySelectorAll(".badge").forEach(b=>{
 
-if(estado==="activo"){
 
-b.textContent="🟢 EN VIVO";
-b.className="badge active";
 
-}
 
-if(estado==="agotarse"){
+// ===============================
+// CUPONES
+// ===============================
 
-b.textContent="🟠 ÚLTIMOS";
-b.className="badge warning";
 
-}
 
-if(estado==="agotado"){
+window.guardarCupon = async function(){
 
-b.textContent="🔴 FIN";
-b.className="badge expired";
 
-}
 
-});
+let codigo =
+document.getElementById("codigoCupon").value.trim();
 
-});
 
-// Limpiar mensaje al cargar página
-window.addEventListener("load",()=>{
-    const t=document.getElementById("toast");
-    t.classList.remove("show");
-    t.innerHTML="";
-});
 
-// ===== VISITANTES DIARIOS + HISTORIAL =====
+if(!codigo){
 
-const ahora = new Date();
+alert("Escribe un código");
 
-const hoy =
-ahora.getFullYear() + "-" +
-String(ahora.getMonth()+1).padStart(2,"0") + "-" +
-String(ahora.getDate()).padStart(2,"0");
-
-const visitaRef = doc(db,"visitas","contador");
-
-getDoc(visitaRef).then(async (visitaSnap)=>{
-
-if(!visitaSnap.exists() || visitaSnap.data().fecha !== hoy){
-
-    // Reinicia contador del día nuevo
-    await setDoc(visitaRef,{
-        total:1,
-        fecha:hoy
-    });
-
-    // Guarda historial
-    const historialRef = doc(db,"visitas_historial",hoy);
-
-    await setDoc(historialRef,{
-        total:1
-    });
-
-}
-else{
-
-    // Solo cuenta nuevos visitantes del mismo día
-    const ultimaVisita = localStorage.getItem("fechaVisita");
-
-    if(ultimaVisita !== hoy){
-      
-localStorage.setItem("fechaVisita",hoy);
-
-        await updateDoc(visitaRef,{
-            total:increment(1)
-        });
-
-        const historialRef = doc(db,"visitas_historial",hoy);
-
-        await setDoc(historialRef,{
-            total:increment(1)
-        },{merge:true});
-
-    }
+return;
 
 }
 
-});
 
-// ===== REGIÓN DEL VISITANTE =====
 
-setTimeout(()=>{
+await setDoc(
 
-fetch("https://ipapi.co/json/")
-.then(res=>res.json())
-.then(data=>{
+doc(db,"cupones",codigo),
 
-const estado=data.region || "Desconocido";
+{
 
-const regionRef=doc(db,"regiones",estado);
 
-updateDoc(regionRef,{
-visitas:increment(1)
-}).catch(()=>{
+descuento:
 
-setDoc(regionRef,{
-visitas:1
-});
+document.getElementById("descuentoCupon").value,
 
-});
 
-});
+minimo:
 
-},3000);
+document.getElementById("minimoCupon").value,
 
-window.copy = async function(code,categoria){
 
-document.activeElement.blur();
+link:
 
-    // Intentar copiar el cupón
-    try{
-        await navigator.clipboard.writeText(code);
+document.getElementById("linkCupon").value,
 
-        const t=document.getElementById("toast");
-        t.innerHTML="✅ CUPÓN COPIADO";
-        t.classList.add("show");
 
-        setTimeout(()=>{
-    t.classList.remove("show");
-    t.innerHTML="";
-},1200);
+tipo:
 
-    }catch(e){
+document.getElementById("tipoCupon").value,
 
-        // Si el navegador no permite copiar (Safari/WhatsApp)
-        prompt("Copia este cupón:", code);
 
-    }
+estado:
 
-    // ===== CONTADOR GENERAL =====
+document.getElementById("estadoCupon").value,
 
-    const ref = doc(db,"contadores","global");
 
-    let datos={
-        total:increment(1)
-    };
+copias:0,
 
-    if(categoria==="relampago"){
-        datos.relampago=increment(1);
-    }
 
-    if(categoria==="exclusivo"){
-        datos.exclusivos=increment(1);
-    }
+fecha:serverTimestamp()
 
-    if(categoria==="bancario"){
-        datos.bancarios=increment(1);
-    }
-
-    updateDoc(ref,datos).catch(async()=>{
-
-await setDoc(ref,{
-total:1,
-relampago: categoria==="relampago" ? 1 : 0,
-exclusivos: categoria==="exclusivo" ? 1 : 0,
-bancarios: categoria==="bancario" ? 1 : 0
-});
-
-});
-    
-    // ===== CONTADOR INDIVIDUAL =====
-
-    const cuponRef = doc(db,"cupones",code);
-
-    updateDoc(cuponRef,{
-        copias:increment(1)
-    }).catch(async()=>{
-
-        await setDoc(cuponRef,{
-            copias:1
-        });
-
-    });
-
-// ===== AHORRO GENERADO =====
-
-const ahorroRef = doc(db,"estadisticas","ahorro");
-
-let ahorro = 0;
-
-if(code==="QUIENGANAHOY") ahorro = 350;
-if(code==="GOOL10") ahorro = 150;
-if(code==="PARTIDO10") ahorro = 812;
-if(code==="CAMISETA10") ahorro = 900;
-if(code==="GANADOR10") ahorro = 88;
-
-if(ahorro > 0){
-
-const clave = "ahorro_" + code + "_" + hoy;
-
-if(!localStorage.getItem(clave)){
-
-updateDoc(ahorroRef,{
-total:increment(ahorro)
-}).catch(async()=>{
-
-await setDoc(ahorroRef,{
-total:ahorro
-});
-
-});
-
-localStorage.setItem(clave,"ok");
 
 }
 
-}
-
-    // ===== REDIRECCIÓN =====
-
-    setTimeout(()=>{
-    window.location.href = REDIRECT_URL;
-},50);
-
-}
-
-// ===== MOSTRAR AHORRO TOTAL =====
-
-const ahorroTotalRef = doc(db,"estadisticas","ahorro");
-
-onSnapshot(ahorroTotalRef,(snap)=>{
-
-const total = snap.data()?.total || 0;
-
-document.getElementById("ahorro").innerHTML =
-"$" + total.toLocaleString("es-MX") + " MXN";
-
-});
-
-let flashIndex = 0;
-let flashTimer;
-
-const flashTrack = document.getElementById("flashTrack");
-const flashSlides = document.querySelectorAll(".flash-slide");
-
-let startX = 0;
-let endX = 0;
-let isDragging = false;
+);
 
 
-function moverCarrusel(){
 
-flashIndex++;
-
-if(flashIndex >= flashSlides.length){
-flashIndex = 0;
-}
-
-flashTrack.style.transform =
-`translateX(-${flashIndex * 100}%)`;
-
-}
+alert("✅ Cupón guardado");
 
 
-function iniciarCarrusel(){
-
-clearInterval(flashTimer);
-
-flashTimer=setInterval(moverCarrusel,4000);
-
-}
+};
 
 
-flashTrack.addEventListener("touchstart",function(e){
 
-clearInterval(flashTimer);
 
-startX=e.touches[0].clientX;
-isDragging=false;
+
+
+
+// MOSTRAR CUPONES
+
+
+onSnapshot(
+
+collection(db,"cupones"),
+
+(snap)=>{
+
+
+let html="";
+
+
+
+snap.forEach((d)=>{
+
+
+let c=d.data();
+
+
+
+html += `
+
+
+<div class="item">
+
+
+<b>
+🎟 ${d.id}
+</b>
+
+
+<br>
+
+${c.descuento}
+
+
+<br>
+
+Mínimo:
+${c.minimo}
+
+
+<br>
+
+Estado:
+${c.estado}
+
+
+
+<button 
+class="delete"
+onclick="eliminarCupon('${d.id}')">
+
+🗑 Eliminar
+
+</button>
+
+
+</div>
+
+
+`;
+
+
 
 });
 
 
-flashTrack.addEventListener("touchend",function(e){
 
-endX=e.changedTouches[0].clientX;
+document.getElementById("listaCupones").innerHTML =
 
-let movimiento = startX - endX;
+html || "Sin cupones";
 
-if(Math.abs(movimiento)>50){
-isDragging=true;
+
 }
 
-if(movimiento > 50){
-flashIndex++;
+
+);
+
+
+
+
+
+
+
+window.eliminarCupon = async function(id){
+
+
+await deleteDoc(
+
+doc(db,"cupones",id)
+
+);
+
+
+};
+
+
+
+
+
+
+
+
+
+// ===============================
+// CATEGORIAS
+// ===============================
+
+
+
+window.guardarCategoria = async function(){
+
+
+
+await addDoc(
+
+collection(db,"categorias"),
+
+{
+
+
+nombre:
+
+document.getElementById("nombreCategoria").value,
+
+
+emoji:
+
+document.getElementById("emojiCategoria").value,
+
+
+link:
+
+document.getElementById("linkCategoria").value,
+
+
+fecha:serverTimestamp()
+
+
 }
 
-if(movimiento < -50){
-flashIndex--;
-}
+);
 
-if(flashIndex < 0){
-flashIndex = flashSlides.length-1;
-}
 
-if(flashIndex >= flashSlides.length){
-flashIndex = 0;
-}
 
-flashTrack.style.transform =
-`translateX(-${flashIndex * 100}%)`;
+alert("✅ Categoría creada");
 
-iniciarCarrusel();
+
+};
+
+
+
+
+
+
+
+
+onSnapshot(
+
+collection(db,"categorias"),
+
+(snap)=>{
+
+
+let html="";
+
+
+
+snap.forEach((d)=>{
+
+
+let c=d.data();
+
+
+
+html += `
+
+
+<div class="item">
+
+
+${c.emoji}
+
+<b>${c.nombre}</b>
+
+
+<br>
+
+
+<a href="${c.link}" target="_blank">
+
+Abrir
+
+</a>
+
+
+<br>
+
+
+<button class="delete"
+onclick="eliminarCategoria('${d.id}')">
+
+🗑 Eliminar
+
+</button>
+
+
+</div>
+
+
+`;
+
+
 
 });
 
 
-iniciarCarrusel();
-  
+
+document.getElementById("listaCategorias").innerHTML =
+
+html || "Sin categorías";
+
+
+}
+
+
+);
+
+
+
+
+
+
+window.eliminarCategoria = async function(id){
+
+
+await deleteDoc(
+
+doc(db,"categorias",id)
+
+);
+
+
+};
+
+
+
+
+
+
+
+
+
+// ===============================
+// BIBLIOTECA IMAGENES
+// ===============================
+
+
+
+window.subirImagen = async function(){
+
+
+
+let archivo =
+
+document.getElementById("archivoImagen").files[0];
+
+
+
+if(!archivo){
+
+alert("Selecciona una imagen");
+
+return;
+
+}
+
+
+
+let nombre =
+
+Date.now()+"_"+archivo.name;
+
+
+
+let imagenRef =
+
+ref(storage,"biblioteca/"+nombre);
+
+
+
+await uploadBytes(
+
+imagenRef,
+
+archivo
+
+);
+
+
+
+let url =
+
+await getDownloadURL(imagenRef);
+
+
+
+
+await addDoc(
+
+collection(db,"imagenes"),
+
+{
+
+
+nombre,
+
+url,
+
+fecha:serverTimestamp()
+
+
+}
+
+);
+
+
+
+alert("✅ Imagen subida");
+
+
+};
+
+
+
+
+
+
+
+onSnapshot(
+
+collection(db,"imagenes"),
+
+(snap)=>{
+
+
+let html="";
+
+
+
+snap.forEach((d)=>{
+
+
+let img=d.data();
+
+
+
+html += `
+
+
+<div class="item">
+
+
+<img src="${img.url}">
+
+
+<br>
+
+${img.nombre}
+
+
+
+<button class="delete"
+
+onclick="eliminarImagen('${d.id}','${img.nombre}')">
+
+🗑 Eliminar
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+
+document.getElementById("galeria").innerHTML =
+
+html || "Sin imágenes";
+
+
+}
+
+
+);
+
+
+
+
+
+
+window.eliminarImagen = async function(id,nombre){
+
+
+await deleteDoc(
+
+doc(db,"imagenes",id)
+
+);
+
+
+
+let refImagen =
+
+ref(storage,"biblioteca/"+nombre);
+
+
+
+deleteObject(refImagen)
+.catch(()=>{});
+
+
+};
+
+
+
+
+
+
+
+
+
+// ===============================
+// MERCADO PAGO
+// ===============================
+
+
+
+window.guardarMercadoPago = async function(){
+
+
+
+await setDoc(
+
+doc(db,"configuracion","mercadopago"),
+
+{
+
+
+titulo:
+
+document.getElementById("tituloMP").value,
+
+
+texto:
+
+document.getElementById("textoMP").value,
+
+
+link:
+
+document.getElementById("linkMP").value
+
+
+}
+
+);
+
+
+
+alert("✅ Mercado Pago actualizado");
+
+
+};
+
+
+
+
+// ===============================
+// PRODUCTOS CARRUSEL
+// ===============================
+
+
+window.guardarProducto = async function(){
+
+
+await addDoc(
+
+collection(db,"productos"),
+
+{
+
+
+nombre:
+
+document.getElementById("nombreProducto").value,
+
+
+imagen:
+
+document.getElementById("imagenProducto").value,
+
+
+antes:
+
+document.getElementById("precioAntes").value,
+
+
+precio:
+
+document.getElementById("precioActual").value,
+
+
+link:
+
+document.getElementById("linkProducto").value,
+
+
+fecha:serverTimestamp()
+
+
+}
+
+);
+
+
+alert("✅ Producto agregado");
+
+
+};
+
+
+
+
+
+// MOSTRAR PRODUCTOS
+
+
+onSnapshot(
+
+collection(db,"productos"),
+
+(snap)=>{
+
+
+let html="";
+
+
+
+snap.forEach((d)=>{
+
+
+let p=d.data();
+
+
+
+html += `
+
+
+<div class="product-card">
+
+
+<img src="${p.imagen}">
+
+
+<h3>
+
+${p.nombre}
+
+</h3>
+
+
+❌ Antes:
+
+<s>${p.antes}</s>
+
+
+<br>
+
+
+🔥 Precio:
+
+<b>${p.precio}</b>
+
+
+<br>
+
+
+<span class="badge">
+
+RELÁMPAGO
+
+</span>
+
+
+
+<button class="edit"
+onclick="editarProducto('${d.id}')">
+
+✏️ Editar
+
+</button>
+
+
+<button class="delete"
+onclick="eliminarProducto('${d.id}')">
+
+🗑 Eliminar
+
+</button>
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+document.getElementById("listaProductos").innerHTML=
+
+html || "Sin productos";
+
+
+}
+
+
+);
+
+
+
+
+
+
+window.eliminarProducto = async function(id){
+
+
+await deleteDoc(
+
+doc(db,"productos",id)
+
+);
+
+
+};
+
 </script>
-
-</body>
-</html>
