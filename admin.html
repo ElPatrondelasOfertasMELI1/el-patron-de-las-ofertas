@@ -9,6 +9,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
 
+
 <style>
 
 *{
@@ -16,11 +17,15 @@ box-sizing:border-box;
 font-family:'Inter',sans-serif;
 }
 
+
 body{
+
 margin:0;
 background:#f2f3f5;
 color:#111;
+
 }
+
 
 /* HEADER */
 
@@ -36,7 +41,6 @@ font-weight:900;
 position:sticky;
 top:0;
 z-index:10;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
 
 }
 
@@ -51,21 +55,14 @@ padding:25px;
 
 }
 
-.login h2{
-
-text-align:center;
-font-weight:900;
-
-}
 
 input,select,textarea{
 
 width:100%;
 padding:15px;
-border-radius:14px;
-border:0;
-background:white;
 margin:8px 0;
+border:0;
+border-radius:14px;
 font-size:15px;
 
 }
@@ -82,6 +79,8 @@ cursor:pointer;
 }
 
 
+/* BOTON LOGIN */
+
 .login button{
 
 width:100%;
@@ -89,7 +88,6 @@ background:#00c853;
 color:white;
 
 }
-
 
 
 /* PANEL */
@@ -101,37 +99,18 @@ display:none;
 }
 
 
-
 /* MENU */
 
 .sidebar{
 
 position:fixed;
-
 top:70px;
-
 left:0;
-
 bottom:0;
-
 width:240px;
-
 background:white;
-
 padding:15px;
-
-box-shadow:5px 0 20px rgba(0,0,0,.08);
-
 overflow:auto;
-
-}
-
-
-.logo-admin{
-
-font-size:20px;
-font-weight:900;
-padding:15px;
 
 }
 
@@ -153,13 +132,11 @@ background:#ffe600;
 }
 
 
-
 /* CONTENIDO */
 
 .content{
 
 margin-left:260px;
-
 padding:20px;
 
 }
@@ -179,16 +156,12 @@ display:block;
 }
 
 
-
 /* TARJETAS */
-
 
 .grid{
 
 display:grid;
-
 grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-
 gap:15px;
 
 }
@@ -197,21 +170,10 @@ gap:15px;
 .card{
 
 background:white;
-
 padding:20px;
-
 border-radius:18px;
-
-box-shadow:0 6px 18px rgba(0,0,0,.08);
-
 text-align:center;
-
-}
-
-
-.card h3{
-
-margin:0 0 10px;
+box-shadow:0 5px 15px #ddd;
 
 }
 
@@ -219,28 +181,19 @@ margin:0 0 10px;
 .numero{
 
 font-size:35px;
-
 font-weight:900;
-
 color:#00c853;
 
 }
 
 
-
-/* CAJAS */
-
 .box{
 
 background:white;
-
 padding:20px;
-
 border-radius:18px;
-
 margin-top:20px;
-
-box-shadow:0 6px 18px rgba(0,0,0,.08);
+box-shadow:0 5px 15px #ddd;
 
 }
 
@@ -248,11 +201,8 @@ box-shadow:0 6px 18px rgba(0,0,0,.08);
 .save{
 
 width:100%;
-
 background:#00c853;
-
 color:white;
-
 margin-top:10px;
 
 }
@@ -261,11 +211,9 @@ margin-top:10px;
 .delete{
 
 background:#e53935;
-
 color:white;
 
 }
-
 
 
 /* MOVIL */
@@ -274,7 +222,7 @@ color:white;
 
 .sidebar{
 
-width:75px;
+width:80px;
 
 }
 
@@ -283,14 +231,12 @@ width:75px;
 
 font-size:11px;
 
-padding:10px;
-
 }
 
 
 .content{
 
-margin-left:90px;
+margin-left:95px;
 
 }
 
@@ -298,6 +244,7 @@ margin-left:90px;
 
 
 </style>
+
 
 </head>
 
@@ -340,18 +287,17 @@ ENTRAR
 
 
 
+
 <div id="panel">
+
 
 
 <div class="sidebar">
 
 
-<div class="logo-admin">
-
+<h3>
 ⚙ ADMIN
-
-</div>
-
+</h3>
 
 
 <button class="menu-btn" onclick="mostrar('dashboard')">
@@ -414,16 +360,18 @@ ENTRAR
 
 
 
+
 <div class="content">
 
+
+
+<!-- DASHBOARD -->
 
 <div id="dashboard" class="section active">
 
 
 <h1>
-
 📊 Dashboard
-
 </h1>
 
 
@@ -443,6 +391,7 @@ ENTRAR
 </div>
 
 
+
 <div class="card">
 
 <h3>
@@ -456,6 +405,7 @@ ENTRAR
 </div>
 
 
+
 <div class="card">
 
 <h3>
@@ -467,6 +417,7 @@ ENTRAR
 </div>
 
 </div>
+
 
 
 <div class="card">
@@ -484,7 +435,6 @@ ENTRAR
 
 </div>
 
-<!-- CONTINUACIÓN PANEL -->
 
 <div class="box">
 
@@ -492,767 +442,56 @@ ENTRAR
 📈 Actividad
 </h2>
 
-<div id="barra">
 
-<div style="
-height:25px;
-background:#eee;
-border-radius:20px;
-overflow:hidden;
-">
+<div id="actividad">
 
-<div style="
-height:100%;
-width:0%;
-background:#00c853;
-border-radius:20px;
-" id="progreso">
-
-</div>
-
-</div>
-
-</div>
+Cargando...
 
 </div>
 
 
 </div>
 
+
+</div>
+
+
+
+<!-- LAS DEMAS SECCIONES VAN EN PARTE 2 -->
+
+<div id="ofertas" class="section"></div>
+
+<div id="cupones" class="section"></div>
+
+<div id="categorias" class="section"></div>
+
+<div id="imagenes" class="section"></div>
+
+<div id="mercadopago" class="section"></div>
+
+<div id="estadisticas" class="section"></div>
+
+<div id="configuracion" class="section"></div>
+
+
+
+</div>
+
+
+</div>
 
 <!-- =========================
-SECCIÓN OFERTAS
+OFERTAS
 ========================= -->
 
 <div id="ofertas" class="section">
 
-<h1>
-⚡ Administrar Ofertas Relámpago
-</h1>
+<h1>⚡ Administrar Ofertas</h1>
 
 
 <div class="box">
 
-<h2>
-➕ Nueva oferta
-</h2>
-
-
-<input id="tituloOferta"
-placeholder="Título del producto">
-
-
-<input id="imagenOferta"
-placeholder="URL o nombre de imagen">
-
-
-<input id="antesOferta"
-placeholder="Precio anterior">
-
-
-<input id="precioOferta"
-placeholder="Precio actual">
-
-
-<input id="linkOferta"
-placeholder="Link afiliado">
-
-
-<select id="estadoOferta">
-
-<option value="activo">
-🟢 Activa
-</option>
-
-<option value="agotarse">
-🟠 Por agotarse
-</option>
-
-<option value="agotado">
-🔴 Agotada
-</option>
-
-</select>
-
-
-<button class="save">
-
-💾 Guardar oferta
-
-</button>
-
-
-</div>
-
-
-<div class="box">
-
-<h2>
-📦 Ofertas registradas
-</h2>
-
-
-<div id="listaOfertas">
-
-Sin ofertas todavía
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<!-- =========================
-SECCIÓN CUPONES
-========================= -->
-
-
-<div id="cupones" class="section">
-
-<h1>
-🎟 Administrar Cupones
-</h1>
-
-
-<div class="box">
-
-<h2>
-➕ Nuevo cupón
-</h2>
-
-
-<input placeholder="Código del cupón">
-
-
-<input placeholder="Descuento">
-
-
-<input placeholder="Compra mínima">
-
-
-<button class="save">
-
-💾 Guardar cupón
-
-</button>
-
-
-</div>
-
-
-<div class="box">
-
-<h2>
-🎟 Cupones actuales
-</h2>
-
-
-<div id="listaCupones">
-
-Sin cupones
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<!-- =========================
-CATEGORÍAS
-========================= -->
-
-
-<div id="categorias" class="section">
-
-
-<h1>
-📂 Categorías
-</h1>
-
-
-<div class="box">
-
-
-<input placeholder="Nombre categoría">
-
-
-<input placeholder="Emoji">
-
-
-<input placeholder="Link afiliado">
-
-
-<button class="save">
-
-➕ Agregar categoría
-
-</button>
-
-
-</div>
-
-
-<div id="listaCategorias">
-
-Sin categorías
-
-</div>
-
-
-</div>
-
-
-
-<!-- =========================
-IMÁGENES
-========================= -->
-
-
-<div id="imagenes" class="section">
-
-
-<h1>
-🖼 Biblioteca de imágenes
-</h1>
-
-
-<div class="box">
-
-
-<input 
-type="file"
-id="archivoImagen">
-
-
-<button class="save">
-
-📤 Subir imagen
-
-</button>
-
-
-</div>
-
-
-<div id="galeria">
-
-Sin imágenes
-
-</div>
-
-
-</div>
-
-
-
-
-<!-- =========================
-MERCADO PAGO
-========================= -->
-
-
-<div id="mercadopago" class="section">
-
-
-<h1>
-💙 Mercado Pago
-</h1>
-
-
-<div class="box">
-
-
-<input placeholder="Título">
-
-
-<textarea placeholder="Descripción"></textarea>
-
-
-<input placeholder="Link">
-
-
-<button class="save">
-
-💾 Guardar cambios
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-<!-- =========================
-ESTADÍSTICAS
-========================= -->
-
-
-<div id="estadisticas" class="section">
-
-
-<h1>
-📈 Estadísticas
-</h1>
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<h3>
-🏆 Cupón más usado
-</h3>
-
-<div id="topCupon">
-
--
-
-</div>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-🔥 Oferta más vista
-</h3>
-
-<div id="topOferta">
-
--
-
-</div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-<!-- =========================
-CONFIGURACIÓN
-========================= -->
-
-
-<div id="configuracion" class="section">
-
-
-<h1>
-⚙ Configuración
-</h1>
-
-
-<div class="box">
-
-
-<h2>
-Estado cupones
-</h2>
-
-
-<button style="
-background:#00c853;
-color:white;
-width:100%;
-">
-
-🟢 Activos
-
-</button>
-
-
-<button style="
-background:#ff9800;
-color:white;
-width:100%;
-margin-top:10px;
-">
-
-🟠 Por agotarse
-
-</button>
-
-
-<button style="
-background:#e53935;
-color:white;
-width:100%;
-margin-top:10px;
-">
-
-🔴 Agotados
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-</div>
-
-<script type="module">
-
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-getFirestore,
-doc,
-onSnapshot,
-collection,
-getDocs,
-updateDoc,
-setDoc,
-increment
-} 
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-const firebaseConfig = {
-
-apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
-
-authDomain:"patronofertasweb.firebaseapp.com",
-
-projectId:"patronofertasweb",
-
-storageBucket:"patronofertasweb.firebasestorage.app",
-
-messagingSenderId:"292338334268",
-
-appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-
-
-/* ===== LOGIN ===== */
-
-
-window.entrar=function(){
-
-let clave=document.getElementById("pass").value;
-
-
-if(clave==="Admin2026"){
-
-
-document.getElementById("login").style.display="none";
-
-document.getElementById("panel").style.display="block";
-
-
-cargarEstadisticas();
-
-cargarCupones();
-
-cargarRegiones();
-
-
-}
-
-else{
-
-alert("❌ Contraseña incorrecta");
-
-}
-
-}
-
-
-
-/* ===== ESTADISTICAS ===== */
-
-
-function cargarEstadisticas(){
-
-
-const ref=doc(db,"contadores","global");
-
-
-onSnapshot(ref,(snap)=>{
-
-
-let data=snap.data() || {};
-
-
-document.getElementById("total").innerHTML=
-data.total || 0;
-
-
-document.getElementById("relampago").innerHTML=
-data.relampago || 0;
-
-
-document.getElementById("exclusivos").innerHTML=
-data.exclusivos || 0;
-
-
-document.getElementById("bancarios").innerHTML=
-data.bancarios || 0;
-
-
-
-});
-
-
-
-const visitantes=doc(db,"visitas","contador");
-
-
-onSnapshot(visitantes,(snap)=>{
-
-
-let data=snap.data() || {};
-
-
-document.getElementById("visitantes").innerHTML=
-data.total || 0;
-
-
-});
-
-
-
-}
-
-
-
-/* ===== CAMBIAR ESTADO CUPONES ===== */
-
-
-window.cambiarEstado=async function(estado){
-
-
-const ref=doc(db,"configuracion","estadoCupones");
-
-
-await setDoc(ref,{
-
-estado:estado
-
-});
-
-
-alert("✅ Estado actualizado");
-
-
-}
-
-
-
-
-
-/* ===== RANKING CUPONES ===== */
-
-
-function cargarCupones(){
-
-
-const ref=collection(db,"cupones");
-
-
-onSnapshot(ref,(snap)=>{
-
-
-let lista=[];
-
-
-snap.forEach(d=>{
-
-
-lista.push({
-
-nombre:d.id,
-
-copias:d.data().copias || 0
-
-});
-
-
-});
-
-
-lista.sort((a,b)=>b.copias-a.copias);
-
-
-
-let html="";
-
-
-lista.forEach((c,i)=>{
-
-
-html+=`
-
-<div class="card">
-
-${i+1}️⃣
-
-<b>${c.nombre}</b>
-
-<br>
-
-${c.copias} copias
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-document.getElementById("cupones").innerHTML=
-html || "Sin datos";
-
-
-});
-
-
-}
-
-
-
-
-/* ===== REGIONES ===== */
-
-
-function cargarRegiones(){
-
-
-const ref=collection(db,"regiones");
-
-
-onSnapshot(ref,(snap)=>{
-
-
-let html="";
-
-
-snap.forEach(d=>{
-
-
-html+=`
-
-<div class="card">
-
-🌎 ${d.id}
-
-<br>
-
-<b>${d.data().visitas || 0}</b>
-
-visitas
-
-</div>
-
-`;
-
-
-
-});
-
-
-document.getElementById("regiones").innerHTML=
-html || "Sin datos";
-
-
-
-});
-
-
-}
-
-
-
-
-
-/* ===== REINICIAR CONTADORES ===== */
-
-
-window.reiniciarContadores=async function(){
-
-
-let clave=prompt("Contraseña");
-
-
-if(clave!=="Admin2026"){
-
-alert("Incorrecta");
-
-return;
-
-}
-
-
-
-if(!confirm("¿Borrar estadísticas?")) return;
-
-
-
-await setDoc(doc(db,"contadores","global"),{
-
-total:0,
-
-relampago:0,
-
-exclusivos:0,
-
-bancarios:0
-
-});
-
-
-
-alert("✅ Reiniciado");
-
-
-}
-
-
-
-</script>
-
-<!-- ===== SECCIÓN CREAR OFERTA ===== -->
-
-<div class="grafica">
-
-<h3>
-🔥 CREAR NUEVA OFERTA
-</h3>
+<h2>➕ Nueva oferta</h2>
 
 
 <input id="tituloOferta" placeholder="Nombre del producto">
@@ -1283,9 +522,10 @@ alert("✅ Reiniciado");
 <input type="file" id="imagenOferta" accept="image/*">
 
 
-<button onclick="guardarOferta()">
 
-💾 PUBLICAR OFERTA
+<button class="save">
+
+💾 Guardar oferta
 
 </button>
 
@@ -1293,19 +533,18 @@ alert("✅ Reiniciado");
 </div>
 
 
-<!-- ===== LISTA OFERTAS ===== -->
+
+<div class="box">
 
 
-<div class="grafica">
-
-<h3>
-📦 OFERTAS PUBLICADAS
-</h3>
+<h2>
+📦 Ofertas publicadas
+</h2>
 
 
 <div id="listaOfertas">
 
-Cargando...
+Sin ofertas
 
 </div>
 
@@ -1313,17 +552,415 @@ Cargando...
 </div>
 
 
+</div>
+
+
+
+
+
+
+<!-- =========================
+CUPONES
+========================= -->
+
+
+<div id="cupones" class="section">
+
+
+<h1>
+🎟 Administrar Cupones
+</h1>
+
+
+<div class="box">
+
+
+<h2>
+➕ Nuevo cupón
+</h2>
+
+
+
+<input id="codigoCupon"
+placeholder="Código cupón">
+
+
+
+<input id="descuentoCupon"
+placeholder="Descuento">
+
+
+
+<input id="minimoCupon"
+placeholder="Compra mínima">
+
+
+
+<button class="save">
+
+💾 Guardar cupón
+
+</button>
+
+
+</div>
+
+
+
+<div class="box">
+
+
+<h2>
+🎟 Cupones activos
+</h2>
+
+
+<div id="listaCupones">
+
+Sin cupones
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- =========================
+CATEGORIAS
+========================= -->
+
+
+<div id="categorias" class="section">
+
+
+<h1>
+📂 Categorías
+</h1>
+
+
+
+<div class="box">
+
+
+<input id="nombreCategoria"
+placeholder="Nombre categoría">
+
+
+<input id="emojiCategoria"
+placeholder="Emoji">
+
+
+<input id="linkCategoria"
+placeholder="Link categoría">
+
+
+<button class="save">
+
+➕ Agregar categoría
+
+</button>
+
+
+</div>
+
+
+
+<div class="box">
+
+<h2>
+📂 Categorías creadas
+</h2>
+
+
+<div id="listaCategorias">
+
+Sin categorías
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+IMAGENES
+========================= -->
+
+
+<div id="imagenes" class="section">
+
+
+<h1>
+🖼 Biblioteca de imágenes
+</h1>
+
+
+
+<div class="box">
+
+
+<input 
+type="file"
+id="archivoImagen"
+accept="image/*">
+
+
+
+<button class="save">
+
+📤 Subir imagen
+
+</button>
+
+
+</div>
+
+
+
+
+<div class="box">
+
+<h2>
+🖼 Galería
+</h2>
+
+
+<div id="galeria">
+
+Sin imágenes
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =========================
+MERCADO PAGO
+========================= -->
+
+
+<div id="mercadopago" class="section">
+
+
+<h1>
+💙 Mercado Pago
+</h1>
+
+
+
+<div class="box">
+
+
+<input id="tituloMP"
+placeholder="Título">
+
+
+<textarea id="textoMP"
+placeholder="Descripción"></textarea>
+
+
+
+<input id="linkMP"
+placeholder="Link Mercado Pago">
+
+
+
+<button class="save">
+
+💾 Guardar cambios
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+ESTADISTICAS
+========================= -->
+
+
+<div id="estadisticas" class="section">
+
+
+<h1>
+📈 Estadísticas
+</h1>
+
+
+
+<div class="grid">
+
+
+
+<div class="card">
+
+<h3>
+🏆 Cupón más usado
+</h3>
+
+<div id="topCupon">
+-
+</div>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+🔥 Oferta más vista
+</h3>
+
+<div id="topOferta">
+-
+</div>
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =========================
+CONFIGURACION
+========================= -->
+
+
+<div id="configuracion" class="section">
+
+
+<h1>
+⚙ Configuración
+</h1>
+
+
+
+<div class="box">
+
+
+<h2>
+Estado de cupones
+</h2>
+
+
+
+<button style="
+background:#00c853;
+color:white;
+width:100%;
+">
+
+🟢 Activos
+
+</button>
+
+
+
+<button style="
+background:#ff9800;
+color:white;
+width:100%;
+margin-top:10px;
+">
+
+🟠 Por agotarse
+
+</button>
+
+
+
+<button style="
+background:#e53935;
+color:white;
+width:100%;
+margin-top:10px;
+">
+
+🔴 Agotados
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
 
 <script type="module">
 
 
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
 import {
+
+getFirestore,
+
+doc,
+
+onSnapshot,
 
 collection,
 
 addDoc,
 
-onSnapshot,
+setDoc,
+
+getDocs,
+
+deleteDoc,
 
 serverTimestamp
 
@@ -1333,166 +970,331 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 
-/*
-IMPORTANTE:
 
-Primero guardaremos la imagen como base64
-para no necesitar Storage todavía.
-
-Cuando actives Storage cambiamos
-esta parte por subida real de archivos.
-*/
+// CONFIG FIREBASE
 
 
-window.guardarOferta = async function(){
+const firebaseConfig = {
+
+
+apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
+
+authDomain:"patronofertasweb.firebaseapp.com",
+
+projectId:"patronofertasweb",
+
+storageBucket:"patronofertasweb.firebasestorage.app",
+
+messagingSenderId:"292338334268",
+
+appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
+
+
+};
 
 
 
-let titulo =
+const app = initializeApp(firebaseConfig);
+
+
+const db = getFirestore(app);
+
+
+
+
+
+// =====================
+// LOGIN
+// =====================
+
+
+window.entrar=function(){
+
+
+let clave=document.getElementById("pass").value;
+
+
+
+if(clave==="Admin2026"){
+
+
+document.getElementById("login").style.display="none";
+
+
+document.getElementById("panel").style.display="block";
+
+
+
+cargarDatos();
+
+
+
+}
+
+else{
+
+
+alert("❌ Contraseña incorrecta");
+
+
+}
+
+
+
+};
+
+
+
+
+
+
+// =====================
+// CAMBIAR SECCIONES
+// =====================
+
+
+window.mostrar=function(id){
+
+
+
+let secciones=document.querySelectorAll(".section");
+
+
+
+secciones.forEach(s=>{
+
+s.classList.remove("active");
+
+});
+
+
+
+document.getElementById(id).classList.add("active");
+
+
+
+};
+
+
+
+
+
+
+
+
+// =====================
+// ESTADISTICAS
+// =====================
+
+
+function cargarDatos(){
+
+
+
+const ref=doc(db,"contadores","global");
+
+
+
+onSnapshot(ref,(snap)=>{
+
+
+let data=snap.data() || {};
+
+
+
+document.getElementById("total").innerHTML=
+data.total || 0;
+
+
+
+document.getElementById("relampago").innerHTML=
+data.relampago || 0;
+
+
+
+document.getElementById("exclusivos").innerHTML=
+data.exclusivos || 0;
+
+
+
+});
+
+
+
+
+
+
+const visitas=doc(db,"visitas","contador");
+
+
+
+onSnapshot(visitas,(snap)=>{
+
+
+let data=snap.data() || {};
+
+
+
+document.getElementById("visitantes").innerHTML=
+data.total || 0;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+// =====================
+// ESTADO CUPONES
+// =====================
+
+
+window.estadoCupon=function(estado){
+
+
+
+setDoc(
+
+doc(db,"configuracion","estadoCupones"),
+
+{
+
+estado:estado
+
+}
+
+);
+
+
+
+alert("✅ Estado actualizado");
+
+
+
+}
+
+
+
+
+
+
+
+
+// =====================
+// GUARDAR OFERTA
+// =====================
+
+
+window.guardarOferta=async function(){
+
+
+
+let titulo=
 document.getElementById("tituloOferta").value;
 
 
-let antes =
+
+let antes=
 document.getElementById("precioAntes").value;
 
 
-let actual =
+
+let actual=
 document.getElementById("precioActual").value;
 
 
-let link =
+
+let link=
 document.getElementById("linkOferta").value;
 
 
-let tipo =
+
+let tipo=
 document.getElementById("tipoOferta").value;
 
 
-let archivo =
-document.getElementById("imagenOferta").files[0];
 
 
 
 if(!titulo || !actual || !link){
 
+
 alert("Completa los datos");
+
 
 return;
 
-}
-
-
-
-
-let imagen="";
-
-
-
-if(archivo){
-
-
-imagen = await convertirImagen(archivo);
-
 
 }
 
 
 
 
-await addDoc(collection(db,"ofertas"),{
+
+await addDoc(
+
+collection(db,"ofertas"),
+
+{
 
 
-titulo:titulo,
+titulo,
 
 precioAntes:antes,
 
 precioActual:actual,
 
-link:link,
+link,
 
-tipo:tipo,
-
-imagen:imagen,
+tipo,
 
 fecha:serverTimestamp()
 
 
-});
-
-
-
-alert("✅ Oferta publicada");
-
-
-
-limpiarOferta();
-
-
 }
 
 
+);
 
 
 
-function convertirImagen(file){
+
+alert("✅ Oferta guardada");
 
 
-return new Promise((resolve)=>{
-
-
-let lector=new FileReader();
-
-
-lector.onload=function(){
-
-resolve(lector.result);
 
 };
 
 
-lector.readAsDataURL(file);
-
-
-
-});
-
-
-}
 
 
 
 
 
-function limpiarOferta(){
 
-
-document.getElementById("tituloOferta").value="";
-
-document.getElementById("precioAntes").value="";
-
-document.getElementById("precioActual").value="";
-
-document.getElementById("linkOferta").value="";
-
-document.getElementById("imagenOferta").value="";
-
-
-}
-
-
-
-
-
+// =====================
 // MOSTRAR OFERTAS
+// =====================
 
 
 const ofertasRef=collection(db,"ofertas");
 
 
+
 onSnapshot(ofertasRef,(snap)=>{
 
 
+
 let html="";
+
 
 
 snap.forEach(d=>{
@@ -1506,32 +1308,19 @@ html+=`
 
 <div class="card">
 
-
-${o.imagen ? 
-`<img src="${o.imagen}" width="100%">`
-:
-""}
-
-
-
 <h3>${o.titulo}</h3>
 
 
-❌ Antes:
-<s>$${o.precioAntes}</s>
+❌ <s>$${o.precioAntes}</s>
 
 
 <br>
 
 
-🔥 Ahora:
-
-<b>
-$${o.precioActual}
-</b>
+🔥 <b>$${o.precioActual}</b>
 
 
-<br>
+<br><br>
 
 
 <a href="${o.link}" target="_blank">
@@ -1539,6 +1328,17 @@ $${o.precioActual}
 VER OFERTA
 
 </a>
+
+
+<br><br>
+
+
+<button class="delete"
+onclick="borrarOferta('${d.id}')">
+
+🗑 Borrar
+
+</button>
 
 
 </div>
@@ -1552,11 +1352,177 @@ VER OFERTA
 
 
 
-document.getElementById("listaOfertas").innerHTML =
+document.getElementById("listaOfertas").innerHTML=
 html || "Sin ofertas";
 
 
+
 });
+
+
+
+
+
+
+
+
+// BORRAR OFERTA
+
+
+window.borrarOferta=async function(id){
+
+
+if(confirm("¿Eliminar oferta?")){
+
+
+await deleteDoc(
+
+doc(db,"ofertas",id)
+
+);
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+// =====================
+// GUARDAR CUPON
+// =====================
+
+
+window.guardarCupon=async function(){
+
+
+
+let codigo=
+document.getElementById("codigoCupon").value;
+
+
+
+let descuento=
+document.getElementById("descuentoCupon").value;
+
+
+
+let minimo=
+document.getElementById("minimoCupon").value;
+
+
+
+if(!codigo){
+
+
+alert("Falta código");
+
+
+return;
+
+
+}
+
+
+
+await setDoc(
+
+doc(db,"cupones",codigo),
+
+{
+
+
+descuento,
+
+minimo,
+
+copias:0
+
+
+}
+
+
+);
+
+
+
+alert("✅ Cupón guardado");
+
+
+};
+
+
+
+
+
+
+// MOSTRAR CUPONES
+
+
+onSnapshot(
+
+collection(db,"cupones"),
+
+(snap)=>{
+
+
+let html="";
+
+
+
+snap.forEach(d=>{
+
+
+let c=d.data();
+
+
+
+html+=`
+
+<div class="card">
+
+
+🎟 <b>${d.id}</b>
+
+
+<br>
+
+
+${c.descuento}
+
+
+<br>
+
+
+Mínimo: ${c.minimo}
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById("listaCupones").innerHTML=
+
+html || "Sin cupones";
+
+
+}
+
+);
+
 
 
 
