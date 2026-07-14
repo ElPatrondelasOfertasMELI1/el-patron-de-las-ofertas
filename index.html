@@ -786,8 +786,6 @@ target="_blank">
 
 </div>
 
-</div>
-
 <div class="ahorro-mini">
 
     <div class="ahorro-texto">
@@ -1304,6 +1302,68 @@ const total = snap.data()?.total || 0;
 
 document.getElementById("ahorro").innerHTML =
 "$" + total.toLocaleString("es-MX") + " MXN";
+
+});
+
+// ===== CARGAR OFERTAS DEL CARRUSEL =====
+
+const ofertas = [
+
+{
+imagen:"https://http2.mlstatic.com/D_NQ_NP_2X_123456-MLA.jpg",
+titulo:"Nintendo Switch Neon",
+antes:"$5,970",
+precio:"$4,795",
+link:"https://meli.la/1mj3itE"
+},
+
+{
+imagen:"https://http2.mlstatic.com/D_NQ_NP_2X_123456-MLA.jpg",
+titulo:"Oferta especial Mercado Libre",
+antes:"$3,999",
+precio:"$2,999",
+link:"https://meli.la/1mj3itE"
+}
+
+];
+
+
+const contenedor = document.getElementById("ofertasPublicas");
+const puntos = document.getElementById("flashDots");
+
+
+ofertas.forEach((o,i)=>{
+
+contenedor.innerHTML += `
+
+<div class="flash-slide"
+onclick="window.open('${o.link}','_blank')">
+
+<img src="${o.imagen}">
+
+<h3>${o.titulo}</h3>
+
+<div class="flash-old">
+Antes: <s>${o.antes}</s>
+</div>
+
+<div class="flash-price">
+${o.precio}
+</div>
+
+<div class="flash-btn">
+🛒 COMPRAR OFERTA
+</div>
+
+</div>
+
+`;
+
+puntos.innerHTML += `
+<div class="flash-dot ${i===0?'active':''}"
+onclick="irOferta(${i})">
+</div>
+`;
 
 });
 
