@@ -17,7 +17,6 @@ box-sizing:border-box;
 font-family:'Inter',sans-serif;
 }
 
-
 body{
 margin:0;
 background:#f2f3f5;
@@ -28,21 +27,17 @@ color:#111;
 /* HEADER */
 
 header{
-
 height:70px;
 background:#ffe600;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
-font-size:22px;
+text-align:center;
+font-size:20px;
 font-weight:900;
-
 position:sticky;
 top:0;
 z-index:10;
-
 }
 
 
@@ -51,7 +46,7 @@ z-index:10;
 .login{
 
 max-width:400px;
-margin:50px auto;
+margin:60px auto;
 padding:25px;
 
 }
@@ -62,13 +57,10 @@ textarea,
 select{
 
 width:100%;
-padding:15px;
-
+padding:14px;
 border:0;
 border-radius:14px;
-
 margin:8px 0;
-
 font-size:15px;
 
 }
@@ -77,28 +69,21 @@ font-size:15px;
 button{
 
 border:0;
-padding:15px;
-
+padding:14px;
 border-radius:14px;
-
 font-weight:900;
-
 cursor:pointer;
 
 }
 
 
-/* BOTON */
-
 .btn-green{
 
 background:#00c853;
 color:white;
-
 width:100%;
 
 }
-
 
 
 /* PANEL */
@@ -116,12 +101,9 @@ display:none;
 .sidebar{
 
 position:fixed;
-
 top:70px;
 left:0;
-
 bottom:0;
-
 width:230px;
 
 background:white;
@@ -135,7 +117,6 @@ box-shadow:5px 0 15px #ddd;
 }
 
 
-
 .sidebar h2{
 
 font-weight:900;
@@ -143,19 +124,16 @@ font-weight:900;
 }
 
 
-
 .menu{
 
 width:100%;
-
-background:#f5f5f5;
+background:#f4f4f4;
 
 margin-bottom:10px;
 
 text-align:left;
 
 }
-
 
 
 .menu:hover{
@@ -167,7 +145,6 @@ background:#ffe600;
 
 
 /* CONTENIDO */
-
 
 .content{
 
@@ -186,7 +163,6 @@ display:none;
 }
 
 
-
 .section.active{
 
 display:block;
@@ -196,7 +172,6 @@ display:block;
 
 
 /* TARJETAS */
-
 
 .grid{
 
@@ -221,8 +196,6 @@ border-radius:18px;
 
 box-shadow:0 5px 15px #ddd;
 
-text-align:center;
-
 }
 
 
@@ -241,7 +214,6 @@ color:#00c853;
 
 /* CAJAS */
 
-
 .box{
 
 background:white;
@@ -258,11 +230,29 @@ box-shadow:0 5px 15px #ddd;
 
 
 
+/* BOTONES ACCION */
+
+.save{
+
+background:#00c853;
+color:white;
+width:100%;
+margin-top:10px;
+
+}
+
+
+.delete{
+
+background:#e53935;
+color:white;
+
+}
+
+
 /* MOVIL */
 
-
 @media(max-width:800px){
-
 
 .sidebar{
 
@@ -270,13 +260,11 @@ width:75px;
 
 }
 
-
 .menu{
 
 font-size:11px;
 
 }
-
 
 .content{
 
@@ -284,13 +272,10 @@ margin-left:90px;
 
 }
 
-
 }
 
 
-
 </style>
-
 
 </head>
 
@@ -307,6 +292,7 @@ margin-left:90px;
 EL PATRÓN DE LAS OFERTAS
 
 </header>
+
 
 
 
@@ -327,7 +313,9 @@ type="password"
 placeholder="Contraseña">
 
 
-<button class="btn-green" onclick="login()">
+<button 
+class="btn-green"
+onclick="login()">
 
 ENTRAR
 
@@ -335,6 +323,7 @@ ENTRAR
 
 
 </div>
+
 
 
 
@@ -355,8 +344,8 @@ ENTRAR
 </h2>
 
 
-
-<button class="menu" onclick="abrirSeccion('dashboard')">
+<button class="menu"
+onclick="abrirSeccion('dashboard')">
 
 📊 Dashboard
 
@@ -364,7 +353,8 @@ ENTRAR
 
 
 
-<button class="menu" onclick="abrirSeccion('ofertas')">
+<button class="menu"
+onclick="abrirSeccion('ofertas')">
 
 ⚡ Ofertas
 
@@ -372,7 +362,8 @@ ENTRAR
 
 
 
-<button class="menu" onclick="abrirSeccion('cupones')">
+<button class="menu"
+onclick="abrirSeccion('cupones')">
 
 🎟 Cupones
 
@@ -380,7 +371,8 @@ ENTRAR
 
 
 
-<button class="menu" onclick="abrirSeccion('imagenes')">
+<button class="menu"
+onclick="abrirSeccion('imagenes')">
 
 🖼 Imágenes
 
@@ -388,7 +380,8 @@ ENTRAR
 
 
 
-<button class="menu" onclick="abrirSeccion('categorias')">
+<button class="menu"
+onclick="abrirSeccion('categorias')">
 
 📂 Categorías
 
@@ -396,7 +389,8 @@ ENTRAR
 
 
 
-<button class="menu" onclick="abrirSeccion('mercadopago')">
+<button class="menu"
+onclick="abrirSeccion('mercadopago')">
 
 💙 Mercado Pago
 
@@ -404,20 +398,12 @@ ENTRAR
 
 
 
-<button class="menu" onclick="abrirSeccion('estadisticas')">
+<button class="menu"
+onclick="abrirSeccion('estadisticas')">
 
 📈 Estadísticas
 
 </button>
-
-
-
-<button class="menu" onclick="abrirSeccion('configuracion')">
-
-⚙ Configuración
-
-</button>
-
 
 
 </div>
@@ -441,6 +427,7 @@ ENTRAR
 </h1>
 
 
+
 <div class="grid">
 
 
@@ -451,9 +438,7 @@ ENTRAR
 </h3>
 
 <div class="number" id="visitantes">
-
 0
-
 </div>
 
 </div>
@@ -467,9 +452,7 @@ ENTRAR
 </h3>
 
 <div class="number" id="clics">
-
 0
-
 </div>
 
 </div>
@@ -484,9 +467,7 @@ ENTRAR
 </h3>
 
 <div class="number" id="flash">
-
 0
-
 </div>
 
 </div>
@@ -501,16 +482,14 @@ ENTRAR
 </h3>
 
 <div class="number" id="exclusivos">
-
 0
-
 </div>
 
 </div>
 
 
-
 </div>
+
 
 
 <div class="box">
@@ -535,7 +514,9 @@ Cargando...
 
 
 
-<!-- SECCIONES VACÍAS -->
+
+<!-- OFERTAS -->
+
 
 <div id="ofertas" class="section">
 
@@ -546,7 +527,7 @@ Cargando...
 
 <div class="box">
 
-Próximo módulo: Crear, editar y eliminar ofertas.
+Cargando módulo de ofertas...
 
 </div>
 
@@ -554,6 +535,10 @@ Próximo módulo: Crear, editar y eliminar ofertas.
 </div>
 
 
+
+
+
+<!-- CUPONES -->
 
 
 <div id="cupones" class="section">
@@ -565,7 +550,7 @@ Próximo módulo: Crear, editar y eliminar ofertas.
 
 <div class="box">
 
-Próximo módulo: Administrar cupones.
+Cargando módulo de cupones...
 
 </div>
 
@@ -573,18 +558,22 @@ Próximo módulo: Administrar cupones.
 </div>
 
 
+
+
+
+<!-- IMAGENES -->
 
 
 <div id="imagenes" class="section">
 
 <h1>
-🖼 Imágenes
+🖼 Biblioteca de imágenes
 </h1>
 
 
 <div class="box">
 
-Próximo módulo: Biblioteca de imágenes.
+Cargando módulo de imágenes...
 
 </div>
 
@@ -592,6 +581,11 @@ Próximo módulo: Biblioteca de imágenes.
 </div>
 
 
+
+
+
+
+<!-- CATEGORIAS -->
 
 
 <div id="categorias" class="section">
@@ -603,7 +597,7 @@ Próximo módulo: Biblioteca de imágenes.
 
 <div class="box">
 
-Próximo módulo.
+Cargando módulo de categorías...
 
 </div>
 
@@ -611,6 +605,10 @@ Próximo módulo.
 </div>
 
 
+
+
+
+<!-- MERCADO PAGO -->
 
 
 <div id="mercadopago" class="section">
@@ -622,7 +620,7 @@ Próximo módulo.
 
 <div class="box">
 
-Próximo módulo.
+Cargando módulo Mercado Pago...
 
 </div>
 
@@ -630,6 +628,11 @@ Próximo módulo.
 </div>
 
 
+
+
+
+
+<!-- ESTADISTICAS -->
 
 
 <div id="estadisticas" class="section">
@@ -641,26 +644,7 @@ Próximo módulo.
 
 <div class="box">
 
-Próximo módulo.
-
-</div>
-
-
-</div>
-
-
-
-
-<div id="configuracion" class="section">
-
-<h1>
-⚙ Configuración
-</h1>
-
-
-<div class="box">
-
-Próximo módulo.
+Cargando estadísticas...
 
 </div>
 
@@ -671,7 +655,35 @@ Próximo módulo.
 
 </div>
 
+
 </div>
+
+
+
+
+
+<script>
+
+function abrirSeccion(id){
+
+let secciones=document.querySelectorAll(".section");
+
+
+secciones.forEach(s=>{
+
+s.classList.remove("active");
+
+});
+
+
+document.getElementById(id)
+.classList.add("active");
+
+
+}
+
+
+</script>
 
 <script type="module">
 
@@ -682,11 +694,8 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 import {
 
 getFirestore,
-
 doc,
-
 onSnapshot,
-
 collection
 
 }
@@ -695,10 +704,9 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 
-
-// =========================
-// CONFIG FIREBASE
-// =========================
+// =============================
+// FIREBASE
+// =============================
 
 
 const firebaseConfig = {
@@ -721,10 +729,6 @@ appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 
 
-
-// INICIAR FIREBASE
-
-
 const app = initializeApp(firebaseConfig);
 
 
@@ -733,20 +737,21 @@ const db = getFirestore(app);
 
 
 
-// =========================
+
+// =============================
 // LOGIN ADMIN
-// =========================
+// =============================
 
 
 window.login=function(){
 
 
-let pass = document.getElementById("password").value;
+const pass =
+document.getElementById("password").value;
 
 
 
 if(pass==="Admin2026"){
-
 
 
 document.getElementById("login").style.display="none";
@@ -757,7 +762,6 @@ document.getElementById("panel").style.display="block";
 
 
 cargarDashboard();
-
 
 
 }
@@ -778,50 +782,17 @@ alert("❌ Contraseña incorrecta");
 
 
 
-// =========================
-// CAMBIO DE SECCIONES
-// =========================
 
-
-window.abrirSeccion=function(id){
-
-
-
-let secciones =
-document.querySelectorAll(".section");
-
-
-
-secciones.forEach(sec=>{
-
-sec.classList.remove("active");
-
-});
-
-
-
-document.getElementById(id)
-.classList.add("active");
-
-
-
-};
-
-
-
-
-
-
-// =========================
-// DASHBOARD FIRESTORE
-// =========================
+// =============================
+// DASHBOARD
+// =============================
 
 
 function cargarDashboard(){
 
 
 
-// CONTADORES GENERALES
+// CLICS Y CUPONES
 
 
 const contadorRef =
@@ -832,7 +803,7 @@ doc(db,"contadores","global");
 onSnapshot(contadorRef,(snap)=>{
 
 
-let data=snap.data() || {};
+const data=snap.data() || {};
 
 
 
@@ -857,7 +828,6 @@ data.exclusivos || 0;
 
 
 
-
 // VISITANTES
 
 
@@ -869,7 +839,7 @@ doc(db,"visitas","contador");
 onSnapshot(visitantesRef,(snap)=>{
 
 
-let data=snap.data() || {};
+const data=snap.data() || {};
 
 
 
@@ -885,22 +855,23 @@ data.total || 0;
 
 
 
-// ACTIVIDAD
+
+// HISTORIAL DE VISITAS
 
 
-const actividadRef =
+const historialRef =
 collection(db,"visitas_historial");
 
 
 
-onSnapshot(actividadRef,(snap)=>{
+onSnapshot(historialRef,(snap)=>{
 
 
 let html="";
 
 
 
-snap.forEach(d=>{
+snap.forEach((d)=>{
 
 
 let dato=d.data();
@@ -911,21 +882,21 @@ html+=`
 
 <div class="card">
 
-📅 ${d.id}
+📅 <b>${d.id}</b>
 
 <br>
 
-👥
+👥 Visitantes:
 
-<b>
+<strong>
 
 ${dato.total || 0}
 
-</b>
+</strong>
 
-visitantes
 
 </div>
+
 
 `;
 
@@ -936,7 +907,8 @@ visitantes
 
 
 document.getElementById("actividad").innerHTML =
-html || "Sin datos";
+
+html || "Sin actividad";
 
 
 
@@ -956,15 +928,10 @@ html || "Sin datos";
 import {
 
 collection,
-
 addDoc,
-
 onSnapshot,
-
 deleteDoc,
-
 doc,
-
 serverTimestamp
 
 }
@@ -974,33 +941,34 @@ from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 
-// =========================
+
+const ofertasRef = collection(db,"ofertas");
+
+
+
+
+// =============================
 // GUARDAR OFERTA
-// =========================
+// =============================
 
 
 window.guardarOferta = async function(){
-
 
 
 let titulo =
 document.getElementById("tituloOferta").value;
 
 
-
 let antes =
 document.getElementById("precioAntes").value;
-
 
 
 let actual =
 document.getElementById("precioActual").value;
 
 
-
 let link =
 document.getElementById("linkOferta").value;
-
 
 
 let tipo =
@@ -1013,19 +981,13 @@ document.getElementById("imagenOferta").files[0];
 
 
 
-
-
 if(!titulo || !actual || !link){
-
 
 alert("Completa los datos");
 
-
 return;
 
-
 }
-
 
 
 
@@ -1033,27 +995,16 @@ let imagen="";
 
 
 
-// convertir imagen a base64
-
-
 if(archivo){
 
-
 imagen = await convertirImagen(archivo);
-
 
 }
 
 
 
 
-
-await addDoc(
-
-collection(db,"ofertas"),
-
-{
-
+await addDoc(ofertasRef,{
 
 titulo,
 
@@ -1067,15 +1018,9 @@ tipo,
 
 imagen,
 
-vistas:0,
-
 fecha:serverTimestamp()
 
-
-}
-
-
-);
+});
 
 
 
@@ -1083,7 +1028,7 @@ alert("✅ Oferta publicada");
 
 
 
-limpiarFormulario();
+limpiarOferta();
 
 
 };
@@ -1094,30 +1039,30 @@ limpiarFormulario();
 
 
 
-// =========================
+// =============================
 // CONVERTIR IMAGEN
-// =========================
+// =============================
 
 
 function convertirImagen(file){
 
 
-return new Promise((resolve)=>{
+return new Promise(resolve=>{
 
 
-let lector = new FileReader();
+let reader=new FileReader();
 
 
-lector.onload=function(){
+reader.onload=()=>{
 
 
-resolve(lector.result);
+resolve(reader.result);
 
 
 };
 
 
-lector.readAsDataURL(file);
+reader.readAsDataURL(file);
 
 
 
@@ -1131,42 +1076,12 @@ lector.readAsDataURL(file);
 
 
 
-// =========================
-// LIMPIAR FORMULARIO
-// =========================
-
-
-function limpiarFormulario(){
-
-
-document.getElementById("tituloOferta").value="";
-
-document.getElementById("precioAntes").value="";
-
-document.getElementById("precioActual").value="";
-
-document.getElementById("linkOferta").value="";
-
-document.getElementById("imagenOferta").value="";
-
-
-}
-
-
-
-
-
-
-// =========================
+// =============================
 // MOSTRAR OFERTAS
-// =========================
+// =============================
 
 
-onSnapshot(
-
-collection(db,"ofertas"),
-
-(snap)=>{
+onSnapshot(ofertasRef,(snap)=>{
 
 
 let html="";
@@ -1185,16 +1100,16 @@ html+=`
 <div class="card">
 
 
-${o.imagen ?
+${o.imagen ? 
 
 `
+
 <img src="${o.imagen}"
-style="
-width:100%;
-border-radius:15px;
-">
+
+style="width:100%;border-radius:15px">
 
 `
+
 :
 
 ""
@@ -1211,13 +1126,7 @@ ${o.titulo}
 
 
 
-❌
-
-<s>
-
-$${o.precioAntes}
-
-</s>
+❌ <s>$${o.precioAntes}</s>
 
 
 <br>
@@ -1237,26 +1146,19 @@ $${o.precioActual}
 
 <a href="${o.link}" target="_blank">
 
-VER OFERTA
+🔗 Ver oferta
 
 </a>
-
 
 
 <br><br>
 
 
-<button 
-style="
-background:#e53935;
-color:white;
-"
+<button class="delete"
 
 onclick="borrarOferta('${d.id}')">
 
-
-🗑 ELIMINAR
-
+🗑 Eliminar
 
 </button>
 
@@ -1275,7 +1177,7 @@ onclick="borrarOferta('${d.id}')">
 
 document.getElementById("listaOfertas").innerHTML =
 
-html || "Sin ofertas publicadas";
+html || "Sin ofertas";
 
 
 
@@ -1286,425 +1188,51 @@ html || "Sin ofertas publicadas";
 
 
 
-// =========================
-// BORRAR OFERTA
-// =========================
 
 
-window.borrarOferta=async function(id){
+// =============================
+// ELIMINAR
+// =============================
+
+
+window.borrarOferta=function(id){
 
 
 if(confirm("¿Eliminar oferta?")){
 
 
-await deleteDoc(
-
-doc(db,"ofertas",id)
-
-);
+deleteDoc(doc(db,"ofertas",id));
 
 
 }
 
 
 };
+
+
+
+
+
+
+function limpiarOferta(){
+
+
+tituloOferta.value="";
+
+precioAntes.value="";
+
+precioActual.value="";
+
+linkOferta.value="";
+
+imagenOferta.value="";
+
+
+}
 
 
 
 </script>
 
-// =========================
-// CUPONES
-// =========================
-
-
-window.guardarCupon=async function(){
-
-
-let codigo=document.getElementById("codigoCupon").value;
-
-let descuento=document.getElementById("descuentoCupon").value;
-
-let minimo=document.getElementById("minimoCupon").value;
-
-let tipo=document.getElementById("tipoCupon").value;
-
-
-
-if(!codigo){
-
-alert("Falta código");
-
-return;
-
-}
-
-
-
-await setDoc(
-
-doc(db,"cupones",codigo),
-
-{
-
-descuento,
-
-minimo,
-
-tipo,
-
-copias:0
-
-}
-
-);
-
-
-
-alert("✅ Cupón guardado");
-
-};
-
-
-
-
-
-onSnapshot(
-
-collection(db,"cupones"),
-
-(snap)=>{
-
-
-let html="";
-
-
-snap.forEach(d=>{
-
-
-let c=d.data();
-
-
-html+=`
-
-<div class="card">
-
-🎟 <b>${d.id}</b>
-
-<br>
-
-${c.descuento}
-
-<br>
-
-Mínimo: ${c.minimo}
-
-<br>
-
-${c.tipo}
-
-</div>
-
-`;
-
-
-});
-
-
-document.getElementById("listaCupones").innerHTML=
-
-html || "Sin cupones";
-
-
-}
-
-);
-
-
-
-
-
-
-
-
-// =========================
-// CATEGORIAS
-// =========================
-
-
-window.guardarCategoria=async function(){
-
-
-let nombre=
-document.getElementById("nombreCategoria").value;
-
-
-let emoji=
-document.getElementById("emojiCategoria").value;
-
-
-let link=
-document.getElementById("linkCategoria").value;
-
-
-
-await addDoc(
-
-collection(db,"categorias"),
-
-{
-
-nombre,
-
-emoji,
-
-link
-
-}
-
-);
-
-
-
-alert("✅ Categoría agregada");
-
-
-};
-
-
-
-
-
-onSnapshot(
-
-collection(db,"categorias"),
-
-(snap)=>{
-
-
-let html="";
-
-
-snap.forEach(d=>{
-
-
-let c=d.data();
-
-
-html+=`
-
-<div class="card">
-
-${c.emoji}
-
-<b>${c.nombre}</b>
-
-<br>
-
-<a href="${c.link}">
-Abrir
-</a>
-
-</div>
-
-`;
-
-
-});
-
-
-document.getElementById("listaCategorias").innerHTML=
-
-html || "Sin categorías";
-
-
-}
-
-);
-
-
-
-
-
-
-
-
-// =========================
-// BIBLIOTECA IMAGENES
-// =========================
-
-
-window.subirImagen=async function(){
-
-
-let archivo=
-document.getElementById("archivoImagen").files[0];
-
-
-
-if(!archivo){
-
-alert("Selecciona imagen");
-
-return;
-
-}
-
-
-
-let imagen=await convertirImagen(archivo);
-
-
-
-await addDoc(
-
-collection(db,"imagenes"),
-
-{
-
-nombre:archivo.name,
-
-imagen,
-
-fecha:serverTimestamp()
-
-}
-
-);
-
-
-
-alert("✅ Imagen guardada");
-
-
-};
-
-
-
-
-
-
-onSnapshot(
-
-collection(db,"imagenes"),
-
-(snap)=>{
-
-
-let html="";
-
-
-snap.forEach(d=>{
-
-
-let i=d.data();
-
-
-html+=`
-
-<div class="card">
-
-<img src="${i.imagen}"
-
-style="width:100%;border-radius:15px">
-
-
-<br>
-
-${i.nombre}
-
-
-</div>
-
-`;
-
-
-});
-
-
-document.getElementById("galeria").innerHTML=
-
-html || "Sin imágenes";
-
-
-}
-
-);
-
-
-
-
-
-
-
-
-
-// =========================
-// MERCADO PAGO
-// =========================
-
-
-window.guardarMP=async function(){
-
-
-await setDoc(
-
-doc(db,"configuracion","mercadopago"),
-
-{
-
-
-titulo:
-document.getElementById("tituloMP").value,
-
-
-texto:
-document.getElementById("textoMP").value,
-
-
-link:
-document.getElementById("linkMP").value
-
-
-}
-
-);
-
-
-alert("✅ Mercado Pago actualizado");
-
-
-};
-
-
-
-
-
-onSnapshot(
-
-doc(db,"configuracion","mercadopago"),
-
-(snap)=>{
-
-
-if(snap.exists()){
-
-
-let d=snap.data();
-
-
-
-tituloMP.value=d.titulo || "";
-
-textoMP.value=d.texto || "";
-
-linkMP.value=d.link || "";
-
-
-}
-
-
-}
-
-);
-
+</body>
+</html>
