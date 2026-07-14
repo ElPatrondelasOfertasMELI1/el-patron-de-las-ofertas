@@ -660,6 +660,44 @@ font-size:13px;
 
 }
   
+/* ===== TENDENCIAS ===== */
+
+.trending{
+
+margin:15px 14px;
+padding:16px;
+background:#fff;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.10);
+
+}
+
+.trending-title{
+
+font-size:21px;
+font-weight:900;
+margin-bottom:12px;
+
+}
+
+.trend-card{
+
+padding:12px;
+margin:8px 0;
+border-radius:14px;
+background:#f7f7f7;
+font-weight:900;
+font-size:16px;
+transition:.25s;
+
+}
+
+.trend-card:hover{
+
+transform:scale(1.02);
+
+}
+  
 </style>
 </head>
 
@@ -842,6 +880,33 @@ VER
 <div class="ahorro-mini">
 
 <div class="ahorro-texto">
+  
+  <!-- ===== TENDENCIAS DEL DÍA ===== -->
+
+<div class="trending">
+
+<div class="trending-title">
+🔥 Lo más buscado hoy
+</div>
+
+<div id="trendingBox">
+
+<div class="trend-card">
+🥇 Cargando...
+</div>
+
+<div class="trend-card">
+🥈 Cargando...
+</div>
+
+<div class="trend-card">
+🥉 Cargando...
+</div>
+
+</div>
+
+</div>
+  
 💰 Nuestra comunidad ya ha ahorrado <b id="ahorro">$0 MXN</b>
 </div>
 
@@ -1412,6 +1477,53 @@ const interes = localStorage.getItem("interesUsuario");
 if(interes){
 
 console.log("Usuario interesado en:", interes);
+
+}
+  
+// ===== LO MÁS BUSCADO =====
+
+const categorias = {};
+
+document.querySelectorAll(".menu-item").forEach(link=>{
+
+link.addEventListener("click",()=>{
+
+const nombre = link.innerText;
+
+categorias[nombre] = (categorias[nombre] || 0) + 1;
+
+localStorage.setItem(
+"tendencias",
+JSON.stringify(categorias)
+);
+
+});
+
+});
+
+const datos = JSON.parse(
+localStorage.getItem("tendencias") || "{}"
+);
+
+const ordenadas = Object.entries(datos)
+.sort((a,b)=>b[1]-a[1])
+.slice(0,3);
+
+const box = document.getElementById("trendingBox");
+
+if(ordenadas.length){
+
+box.innerHTML="";
+
+ordenadas.forEach((item,i)=>{
+
+box.innerHTML += `
+<div class="trend-card">
+${["🥇","🥈","🥉"][i]} ${item[0]}
+</div>
+`;
+
+});
 
 }
   
