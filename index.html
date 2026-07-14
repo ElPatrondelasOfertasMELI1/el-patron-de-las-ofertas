@@ -1129,6 +1129,8 @@ else{
     const ultimaVisita = localStorage.getItem("fechaVisita");
 
     if(ultimaVisita !== hoy){
+      
+localStorage.setItem("fechaVisita",hoy);
 
         await updateDoc(visitaRef,{
             total:increment(1)
