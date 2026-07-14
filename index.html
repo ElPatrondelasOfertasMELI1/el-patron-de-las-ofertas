@@ -641,49 +641,7 @@ target="_blank">
 
 <div class="flash-carousel">
 
-<div class="flash-track" id="flashTrack">
-
-<div class="flash-slide">
-
-<img src="IMG_9774.jpeg">
-
-<h3>👟 Tenis Air 1 Hombre</h3>
-
-<div class="flash-old">
-❌ Antes: <s>$407.03</s>
-</div>
-
-<div class="flash-price">
-🔥 $281.26
-</div>
-
-<a class="flash-btn"
-href="https://meli.la/2wKB7Jo"
-target="_blank">
-🛒 VER OFERTA
-</a>
-
-</div>
-
-<div class="flash-slide">
-
-<img src="IMG_9772.jpeg">
-
-<h3>🎒 Mochila Matein</h3>
-
-<div class="flash-old">
-❌ Antes: <s>$756.90</s>
-</div>
-
-<div class="flash-price">
-🔥 $288.30
-</div>
-
-<a class="flash-btn"
-href="https://meli.la/2iVPve4"
-target="_blank">
-🛒 VER OFERTA
-</a>
+<div class="flash-track" id="ofertasPublicas">
 
 </div>
 
@@ -1249,6 +1207,112 @@ iniciarCarrusel();
 
 });
   
+</script>
+
+<script type="module">
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
+
+authDomain:"patronofertasweb.firebaseapp.com",
+
+projectId:"patronofertasweb",
+
+storageBucket:"patronofertasweb.firebasestorage.app",
+
+messagingSenderId:"292338334268",
+
+appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+
+
+onSnapshot(collection(db,"ofertas"),(snap)=>{
+
+
+let html="";
+
+
+snap.forEach((d)=>{
+
+
+let o=d.data();
+
+
+html+=`
+
+<div class="flash-slide"
+onclick="window.open('${o.link}','_blank')">
+
+
+${o.imagen ? 
+`
+<img src="${o.imagen}">
+`
+:
+""
+}
+
+
+<h3>
+${o.titulo}
+</h3>
+
+
+<div class="flash-old">
+
+❌ Antes:
+<s>$${o.precioAntes}</s>
+
+</div>
+
+
+<div class="flash-price">
+
+🔥 $${o.precioActual}
+
+</div>
+
+
+<div class="flash-btn">
+
+🛒 VER OFERTA
+
+</div>
+
+
+</div>
+
+`;
+
+
+});
+
+
+document.getElementById("ofertasPublicas").innerHTML=html;
+
+
+});
+
+
 </script>
 
 </body>
