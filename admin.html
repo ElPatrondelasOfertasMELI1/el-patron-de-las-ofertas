@@ -5,9 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin PRO - El Patrón de las Ofertas</title>
+<title>Admin PRO | El Patrón de las Ofertas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
+
 
 <style>
 
@@ -16,69 +17,82 @@ box-sizing:border-box;
 font-family:'Inter',sans-serif;
 }
 
+
 body{
+
 margin:0;
-background:#f2f3f5;
+background:#f3f4f6;
 color:#111;
+
 }
 
 
 /* HEADER */
 
-header{
-height:70px;
+.header{
+
+height:75px;
 background:#ffe600;
 display:flex;
 align-items:center;
 justify-content:center;
-text-align:center;
 font-size:22px;
 font-weight:900;
-position:sticky;
-top:0;
-z-index:10;
+box-shadow:0 5px 20px #ddd;
+
 }
+
 
 
 /* LOGIN */
 
+
 .login{
-max-width:400px;
-margin:50px auto;
+
+max-width:380px;
+margin:80px auto;
+background:white;
 padding:25px;
+border-radius:25px;
+box-shadow:0 10px 30px #ddd;
+
 }
+
 
 
 input,
 textarea,
 select{
 
+
 width:100%;
 padding:15px;
-border:0;
-border-radius:14px;
+border:none;
+background:#f1f1f1;
+border-radius:15px;
 margin:8px 0;
-font-size:15px;
+font-weight:700;
 
 }
+
 
 
 button{
 
 border:0;
-padding:15px;
-border-radius:14px;
-font-weight:900;
 cursor:pointer;
+font-weight:900;
+border-radius:15px;
+padding:14px;
 
 }
 
 
-.btn-green{
+.btn-main{
 
+width:100%;
 background:#00c853;
 color:white;
-width:100%;
 
 }
 
@@ -86,49 +100,43 @@ width:100%;
 
 /* PANEL */
 
+
 #panel{
+
 display:none;
+
 }
 
 
 
 /* MENU */
 
-.sidebar{
-
-position:fixed;
-top:70px;
-left:0;
-bottom:0;
-width:230px;
-background:white;
-padding:15px;
-overflow:auto;
-box-shadow:5px 0 15px #ddd;
-
-}
-
-
-.sidebar h2{
-
-font-weight:900;
-
-}
-
-
 
 .menu{
 
+position:fixed;
+top:75px;
+left:0;
+bottom:0;
+width:240px;
+background:white;
+padding:15px;
+box-shadow:5px 0 20px #ddd;
+
+}
+
+
+.menu button{
+
 width:100%;
-background:#f5f5f5;
 margin-bottom:10px;
+background:#f5f5f5;
 text-align:left;
 
 }
 
 
-
-.menu:hover{
+.menu button:hover{
 
 background:#ffe600;
 
@@ -141,11 +149,10 @@ background:#ffe600;
 
 .content{
 
-margin-left:250px;
-padding:20px;
+margin-left:260px;
+padding:25px;
 
 }
-
 
 
 .section{
@@ -153,7 +160,6 @@ padding:20px;
 display:none;
 
 }
-
 
 
 .section.active{
@@ -170,7 +176,7 @@ display:block;
 .grid{
 
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
 gap:15px;
 
 }
@@ -181,9 +187,8 @@ gap:15px;
 
 background:white;
 padding:20px;
-border-radius:18px;
-box-shadow:0 5px 15px #ddd;
-text-align:center;
+border-radius:22px;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
 
 }
 
@@ -191,43 +196,29 @@ text-align:center;
 
 .number{
 
-font-size:35px;
+font-size:38px;
 font-weight:900;
 color:#00c853;
 
 }
 
 
-/* CAJAS */
 
 .box{
 
 background:white;
 padding:20px;
-border-radius:18px;
+border-radius:22px;
 margin-top:20px;
-box-shadow:0 5px 15px #ddd;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
 
 }
 
 
 
-/* FORMULARIOS */
+.hidden{
 
-
-.form-grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:10px;
-
-}
-
-
-
-img{
-
-max-width:100%;
+display:none;
 
 }
 
@@ -236,18 +227,20 @@ max-width:100%;
 /* MOVIL */
 
 
-@media(max-width:800px){
-
-.sidebar{
-
-width:75px;
-
-}
+@media(max-width:700px){
 
 
 .menu{
 
+width:80px;
+
+}
+
+
+.menu button{
+
 font-size:11px;
+text-align:center;
 
 }
 
@@ -255,10 +248,13 @@ font-size:11px;
 .content{
 
 margin-left:90px;
+padding:15px;
 
 }
 
+
 }
+
 
 
 </style>
@@ -269,16 +265,19 @@ margin-left:90px;
 <body>
 
 
-<header>
+
+<div class="header">
 
 ⚡ PANEL ADMIN PRO ⚡
 <br>
 EL PATRÓN DE LAS OFERTAS
 
-</header>
+</div>
+
 
 
 <!-- LOGIN -->
+
 
 <div class="login" id="login">
 
@@ -294,7 +293,9 @@ type="password"
 placeholder="Contraseña">
 
 
-<button class="btn-green" onclick="login()">
+<button 
+class="btn-main"
+onclick="login()">
 
 ENTRAR
 
@@ -304,13 +305,17 @@ ENTRAR
 </div>
 
 
+
+
+
 <!-- PANEL -->
 
 
 <div id="panel">
 
 
-<div class="sidebar">
+
+<div class="menu">
 
 
 <h2>
@@ -318,53 +323,69 @@ ENTRAR
 </h2>
 
 
-<button class="menu" onclick="abrirSeccion('dashboard')">
+
+<button onclick="abrir('dashboard')">
+
 📊 Dashboard
+
 </button>
 
 
-<button class="menu" onclick="abrirSeccion('ofertas')">
+
+<button onclick="abrir('ofertas')">
+
 ⚡ Ofertas
+
 </button>
 
 
-<button class="menu" onclick="abrirSeccion('cupones')">
+
+<button onclick="abrir('cupones')">
+
 🎟 Cupones
+
 </button>
 
 
-<button class="menu" onclick="abrirSeccion('imagenes')">
+
+<button onclick="abrir('imagenes')">
+
 🖼 Imágenes
+
 </button>
 
 
-<button class="menu" onclick="abrirSeccion('categorias')">
-📂 Categorías
-</button>
 
+<button onclick="abrir('estadisticas')">
 
-<button class="menu" onclick="abrirSeccion('mercadopago')">
-💙 Mercado Pago
-</button>
-
-
-<button class="menu" onclick="abrirSeccion('estadisticas')">
 📈 Estadísticas
+
 </button>
 
 
-<button class="menu" onclick="abrirSeccion('configuracion')">
+
+<button onclick="abrir('configuracion')">
+
 ⚙ Configuración
+
 </button>
+
 
 
 </div>
 
 
+
+
+
 <div class="content">
 
 
+
+
+
 <!-- DASHBOARD -->
+
 
 <div id="dashboard" class="section active">
 
@@ -374,7 +395,9 @@ ENTRAR
 </h1>
 
 
+
 <div class="grid">
+
 
 
 <div class="card">
@@ -384,10 +407,14 @@ ENTRAR
 </h3>
 
 <div class="number" id="visitantes">
+
 0
+
 </div>
 
 </div>
+
+
 
 
 
@@ -397,11 +424,18 @@ ENTRAR
 👆 Clics
 </h3>
 
+
 <div class="number" id="clics">
+
 0
-</div>
 
 </div>
+
+
+</div>
+
+
+
 
 
 
@@ -411,35 +445,52 @@ ENTRAR
 ⚡ Relámpago
 </h3>
 
-<div class="number" id="flash">
+
+<div class="number" id="relampago">
+
 0
-</div>
 
 </div>
+
+
+</div>
+
+
+
 
 
 
 <div class="card">
 
 <h3>
-💎 Exclusivos
+🎟 Copias
 </h3>
 
-<div class="number" id="exclusivos">
+
+<div class="number" id="copias">
+
 0
-</div>
 
 </div>
 
 
 </div>
+
+
+
+
+</div>
+
+
 
 
 <div class="box">
 
+
 <h2>
-📈 Actividad
+📈 Actividad reciente
 </h2>
+
 
 <div id="actividad">
 
@@ -451,11 +502,20 @@ Cargando...
 </div>
 
 
+
 </div>
+
+
+
+
+
+
 
 <!-- OFERTAS -->
 
+
 <div id="ofertas" class="section">
+
 
 <h1>
 ⚡ Ofertas Relámpago
@@ -465,34 +525,231 @@ Cargando...
 <div class="box">
 
 
+Aquí estará el creador de ofertas
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- CUPONES -->
+
+
+<div id="cupones" class="section">
+
+
+<h1>
+🎟 Cupones
+</h1>
+
+
+<div class="box">
+
+
+Aquí estará el administrador de cupones
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- IMAGENES -->
+
+
+<div id="imagenes" class="section">
+
+
+<h1>
+🖼 Biblioteca
+
+</h1>
+
+
+<div class="box">
+
+
+Aquí estará la biblioteca de imágenes
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ESTADISTICAS -->
+
+
+<div id="estadisticas" class="section">
+
+
+<h1>
+📈 Estadísticas PRO
+</h1>
+
+
+<div class="box">
+
+
+Cargando estadísticas...
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- CONFIG -->
+
+
+<div id="configuracion" class="section">
+
+
+<h1>
+⚙ Configuración
+
+</h1>
+
+
+<div class="box">
+
+
+Estados de cupones y ajustes
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+</div>
+
+
+
+
+
+
+<script type="module">
+
+
+
+
+// LOGIN
+
+
+window.login=function(){
+
+
+let pass=document.getElementById("password").value;
+
+
+if(pass==="Admin2026"){
+
+
+document.getElementById("login").style.display="none";
+
+
+document.getElementById("panel").style.display="block";
+
+
+}
+
+else{
+
+
+alert("❌ Contraseña incorrecta");
+
+
+}
+
+
+};
+
+
+
+
+// CAMBIO MENU
+
+
+window.abrir=function(id){
+
+
+document.querySelectorAll(".section")
+.forEach(e=>{
+
+e.classList.remove("active");
+
+});
+
+
+document.getElementById(id)
+.classList.add("active");
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+</html>
+
+<div class="box">
+
 <h2>
-➕ Crear oferta
+➕ Nueva oferta relámpago
 </h2>
 
 
-<input id="tituloOferta" placeholder="Nombre del producto">
+<input id="tituloOferta"
+placeholder="Nombre del producto">
 
 
-<input id="precioAntes" placeholder="Precio anterior">
+<input id="precioAntes"
+placeholder="Precio anterior">
 
 
-<input id="precioActual" placeholder="Precio actual">
+<input id="precioActual"
+placeholder="Precio actual">
 
 
-<input id="linkOferta" placeholder="Link Mercado Libre">
+<input id="linkOferta"
+placeholder="Link Mercado Libre">
 
-
-<select id="tipoOferta">
-
-<option value="relampago">
-⚡ Oferta Relámpago
-</option>
-
-<option value="imperdible">
-🔥 Oferta Imperdible
-</option>
-
-</select>
 
 
 <input 
@@ -501,9 +758,11 @@ id="imagenOferta"
 accept="image/*">
 
 
-<button class="btn-green" onclick="guardarOferta()">
 
-💾 PUBLICAR OFERTA
+<button class="btn-main"
+onclick="guardarOferta()">
+
+⚡ PUBLICAR OFERTA
 
 </button>
 
@@ -528,819 +787,31 @@ Cargando...
 
 </div>
 
+// =====================================
+// CUPONES ADMIN PRO
+// =====================================
 
-</div>
-
-
-
-
-<!-- CUPONES -->
-
-
-<div id="cupones" class="section">
-
-
-<h1>
-🎟 Cupones
-</h1>
-
-
-
-<div class="box">
-
-
-<h2>
-➕ Crear cupón
-</h2>
-
-
-<input id="codigoCupon" placeholder="Código del cupón">
-
-
-<input id="descuentoCupon" placeholder="Ejemplo: $500 OFF">
-
-
-<input id="minimoCupon" placeholder="Compra mínima">
-
-
-<select id="tipoCupon">
-
-
-<option value="relampago">
-⚡ Relámpago
-</option>
-
-
-<option value="bancario">
-🏦 Bancario
-</option>
-
-
-<option value="exclusivo">
-💎 Exclusivo Meli+
-</option>
-
-
-</select>
-
-
-
-<button class="btn-green" onclick="guardarCupon()">
-
-💾 GUARDAR CUPÓN
-
-</button>
-
-
-</div>
-
-
-
-<div class="box">
-
-
-<h2>
-🎟 Cupones activos
-</h2>
-
-
-<div id="listaCupones">
-
-Cargando...
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- IMAGENES -->
-
-
-<div id="imagenes" class="section">
-
-
-<h1>
-🖼 Biblioteca de imágenes
-</h1>
-
-
-
-<div class="box">
-
-
-<input 
-type="file"
-id="archivoImagen"
-accept="image/*">
-
-
-
-<button class="btn-green" onclick="subirImagen()">
-
-📤 SUBIR IMAGEN
-
-</button>
-
-
-</div>
-
-
-
-<div class="box">
-
-
-<h2>
-Galería
-</h2>
-
-
-<div id="galeria">
-
-Cargando...
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<!-- CATEGORIAS -->
-
-
-<div id="categorias" class="section">
-
-
-<h1>
-📂 Categorías
-</h1>
-
-
-
-<div class="box">
-
-
-<input id="nombreCategoria" placeholder="Nombre categoría">
-
-
-<input id="emojiCategoria" placeholder="Emoji">
-
-
-<input id="linkCategoria" placeholder="Link categoría">
-
-
-<button class="btn-green" onclick="guardarCategoria()">
-
-➕ AGREGAR CATEGORÍA
-
-</button>
-
-
-</div>
-
-
-
-<div class="box">
-
-
-<h2>
-📂 Categorías activas
-</h2>
-
-
-<div id="listaCategorias">
-
-Cargando...
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<!-- MERCADO PAGO -->
-
-
-<div id="mercadopago" class="section">
-
-
-<h1>
-💙 Mercado Pago
-</h1>
-
-
-<div class="box">
-
-
-<input id="tituloMP" placeholder="Título beneficio">
-
-
-<textarea id="textoMP" placeholder="Descripción"></textarea>
-
-
-<input id="linkMP" placeholder="Link Mercado Pago">
-
-
-<button class="btn-green" onclick="guardarMP()">
-
-💾 ACTUALIZAR
-
-</button>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<!-- ESTADISTICAS -->
-
-
-<div id="estadisticas" class="section">
-
-
-<h1>
-📈 Estadísticas
-</h1>
-
-
-<div class="box">
-
-
-<h3>
-Copias de cupones
-</h3>
-
-
-<div id="estadisticaCupones">
-
-Cargando...
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<!-- CONFIGURACION -->
-
-
-<div id="configuracion" class="section">
-
-
-<h1>
-⚙ Configuración
-</h1>
-
-
-<div class="box">
-
-
-<h3>
-Estado de cupones
-</h3>
-
-
-<select id="estadoCupones">
-
-
-<option value="activo">
-🟢 Activos
-</option>
-
-
-<option value="agotarse">
-🟠 Últimos
-</option>
-
-
-<option value="agotado">
-🔴 Agotados
-</option>
-
-
-</select>
-
-
-
-<button class="btn-green" onclick="guardarEstado()">
-
-💾 GUARDAR ESTADO
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-
-</div>
-
-</div>
-
-<script type="module">
-
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-
-import {
-
-getFirestore,
-doc,
-setDoc,
-getDoc,
-collection,
-addDoc,
-onSnapshot,
-deleteDoc,
-serverTimestamp,
-increment
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-
-// =========================
-// FIREBASE
-// =========================
-
-
-const firebaseConfig = {
-
-apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
-
-authDomain:"patronofertasweb.firebaseapp.com",
-
-projectId:"patronofertasweb",
-
-storageBucket:"patronofertasweb.firebasestorage.app",
-
-messagingSenderId:"292338334268",
-
-appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
-
-};
-
-
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-
-
-
-
-// =========================
-// LOGIN
-// =========================
-
-
-window.login=function(){
-
-
-let pass =
-document.getElementById("password").value;
-
-
-
-if(pass==="Admin2026"){
-
-
-document.getElementById("login").style.display="none";
-
-
-document.getElementById("panel").style.display="block";
-
-
-cargarDashboard();
-
-
-}
-
-else{
-
-
-alert("❌ Contraseña incorrecta");
-
-
-}
-
-
-};
-
-
-
-
-
-
-// =========================
-// CAMBIAR SECCIONES
-// =========================
-
-
-window.abrirSeccion=function(id){
-
-
-document.querySelectorAll(".section")
-.forEach(e=>{
-
-e.classList.remove("active");
-
-});
-
-
-document.getElementById(id)
-.classList.add("active");
-
-
-};
-
-
-
-
-
-
-// =========================
-// DASHBOARD
-// =========================
-
-
-function cargarDashboard(){
-
-
-const contador =
-doc(db,"contadores","global");
-
-
-
-onSnapshot(contador,(snap)=>{
-
-
-let d=snap.data() || {};
-
-
-
-clics.innerHTML=d.total || 0;
-
-flash.innerHTML=d.relampago || 0;
-
-exclusivos.innerHTML=d.exclusivos || 0;
-
-
-});
-
-
-
-
-
-const visitas =
-doc(db,"visitas","contador");
-
-
-
-onSnapshot(visitas,(snap)=>{
-
-
-let d=snap.data() || {};
-
-
-visitantes.innerHTML =
-d.total || 0;
-
-
-});
-
-
-
-
-
-const historial =
-collection(db,"visitas_historial");
-
-
-
-onSnapshot(historial,(snap)=>{
-
-
-let html="";
-
-
-
-snap.forEach(d=>{
-
-
-html+=`
-
-<div class="card">
-
-📅 ${d.id}
-
-<br>
-
-👥 ${d.data().total || 0}
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-actividad.innerHTML =
-html || "Sin datos";
-
-
-});
-
-
-}
-
-
-
-
-
-// =========================
-// CONVERTIR IMAGEN
-// =========================
-
-
-function convertirImagen(file){
-
-
-return new Promise(resolve=>{
-
-
-let reader=new FileReader();
-
-
-reader.onload=()=>resolve(reader.result);
-
-
-reader.readAsDataURL(file);
-
-
-});
-
-
-}
-
-
-
-
-// =========================
-// OFERTAS
-// =========================
-
-
-window.guardarOferta=async function(){
-
-
-let titulo=
-tituloOferta.value;
-
-
-let antes=
-precioAntes.value;
-
-
-let actual=
-precioActual.value;
-
-
-let link=
-linkOferta.value;
-
-
-let tipo=
-tipoOferta.value;
-
-
-let imagen="";
-
-
-
-if(imagenOferta.files[0]){
-
-
-imagen =
-await convertirImagen(imagenOferta.files[0]);
-
-
-}
-
-
-
-if(!titulo || !actual || !link){
-
-
-alert("Completa los datos");
-
-return;
-
-}
-
-
-
-await addDoc(
-
-collection(db,"ofertas"),
-
-{
-
-titulo,
-
-precioAntes:antes,
-
-precioActual:actual,
-
-link,
-
-tipo,
-
-imagen,
-
-fecha:serverTimestamp()
-
-}
-
-);
-
-
-
-alert("✅ Oferta creada");
-
-
-};
-
-
-
-
-
-
-onSnapshot(
-
-collection(db,"ofertas"),
-
-(snap)=>{
-
-
-let html="";
-
-
-
-snap.forEach(d=>{
-
-
-let o=d.data();
-
-
-
-html+=`
-
-<div class="card">
-
-
-${o.imagen ?
-
-`
-<img src="${o.imagen}"
-style="width:100%;border-radius:15px">
-`
-
-:""}
-
-
-
-<h3>${o.titulo}</h3>
-
-
-❌ <s>$${o.precioAntes}</s>
-
-
-<br>
-
-
-🔥 <b>$${o.precioActual}</b>
-
-
-<br><br>
-
-
-<a href="${o.link}" target="_blank">
-
-VER OFERTA
-
-</a>
-
-
-<br><br>
-
-
-<button 
-style="background:#e53935;color:white"
-onclick="borrarOferta('${d.id}')">
-
-🗑 ELIMINAR
-
-</button>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-listaOfertas.innerHTML =
-html || "Sin ofertas";
-
-
-});
-
-
-
-
-
-window.borrarOferta=async function(id){
-
-
-if(confirm("¿Eliminar oferta?")){
-
-
-await deleteDoc(
-doc(db,"ofertas",id)
-);
-
-
-}
-
-
-};
-
-// =========================
-// CUPONES
-// =========================
 
 
 window.guardarCupon=async function(){
 
 
+
 let codigo=
-codigoCupon.value.trim();
+codigoCupon.value
+.trim()
+.toUpperCase();
+
 
 
 let descuento=
 descuentoCupon.value;
 
 
+
 let minimo=
 minimoCupon.value;
+
 
 
 let tipo=
@@ -1348,16 +819,24 @@ tipoCupon.value;
 
 
 
+let estado=
+estadoCupon.value;
+
+
+
+
 if(!codigo){
 
 
-alert("Escribe el código");
+alert("Escribe el código del cupón");
 
 
 return;
 
 
 }
+
+
 
 
 
@@ -1374,6 +853,8 @@ minimo,
 
 tipo,
 
+estado,
+
 copias:0,
 
 fecha:serverTimestamp()
@@ -1381,11 +862,14 @@ fecha:serverTimestamp()
 
 }
 
+
 );
 
 
 
-alert("✅ Cupón guardado");
+
+
+// LIMPIAR CAMPOS
 
 
 codigoCupon.value="";
@@ -1395,7 +879,13 @@ descuentoCupon.value="";
 minimoCupon.value="";
 
 
+
+alert("✅ Cupón creado");
+
+
+
 };
+
 
 
 
@@ -1423,46 +913,117 @@ let c=d.data();
 
 
 
+
+let color="";
+
+
+
+if(c.estado==="activo"){
+
+color="🟢 ACTIVO";
+
+}
+
+
+if(c.estado==="agotando"){
+
+color="🟠 POR AGOTARSE";
+
+}
+
+
+if(c.estado==="agotado"){
+
+color="🔴 AGOTADO";
+
+}
+
+
+
+
+
+
 html+=`
 
 <div class="card">
 
 
-🎟 <b>${d.id}</b>
+<h2>
+
+🎟 ${d.id}
+
+</h2>
 
 
-<br><br>
+
+<p>
+
+${color}
+
+</p>
 
 
-💰 ${c.descuento}
+
+<p>
+
+💰 ${c.descuento || ""}
+
+</p>
 
 
-<br>
 
+<p>
 
 Compra mínima:
-${c.minimo}
+<b>${c.minimo || ""}</b>
+
+</p>
 
 
-<br>
 
+<p>
 
 Tipo:
-${c.tipo}
+<b>${c.tipo}</b>
+
+</p>
 
 
-<br>
 
+<p>
 
 Copias:
-${c.copias || 0}
+<b>${c.copias || 0}</b>
 
+</p>
 
-<br><br>
 
 
 <button
-style="background:#e53935;color:white"
+
+style="
+background:#ffe600;
+width:100%;
+margin-bottom:8px
+"
+
+onclick="cambiarEstadoCupon('${d.id}')">
+
+🔄 CAMBIAR ESTADO
+
+</button>
+
+
+
+
+<button
+
+style="
+background:#e53935;
+color:white;
+width:100%
+"
+
 onclick="eliminarCupon('${d.id}')">
 
 🗑 ELIMINAR
@@ -1470,7 +1031,9 @@ onclick="eliminarCupon('${d.id}')">
 </button>
 
 
+
 </div>
+
 
 `;
 
@@ -1484,6 +1047,7 @@ listaCupones.innerHTML =
 html || "Sin cupones";
 
 
+
 });
 
 
@@ -1491,148 +1055,84 @@ html || "Sin cupones";
 
 
 
+
+// CAMBIAR ESTADO RÁPIDO
+
+
+window.cambiarEstadoCupon=async function(id){
+
+
+
+let ref=
+doc(db,"cupones",id);
+
+
+
+let snap=
+await getDoc(ref);
+
+
+
+let estado=
+snap.data().estado;
+
+
+
+let nuevo;
+
+
+
+if(estado==="activo"){
+
+nuevo="agotando";
+
+}
+
+else if(estado==="agotando"){
+
+nuevo="agotado";
+
+}
+
+else{
+
+nuevo="activo";
+
+}
+
+
+
+
+
+await updateDoc(ref,{
+
+estado:nuevo
+
+});
+
+
+
+};
+
+
+
+
+
+
+
+// ELIMINAR CUPÓN
+
+
 window.eliminarCupon=async function(id){
+
 
 
 if(confirm("¿Eliminar cupón?")){
 
 
 await deleteDoc(
+
 doc(db,"cupones",id)
-);
-
-
-}
-
-
-};
-
-
-
-
-
-
-
-// =========================
-// CATEGORIAS
-// =========================
-
-
-window.guardarCategoria=async function(){
-
-
-
-await addDoc(
-
-collection(db,"categorias"),
-
-{
-
-
-nombre:
-nombreCategoria.value,
-
-
-emoji:
-emojiCategoria.value,
-
-
-link:
-linkCategoria.value,
-
-
-fecha:serverTimestamp()
-
-
-}
-
-);
-
-
-
-alert("✅ Categoría agregada");
-
-
-};
-
-
-
-onSnapshot(
-
-collection(db,"categorias"),
-
-(snap)=>{
-
-
-let html="";
-
-
-
-snap.forEach(d=>{
-
-
-let c=d.data();
-
-
-
-html+=`
-
-<div class="card">
-
-
-${c.emoji}
-
-
-<h3>
-${c.nombre}
-</h3>
-
-
-<a href="${c.link}" target="_blank">
-
-ABRIR
-
-</a>
-
-
-<br><br>
-
-
-<button
-style="background:#e53935;color:white"
-onclick="borrarCategoria('${d.id}')">
-
-🗑 ELIMINAR
-
-</button>
-
-
-</div>
-
-
-`;
-
-
-});
-
-
-
-listaCategorias.innerHTML =
-html || "Sin categorías";
-
-
-});
-
-
-window.borrarCategoria=async function(id){
-
-
-if(confirm("¿Eliminar categoría?")){
-
-
-await deleteDoc(
-
-doc(db,"categorias",id)
 
 );
 
@@ -1640,41 +1140,54 @@ doc(db,"categorias",id)
 }
 
 
+
 };
 
-
-
-
-
-
-// =========================
+// =====================================
 // BIBLIOTECA IMAGENES
-// =========================
+// =====================================
+
+
+
+function convertirImagen(file){
+
+
+return new Promise(resolve=>{
+
+
+let reader=new FileReader();
+
+
+reader.onload=()=>resolve(reader.result);
+
+
+reader.readAsDataURL(file);
+
+
+});
+
+}
+
 
 
 window.subirImagen=async function(){
 
 
-
-let archivo =
+let archivo=
 archivoImagen.files[0];
-
 
 
 if(!archivo){
 
-
 alert("Selecciona una imagen");
 
-
 return;
-
 
 }
 
 
 
-let imagen =
+let imagen=
 await convertirImagen(archivo);
 
 
@@ -1685,18 +1198,19 @@ collection(db,"imagenes"),
 
 {
 
+imagen,
 
 nombre:archivo.name,
 
-imagen,
-
 fecha:serverTimestamp()
-
 
 }
 
 );
 
+
+
+archivoImagen.value="";
 
 
 alert("✅ Imagen guardada");
@@ -1735,20 +1249,28 @@ html+=`
 
 <img src="${i.imagen}"
 
-style="width:100%;border-radius:15px">
+style="
+width:100%;
+border-radius:15px
+">
 
 
-<br>
-
+<p>
 
 ${i.nombre}
 
+</p>
 
-<br><br>
 
 
 <button
-style="background:#e53935;color:white"
+
+style="
+background:#e53935;
+color:white;
+width:100%
+"
+
 onclick="borrarImagen('${d.id}')">
 
 🗑 ELIMINAR
@@ -1762,6 +1284,7 @@ onclick="borrarImagen('${d.id}')">
 `;
 
 
+
 });
 
 
@@ -1771,6 +1294,7 @@ html || "Sin imágenes";
 
 
 });
+
 
 
 
@@ -1789,131 +1313,16 @@ doc(db,"imagenes",id)
 
 };
 
- 
-// =========================
-// MERCADO PAGO
-// =========================
 
 
-window.guardarMP=async function(){
 
 
-await setDoc(
 
-doc(db,"configuracion","mercadopago"),
 
-{
+// =====================================
+// ESTADISTICAS
+// =====================================
 
-
-titulo:
-tituloMP.value,
-
-
-texto:
-textoMP.value,
-
-
-link:
-linkMP.value,
-
-
-fecha:serverTimestamp()
-
-
-}
-
-);
-
-
-
-alert("✅ Mercado Pago actualizado");
-
-
-};
-
-
-
-
-
-onSnapshot(
-
-doc(db,"configuracion","mercadopago"),
-
-(snap)=>{
-
-
-if(snap.exists()){
-
-
-let d=snap.data();
-
-
-
-tituloMP.value =
-d.titulo || "";
-
-
-textoMP.value =
-d.texto || "";
-
-
-linkMP.value =
-d.link || "";
-
-
-}
-
-
-}
-
-);
-
-
-
-
-
-
-
-
-// =========================
-// ESTADO CUPONES
-// =========================
-
-
-window.guardarEstado=async function(){
-
-
-
-await setDoc(
-
-doc(db,"configuracion","estadoCupones"),
-
-{
-
-
-estado:
-estadoCupones.value
-
-
-}
-
-);
-
-
-
-alert("✅ Estado actualizado");
-
-
-};
-
-
-
-
-
-
-// =========================
-// ESTADISTICAS CUPONES
-// =========================
 
 
 onSnapshot(
@@ -1923,7 +1332,9 @@ collection(db,"cupones"),
 (snap)=>{
 
 
-let html="";
+let total=0;
+
+let ranking=[];
 
 
 
@@ -1933,17 +1344,61 @@ snap.forEach(d=>{
 let c=d.data();
 
 
+let copias=c.copias || 0;
+
+
+total+=copias;
+
+
+
+ranking.push({
+
+codigo:d.id,
+
+copias
+
+});
+
+
+});
+
+
+
+totalCopias.innerHTML=total;
+
+
+totalCupones.innerHTML=snap.size;
+
+
+
+ranking.sort(
+
+(a,b)=>b.copias-a.copias
+
+);
+
+
+
+let html="";
+
+
+
+ranking.slice(0,10)
+.forEach((r,i)=>{
+
 
 html+=`
 
 <div class="card">
 
-🎟 ${d.id}
+${i+1}️⃣
+
+<b>${r.codigo}</b>
 
 <br>
 
 Copias:
-<b>${c.copias || 0}</b>
+${r.copias}
 
 </div>
 
@@ -1955,7 +1410,7 @@ Copias:
 
 
 
-estadisticaCupones.innerHTML =
+rankingCupones.innerHTML=
 html || "Sin datos";
 
 
@@ -1967,24 +1422,45 @@ html || "Sin datos";
 
 
 
-// =========================
-// CONTADOR DE COPIAS
-// =========================
+onSnapshot(
+
+collection(db,"ofertas"),
+
+(snap)=>{
 
 
-window.copiarCupon=async function(codigo){
+totalOfertas.innerHTML=
+snap.size;
+
+
+});
 
 
 
-await updateDoc(
 
-doc(db,"cupones",codigo),
+
+
+
+// =====================================
+// CONFIGURACION GENERAL
+// =====================================
+
+
+
+window.guardarConfiguracion=async function(){
+
+
+
+await setDoc(
+
+doc(db,"configuracion","general"),
 
 {
 
+estado:
+estadoGeneral.value,
 
-copias:increment(1)
-
+fecha:serverTimestamp()
 
 }
 
@@ -1992,200 +1468,7 @@ copias:increment(1)
 
 
 
-navigator.clipboard.writeText(codigo);
-
-
-
-alert("✅ Cupón copiado");
+alert("✅ Configuración guardada");
 
 
 };
-
-
-
-
-
-
-
-
-// =========================
-// CONTADOR VISITAS
-// =========================
-
-
-const visitaRef =
-doc(db,"visitas","contador");
-
-
-
-getDoc(visitaRef).then(async(snap)=>{
-
-
-if(!snap.exists()){
-
-
-await setDoc(
-
-visitaRef,
-
-{
-
-
-total:1
-
-}
-
-);
-
-
-}
-
-else{
-
-
-await setDoc(
-
-visitaRef,
-
-{
-
-
-total:
-(snap.data().total || 0)+1
-
-
-}
-
-);
-
-
-}
-
-
-});
-
-
-
-
-
-
-
-
-// =========================
-// CONTADOR CLICS GENERALES
-// =========================
-
-
-const globalRef =
-doc(db,"contadores","global");
-
-
-
-getDoc(globalRef).then(async(snap)=>{
-
-
-if(!snap.exists()){
-
-
-await setDoc(
-
-globalRef,
-
-{
-
-
-total:0,
-
-relampago:0,
-
-exclusivos:0,
-
-bancarios:0
-
-
-}
-
-);
-
-
-}
-
-
-});
-
-
-
-
-
-
-
-
-// =========================
-// CREAR ESTRUCTURA INICIAL
-// =========================
-
-
-async function iniciarBase(){
-
-
-
-const refs=[
-
-
-["configuracion","estadoCupones"],
-
-["configuracion","mercadopago"],
-
-["contadores","global"],
-
-["visitas","contador"],
-
-["estadisticas","ahorro"]
-
-
-];
-
-
-
-for(let r of refs){
-
-
-
-let ref =
-doc(db,r[0],r[1]);
-
-
-
-let snap =
-await getDoc(ref);
-
-
-
-if(!snap.exists()){
-
-
-await setDoc(ref,{});
-
-
-}
-
-
-
-}
-
-
-}
-
-
-
-iniciarBase();
-
-
-
-
-</script>
-
-
-</body>
-
-</html>
