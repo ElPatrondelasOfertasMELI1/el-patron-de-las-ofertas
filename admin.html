@@ -5,62 +5,191 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Panel Admin - El Patrón de las Ofertas</title>
+<title>Panel Admin PRO - El Patrón de las Ofertas</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 
+*{
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
 body{
 margin:0;
-font-family:Inter,sans-serif;
 background:#f2f3f5;
-color:#000;
+color:#111;
 }
+
+/* HEADER */
 
 header{
+
+height:70px;
 background:#ffe600;
-padding:20px;
-text-align:center;
+display:flex;
+align-items:center;
+justify-content:center;
 font-size:22px;
 font-weight:900;
+position:sticky;
+top:0;
+z-index:10;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+
 }
+
+
+/* LOGIN */
 
 .login{
-padding:30px;
-text-align:center;
+
+max-width:400px;
+margin:50px auto;
+padding:25px;
+
 }
 
-input{
-padding:15px;
-border-radius:12px;
-border:0;
-width:80%;
-font-size:16px;
+.login h2{
+
+text-align:center;
+font-weight:900;
+
 }
+
+input,select,textarea{
+
+width:100%;
+padding:15px;
+border-radius:14px;
+border:0;
+background:white;
+margin:8px 0;
+font-size:15px;
+
+}
+
 
 button{
-margin-top:15px;
-padding:14px;
+
 border:0;
-border-radius:12px;
-background:#00c853;
-color:white;
+padding:15px;
+border-radius:14px;
 font-weight:900;
-width:85%;
+cursor:pointer;
+
 }
 
-#panel{
-display:none;
+
+.login button{
+
+width:100%;
+background:#00c853;
+color:white;
+
 }
+
+
+
+/* PANEL */
+
+#panel{
+
+display:none;
+
+}
+
+
+
+/* MENU */
+
+.sidebar{
+
+position:fixed;
+
+top:70px;
+
+left:0;
+
+bottom:0;
+
+width:240px;
+
+background:white;
+
+padding:15px;
+
+box-shadow:5px 0 20px rgba(0,0,0,.08);
+
+overflow:auto;
+
+}
+
+
+.logo-admin{
+
+font-size:20px;
+font-weight:900;
+padding:15px;
+
+}
+
+
+.menu-btn{
+
+width:100%;
+background:#f5f5f5;
+margin-bottom:10px;
+text-align:left;
+
+}
+
+
+.menu-btn:hover{
+
+background:#ffe600;
+
+}
+
+
+
+/* CONTENIDO */
+
+.content{
+
+margin-left:260px;
+
+padding:20px;
+
+}
+
+
+.section{
+
+display:none;
+
+}
+
+
+.section.active{
+
+display:block;
+
+}
+
+
+
+/* TARJETAS */
 
 
 .grid{
 
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+
 gap:15px;
-padding:15px;
 
 }
 
@@ -68,78 +197,105 @@ padding:15px;
 .card{
 
 background:white;
+
 padding:20px;
+
 border-radius:18px;
-box-shadow:0 5px 15px #ddd;
+
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+
 text-align:center;
+
+}
+
+
+.card h3{
+
+margin:0 0 10px;
 
 }
 
 
 .numero{
 
-font-size:30px;
+font-size:35px;
+
 font-weight:900;
+
+color:#00c853;
 
 }
 
 
-.grafica{
 
-margin:15px;
+/* CAJAS */
+
+.box{
+
 background:white;
+
 padding:20px;
+
 border-radius:18px;
 
+margin-top:20px;
+
+box-shadow:0 6px 18px rgba(0,0,0,.08);
+
 }
 
 
-.barra{
+.save{
 
-height:25px;
+width:100%;
+
 background:#00c853;
-margin:8px 0;
-border-radius:10px;
 
-}
-
-.barra-dia{
-
-margin:12px 0;
-
-}
-
-.barra-dia span{
-
-display:block;
-font-weight:900;
-margin-bottom:5px;
-
-}
-
-
-.fondo-barra{
-
-background:#eee;
-height:25px;
-border-radius:12px;
-overflow:hidden;
-
-}
-
-
-.relleno-barra{
-
-height:100%;
-background:#00c853;
-border-radius:12px;
-text-align:right;
-padding-right:8px;
 color:white;
-font-size:13px;
-font-weight:900;
+
+margin-top:10px;
 
 }
+
+
+.delete{
+
+background:#e53935;
+
+color:white;
+
+}
+
+
+
+/* MOVIL */
+
+@media(max-width:800px){
+
+.sidebar{
+
+width:75px;
+
+}
+
+
+.menu-btn{
+
+font-size:11px;
+
+padding:10px;
+
+}
+
+
+.content{
+
+margin-left:90px;
+
+}
+
+}
+
 
 </style>
 
@@ -150,24 +306,35 @@ font-weight:900;
 
 
 <header>
-⚡ PANEL ADMINISTRADOR ⚡
+
+⚡ PANEL ADMIN PRO ⚡
 <br>
 EL PATRÓN DE LAS OFERTAS
+
 </header>
 
 
 
 <div class="login" id="login">
 
-<h2>🔐 Acceso</h2>
 
-<input id="pass" type="password" placeholder="Contraseña">
+<h2>
+🔐 Acceso Administrador
+</h2>
 
-<br>
+
+<input 
+id="pass"
+type="password"
+placeholder="Contraseña">
+
 
 <button onclick="entrar()">
+
 ENTRAR
+
 </button>
+
 
 </div>
 
@@ -176,160 +343,582 @@ ENTRAR
 <div id="panel">
 
 
+<div class="sidebar">
+
+
+<div class="logo-admin">
+
+⚙ ADMIN
+
+</div>
+
+
+
+<button class="menu-btn" onclick="mostrar('dashboard')">
+
+📊 Dashboard
+
+</button>
+
+
+<button class="menu-btn" onclick="mostrar('ofertas')">
+
+⚡ Ofertas
+
+</button>
+
+
+<button class="menu-btn" onclick="mostrar('cupones')">
+
+🎟 Cupones
+
+</button>
+
+
+<button class="menu-btn" onclick="mostrar('categorias')">
+
+📂 Categorías
+
+</button>
+
+
+<button class="menu-btn" onclick="mostrar('imagenes')">
+
+🖼 Imágenes
+
+</button>
+
+
+<button class="menu-btn" onclick="mostrar('mercadopago')">
+
+💙 Mercado Pago
+
+</button>
+
+
+<button class="menu-btn" onclick="mostrar('estadisticas')">
+
+📈 Estadísticas
+
+</button>
+
+
+<button class="menu-btn" onclick="mostrar('configuracion')">
+
+⚙ Configuración
+
+</button>
+
+
+</div>
+
+
+
+<div class="content">
+
+
+<div id="dashboard" class="section active">
+
+
+<h1>
+
+📊 Dashboard
+
+</h1>
+
+
 <div class="grid">
 
+
 <div class="card">
-👥 TOTAL VISITANTES
+
+<h3>
+👥 Visitantes
+</h3>
+
 <div class="numero" id="visitantes">
 0
 </div>
+
 </div>
 
-<button onclick="reiniciarContadores()"
-style="
-background:#e53935;
-color:#fff;
-font-weight:900;
-margin:15px;
-width:calc(100% - 30px);
-padding:16px;
-border:none;
-border-radius:15px;
-font-size:17px;
-cursor:pointer;
-">
-🔄 REINICIAR CONTADORES
-</button>
 
 <div class="card">
-👆 TOTAL CLICS
+
+<h3>
+👆 Clics
+</h3>
+
 <div class="numero" id="total">
 0
 </div>
+
 </div>
 
 
 <div class="card">
-⚡ RELÁMPAGO
+
+<h3>
+⚡ Relámpago
+</h3>
+
 <div class="numero" id="relampago">
 0
 </div>
+
 </div>
 
 
 <div class="card">
-💎 EXCLUSIVOS
+
+<h3>
+💎 Exclusivos
+</h3>
+
 <div class="numero" id="exclusivos">
 0
 </div>
+
+</div>
+
+
+</div>
+
+<!-- CONTINUACIÓN PANEL -->
+
+<div class="box">
+
+<h2>
+📈 Actividad
+</h2>
+
+<div id="barra">
+
+<div style="
+height:25px;
+background:#eee;
+border-radius:20px;
+overflow:hidden;
+">
+
+<div style="
+height:100%;
+width:0%;
+background:#00c853;
+border-radius:20px;
+" id="progreso">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+SECCIÓN OFERTAS
+========================= -->
+
+<div id="ofertas" class="section">
+
+<h1>
+⚡ Administrar Ofertas Relámpago
+</h1>
+
+
+<div class="box">
+
+<h2>
+➕ Nueva oferta
+</h2>
+
+
+<input id="tituloOferta"
+placeholder="Título del producto">
+
+
+<input id="imagenOferta"
+placeholder="URL o nombre de imagen">
+
+
+<input id="antesOferta"
+placeholder="Precio anterior">
+
+
+<input id="precioOferta"
+placeholder="Precio actual">
+
+
+<input id="linkOferta"
+placeholder="Link afiliado">
+
+
+<select id="estadoOferta">
+
+<option value="activo">
+🟢 Activa
+</option>
+
+<option value="agotarse">
+🟠 Por agotarse
+</option>
+
+<option value="agotado">
+🔴 Agotada
+</option>
+
+</select>
+
+
+<button class="save">
+
+💾 Guardar oferta
+
+</button>
+
+
+</div>
+
+
+<div class="box">
+
+<h2>
+📦 Ofertas registradas
+</h2>
+
+
+<div id="listaOfertas">
+
+Sin ofertas todavía
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+SECCIÓN CUPONES
+========================= -->
+
+
+<div id="cupones" class="section">
+
+<h1>
+🎟 Administrar Cupones
+</h1>
+
+
+<div class="box">
+
+<h2>
+➕ Nuevo cupón
+</h2>
+
+
+<input placeholder="Código del cupón">
+
+
+<input placeholder="Descuento">
+
+
+<input placeholder="Compra mínima">
+
+
+<button class="save">
+
+💾 Guardar cupón
+
+</button>
+
+
+</div>
+
+
+<div class="box">
+
+<h2>
+🎟 Cupones actuales
+</h2>
+
+
+<div id="listaCupones">
+
+Sin cupones
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+CATEGORÍAS
+========================= -->
+
+
+<div id="categorias" class="section">
+
+
+<h1>
+📂 Categorías
+</h1>
+
+
+<div class="box">
+
+
+<input placeholder="Nombre categoría">
+
+
+<input placeholder="Emoji">
+
+
+<input placeholder="Link afiliado">
+
+
+<button class="save">
+
+➕ Agregar categoría
+
+</button>
+
+
+</div>
+
+
+<div id="listaCategorias">
+
+Sin categorías
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+IMÁGENES
+========================= -->
+
+
+<div id="imagenes" class="section">
+
+
+<h1>
+🖼 Biblioteca de imágenes
+</h1>
+
+
+<div class="box">
+
+
+<input 
+type="file"
+id="archivoImagen">
+
+
+<button class="save">
+
+📤 Subir imagen
+
+</button>
+
+
+</div>
+
+
+<div id="galeria">
+
+Sin imágenes
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- =========================
+MERCADO PAGO
+========================= -->
+
+
+<div id="mercadopago" class="section">
+
+
+<h1>
+💙 Mercado Pago
+</h1>
+
+
+<div class="box">
+
+
+<input placeholder="Título">
+
+
+<textarea placeholder="Descripción"></textarea>
+
+
+<input placeholder="Link">
+
+
+<button class="save">
+
+💾 Guardar cambios
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<!-- =========================
+ESTADÍSTICAS
+========================= -->
+
+
+<div id="estadisticas" class="section">
+
+
+<h1>
+📈 Estadísticas
+</h1>
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+🏆 Cupón más usado
+</h3>
+
+<div id="topCupon">
+
+-
+
+</div>
+
 </div>
 
 
 <div class="card">
-🏦 BANCARIOS
-<div class="numero" id="bancarios">
-0
-</div>
-</div>
-
-
-</div>
-
-
-
-<div class="grafica">
 
 <h3>
-📈 ACTIVIDAD
+🔥 Oferta más vista
 </h3>
 
+<div id="topOferta">
 
-<div>
-Hoy
-</div>
+-
 
-<div class="barra" id="barra"></div>
-
-
-</div>
-
-<div class="grafica">
-
-<h3>
-📊 ÚLTIMOS 3 DÍAS
-</h3>
-
-<div id="historial">
-Cargando...
 </div>
 
 </div>
 
-<div class="grafica">
-
-<h3>
-📈 VISITAS ÚLTIMOS 3 DÍAS
-</h3>
-
-<div id="graficaDias">
-Cargando...
-</div>
 
 </div>
 
-<div class="grafica">
-
-<h3>
-🌎 REGIONES
-</h3>
-
-<div id="regiones">
-Cargando...
-</div>
 
 </div>
 
-<div class="grafica">
 
-<h3>
-⚡ ESTADO DE CUPONES RELÁMPAGO
-</h3>
 
-<button style="background:#00c853"
-onclick="cambiarEstado('activo')">
-🟢 ACTIVAR CUPONES
+
+<!-- =========================
+CONFIGURACIÓN
+========================= -->
+
+
+<div id="configuracion" class="section">
+
+
+<h1>
+⚙ Configuración
+</h1>
+
+
+<div class="box">
+
+
+<h2>
+Estado cupones
+</h2>
+
+
+<button style="
+background:#00c853;
+color:white;
+width:100%;
+">
+
+🟢 Activos
+
 </button>
 
-<button style="background:#ff9800"
-onclick="cambiarEstado('agotarse')">
-🟠 POR AGOTARSE
+
+<button style="
+background:#ff9800;
+color:white;
+width:100%;
+margin-top:10px;
+">
+
+🟠 Por agotarse
+
 </button>
 
-<button style="background:#e53935"
-onclick="cambiarEstado('agotado')">
-🔴 AGOTADOS
+
+<button style="
+background:#e53935;
+color:white;
+width:100%;
+margin-top:10px;
+">
+
+🔴 Agotados
+
 </button>
+
 
 </div>
 
-<div class="grafica">
 
-<h3>
-🎟️ CUPONES MÁS COPIADOS
-</h3>
+</div>
 
-<div id="cupones">
-Cargando...
+
+
 </div>
 
 </div>
 
 <script type="module">
 
-
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
 
 import {
 getFirestore,
@@ -337,290 +926,318 @@ doc,
 onSnapshot,
 collection,
 getDocs,
-getDoc,
 updateDoc,
-setDoc
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
+setDoc,
+increment
+} 
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
+apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
 
-authDomain: "patronofertasweb.firebaseapp.com",
+authDomain:"patronofertasweb.firebaseapp.com",
 
-projectId: "patronofertasweb",
+projectId:"patronofertasweb",
 
-storageBucket: "patronofertasweb.firebasestorage.app",
+storageBucket:"patronofertasweb.firebasestorage.app",
 
-messagingSenderId: "292338334268",
+messagingSenderId:"292338334268",
 
-appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
+appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 };
-
 
 
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-window.cambiarEstado = async function(estado){
 
-const ref = doc(db,"configuracion","estadoCupones");
 
-await updateDoc(ref,{
-estado:estado
-}).catch(async()=>{
+/* ===== LOGIN ===== */
 
-await setDoc(ref,{
-estado:estado
-});
 
-});
+window.entrar=function(){
 
-alert("✅ Estado actualizado.");
+let clave=document.getElementById("pass").value;
+
+
+if(clave==="Admin2026"){
+
+
+document.getElementById("login").style.display="none";
+
+document.getElementById("panel").style.display="block";
+
+
+cargarEstadisticas();
+
+cargarCupones();
+
+cargarRegiones();
+
 
 }
 
-// ===== REGIONES EN TIEMPO REAL =====
+else{
 
-const regionesRef = collection(db,"regiones");
-
-
-onSnapshot(regionesRef,(snap)=>{
-
-let html="";
-
-
-snap.forEach(doc=>{
-
-const data = doc.data();
-
-
-html += `
-<div class="card">
-🌎 ${doc.id}
-<br>
-<b>${data.visitas || 0} visitas</b>
-</div>
-`;
-
-});
-
-
-if(html===""){
-html="Sin datos todavía";
-}
-
-
-document.getElementById("regiones").innerHTML = html;
-
-
-});
-
-
-window.entrar = function(){
-
-    window.reiniciarContadores = async function(){
-
-        const clave = prompt("Escribe la contraseña para reiniciar:");
-
-        if(clave !== "Admin2026"){
-            alert("Contraseña incorrecta");
-            return;
-        }
-
-        if(!confirm("¿Seguro que deseas reiniciar todos los contadores?")) return;
-
-        const ref = doc(db,"contadores","global");
-
-        await updateDoc(ref,{
-            total:0,
-            relampago:0,
-            bancarios:0,
-            exclusivos:0
-        });
-
-const cuponesRef = collection(db,"cupones");
-
-const snap = await getDocs(cuponesRef);
-
-for (const d of snap.docs){
-
-    await updateDoc(doc(db,"cupones",d.id),{
-
-        copias:0
-
-    });
+alert("❌ Contraseña incorrecta");
 
 }
 
-        alert("✅ Contadores reiniciados correctamente.");
-
-    }
-
-    let clave = document.getElementById("pass").value;
-
-    if(clave==="Admin2026"){
-
-        document.getElementById("login").style.display="none";
-        document.getElementById("panel").style.display="block";
-        
-        cargarDatos();
-cargarHistorial();
-cargarRankingCupones();
-
-  }else{
-
-    alert("Contraseña incorrecta");
-
 }
 
-};
 
-// ===== HISTORIAL ÚLTIMOS 3 DÍAS =====
 
-async function cargarHistorial(){
+/* ===== ESTADISTICAS ===== */
 
-const ref = collection(db,"visitas_historial");
 
-onSnapshot(ref,(snap)=>{
+function cargarEstadisticas(){
 
-let datos=[];
-
-snap.forEach(doc=>{
-    datos.push({
-        fecha:doc.id,
-        total:doc.data().total || 0
-    });
-});
-
-datos.sort((a,b)=>b.fecha.localeCompare(a.fecha));
-
-let html="";
-let grafica="";
-
-let max=Math.max(...datos.map(x=>x.total),1);
-
-datos.slice(0,3).forEach(d=>{
-
-html+=`
-<p>
-📅 ${d.fecha}<br>
-👥 <b>${d.total} visitantes</b>
-</p>
-`;
-
-let porcentaje=(d.total/max)*100;
-
-grafica+=`
-<div class="barra-dia">
-<span>${d.fecha} (${d.total})</span>
-<div class="fondo-barra">
-<div class="relleno-barra" style="width:${porcentaje}%"></div>
-</div>
-</div>
-`;
-
-});
-
-document.getElementById("historial").innerHTML=html;
-document.getElementById("graficaDias").innerHTML=grafica;
-
-});
-
-// TOTAL DE VISITANTES
-
-const visitantesRef = doc(db,"visitas","contador");
-
-onSnapshot(visitantesRef,(snap)=>{
-
-const data = snap.data();
-
-document.getElementById("visitantes").innerHTML =
-data.total || 0;
-
-});
-
-}
-
-async function cargarRankingCupones(){
-
-const ref = collection(db,"cupones");
-
-onSnapshot(ref,(snap)=>{
-
-let datos=[];
-
-snap.forEach(doc=>{
-
-datos.push({
-nombre:doc.id,
-copias:doc.data().copias || 0
-});
-
-});
-
-datos.sort((a,b)=>b.copias-a.copias);
-
-let html="";
-
-datos.forEach((c,i)=>{
-
-const puesto=["🥇","🥈","🥉","4️⃣","5️⃣","6️⃣"][i] || "⭐";
-
-html+=`
-<div class="card">
-${puesto} <b>${c.nombre}</b><br>
-${c.copias} copias
-</div>
-`;
-
-});
-
-document.getElementById("cupones").innerHTML = html;
-
-});
-
-}
-
-function cargarDatos(){
 
 const ref=doc(db,"contadores","global");
 
 
+onSnapshot(ref,(snap)=>{
+
+
+let data=snap.data() || {};
+
+
+document.getElementById("total").innerHTML=
+data.total || 0;
+
+
+document.getElementById("relampago").innerHTML=
+data.relampago || 0;
+
+
+document.getElementById("exclusivos").innerHTML=
+data.exclusivos || 0;
+
+
+document.getElementById("bancarios").innerHTML=
+data.bancarios || 0;
+
+
+
+});
+
+
+
+const visitantes=doc(db,"visitas","contador");
+
+
+onSnapshot(visitantes,(snap)=>{
+
+
+let data=snap.data() || {};
+
+
+document.getElementById("visitantes").innerHTML=
+data.total || 0;
+
+
+});
+
+
+
+}
+
+
+
+/* ===== CAMBIAR ESTADO CUPONES ===== */
+
+
+window.cambiarEstado=async function(estado){
+
+
+const ref=doc(db,"configuracion","estadoCupones");
+
+
+await setDoc(ref,{
+
+estado:estado
+
+});
+
+
+alert("✅ Estado actualizado");
+
+
+}
+
+
+
+
+
+/* ===== RANKING CUPONES ===== */
+
+
+function cargarCupones(){
+
+
+const ref=collection(db,"cupones");
+
 
 onSnapshot(ref,(snap)=>{
 
 
-const data=snap.data();
+let lista=[];
 
 
-
-document.getElementById("total").innerHTML=data.total || 0;
-
-
-document.getElementById("relampago").innerHTML=data.relampago || 0;
+snap.forEach(d=>{
 
 
-document.getElementById("exclusivos").innerHTML=data.exclusivos || 0;
+lista.push({
 
+nombre:d.id,
 
-document.getElementById("bancarios").innerHTML=data.bancarios || 0;
+copias:d.data().copias || 0
 
-
-
-let total=data.total || 1;
-
-
-document.getElementById("barra").style.width=
-
-Math.min(total/100,100)+"%";
+});
 
 
 });
+
+
+lista.sort((a,b)=>b.copias-a.copias);
+
+
+
+let html="";
+
+
+lista.forEach((c,i)=>{
+
+
+html+=`
+
+<div class="card">
+
+${i+1}️⃣
+
+<b>${c.nombre}</b>
+
+<br>
+
+${c.copias} copias
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+document.getElementById("cupones").innerHTML=
+html || "Sin datos";
+
+
+});
+
+
+}
+
+
+
+
+/* ===== REGIONES ===== */
+
+
+function cargarRegiones(){
+
+
+const ref=collection(db,"regiones");
+
+
+onSnapshot(ref,(snap)=>{
+
+
+let html="";
+
+
+snap.forEach(d=>{
+
+
+html+=`
+
+<div class="card">
+
+🌎 ${d.id}
+
+<br>
+
+<b>${d.data().visitas || 0}</b>
+
+visitas
+
+</div>
+
+`;
+
+
+
+});
+
+
+document.getElementById("regiones").innerHTML=
+html || "Sin datos";
+
+
+
+});
+
+
+}
+
+
+
+
+
+/* ===== REINICIAR CONTADORES ===== */
+
+
+window.reiniciarContadores=async function(){
+
+
+let clave=prompt("Contraseña");
+
+
+if(clave!=="Admin2026"){
+
+alert("Incorrecta");
+
+return;
+
+}
+
+
+
+if(!confirm("¿Borrar estadísticas?")) return;
+
+
+
+await setDoc(doc(db,"contadores","global"),{
+
+total:0,
+
+relampago:0,
+
+exclusivos:0,
+
+bancarios:0
+
+});
+
+
+
+alert("✅ Reiniciado");
 
 
 }
@@ -629,6 +1246,319 @@ Math.min(total/100,100)+"%";
 
 </script>
 
+<!-- ===== SECCIÓN CREAR OFERTA ===== -->
 
-</body>
-</html>
+<div class="grafica">
+
+<h3>
+🔥 CREAR NUEVA OFERTA
+</h3>
+
+
+<input id="tituloOferta" placeholder="Nombre del producto">
+
+
+<input id="precioAntes" placeholder="Precio anterior">
+
+
+<input id="precioActual" placeholder="Precio actual">
+
+
+<input id="linkOferta" placeholder="Link Mercado Libre">
+
+
+<select id="tipoOferta">
+
+<option value="flash">
+⚡ Relámpago
+</option>
+
+<option value="normal">
+🔥 Oferta imperdible
+</option>
+
+</select>
+
+
+<input type="file" id="imagenOferta" accept="image/*">
+
+
+<button onclick="guardarOferta()">
+
+💾 PUBLICAR OFERTA
+
+</button>
+
+
+</div>
+
+
+<!-- ===== LISTA OFERTAS ===== -->
+
+
+<div class="grafica">
+
+<h3>
+📦 OFERTAS PUBLICADAS
+</h3>
+
+
+<div id="listaOfertas">
+
+Cargando...
+
+</div>
+
+
+</div>
+
+
+
+<script type="module">
+
+
+import {
+
+collection,
+
+addDoc,
+
+onSnapshot,
+
+serverTimestamp
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+
+/*
+IMPORTANTE:
+
+Primero guardaremos la imagen como base64
+para no necesitar Storage todavía.
+
+Cuando actives Storage cambiamos
+esta parte por subida real de archivos.
+*/
+
+
+window.guardarOferta = async function(){
+
+
+
+let titulo =
+document.getElementById("tituloOferta").value;
+
+
+let antes =
+document.getElementById("precioAntes").value;
+
+
+let actual =
+document.getElementById("precioActual").value;
+
+
+let link =
+document.getElementById("linkOferta").value;
+
+
+let tipo =
+document.getElementById("tipoOferta").value;
+
+
+let archivo =
+document.getElementById("imagenOferta").files[0];
+
+
+
+if(!titulo || !actual || !link){
+
+alert("Completa los datos");
+
+return;
+
+}
+
+
+
+
+let imagen="";
+
+
+
+if(archivo){
+
+
+imagen = await convertirImagen(archivo);
+
+
+}
+
+
+
+
+await addDoc(collection(db,"ofertas"),{
+
+
+titulo:titulo,
+
+precioAntes:antes,
+
+precioActual:actual,
+
+link:link,
+
+tipo:tipo,
+
+imagen:imagen,
+
+fecha:serverTimestamp()
+
+
+});
+
+
+
+alert("✅ Oferta publicada");
+
+
+
+limpiarOferta();
+
+
+}
+
+
+
+
+
+function convertirImagen(file){
+
+
+return new Promise((resolve)=>{
+
+
+let lector=new FileReader();
+
+
+lector.onload=function(){
+
+resolve(lector.result);
+
+};
+
+
+lector.readAsDataURL(file);
+
+
+
+});
+
+
+}
+
+
+
+
+
+function limpiarOferta(){
+
+
+document.getElementById("tituloOferta").value="";
+
+document.getElementById("precioAntes").value="";
+
+document.getElementById("precioActual").value="";
+
+document.getElementById("linkOferta").value="";
+
+document.getElementById("imagenOferta").value="";
+
+
+}
+
+
+
+
+
+// MOSTRAR OFERTAS
+
+
+const ofertasRef=collection(db,"ofertas");
+
+
+onSnapshot(ofertasRef,(snap)=>{
+
+
+let html="";
+
+
+snap.forEach(d=>{
+
+
+let o=d.data();
+
+
+
+html+=`
+
+<div class="card">
+
+
+${o.imagen ? 
+`<img src="${o.imagen}" width="100%">`
+:
+""}
+
+
+
+<h3>${o.titulo}</h3>
+
+
+❌ Antes:
+<s>$${o.precioAntes}</s>
+
+
+<br>
+
+
+🔥 Ahora:
+
+<b>
+$${o.precioActual}
+</b>
+
+
+<br>
+
+
+<a href="${o.link}" target="_blank">
+
+VER OFERTA
+
+</a>
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+
+document.getElementById("listaOfertas").innerHTML =
+html || "Sin ofertas";
+
+
+});
+
+
+
+</script>
+
