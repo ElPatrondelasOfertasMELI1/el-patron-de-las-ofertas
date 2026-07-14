@@ -292,6 +292,29 @@ Cargando...
 <div class="grafica">
 
 <h3>
+⚡ ESTADO DE CUPONES RELÁMPAGO
+</h3>
+
+<button style="background:#00c853"
+onclick="cambiarEstado('activo')">
+🟢 ACTIVAR CUPONES
+</button>
+
+<button style="background:#ff9800"
+onclick="cambiarEstado('agotarse')">
+🟠 POR AGOTARSE
+</button>
+
+<button style="background:#e53935"
+onclick="cambiarEstado('agotado')">
+🔴 AGOTADOS
+</button>
+
+</div>
+
+<div class="grafica">
+
+<h3>
 🎟️ CUPONES MÁS COPIADOS
 </h3>
 
@@ -315,9 +338,9 @@ onSnapshot,
 collection,
 getDocs,
 getDoc,
-updateDoc
+updateDoc,
+setDoc
 } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 
 
 
@@ -341,7 +364,23 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+window.cambiarEstado = async function(estado){
+
+const ref = doc(db,"configuracion","estadoCupones");
+
+await updateDoc(ref,{
+estado:estado
+}).catch(async()=>{
+
+await setDoc(ref,{
+estado:estado
+});
+
+});
+
+alert("✅ Estado actualizado.");
+
+}
 
 // ===== REGIONES EN TIEMPO REAL =====
 
