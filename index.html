@@ -617,6 +617,8 @@ min-width:100%;
 flex-shrink:0;
 user-select:none;
 -webkit-user-select:none;
+cursor:pointer;
+-webkit-tap-highlight-color:transparent;
 }
 
 .flash-track{
@@ -1348,6 +1350,7 @@ const flashSlides = document.querySelectorAll(".flash-slide");
 
 let startX = 0;
 let endX = 0;
+let isDragging = false;
 
 
 function moverCarrusel(){
@@ -1378,6 +1381,7 @@ flashTrack.addEventListener("touchstart",function(e){
 clearInterval(flashTimer);
 
 startX=e.touches[0].clientX;
+isDragging=false;
 
 });
 
@@ -1388,38 +1392,28 @@ endX=e.changedTouches[0].clientX;
 
 let movimiento = startX - endX;
 
+if(Math.abs(movimiento)>50){
+isDragging=true;
+}
 
 if(movimiento > 50){
-
 flashIndex++;
-
 }
-
 
 if(movimiento < -50){
-
 flashIndex--;
-
 }
-
 
 if(flashIndex < 0){
-
 flashIndex = flashSlides.length-1;
-
 }
-
 
 if(flashIndex >= flashSlides.length){
-
 flashIndex = 0;
-
 }
-
 
 flashTrack.style.transform =
 `translateX(-${flashIndex * 100}%)`;
-
 
 iniciarCarrusel();
 
