@@ -1403,7 +1403,7 @@ const ahorro = Number(datosCupon.ahorro || 0);
 
 if(ahorro > 0){
 
-const clave = "ahorro_" + code + "_" + hoy;
+const clave = "ahorro_" + code + "_" + fecha;
 
 
 if(!localStorage.getItem(clave)){
@@ -1436,8 +1436,8 @@ clave,
     // ===== REDIRECCIÓN =====
 
     setTimeout(()=>{
-    window.location.href = REDIRECT_URL;
-},50);
+window.location.href = REDIRECT_URL;
+},300);
 
 }
 
@@ -1816,7 +1816,7 @@ ${c.tipo=="relampago"
 </div>
 
 <div class="cupon-desc">
-$${c.descuento} OFF
+${c.descuento} OFF
 </div>
 
 <div class="cupon-sub">
