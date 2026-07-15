@@ -1606,14 +1606,26 @@ codigoCupon.value
 let descuento =
 descuentoCupon.value.trim();
 
-if(descuento && !descuento.includes("$") && !descuento.includes("%")){
-    descuento = "$" + descuento + " OFF";
+if(descuento.includes("$")){
+
+let numero = descuento.replace(/\D/g,"");
+
+descuento =
+"$" + numero.replace(/\B(?=(\d{3})+(?!\d))/g,",") + " OFF";
+
+}
+
+else if(descuento && !descuento.includes("%")){
+
+descuento =
+"$" + descuento.replace(/\B(?=(\d{3})+(?!\d))/g,",") + " OFF";
+
 }
 
 
 let minimo =
 minimoCupon.value
-.trim()
+.replace(/\D/g,"")
 .replace(/\B(?=(\d{3})+(?!\d))/g,",");
 
 
