@@ -1590,6 +1590,8 @@ actualizarCarrusel();
 
 function actualizarCarrusel(){
 
+if(!track) return;
+
 track.style.transform =
 `translate3d(-${posicion * 100}%,0,0)`;
 
