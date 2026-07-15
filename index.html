@@ -1188,18 +1188,15 @@ localStorage.getItem("fechaVisita");
 const contador =
 doc(
 db,
-"estadisticas_diarias",
+"visitas",
 fechaHoy
 );
 
-if(!visitante || visitante !== fechaHoy){
-
-setDoc(
+await setDoc(
 contador,
 {
-visitas:increment(1),
-fecha:fechaHoy
-}
+total:increment(1)
+},
 {
 merge:true
 }
