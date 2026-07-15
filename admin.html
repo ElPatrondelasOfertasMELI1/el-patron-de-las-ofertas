@@ -346,6 +346,7 @@ padding:15px;
 
 </style>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -437,7 +438,6 @@ ENTRAR
 </button>
 
 
-
 <button class="menu" onclick="abrirSeccion('imagenes')">
 
 🖼 Imágenes
@@ -464,7 +464,11 @@ ENTRAR
 
 </button>
 
+<button class="menu" onclick="abrirSeccion('grafica')">
 
+📊 Gráfica semanal
+
+</button>
 
 </div>
 
@@ -633,6 +637,16 @@ Cargando...
 </div>
 
 
+<div id="grafica" class="section">
+
+<h1>
+📊 Últimos 7 días
+</h1>
+
+
+<div class="box">
+
+<canvas id="graficaSemanal"></canvas>
 
 
 </div>
