@@ -802,78 +802,103 @@ d.exclusivos || 0;
 
 
 
-const visitasRef =
-doc(db,"visitas","contador");
+// ==========================
+// VISITANTE ÚNICO DIARIO
+// ==========================
+
+
+const zonaHoraria="America/Mexico_City";
+
+
+const fechaHoy =
+new Intl.DateTimeFormat(
+"en-CA",
+{
+timeZone:zonaHoraria
+}
+).format(new Date());
 
 
 
-onSnapshot(visitasRef,(snap)=>{
-
-
-let d=snap.data() || {};
+let visitante =
+localStorage.getItem("visitanteID");
 
 
 
-document.getElementById("visitantes").innerHTML =
-d.total || 0;
+if(!visitante){
 
+
+visitante =
+crypto.randomUUID();
+
+
+localStorage.setItem(
+"visitanteID",
+visitante
+);
+
+
+}
+
+
+
+const visitaUsuario =
+doc(
+db,
+"usuarios",
+visitante
+);
+
+
+
+getDoc(visitaUsuario)
+.then(async(snap)=>{
+
+
+let datos=snap.data();
+
+
+if(!datos || datos.fecha!==fechaHoy){
+
+
+
+await setDoc(
+visitaUsuario,
+{
+
+fecha:fechaHoy
+
+}
+);
+
+
+
+const contador =
+doc(
+db,
+"visitas",
+fechaHoy
+);
+
+
+
+await setDoc(
+contador,
+{
+
+total:increment(1)
+
+},
+{
+merge:true
+}
+);
+
+
+}
 
 
 });
-
-
-
-
-
-
-
-
-const historial =
-collection(db,"visitas_historial");
-
-
-
-onSnapshot(historial,(snap)=>{
-
-
-let html="";
-
-
-
-snap.forEach(d=>{
-
-
-html+=`
-
-
-<div class="card">
-
-
-📅 ${d.id}
-
-
-<br>
-
-
-👥 Visitas:
-
-
-<b>
-
-${d.data().total || 0}
-
-</b>
-
-
-</div>
-
-
-`;
-
-
-
-});
-
 
 
 document.getElementById("actividad").innerHTML =
@@ -1769,6 +1794,15 @@ onclick="cambiarEstadoCupon('${d.id}','${c.estado}')">
 
 <br><br>
 
+<button class="btn-main"
+onclick="editarOferta('${d.id}')">
+
+✏️ EDITAR
+
+</button>
+
+<br><br>
+
 <button class="btn-delete"
 onclick="eliminarCupon('${d.id}')">
 🗑 Eliminar
@@ -2367,11 +2401,65 @@ alert("✅ Configuración guardada");
 
 };
 
+// ==========================
+// EDITAR OFERTAS
+// ==========================
+
+
+window.editarOferta = async function(id){
+
+
+const ref = doc(db,"ofertas",id);
+
+
+const snap = await getDoc(ref);
+
+
+const o = snap.data();
+
+
+let titulo = prompt(
+"Nombre del producto:",
+o.titulo
+);
+
+
+if(!titulo) return;
+
+
+let precioAntes = prompt(
+"Precio anterior:",
+o.precioAntes
+);
+
+
+let precioActual = prompt(
+"Precio actual:",
+o.precioActual
+);
+
+
+let link = prompt(
+"Link Mercado Libre:",
+o.link
+);
 
 
 
+await updateDoc(ref,{
+
+titulo,
+precioAntes,
+precioActual,
+link
+
+});
 
 
+alert("✅ Oferta actualizada");
+
+
+};
 
 console.log(
 "⚡ ADMIN PRO COMPLETO CARGADO"
