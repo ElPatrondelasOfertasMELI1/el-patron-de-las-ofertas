@@ -914,6 +914,61 @@ transform:scale(.95);
 
 }
 
+.carrusel-box{
+
+display:flex;
+gap:15px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+padding:10px;
+
+}
+
+.oferta-card{
+
+min-width:280px;
+background:white;
+border-radius:20px;
+padding:15px;
+box-shadow:0 5px 15px #ddd;
+scroll-snap-align:center;
+cursor:pointer;
+
+}
+
+.oferta-card img{
+
+width:100%;
+height:220px;
+object-fit:contain;
+border-radius:15px;
+
+}
+
+
+.oferta-card h3{
+
+font-size:18px;
+font-weight:900;
+
+}
+
+
+.precio{
+
+font-size:28px;
+font-weight:900;
+color:#00a650;
+
+}
+
+
+.antes{
+
+color:#777;
+
+}
+
 </style>
 </head>
 
@@ -1618,17 +1673,6 @@ iniciarAuto();
 
 <script type="module">
 
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
 const firebaseConfig = {
 
 apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
@@ -1794,5 +1838,6 @@ window.copy = window.copy;
 });
 
 </script>
+
 
 </body>
