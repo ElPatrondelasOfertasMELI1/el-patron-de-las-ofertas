@@ -837,14 +837,43 @@ background:linear-gradient(
 
 }
 
-.cupon-card:hover{
+..cupon-card{
 
-transform:translateY(-5px);
+position:relative;
+overflow:hidden;
+
+padding:12px;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#fff8cc,#ffe066);
+
+border:2px solid #ffb300;
 
 box-shadow:
-0 25px 45px rgba(0,0,0,.15);
+0 8px 20px rgba(255,193,7,.35);
+
+height:155px;
+
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
+animation:flashGlow 1.8s infinite alternate;
 
 }
+
+
+.cupon-card:hover{
+
+transform:translateY(-4px);
+
+box-shadow:
+0 15px 35px rgba(255,193,7,.45);
+
+}
+
+
 
 .cupon-card::before{
 
@@ -858,27 +887,36 @@ right:0;
 
 height:6px;
 
-background:linear-gradient(90deg,#ffe600,#ff9800,#ff5722);
+background:linear-gradient(
+90deg,
+#ffe600,
+#ff9800,
+#ff5722
+);
 
 }
 
 .cupon-header{
 
-font-size:9px;
+font-size:13px;
+
 font-weight:900;
 
-color:#444;
+color:#ff6f00;
 
 margin-top:5px;
-margin-bottom:8px;
 
-padding-top:8px;
+display:flex;
+
+align-items:center;
+
+gap:5px;
 
 }
 
 .cupon-desc{
 
-font-size:18px;
+font-size:20px;
 
 font-weight:900;
 
@@ -886,7 +924,7 @@ color:#00a650;
 
 text-align:center;
 
-margin:4px 0;
+margin:5px 0;
 
 }
 
@@ -917,16 +955,20 @@ font-size:14px;
 
 position:absolute;
 
-top:8px;
-right:8px;
+top:10px;
+right:10px;
 
-padding:3px 7px;
+padding:4px 8px;
 
 font-size:8px;
 
 border-radius:20px;
 
 font-weight:900;
+
+color:white;
+
+z-index:2;
 
 }
 
@@ -1747,7 +1789,7 @@ ${c.tipo=="relampago"
 </div>
 
 <div class="cupon-desc">
-💰 ${c.descuento}
+🔥 $${c.descuento} DE DESCUENTO
 </div>
 
 <div class="cupon-min">
