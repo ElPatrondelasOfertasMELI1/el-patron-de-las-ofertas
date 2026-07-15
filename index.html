@@ -787,189 +787,99 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
+
+
+
+
 .cupon-card{
-
 position:relative;
 overflow:hidden;
 
-padding:32px 10px 10px;
-
-border-radius:16px;
-
-background:
-rgba(255,255,255,.55);
-
-backdrop-filter:blur(20px);
--webkit-backdrop-filter:blur(20px);
-
-border:1px solid rgba(255,255,255,.8);
-
-box-shadow:
-0 8px 20px rgba(0,120,255,.15);
-
-height:150px;
-
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-
-}
-
-
-.cupon-card::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:0;
-right:0;
-
-height:5px;
-
-background:linear-gradient(
-90deg,
-#ffe600,
-#ff9800,
-#ff5722
-);
-
-}
-
-..cupon-card{
-
-position:relative;
-overflow:hidden;
-
-padding:12px;
-
+background:#fff;
 border-radius:18px;
+border:2px solid #ffd54f;
 
-background:linear-gradient(135deg,#fff8cc,#ffe066);
+padding:30px 12px 12px;
 
-border:2px solid #ffb300;
+box-shadow:0 8px 18px rgba(0,0,0,.08);
 
-box-shadow:
-0 8px 20px rgba(255,193,7,.35);
-
-height:155px;
+height:165px;
 
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 
-animation:flashGlow 1.8s infinite alternate;
-
+transition:.25s;
 }
-
 
 .cupon-card:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-0 15px 35px rgba(255,193,7,.45);
-
-}
-
-
-
-.cupon-card::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:0;
-right:0;
-
-height:6px;
-
-background:linear-gradient(
-90deg,
-#ffe600,
-#ff9800,
-#ff5722
-);
-
+transform:translateY(-3px);
+box-shadow:0 15px 30px rgba(0,0,0,.18);
 }
 
 .cupon-header{
-
-font-size:13px;
-
-font-weight:900;
-
-color:#ff6f00;
-
-margin-top:5px;
-
-display:flex;
-
-align-items:center;
-
-gap:5px;
-
+font-size:11px;
+font-weight:800;
+letter-spacing:.8px;
+text-transform:uppercase;
+color:#ff9800;
+text-align:center;
+margin-bottom:6px;
 }
 
 .cupon-desc{
-
-font-size:20px;
-
+font-size:24px;
 font-weight:900;
-
 color:#00a650;
-
 text-align:center;
+line-height:1;
+text-shadow:0 2px 6px rgba(0,166,80,.15);
+}
 
-margin:5px 0;
-
+.cupon-desc span{
+display:block;
+font-size:12px;
+font-weight:800;
+color:#555;
+margin-top:4px;
+text-shadow:none;
 }
 
 .cupon-min{
-
-background:rgba(255,255,255,.45);
-
-border-radius:10px;
-
-padding:6px;
-
+background:#fff8e1;
+border-radius:12px;
+padding:8px;
 font-size:11px;
-
 text-align:center;
-
-margin:0;
-
+color:#555;
 }
 
-
 .cupon-min b{
-
-font-size:14px;
-
+display:block;
+margin-top:2px;
+font-size:16px;
+color:#000;
 }
 
 .badge{
-
 position:absolute;
+top:0;
+left:0;
+right:0;
 
-top:10px;
-right:10px;
+height:22px;
 
-padding:4px 8px;
+display:flex;
+align-items:center;
+justify-content:center;
 
-font-size:8px;
-
-border-radius:20px;
-
+font-size:9px;
 font-weight:900;
+letter-spacing:.5px;
 
-color:white;
+color:#fff;
 
-z-index:2;
-
+border-radius:16px 16px 0 0;
 }
 
 </style>
@@ -1781,7 +1691,7 @@ ${estado}
 <div class="cupon-header">
 
 ${c.tipo=="relampago"
-? "⚡ RELÁMPAGO"
+? "⚡ CUPÓN RELÁMPAGO"
 : c.tipo=="bancario"
 ? "🏦 BANCARIO"
 : "💎 MELI+"}
@@ -1789,7 +1699,8 @@ ${c.tipo=="relampago"
 </div>
 
 <div class="cupon-desc">
-🔥 $${c.descuento} DE DESCUENTO
+${c.descuento}
+<span>DE DESCUENTO</span>
 </div>
 
 <div class="cupon-min">
