@@ -1958,7 +1958,7 @@ onclick="cambiarEstadoCupon('${d.id}','${c.estado}')">
 <br><br>
 
 <button class="btn-main"
-onclick="editarOferta('${d.id}')">
+editarCupon(id)
 
 ✏️ EDITAR
 
@@ -2624,7 +2624,7 @@ document.getElementById("ahorroTotal").value
 
 await setDoc(
 
-doc(db,"estadisticas","ahorro")
+doc(db,"estadisticas","ahorro"),
 
 {
 
