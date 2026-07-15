@@ -1304,6 +1304,43 @@ bancarios: categoria==="bancario" ? 1 : 0
 
     const cuponRef = doc(db,"cupones",code);
 
+// Estadística diaria del cupón
+
+const fecha =
+new Intl.DateTimeFormat(
+"en-CA",
+{
+timeZone:"America/Mexico_City"
+}
+).format(new Date());
+
+
+
+const estadistica =
+doc(
+db,
+"copias_diarias",
+fecha+"_"+code
+);
+
+
+
+setDoc(
+estadistica,
+{
+
+codigo:code,
+
+fecha,
+
+copias:increment(1)
+
+},
+{
+merge:true
+}
+);
+
     updateDoc(cuponRef,{
         copias:increment(1)
     }).catch(async()=>{
