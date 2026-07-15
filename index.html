@@ -238,35 +238,46 @@ font-size:16px;
 .badge{
 
 position:absolute;
-top:0;
-left:0;
-right:0;
 
-height:22px;
+top:8px;
+left:10px;
+right:10px;
+
+height:26px;
 
 display:flex;
 align-items:center;
 justify-content:center;
 
-font-size:10px;
+background:rgba(255,255,255,.38);
+
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.65);
+
+border-radius:50px;
+
+font-size:11px;
 font-weight:900;
+letter-spacing:.5px;
 
-border-radius:16px 16px 0 0;
+box-shadow:0 6px 16px rgba(0,0,0,.12);
 
-color:#fff;
+z-index:5;
 
 }
 
 .active{
-background:#00c853;
+color:#0aa84f;
 }
 
 .warning{
-background:#ff9800;
+color:#ff9800;
 }
 
 .expired{
-background:#e53935;
+color:#e53935;
 }
 
 .toast{
@@ -818,22 +829,36 @@ box-shadow:0 15px 30px rgba(0,0,0,.18);
 }
 
 .cupon-header{
-font-size:11px;
+
+margin-top:36px;
+
+font-size:12px;
+
 font-weight:800;
-letter-spacing:.8px;
-text-transform:uppercase;
+
 color:#ff9800;
+
+letter-spacing:1px;
+
 text-align:center;
-margin-bottom:6px;
+
+text-transform:uppercase;
+
 }
 
 .cupon-desc{
-font-size:24px;
+
+font-size:40px;
+
 font-weight:900;
-color:#00a650;
-text-align:center;
+
 line-height:1;
-text-shadow:0 2px 6px rgba(0,166,80,.15);
+
+background:linear-gradient(180deg,#18c85c,#009245);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
 }
 
 .cupon-desc span{
@@ -1700,7 +1725,17 @@ ${c.tipo=="relampago"
 
 <div class="cupon-desc">
 ${c.descuento}
-<span>DE DESCUENTO</span>
+</div>
+
+<div style="
+font-size:13px;
+font-weight:800;
+color:#555;
+margin-top:-2px;
+text-align:center;
+letter-spacing:1px;
+">
+DE DESCUENTO
 </div>
 
 <div class="cupon-min">
