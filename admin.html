@@ -1820,117 +1820,52 @@ estadoTexto=
 
 
 
-html+=`
+html += `
 
+<div class="bank-card">
 
-<div class="card">
+<div class="badge ${clase}">
+${estado}
+</div>
 
+<div class="bank">
 
-<h3>
-
-🎟 ${d.id}
-
-</h3>
-
-
-
-💰
-
-<b>
-
-${c.descuento}
-
-</b>
-
-
-
-<br><br>
-
-
-
-Compra mínima:
-
-${c.minimo}
-
-
-
-<br><br>
-
-
-
-Tipo:
-
-${c.tipo}
-
-
-
-<br><br>
-
-
-
-Estado:
-
-${estadoTexto}
-
-
-
-<br><br>
-
-
-
-Copias:
-
-<b>
-
-${c.copias || 0}
-
-</b>
-
-
-
-
-<br><br>
-
-
-
-
-<button class="btn-status"
-
-onclick="cambiarEstadoCupon('${d.id}','${c.estado}')">
-
-🔄 CAMBIAR ESTADO
-
-</button>
-
-
-
-<br><br>
-
-
-
-
-<button class="btn-delete"
-
-onclick="eliminarCupon('${d.id}')">
-
-🗑 ELIMINAR
-
-</button>
-
-
-
+${c.tipo=="relampago" ? "⚡ CUPÓN RELÁMPAGO" :
+c.tipo=="bancario" ? "🏦 CUPÓN BANCARIO" :
+"💎 CUPÓN MELI+"}
 
 </div>
 
+<p style="font-size:18px;font-weight:900;color:#00c853;">
+💰 ${c.descuento}
+</p>
 
+<p>
+🛒 Compra mínima
+<br>
+<b>${c.minimo}</b>
+</p>
+
+<p style="font-size:13px;color:#777;">
+🔒 El código permanecerá oculto.
+<br>
+Se copiará automáticamente al presionar el botón.
+</p>
+
+<button class="bank-btn"
+onclick="copy('${c.id}','${c.tipo}')">
+
+📋 COPIAR CUPÓN
+
+</button>
+
+</div>
 
 `;
 
 
 
 });
-
-
 
 
 
@@ -1941,12 +1876,6 @@ html || "Sin cupones";
 
 
 });
-
-
-
-
-
-
 
 
 
