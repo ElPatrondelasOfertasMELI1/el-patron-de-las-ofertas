@@ -741,6 +741,58 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
+.cupon-card{
+background:#fff;
+border-radius:20px;
+padding:22px;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+text-align:center;
+border:2px solid #ffe600;
+}
+
+.cupon-header{
+font-size:22px;
+font-weight:900;
+margin-bottom:10px;
+}
+
+.cupon-desc{
+font-size:26px;
+font-weight:900;
+color:#00a650;
+margin:15px 0;
+}
+
+.cupon-min{
+font-size:16px;
+margin:15px 0;
+}
+
+.cupon-lock{
+background:#f5f5f5;
+padding:12px;
+border-radius:12px;
+margin:15px 0;
+color:#666;
+font-size:14px;
+}
+
+.bank-btn{
+width:100%;
+background:#3483fa;
+color:#fff;
+font-size:18px;
+font-weight:900;
+padding:16px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+}
+
+.bank-btn:hover{
+background:#2968c8;
+}
+
 </style>
 </head>
 
@@ -1540,46 +1592,58 @@ clase="expired";
 
 }
 
-
-
 html += `
 
+<div class="cupon-card">
 
-<div class="bank-card">
+<div class="cupon-header">
 
+${c.tipo=="relampago"
+? "⚡ CUPÓN RELÁMPAGO"
+: c.tipo=="bancario"
+? "🏦 CUPÓN BANCARIO"
+: "💎 CUPÓN MELI+"}
 
-<div class="badge ${clase}">
-${estado}
 </div>
 
-
-<div class="bank">
-🎟 ${c.id}
+<div class="cupon-status ${c.estado}">
+${estadoTexto}
 </div>
 
+<div class="cupon-desc">
 
-<p>
-<b>${c.descuento}</b>
-</p>
+💰 <b>${c.descuento}</b>
 
+</div>
 
-<p>
-Compra mínima:
+<div class="cupon-min">
+
+🛒 Compra mínima
+
 <br>
-<b>${c.minimo}</b>
-</p>
 
+<b>${c.minimo}</b>
+
+</div>
+
+<div class="cupon-lock">
+
+🔒 El código permanecerá oculto
+
+<br>
+
+Se copiará automáticamente.
+
+</div>
 
 <button class="bank-btn"
-onclick="copy('${c.id}','${c.tipo}')">
+onclick="copy('${d.id}','${c.tipo}')">
 
 📋 COPIAR CUPÓN
 
 </button>
 
-
 </div>
-
 
 `;
 
