@@ -747,15 +747,10 @@ background:#00c853;
 }
   
 #cuponesFirebase{
-
 display:grid;
-
 grid-template-columns:repeat(2,1fr);
-
-gap:8px;
-
-margin:10px 14px;
-
+gap:12px;
+margin:12px;
 }
   
 #cuponesFirebase{
@@ -785,38 +780,36 @@ grid-template-columns:repeat(2,1fr);
 }
 
 .cupon-card{
+position:relative;
+overflow:hidden;
+
 padding:18px 10px 10px;
 min-height:165px;
+
 border-radius:18px;
-}
 
-.cupon-card::before{
+/* Fondo */
+background:linear-gradient(180deg,#ffffff,#fafafa);
 
-content:"";
+/* Contorno premium */
+border:1.5px solid #d9d9d9;
 
-position:absolute;
+/* Separación visual */
+box-shadow:
+0 2px 8px rgba(0,0,0,.05),
+0 0 0 1px rgba(255,255,255,.8) inset;
 
-top:0;
-left:0;
-right:0;
-
-height:5px;
-
-background:linear-gradient(
-90deg,
-#ffe600,
-#ffd000,
-#ffb300
-);
-
+transition:.25s;
 }
 
 .cupon-card:hover{
 
 transform:translateY(-3px);
 
+border-color:#3483fa;
+
 box-shadow:
-0 18px 35px rgba(0,0,0,.14);
+0 10px 24px rgba(52,131,250,.18);
 
 }
 
