@@ -1661,9 +1661,8 @@ placeholder="Ejemplo: 10% OFF o $500 OFF">
 <input id="minimoCupon"
 placeholder="Ejemplo: $4,000">
 
-
-
-
+<input id="ahorroCupon"
+placeholder="Ahorro generado ejemplo: 500">
 
 <select id="tipoCupon">
 
@@ -1807,7 +1806,10 @@ minimoCupon.value
 .replace(/\D/g,"")
 .replace(/\B(?=(\d{3})+(?!\d))/g,",");
 
-
+let ahorro =
+Number(
+ahorroCupon.value.replace(/\D/g,"")
+) || 0;
 
 let tipo =
 tipoCupon.value;
@@ -1844,6 +1846,8 @@ doc(db,"cupones",codigo),
 descuento,
 
 minimo:"$"+minimo,
+
+ahorro,
 
 tipo,
 
