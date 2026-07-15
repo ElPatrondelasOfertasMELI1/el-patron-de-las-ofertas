@@ -1435,19 +1435,14 @@ clave,
 
     // ===== REDIRECCIÓN =====
 
-    setTimeout(()=>{
-
-window.location.href =
-"meli://home?url=https://meli.la/1mj3itE";
-
 setTimeout(()=>{
 
-window.location.href =
-"https://meli.la/1mj3itE";
-
-},1200);
+window.location.href = "https://meli.la/1mj3itE";
 
 },300);
+
+} // ===== CIERRE FUNCIÓN COPY =====
+
 
 // ===== MOSTRAR AHORRO TOTAL =====
 
@@ -1824,7 +1819,7 @@ ${c.tipo=="relampago"
 </div>
 
 <div class="cupon-desc">
-$${String(c.descuento).replace(" OFF","")}
+${String(c.descuento).replace(" OFF","")}
 </div>
 
 <div class="cupon-sub">
