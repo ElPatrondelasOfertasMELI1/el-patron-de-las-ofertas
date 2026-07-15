@@ -1606,8 +1606,8 @@ ${c.tipo=="relampago"
 
 </div>
 
-<div class="cupon-status ${c.estado}">
-${estadoTexto}
+<div class="badge ${clase}">
+${estado}
 </div>
 
 <div class="cupon-desc">
@@ -1637,7 +1637,7 @@ Se copiará automáticamente.
 </div>
 
 <button class="bank-btn"
-onclick="copy('${d.id}','${c.tipo}')">
+onclick="copy('${c.id}','${c.tipo}')"
 
 📋 COPIAR CUPÓN
 
