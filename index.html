@@ -1356,15 +1356,24 @@ const clave = "ahorro_" + code + "_" + fecha;
 if(!localStorage.getItem(clave)){
 
 
+try{
+
 await setDoc(
-ahorroRef,
+contador,
 {
-total:increment(ahorro)
+total:increment(1),
+fecha:fechaHoy
 },
 {
 merge:true
 }
 );
+
+}catch(e){
+
+console.log("Error contador visitas:",e);
+
+}
 
 
 localStorage.setItem(
