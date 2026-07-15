@@ -1385,35 +1385,49 @@ merge:true
 
     });
 
-// ===== AHORRO GENERADO =====
+// ===== AHORRO AUTOMÁTICO DESDE ADMIN =====
 
 const ahorroRef = doc(db,"estadisticas","ahorro");
 
-let ahorro = 0;
+const cuponActual = await getDoc(
+doc(db,"cupones",code)
+);
 
-if(code==="QUIENGANAHOY") ahorro = 350;
-if(code==="GOOL10") ahorro = 150;
-if(code==="PARTIDO10") ahorro = 812;
-if(code==="CAMISETA10") ahorro = 900;
-if(code==="GANADOR10") ahorro = 88;
+
+if(cuponActual.exists()){
+
+const datosCupon = cuponActual.data();
+
+const ahorro = Number(datosCupon.ahorro || 0);
+
 
 if(ahorro > 0){
 
 const clave = "ahorro_" + code + "_" + hoy;
 
+
 if(!localStorage.getItem(clave)){
 
-updateDoc(ahorroRef,{
+
+await setDoc(
+ahorroRef,
+{
 total:increment(ahorro)
-}).catch(async()=>{
+},
+{
+merge:true
+}
+);
 
-await setDoc(ahorroRef,{
-total:ahorro
-});
 
-});
+localStorage.setItem(
+clave,
+"ok"
+);
 
-localStorage.setItem(clave,"ok");
+
+}
+
 
 }
 
