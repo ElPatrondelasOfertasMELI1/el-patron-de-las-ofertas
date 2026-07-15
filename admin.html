@@ -1505,9 +1505,14 @@ ${o.estado==="activo"
 
 }
 
+<br><br>
 
+<button class="btn-main"
+onclick="editarOfertaCarrusel('${d.id}')">
 
+✏️ EDITAR OFERTA
 
+</button>
 
 <br><br>
 
@@ -2888,7 +2893,107 @@ console.log(
 "⚡ ADMIN PRO COMPLETO CARGADO"
 );
 
+window.editarOfertaCarrusel = async function(id){
 
+const ref = doc(db,"ofertas",id);
+
+const snap = await getDoc(ref);
+
+if(!snap.exists()){
+alert("Oferta no encontrada");
+return;
+}
+
+
+const o=snap.data();
+
+
+let titulo = prompt(
+"Nombre del producto:",
+o.titulo
+);
+
+if(!titulo) return;
+
+
+let precioAntes = prompt(
+"Precio anterior:",
+o.precioAntes
+);
+
+
+let precioActual = prompt(
+"Precio actual:",
+o.precioActual
+);
+
+
+let link = prompt(
+"Link Mercado Libre:",
+o.link
+);
+
+
+let cambiar = confirm(
+"¿Cambiar imagen?"
+);
+
+
+let datos={
+titulo,
+precioAntes,
+precioActual,
+link
+};
+
+
+
+if(cambiar){
+
+let input=document.createElement("input");
+
+input.type="file";
+input.accept="image/*";
+
+input.click();
+
+
+input.onchange=async()=>{
+
+
+let archivo=input.files[0];
+
+
+if(archivo){
+
+let imagen=await convertirImagen(archivo);
+
+datos.imagen=imagen;
+
+}
+
+
+await updateDoc(ref,datos);
+
+
+alert("✅ Oferta actualizada");
+
+
+};
+
+}else{
+
+
+await updateDoc(ref,datos);
+
+
+alert("✅ Oferta actualizada");
+
+
+}
+
+
+};
 
 </script>
 
