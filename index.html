@@ -387,6 +387,24 @@ box-shadow:0 6px 18px rgba(0,0,0,.2);
 }
 
 .toast{
+position:fixed;
+top:45%;
+left:50%;
+transform:translate(-50%,-50%);
+background:#111;
+color:#fff;
+padding:14px 22px;
+border-radius:14px;
+font-weight:900;
+font-size:16px;
+z-index:99999;
+opacity:0;
+pointer-events:none;
+transition:.3s;
+}
+
+.toast.show{
+opacity:1;
 animation:copiarOK .35s;
 }
 
@@ -1590,11 +1608,12 @@ actualizarCarrusel();
 
 function actualizarCarrusel(){
 
+const track = getTrack();
+
 if(!track) return;
 
 track.style.transform =
 `translate3d(-${posicion * 100}%,0,0)`;
-
 
 document.querySelectorAll(".flash-dot")
 .forEach((dot,i)=>{
@@ -1621,8 +1640,46 @@ moverCarrusel,
 
 }
 
+function getTrack(){
+return document.getElementById("ofertasPublicas");
+}
+
+if(track){
 
 track.addEventListener("touchstart",(e)=>{
+inicioX=e.touches[0].clientX;
+inicioY=e.touches[0].clientY;
+clearInterval(timer);
+},{passive:true});
+
+
+track.addEventListener("touchend",(e)=>{
+
+let finX=e.changedTouches[0].clientX;
+let movimientoX=inicioX-finX;
+
+if(Math.abs(movimientoX)>50){
+
+const total=document.querySelectorAll(".flash-slide").length;
+
+if(movimientoX>0){
+posicion++;
+}else{
+posicion--;
+}
+
+if(posicion<0) posicion=total-1;
+if(posicion>=total) posicion=0;
+
+actualizarCarrusel();
+
+}
+
+iniciarAuto();
+
+},{passive:true});
+
+}
 
 inicioX=e.touches[0].clientX;
 inicioY=e.touches[0].clientY;
