@@ -2624,6 +2624,138 @@ alert("✅ Oferta actualizada");
 
 };
 
+// ==========================
+// GRÁFICA ÚLTIMOS 7 DÍAS
+// ==========================
+
+
+let grafica;
+
+
+
+onSnapshot(
+
+collection(db,"estadisticas_diarias"),
+
+(snapshot)=>{
+
+
+let datos=[];
+
+
+snapshot.forEach(d=>{
+
+datos.push({
+
+fecha:d.id,
+
+visitas:d.data().visitas || 0,
+
+clics:d.data().clics || 0
+
+});
+
+});
+
+
+
+// ordenar fechas
+
+datos.sort(
+(a,b)=>a.fecha.localeCompare(b.fecha)
+);
+
+
+
+// últimos 7
+
+datos =
+datos.slice(-7);
+
+
+
+const labels =
+datos.map(x=>x.fecha);
+
+
+const visitas =
+datos.map(x=>x.visitas);
+
+
+const clics =
+datos.map(x=>x.clics);
+
+
+
+if(grafica){
+
+grafica.destroy();
+
+}
+
+
+
+const ctx =
+document.getElementById(
+"graficaSemanal"
+);
+
+
+
+if(ctx){
+
+
+grafica =
+new Chart(
+ctx,
+{
+
+type:"bar",
+
+data:{
+
+labels,
+
+datasets:[
+
+{
+
+label:"Visitas",
+
+data:visitas
+
+},
+
+{
+
+label:"Clics",
+
+data:clics
+
+}
+
+]
+
+},
+
+
+options:{
+
+responsive:true
+
+}
+
+}
+
+);
+
+
+}
+
+
+
+});
+
 console.log(
 "⚡ ADMIN PRO COMPLETO CARGADO"
 );
