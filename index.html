@@ -1211,13 +1211,42 @@ else{
 
         await setDoc(historialRef,{
             total:increment(1)
-        },{merge:true});
+     // ==========================
+// ESTADÍSTICAS DIARIAS
+// ==========================
 
-    }
 
+const fecha =
+new Intl.DateTimeFormat(
+"en-CA",
+{
+timeZone:"America/Mexico_City"
 }
+).format(new Date());
 
-});
+
+
+const diaRef =
+doc(
+db,
+"estadisticas_diarias",
+fechaHoy
+);
+
+
+await setDoc(
+diaRef,
+{
+
+fecha:fechaHoy,
+
+visitas:increment(1)
+
+},
+{
+merge:true
+}
+);
 
 // ===== REGIÓN DEL VISITANTE =====
 
