@@ -12,7 +12,13 @@
 body{
   margin:0;
   font-family:'Inter', sans-serif;
-  background:#f2f3f5;
+  background:
+  linear-gradient(
+    135deg,
+    #e8f5ff,
+    #f8fbff,
+    #d9ecff
+  );
   color:#000;
   font-weight:700;
 }
@@ -753,35 +759,21 @@ grid-template-columns:repeat(2,1fr);
 
 .cupon-card{
 
-position:relative;
-overflow:hidden;
-
-padding:12px;
-
-border-radius:20px;
-
-
 background:
-linear-gradient(
-135deg,
-rgba(255,255,255,.75),
-rgba(210,240,255,.45)
-);
 
+rgba(255,255,255,.45);
 
 backdrop-filter:blur(25px);
--webkit-backdrop-filter:blur(25px);
 
+-webkit-backdrop-filter:blur(25px);
 
 border:1px solid rgba(255,255,255,.8);
 
-
 box-shadow:
-0 10px 25px rgba(0,140,255,.15),
-inset 0 1px 15px rgba(255,255,255,.9);
 
+0 15px 35px rgba(0,120,255,.18),
 
-transition:.3s;
+inset 0 1px 15px rgba(255,255,255,.8);
 
 }
 
