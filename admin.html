@@ -343,19 +343,20 @@ import {initializeApp}
 
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-
 import {
 
 getFirestore,
 doc,
-onSnapshot
+collection,
+addDoc,
+setDoc,
+onSnapshot,
+deleteDoc,
+serverTimestamp
 
 }
 
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-
 
 const firebaseConfig={
 
@@ -486,21 +487,6 @@ d.visitas||0;
 // ==============================
 // ⚡ CREAR OFERTAS PARA CARRUSEL
 // ==============================
-
-
-import {
-
-collection,
-addDoc,
-onSnapshot,
-deleteDoc,
-doc,
-serverTimestamp
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
 
 
 
@@ -1434,44 +1420,6 @@ location.reload();
 // ==============================
 
 
-document.getElementById("estadisticas")?.insertAdjacentHTML(
-"beforeend",
-
-`
-
-<div class="box">
-
-<h3>
-🖼 Biblioteca
-</h3>
-
-
-<input 
-id="imagenBiblioteca"
-placeholder="URL imagen">
-
-
-<button class="green"
-onclick="guardarImagen()">
-
-💾 Guardar imagen
-
-</button>
-
-
-<div id="galeria"></div>
-
-
-</div>
-
-`
-
-);
-
-
-
-
-
 window.guardarImagen=async function(){
 
 
@@ -1624,59 +1572,6 @@ doc(db,"imagenes",id)
 // ==============================
 // 🌎 ESTADO GENERAL PAGINA
 // ==============================
-
-
-document.getElementById("estadisticas")?.insertAdjacentHTML(
-"beforeend",
-
-`
-
-<div class="box">
-
-<h3>
-🌎 Estado página
-</h3>
-
-
-<select id="estadoPagina">
-
-
-<option value="activo">
-🟢 Todo activo
-</option>
-
-
-<option value="limitado">
-🟠 Algunas ofertas agotando
-</option>
-
-
-<option value="apagado">
-🔴 Pausado
-</option>
-
-
-</select>
-
-
-
-<button class="green"
-onclick="guardarEstadoPagina()">
-
-Guardar
-
-</button>
-
-
-</div>
-
-`
-
-);
-
-
-
-
 
 
 window.guardarEstadoPagina=
