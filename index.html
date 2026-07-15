@@ -1172,51 +1172,9 @@ window.addEventListener("load",()=>{
     t.innerHTML="";
 });
 
-// ===== VISITANTES DIARIOS + HISTORIAL =====
+// ===== VISITANTES DIARIOS =====
 
-const hoy = new Date().toISOString().split("T")[0];
-
-const visitaRef = doc(db,"visitas","contador");
-
-getDoc(visitaRef).then(async (visitaSnap)=>{
-
-if(!visitaSnap.exists() || visitaSnap.data().fecha !== hoy){
-
-    // Reinicia contador del día nuevo
-    await setDoc(visitaRef,{
-        total:1,
-        fecha:hoy
-    });
-
-    // Guarda historial
-    const historialRef = doc(db,"visitas_historial",hoy);
-
-    await setDoc(historialRef,{
-        total:1
-    });
-
-}
-else{
-
-    // Solo cuenta nuevos visitantes del mismo día
-    const ultimaVisita = localStorage.getItem("fechaVisita");
-
-    if(ultimaVisita !== hoy){
-
-        await updateDoc(visitaRef,{
-            total:increment(1)
-        });
-
-        const historialRef = doc(db,"visitas_historial",hoy);
-
-        await setDoc(historialRef,{
-            total:increment(1)
-     // ==========================
-// ESTADÍSTICAS DIARIAS
-// ==========================
-
-
-const fecha =
+const fechaHoy =
 new Intl.DateTimeFormat(
 "en-CA",
 {
@@ -1225,28 +1183,38 @@ timeZone:"America/Mexico_City"
 ).format(new Date());
 
 
+const visitante =
+localStorage.getItem("fechaVisita");
 
-const diaRef =
+
+const contador =
 doc(
 db,
 "estadisticas_diarias",
-fechaHoy
+fecha
 );
 
 
+if(!visitante || visitante !== fechaHoy){
+
 await setDoc(
-diaRef,
+contador,
 {
-
-fecha:fechaHoy,
-
-visitas:increment(1)
-
+total:increment(1),
+fecha:fechaHoy
 },
 {
 merge:true
 }
 );
+
+
+localStorage.setItem(
+"fechaVisita",
+fechaHoy
+);
+
+}
 
 // ===== REGIÓN DEL VISITANTE =====
 
@@ -1301,6 +1269,45 @@ document.activeElement.blur();
     // ===== CONTADOR GENERAL =====
 
     const ref = doc(db,"contadores","global");
+
+const dia =
+new Intl.DateTimeFormat(
+"en-CA",
+{
+timeZone:"America/Mexico_City"
+}
+).format(new Date());
+
+
+const diarioRef =
+doc(
+db,
+"estadisticas_diarias",
+dia
+);
+
+
+await setDoc(
+diarioRef,
+{
+fecha:dia,
+clics:increment(1)
+},
+{
+merge:true
+}
+);
+
+await setDoc(
+doc(db,"estadisticas_diarias",fechaHoy),
+{
+fecha:fechaHoy,
+visitas:increment(1)
+},
+{
+merge:true
+}
+);
 
     let datos={
         total:increment(1)
