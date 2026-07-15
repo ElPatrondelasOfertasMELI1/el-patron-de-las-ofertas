@@ -1160,7 +1160,7 @@ messagingSenderId: "292338334268",
 appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 };
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig, "cuponesApp");
 const db = getFirestore(app);
 
 // Limpiar mensaje al cargar página
@@ -1313,6 +1313,24 @@ merge:true
         });
 
     });
+
+// ===== CONTADOR GLOBAL DASHBOARD =====
+
+const globalRef = doc(db,"contadores","global");
+
+await setDoc(
+globalRef,
+{
+    total: increment(1),
+
+  [categoria==="exclusivo" ? "exclusivos" : categoria]:
+increment(1)
+
+},
+{
+    merge:true
+}
+);
 
 // ===== AHORRO AUTOMÁTICO DESDE ADMIN =====
 
