@@ -2450,72 +2450,82 @@ html || "Sin datos";
 // ==========================
 
 
-
 document.getElementById("zonaConfiguracion").innerHTML=`
-
 
 <div class="box">
 
-
 <h2>
-
 ⚙ Estado general
-
 </h2>
-
-
-
 
 
 <select id="estadoGeneral">
 
-
 <option value="activo">
-
 🟢 Todos activos
-
 </option>
-
-
 
 <option value="agotando">
-
 🟠 Últimos disponibles
-
 </option>
-
-
 
 <option value="agotado">
-
 🔴 Todos agotados
-
 </option>
-
-
 
 </select>
 
 
-
-
 <br><br>
 
-
-
 <button class="btn-main"
-
 onclick="guardarConfiguracion()">
 
-💾 GUARDAR CONFIGURACIÓN
+💾 GUARDAR ESTADO
 
 </button>
 
 
+</div>
+
+
+
+<div class="box">
+
+<h2>
+💰 Generador de ahorro comunidad
+</h2>
+
+
+<p>
+Cantidad de cupones activos:
+</p>
+
+<input 
+id="cantidadCupones"
+type="number"
+placeholder="Ejemplo: 4">
+
+
+<p>
+Ahorro acumulado:
+</p>
+
+<input 
+id="ahorroTotal"
+type="number"
+placeholder="Ejemplo: 25000">
+
+
+<button class="btn-main"
+onclick="guardarAhorro()">
+
+💰 ACTUALIZAR AHORRO
+
+</button>
 
 
 </div>
-
 
 
 `;
@@ -2523,11 +2533,9 @@ onclick="guardarConfiguracion()">
 
 
 
-
-
+// GUARDAR ESTADO GENERAL
 
 window.guardarConfiguracion = async function(){
-
 
 
 await setDoc(
@@ -2536,12 +2544,48 @@ doc(db,"configuracion","estado"),
 
 {
 
-
 estado:
 document.getElementById("estadoGeneral").value,
 
-
 fecha:serverTimestamp()
+
+}
+
+);
+
+
+alert("✅ Configuración guardada");
+
+
+};
+
+
+
+
+// CARGAR DATOS DE AHORRO
+
+onSnapshot(
+
+doc(db,"configuracion","ahorro"),
+
+(snap)=>{
+
+
+if(snap.exists()){
+
+
+let datos=snap.data();
+
+
+document.getElementById("cantidadCupones").value =
+datos.cupones || 0;
+
+
+document.getElementById("ahorroTotal").value =
+datos.ahorroTotal || 0;
+
+
+}
 
 
 }
@@ -2550,7 +2594,44 @@ fecha:serverTimestamp()
 
 
 
-alert("✅ Configuración guardada");
+
+// GUARDAR AHORRO
+
+window.guardarAhorro = async function(){
+
+
+let cupones =
+Number(
+document.getElementById("cantidadCupones").value
+);
+
+
+let ahorro =
+Number(
+document.getElementById("ahorroTotal").value
+);
+
+
+
+await setDoc(
+
+doc(db,"configuracion","ahorro"),
+
+{
+
+cupones,
+
+ahorroTotal:ahorro,
+
+fecha:serverTimestamp()
+
+}
+
+);
+
+
+
+alert("✅ Ahorro actualizado");
 
 
 };
