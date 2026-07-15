@@ -1606,6 +1606,10 @@ codigoCupon.value
 let descuento =
 descuentoCupon.value.trim();
 
+if(descuento && !descuento.includes("$") && !descuento.includes("%")){
+    descuento = "$" + descuento + " OFF";
+}
+
 
 let minimo =
 minimoCupon.value
