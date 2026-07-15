@@ -869,144 +869,6 @@ onclick="copy('MELIMAS7OLA','exclusivo')">
 
 <div id="cuponesFirebase"></div>
 
-<div class="section">
-⚡ CUPONES RELÁMPAGO
-</div>
-
-<div class="bank-grid">
-
-<!-- CUPÓN 1 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $350 OFF
-</p>
-
-<p>
-Compra mínima: $3,500
-<br>
-Tope: $350
-</p>
-
-<button class="bank-btn"
-onclick="copy('QUIENGANAHOY','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 2 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $150 OFF
-</p>
-
-<p>
-Compra mínima: $1,500
-<br>
-Tope: $150
-</p>
-
-<button class="bank-btn"
-onclick="copy('GOOL10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 3 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-🔥 10% OFF
-</p>
-
-<p>
-Compra mínima: $6,500
-<br>
-Tope: $812
-</p>
-
-<button class="bank-btn"
-onclick="copy('PARTIDO10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 4 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-💰 $900 OFF
-</p>
-
-<p>
-Compra mínima: $9,000
-<br>
-Tope: $900
-</p>
-
-<button class="bank-btn"
-onclick="copy('CAMISETA10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-<!-- CUPÓN 5 -->
-<div class="bank-card flash">
-
-<span class="badge"></span>
-
-<div class="bank">
-⚡ CUPÓN RELÁMPAGO
-</div>
-
-<p>
-🔥 10% OFF
-</p>
-
-<p>
-Compra mínima: $700
-<br>
-Tope: $88
-</p>
-
-<button class="bank-btn"
-onclick="copy('GANADOR10','relampago')">
-📋 COPIAR CUPÓN
-</button>
-
-</div>
-
-</div>
-
 <div class="section" id="mercadopago">
 💙 BENEFICIOS MERCADO PAGO
 </div>
@@ -1568,50 +1430,6 @@ iniciarAuto();
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
-
-import {
-
-getFirestore,
-collection,
-onSnapshot
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-
-const firebaseConfig = {
-
-apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
-
-authDomain:"patronofertasweb.firebaseapp.com",
-
-projectId:"patronofertasweb",
-
-storageBucket:"patronofertasweb.firebasestorage.app",
-
-messagingSenderId:"292338334268",
-
-appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
-
-};
-
-
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-
-
-
-
-<script type="module">
-
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
 import {
 getFirestore,
 collection,
@@ -1643,13 +1461,12 @@ const db = getFirestore(app);
 
 
 
-const zonaCupones =
-document.getElementById("cuponesFirebase");
+const zonaCupones = document.getElementById("cuponesFirebase");
 
 
 
 onSnapshot(
-collection(db,"cupones"),
+collection(db,"cupones_publicos"),
 (snapshot)=>{
 
 
@@ -1658,31 +1475,28 @@ let cupones=[];
 
 snapshot.forEach(doc=>{
 
-let c=doc.data();
-
 cupones.push({
 
 id:doc.id,
 
-...c
+...doc.data()
 
 });
 
 });
 
 
-// ORDENAR DE MENOR A MAYOR COMPRA MINIMA
+// ORDENAR POR COMPRA MÍNIMA
 
 cupones.sort((a,b)=>{
 
 let A=parseInt(
-(a.minimo||"0").replace(/\D/g,"")
+(a.minimo || "0").replace(/\D/g,"")
 );
 
 let B=parseInt(
-(b.minimo||"0").replace(/\D/g,"")
+(b.minimo || "0").replace(/\D/g,"")
 );
-
 
 return A-B;
 
@@ -1697,33 +1511,30 @@ let html="";
 cupones.forEach(c=>{
 
 
-let estadoTexto="";
+let estado="";
 
 let clase="";
 
 
-
 if(c.estado==="activo"){
 
-estadoTexto="🟢 ACTIVO";
+estado="🟢 ACTIVO";
 
 clase="active";
 
 }
 
+else if(c.estado==="agotando"){
 
-if(c.estado==="agotando"){
-
-estadoTexto="🟠 POR AGOTARSE";
+estado="🟠 POR AGOTARSE";
 
 clase="warning";
 
 }
 
+else{
 
-if(c.estado==="agotado"){
-
-estadoTexto="🔴 AGOTADO";
+estado="🔴 AGOTADO";
 
 clase="expired";
 
@@ -1731,53 +1542,40 @@ clase="expired";
 
 
 
-html+=`
+html += `
+
 
 <div class="bank-card">
 
 
 <div class="badge ${clase}">
-${estadoTexto}
+${estado}
 </div>
-
 
 
 <div class="bank">
-
 🎟 ${c.id}
-
 </div>
 
 
-
 <p>
-
 <b>${c.descuento}</b>
-
 </p>
-
 
 
 <p>
-
 Compra mínima:
-
 <br>
-
 <b>${c.minimo}</b>
-
 </p>
-
 
 
 <button class="bank-btn"
-
 onclick="copy('${c.id}','${c.tipo}')">
 
 📋 COPIAR CUPÓN
 
 </button>
-
 
 
 </div>
@@ -1790,9 +1588,9 @@ onclick="copy('${c.id}','${c.tipo}')">
 
 
 
-zonaCupones.innerHTML =
+zonaCupones.innerHTML = 
 
-html || "Sin cupones disponibles";
+html || "⚠️ Sin cupones disponibles";
 
 
 });
