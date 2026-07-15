@@ -1264,75 +1264,6 @@ document.activeElement.blur();
 
     }
 
-    // ===== CONTADOR GENERAL =====
-
-    const ref = doc(db,"contadores","global");
-
-const dia =
-new Intl.DateTimeFormat(
-"en-CA",
-{
-timeZone:"America/Mexico_City"
-}
-).format(new Date());
-
-
-const diarioRef =
-doc(
-db,
-"estadisticas_diarias",
-dia
-);
-
-
-await setDoc(
-diarioRef,
-{
-fecha:dia,
-clics:increment(1)
-},
-{
-merge:true
-}
-);
-
-await setDoc(
-doc(db,"estadisticas_diarias",fechaHoy),
-{
-fecha:fechaHoy,
-visitas:increment(1)
-},
-{
-merge:true
-}
-);
-
-    let datos={
-        total:increment(1)
-    };
-
-    if(categoria==="relampago"){
-        datos.relampago=increment(1);
-    }
-
-    if(categoria==="exclusivo"){
-        datos.exclusivos=increment(1);
-    }
-
-    if(categoria==="bancario"){
-        datos.bancarios=increment(1);
-    }
-
-    updateDoc(ref,datos).catch(async()=>{
-
-await setDoc(ref,{
-total:1,
-relampago: categoria==="relampago" ? 1 : 0,
-exclusivos: categoria==="exclusivo" ? 1 : 0,
-bancarios: categoria==="bancario" ? 1 : 0
-});
-
-});
     
     // ===== CONTADOR INDIVIDUAL =====
 
@@ -1433,16 +1364,10 @@ clave,
 
 }
 
-    // ===== REDIRECCIÓN =====
+// ===== REDIRECCIÓN RÁPIDA =====
 
-setTimeout(()=>{
-
-window.location.href = "https://meli.la/1mj3itE";
-
-},300);
-
-} // ===== CIERRE FUNCIÓN COPY =====
-
+window.location.href =
+"https://meli.la/1mj3itE";
 
 // ===== MOSTRAR AHORRO TOTAL =====
 
