@@ -337,7 +337,12 @@ padding:15px;
 
 }
 
-
+.bank-card{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 5px 15px #ddd;
+}
 
 </style>
 
@@ -884,13 +889,6 @@ html || "Sin datos";
 }
 
 
-
-
-
-
-
-
-
 // ==========================
 // CREAR BASE AUTOMÁTICA
 // ==========================
@@ -1223,20 +1221,10 @@ imagenOferta.value="";
 estadoOferta.value="activo";
 
 
-
-
-
 alert("✅ Oferta publicada");
 
 
 };
-
-
-
-
-
-
-
 
 
 // MOSTRAR OFERTAS
@@ -1280,9 +1268,6 @@ ${o.imagen ?
 ""
 
 }
-
-
-
 
 
 <h3>
@@ -1388,9 +1373,6 @@ onclick="borrarOferta('${d.id}')">
 });
 
 
-
-
-
 document.getElementById("listaOfertas").innerHTML =
 
 html || "Sin ofertas";
@@ -1398,13 +1380,6 @@ html || "Sin ofertas";
 
 
 });
-
-
-
-
-
-
-
 
 
 // CAMBIAR ESTADO
@@ -1458,18 +1433,10 @@ estado:nuevo
 };
 
 
-
-
-
-
-
-
 // ELIMINAR OFERTA
 
 
 window.borrarOferta = async function(id){
-
-
 
 if(confirm("¿Eliminar oferta?")){
 
@@ -1550,9 +1517,6 @@ placeholder="Compra mínima">
 </select>
 
 
-
-
-
 <select id="estadoCupon">
 
 
@@ -1583,10 +1547,6 @@ placeholder="Compra mínima">
 </select>
 
 
-
-
-
-
 <button class="btn-main"
 
 onclick="guardarCupon()">
@@ -1598,10 +1558,6 @@ onclick="guardarCupon()">
 
 
 </div>
-
-
-
-
 
 
 <div class="box">
@@ -1666,11 +1622,6 @@ tipoCupon.value;
 
 let estado =
 estadoCupon.value;
-
-
-
-
-
 
 
 if(!codigo){
@@ -1743,137 +1694,71 @@ alert("✅ Cupón guardado");
 };
 
 
-
-
-
-
-
-
-
 // MOSTRAR CUPONES
 
 
-onSnapshot(
 
-collection(db,"cupones"),
-
-(snap)=>{
-
+onSnapshot(collection(db,"cupones"), (snap)=>{
 
 let html="";
 
-
-
 snap.forEach(d=>{
 
-
-let c=d.data();
-
-
-
+const c=d.data();
 
 let estadoTexto="";
 
-
-
 if(c.estado==="activo"){
-
-estadoTexto=
-
-`<span class="badge activo">
-
-🟢 Activo
-
-</span>`;
-
+estadoTexto='<span class="badge activo">🟢 Activo</span>';
 }
 
-
-
-if(c.estado==="agotando"){
-
-estadoTexto=
-
-`<span class="badge agotando">
-
-🟠 Por agotarse
-
-</span>`;
-
+else if(c.estado==="agotando"){
+estadoTexto='<span class="badge agotando">🟠 Por agotarse</span>';
 }
 
-
-
-if(c.estado==="agotado"){
-
-estadoTexto=
-
-`<span class="badge agotado">
-
-🔴 Agotado
-
-</span>`;
-
+else{
+estadoTexto='<span class="badge agotado">🔴 Agotado</span>';
 }
 
+html+=`
 
+<div class="card">
 
-
-
-html += `
-
-<div class="bank-card">
-
-<div class="badge ${clase}">
-${estado}
-</div>
-
-<div class="bank">
-
-${c.tipo=="relampago" ? "⚡ CUPÓN RELÁMPAGO" :
-c.tipo=="bancario" ? "🏦 CUPÓN BANCARIO" :
+<h3>
+${c.tipo=="relampago"?"⚡ CUPÓN RELÁMPAGO":
+c.tipo=="bancario"?"🏦 CUPÓN BANCARIO":
 "💎 CUPÓN MELI+"}
+</h3>
 
-</div>
+${estadoTexto}
 
-<p style="font-size:18px;font-weight:900;color:#00c853;">
-💰 ${c.descuento}
-</p>
+<p><b>Código:</b> ${d.id}</p>
 
-<p>
-🛒 Compra mínima
-<br>
-<b>${c.minimo}</b>
-</p>
+<p><b>Descuento:</b> ${c.descuento}</p>
 
-<p style="font-size:13px;color:#777;">
-🔒 El código permanecerá oculto.
-<br>
-Se copiará automáticamente al presionar el botón.
-</p>
+<p><b>Compra mínima:</b> ${c.minimo}</p>
 
-<button class="bank-btn"
-onclick="copy('${c.id}','${c.tipo}')">
+<p><b>Copias:</b> ${c.copias || 0}</p>
 
-📋 COPIAR CUPÓN
+<button class="btn-status"
+onclick="cambiarEstadoCupon('${d.id}','${c.estado}')">
+🔄 Cambiar estado
+</button>
 
+<br><br>
+
+<button class="btn-delete"
+onclick="eliminarCupon('${d.id}')">
+🗑 Eliminar
 </button>
 
 </div>
 
 `;
 
-
-
 });
 
-
-
-document.getElementById("listaCupones").innerHTML =
-
-html || "Sin cupones";
-
-
+document.getElementById("listaCupones").innerHTML=html || "Sin cupones";
 
 });
 
@@ -1938,13 +1823,6 @@ estado:nuevo
 };
 
 
-
-
-
-
-
-
-
 // ELIMINAR CUPÓN
 
 
@@ -1967,14 +1845,6 @@ doc(db,"cupones",id)
 
 
 };
-
-
-
-
-
-
-
-
 
 // CONTADOR DE COPIAS
 
@@ -2066,11 +1936,6 @@ onclick="subirImagen()">
 `;
 
 
-
-
-
-
-
 function convertirImagenGaleria(file){
 
 
@@ -2101,13 +1966,7 @@ reader.readAsDataURL(file);
 }
 
 
-
-
-
-
-
 window.subirImagen = async function(){
-
 
 
 let archivo =
@@ -2127,16 +1986,8 @@ return;
 }
 
 
-
-
-
 let imagen =
 await convertirImagenGaleria(archivo);
-
-
-
-
-
 
 
 await addDoc(
@@ -2158,11 +2009,6 @@ fecha:serverTimestamp()
 );
 
 
-
-
-
-
-
 document.getElementById("archivoImagen").value="";
 
 
@@ -2171,13 +2017,6 @@ alert("✅ Imagen guardada");
 
 
 };
-
-
-
-
-
-
-
 
 
 onSnapshot(
@@ -2243,9 +2082,6 @@ onclick="borrarImagen('${d.id}')">
 });
 
 
-
-
-
 document.getElementById("galeria").innerHTML=
 
 html || "Sin imágenes";
@@ -2279,15 +2115,7 @@ doc(db,"imagenes",id)
 }
 
 
-
 };
-
-
-
-
-
-
-
 
 
 // ==========================
