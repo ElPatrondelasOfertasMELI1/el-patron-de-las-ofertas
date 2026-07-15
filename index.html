@@ -1194,7 +1194,7 @@ fechaHoy
 
 if(!visitante || visitante !== fechaHoy){
 
-await setDoc(
+setDoc(
 contador,
 {
 total:increment(1),
@@ -1359,10 +1359,9 @@ if(!localStorage.getItem(clave)){
 try{
 
 await setDoc(
-contador,
+ahorroRef,
 {
-total:increment(1),
-fecha:fechaHoy
+total:increment(ahorro)
 },
 {
 merge:true
