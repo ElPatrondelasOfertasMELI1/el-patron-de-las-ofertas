@@ -10,13 +10,12 @@
 <style>
 
 body{
-  margin:0;
-  font-family:'Inter', sans-serif;
-  background:
-  radial-gradient(circle at top left,#d9f0ff,#ffffff 40%),
-  linear-gradient(135deg,#eaf6ff,#d7eaff);
-  color:#000;
-  font-weight:700;
+margin:0;
+font-family:'Inter',sans-serif;
+background:
+radial-gradient(circle at 20% 10%,#ffffff,#e8f4ff 35%,#d5e9ff 100%);
+color:#000;
+font-weight:700;
 }
 
 /* ===== ENCABEZADO ===== */
@@ -411,17 +410,27 @@ line-height:1.4;
 }
 
 .bank-btn{
+
 width:100%;
-padding:14px;
+
+padding:8px;
+
 border:none;
-border-radius:16px;
-background:linear-gradient(135deg,#00a650,#00c853);
-color:#fff;
-font-size:15px;
+
+border-radius:10px;
+
+background:linear-gradient(
+135deg,
+#00a650,
+#00c853
+);
+
+color:white;
+
+font-size:12px;
+
 font-weight:900;
-cursor:pointer;
-box-shadow:0 12px 25px rgba(0,166,80,.35);
-transition:.25s;
+
 }
 
 .bank-btn:hover{
@@ -727,6 +736,18 @@ background:#00c853;
 }
   
 #cuponesFirebase{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:8px;
+
+margin:10px 14px;
+
+}
+  
+#cuponesFirebase{
 grid-template-columns:repeat(2,1fr);
 gap:8px;
 margin:12px;
@@ -757,27 +778,48 @@ grid-template-columns:repeat(2,1fr);
 position:relative;
 overflow:hidden;
 
-padding:12px;
+padding:10px;
 
-border-radius:18px;
+border-radius:16px;
 
 background:
-linear-gradient(
-135deg,
-rgba(255,255,255,.75),
-rgba(220,240,255,.45)
-);
+rgba(255,255,255,.55);
 
-backdrop-filter:blur(25px);
--webkit-backdrop-filter:blur(25px);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
 
-border:1px solid rgba(255,255,255,.9);
+border:1px solid rgba(255,255,255,.8);
 
 box-shadow:
-0 12px 30px rgba(0,120,255,.15),
-inset 0 0 20px rgba(255,255,255,.8);
+0 8px 20px rgba(0,120,255,.15);
 
-min-height:170px;
+height:150px;
+
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
+}
+
+
+.cupon-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+
+height:5px;
+
+background:linear-gradient(
+90deg,
+#ffe600,
+#ff9800,
+#ff5722
+);
 
 }
 
@@ -822,7 +864,7 @@ padding-top:8px;
 
 .cupon-desc{
 
-font-size:22px;
+font-size:18px;
 
 font-weight:900;
 
@@ -830,29 +872,30 @@ color:#00a650;
 
 text-align:center;
 
-margin:10px 0;
+margin:4px 0;
 
 }
 
 .cupon-min{
-background:rgba(255,255,255,.55);
-border:1px solid rgba(255,255,255,.7);
-border-radius:14px;
-padding:10px;
+
+background:rgba(255,255,255,.45);
+
+border-radius:10px;
+
+padding:6px;
+
+font-size:11px;
+
 text-align:center;
-font-size:13px;
-margin-bottom:16px;
+
+margin:0;
+
 }
+
 
 .cupon-min b{
 
-display:block;
-
-margin-top:3px;
-
-font-size:17px;
-
-color:#111;
+font-size:14px;
 
 }
 
