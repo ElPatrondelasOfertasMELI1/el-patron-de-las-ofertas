@@ -2647,21 +2647,22 @@ alert("✅ Ahorro actualizado");
 
 window.editarOferta = async function(id){
 
-
 const ref = doc(db,"ofertas",id);
-
 
 const snap = await getDoc(ref);
 
+if(!snap.exists()){
+alert("Oferta no encontrada");
+return;
+}
 
-const o = snap.data();
+const o=snap.data();
 
 
 let titulo = prompt(
 "Nombre del producto:",
 o.titulo
 );
-
 
 if(!titulo) return;
 
@@ -2684,18 +2685,69 @@ o.link
 );
 
 
+// CAMBIAR IMAGEN
+let cambiarImagen = confirm(
+"¿Quieres cambiar la imagen?"
+);
 
-await updateDoc(ref,{
+
+let datos={
 
 titulo,
 precioAntes,
 precioActual,
 link
 
-});
+};
+
+
+
+if(cambiarImagen){
+
+let input=document.createElement("input");
+
+input.type="file";
+input.accept="image/*";
+
+input.click();
+
+
+input.onchange=async()=>{
+
+
+let archivo=input.files[0];
+
+
+if(archivo){
+
+let imagen=await convertirImagen(archivo);
+
+
+datos.imagen=imagen;
+
+
+}
+
+
+await updateDoc(ref,datos);
 
 
 alert("✅ Oferta actualizada");
+
+
+};
+
+
+}else{
+
+
+await updateDoc(ref,datos);
+
+
+alert("✅ Oferta actualizada");
+
+
+}
 
 
 };
