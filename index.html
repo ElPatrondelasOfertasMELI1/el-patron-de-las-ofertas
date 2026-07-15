@@ -1389,14 +1389,13 @@ clave,
 }
 
 // ===== REDIRECCIÓN RÁPIDA =====
-
-const destino = "https://meli.la/1mj3itE";
-
+// Solo redirige si tiene link propio
+const destino = "";
+if(destino && destino !== ""){
 setTimeout(()=>{
-
 window.location.assign(destino);
-
-},300);
+},800);
+}
 
 // ===== MOSTRAR AHORRO TOTAL =====
 
