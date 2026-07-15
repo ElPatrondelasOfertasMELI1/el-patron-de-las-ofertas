@@ -452,7 +452,11 @@ ENTRAR
 
 </button>
 
+<button class="menu" onclick="abrirSeccion('ranking')">
 
+🏆 Ranking Cupones
+
+</button>
 
 <button class="menu" onclick="abrirSeccion('configuracion')">
 
@@ -463,8 +467,6 @@ ENTRAR
 
 
 </div>
-
-
 
 
 
@@ -601,7 +603,25 @@ Cargando...
 </div>
 
 
+<div id="ranking" class="section">
 
+<h1>
+🏆 Ranking de Cupones
+</h1>
+
+
+<div class="box">
+
+<div id="rankingCupones">
+
+Cargando...
+
+</div>
+
+</div>
+
+
+</div>
 
 
 <div id="configuracion" class="section">
@@ -978,6 +998,135 @@ exclusivos:0
 
 iniciarBase();
 
+// ==========================
+// RANKING CUPONES MÁS USADOS
+// ==========================
+
+
+onSnapshot(
+
+collection(db,"cupones"),
+
+(snapshot)=>{
+
+
+let lista=[];
+
+
+
+snapshot.forEach(doc=>{
+
+
+let c=doc.data();
+
+
+lista.push({
+
+codigo:doc.id,
+
+copias:c.copias || 0,
+
+tipo:c.tipo,
+
+descuento:c.descuento
+
+});
+
+
+});
+
+
+
+// ORDENAR MAYOR A MENOR
+
+lista.sort(
+(a,b)=>b.copias-a.copias
+);
+
+
+
+let html="";
+
+
+
+lista.slice(0,10)
+.forEach((c,i)=>{
+
+
+let puesto="";
+
+
+if(i===0)
+puesto="🥇";
+
+else if(i===1)
+puesto="🥈";
+
+else if(i===2)
+puesto="🥉";
+
+else
+puesto="🏅";
+
+
+
+html+=`
+
+<div class="card">
+
+
+<h2>
+
+${puesto}
+${c.codigo}
+
+</h2>
+
+
+<p>
+
+💰 ${c.descuento}
+
+</p>
+
+
+<p>
+
+🎟 Copias:
+
+<b>
+${c.copias}
+</b>
+
+</p>
+
+
+<p>
+
+Tipo:
+${c.tipo}
+
+</p>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+document.getElementById(
+"rankingCupones"
+).innerHTML =
+html || "Sin datos";
+
+
+
+});
 
 console.log("⚡ ADMIN PRO FIREBASE CARGADO");
 
