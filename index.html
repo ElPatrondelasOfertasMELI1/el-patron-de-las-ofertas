@@ -1366,8 +1366,11 @@ clave,
 
 // ===== REDIRECCIÓN RÁPIDA =====
 
-window.location.href =
-"https://meli.la/1mj3itE";
+const destino = "https://meli.la/1mj3itE";
+
+setTimeout(()=>{
+window.location.href = destino;
+},100);
 
 // ===== MOSTRAR AHORRO TOTAL =====
 
@@ -1776,6 +1779,18 @@ zonaCupones.innerHTML =
 
 html || "⚠️ Sin cupones disponibles";
 
+
+});
+
+// REINICIAR PÁGINA AL VOLVER DESDE MERCADO LIBRE
+
+window.addEventListener("pageshow", (event)=>{
+
+if(event.persisted){
+
+location.reload();
+
+}
 
 });
 
