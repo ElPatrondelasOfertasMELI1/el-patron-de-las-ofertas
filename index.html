@@ -752,22 +752,37 @@ grid-template-columns:repeat(2,1fr);
 }
 
 .cupon-card{
+
 position:relative;
 overflow:hidden;
-padding:18px;
-border-radius:24px;
 
-background:rgba(255,255,255,.45);
-backdrop-filter:blur(22px);
--webkit-backdrop-filter:blur(22px);
+padding:12px;
 
-border:1px solid rgba(255,255,255,.6);
+border-radius:20px;
+
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.75),
+rgba(210,240,255,.45)
+);
+
+
+backdrop-filter:blur(25px);
+-webkit-backdrop-filter:blur(25px);
+
+
+border:1px solid rgba(255,255,255,.8);
+
 
 box-shadow:
-0 15px 35px rgba(0,0,0,.10),
-inset 0 1px rgba(255,255,255,.7);
+0 10px 25px rgba(0,140,255,.15),
+inset 0 1px 15px rgba(255,255,255,.9);
 
-transition:.30s;
+
+transition:.3s;
+
 }
 
 .cupon-card:hover{
@@ -796,20 +811,33 @@ background:linear-gradient(90deg,#ffe600,#ff9800,#ff5722);
 }
 
 .cupon-header{
-font-size:12px;
+
+font-size:11px;
 font-weight:900;
-letter-spacing:1px;
-color:#666;
+
+letter-spacing:.5px;
+
+color:#333;
+
 text-transform:uppercase;
-margin-bottom:10px;
+
+margin-top:25px;
+margin-bottom:5px;
+
 }
 
 .cupon-desc{
-font-size:28px;
+
+font-size:22px;
+
 font-weight:900;
+
 color:#00a650;
+
 text-align:center;
-margin:15px 0;
+
+margin:10px 0;
+
 }
 
 .cupon-min{
@@ -823,17 +851,36 @@ margin-bottom:16px;
 }
 
 .cupon-min b{
+
 display:block;
-margin-top:4px;
-font-size:20px;
+
+margin-top:3px;
+
+font-size:17px;
+
 color:#111;
+
 }
 
 .badge{
-padding:6px 12px;
-font-size:11px;
-border-radius:30px;
-backdrop-filter:blur(12px);
+
+position:absolute;
+
+top:8px;
+right:8px;
+
+
+padding:4px 8px;
+
+font-size:9px;
+
+border-radius:20px;
+
+font-weight:900;
+
+
+backdrop-filter:blur(15px);
+
 }
 
 </style>
