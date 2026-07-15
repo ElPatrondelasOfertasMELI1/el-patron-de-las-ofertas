@@ -13,12 +13,8 @@ body{
   margin:0;
   font-family:'Inter', sans-serif;
   background:
-  linear-gradient(
-    135deg,
-    #e8f5ff,
-    #f8fbff,
-    #d9ecff
-  );
+  radial-gradient(circle at top left,#d9f0ff,#ffffff 40%),
+  linear-gradient(135deg,#eaf6ff,#d7eaff);
   color:#000;
   font-weight:700;
 }
@@ -759,21 +755,30 @@ grid-template-columns:repeat(2,1fr);
 
 .cupon-card{
 
-background:
+position:relative;
+overflow:hidden;
 
-rgba(255,255,255,.45);
+padding:12px;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.75),
+rgba(220,240,255,.45)
+);
 
 backdrop-filter:blur(25px);
-
 -webkit-backdrop-filter:blur(25px);
 
-border:1px solid rgba(255,255,255,.8);
+border:1px solid rgba(255,255,255,.9);
 
 box-shadow:
+0 12px 30px rgba(0,120,255,.15),
+inset 0 0 20px rgba(255,255,255,.8);
 
-0 15px 35px rgba(0,120,255,.18),
-
-inset 0 1px 15px rgba(255,255,255,.8);
+min-height:170px;
 
 }
 
@@ -804,17 +809,15 @@ background:linear-gradient(90deg,#ffe600,#ff9800,#ff5722);
 
 .cupon-header{
 
-font-size:11px;
+font-size:10px;
 font-weight:900;
 
-letter-spacing:.5px;
+color:#444;
 
-color:#333;
+margin-top:5px;
+margin-bottom:8px;
 
-text-transform:uppercase;
-
-margin-top:25px;
-margin-bottom:5px;
+padding-top:8px;
 
 }
 
@@ -861,17 +864,13 @@ position:absolute;
 top:8px;
 right:8px;
 
+padding:3px 7px;
 
-padding:4px 8px;
-
-font-size:9px;
+font-size:8px;
 
 border-radius:20px;
 
 font-weight:900;
-
-
-backdrop-filter:blur(15px);
 
 }
 
