@@ -626,15 +626,22 @@ margin:5px 0;
 
 .flash-btn{
 
-display:block;
-margin-top:10px;
-padding:12px;
-background:#00c853;
-color:#fff;
-border-radius:14px;
-text-align:center;
+margin-top:12px;
+padding:14px;
+
+background:linear-gradient(135deg,#00a650,#00c853);
+
+color:white;
+
+font-size:16px;
+
 font-weight:900;
-text-decoration:none;
+
+border-radius:14px;
+
+text-align:center;
+
+box-shadow:0 8px 20px rgba(0,166,80,.35);
 
 }
   
@@ -1439,51 +1446,82 @@ const puntos = document.getElementById("flashDots");
 
 onSnapshot(collection(db,"ofertas"),(snap)=>{
 
-contenedor.innerHTML="";
-puntos.innerHTML="";
-
 let ofertas=[];
 
 snap.forEach(doc=>{
 
-let o=doc.data();
-
-ofertas.push(o);
+ofertas.push({
+id:doc.id,
+...doc.data()
+});
 
 });
 
+ofertas.sort((a,b)=>{
+
+let fa=a.fecha?.seconds||0;
+let fb=b.fecha?.seconds||0;
+
+return fb-fa;
+
+});
+
+contenedor.innerHTML="";
+puntos.innerHTML="";
+
 ofertas.forEach((o,i)=>{
 
-contenedor.innerHTML += `
+contenedor.innerHTML+=`
 
 <div class="flash-slide"
 onclick="window.open('${o.link}','_blank')">
 
-<img src="${o.imagen || ''}">
+<img
+src="${o.imagen}"
+loading="lazy"
+onerror="this.src='https://placehold.co/700x700?text=Sin+Imagen'">
 
-<h3>
-${o.titulo}
-</h3>
+<h3>${o.titulo}</h3>
 
 <div class="flash-old">
-Antes: <s>$${o.precioAntes}</s>
+
+❌ Antes:
+<s>
+
+$${Number(o.precioAntes).toLocaleString("es-MX")}
+
+</s>
+
+</div>
+
+<div style="margin:8px 0;
+font-size:18px;
+font-weight:900;
+color:#ff6d00;">
+
+🏷️ ${o.descuento}% OFF
+
 </div>
 
 <div class="flash-price">
-$${o.precioActual}
+
+💥 $${Number(o.precioActual).toLocaleString("es-MX")}
+
 </div>
 
 <div class="flash-btn">
-🛒 TOCA AQUÍ PARA COMPRAR
+
+🛒 COMPRAR AHORA
+
 </div>
 
 </div>
 
 `;
 
-puntos.innerHTML += `
+puntos.innerHTML+=`
 
-<div class="flash-dot ${i===0?'active':''}"
+<div class="flash-dot ${i==0?"active":""}"
 onclick="irOferta(${i})">
 </div>
 
@@ -1491,7 +1529,10 @@ onclick="irOferta(${i})">
 
 });
 
+posicion=0;
+
 actualizarCarrusel();
+
 iniciarAuto();
 
 });
@@ -1616,71 +1657,27 @@ iniciarAuto();
 
 };
   
-</script>
-
-<script type="module">
-
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-const firebaseConfig = {
-
-apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
-
-authDomain:"patronofertasweb.firebaseapp.com",
-
-projectId:"patronofertasweb",
-
-storageBucket:"patronofertasweb.firebasestorage.app",
-
-messagingSenderId:"292338334268",
-
-appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
-
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
+// ===== CUPONES FIREBASE =====
 
 const zonaCupones = document.getElementById("cuponesFirebase");
 
-onSnapshot(
-collection(db,"cupones"),
-(snapshot)=>{
+onSnapshot(collection(db,"cupones"),(snapshot)=>{
 
 let cupones=[];
 
 snapshot.forEach(doc=>{
 
 cupones.push({
-
 id:doc.id,
-
 ...doc.data()
-
 });
 
 });
-
-// ORDENAR POR COMPRA MÍNIMA
 
 cupones.sort((a,b)=>{
 
-let A=parseInt(
-(a.minimo || "0").replace(/\D/g,"")
-);
-
-let B=parseInt(
-(b.minimo || "0").replace(/\D/g,"")
-);
+let A=parseInt((a.minimo||"0").replace(/\D/g,""));
+let B=parseInt((b.minimo||"0").replace(/\D/g,""));
 
 return A-B;
 
@@ -1691,34 +1688,22 @@ let html="";
 cupones.forEach(c=>{
 
 let estado="";
-
 let clase="";
 
 if(c.estado==="activo"){
-
 estado="🟢 ACTIVO";
-
 clase="active";
-
 }
-
 else if(c.estado==="agotando"){
-
 estado="🟠 POR AGOTARSE";
-
 clase="warning";
-
 }
-
 else{
-
 estado="🔴 AGOTADO";
-
 clase="expired";
-
 }
 
-html += `
+html+=`
 
 <div class="cupon-card">
 
@@ -1729,15 +1714,15 @@ ${estado}
 <div class="cupon-header">
 
 ${c.tipo=="relampago"
-? "⚡ CUPÓN RELÁMPAGO"
-: c.tipo=="bancario"
-? "🏦 BANCARIO"
-: "💎 MELI+"}
+?"⚡ CUPÓN RELÁMPAGO"
+:c.tipo=="bancario"
+?"🏦 BANCARIO"
+:"💎 MELI+"}
 
 </div>
 
 <div class="cupon-desc">
-${c.descuento} OFF
+${c.descuento}
 </div>
 
 <div class="cupon-sub">
@@ -1762,12 +1747,14 @@ onclick="copy('${c.id}','${c.tipo}')">
 
 });
 
-zonaCupones.innerHTML = 
-
-html || "⚠️ Sin cupones disponibles";
+zonaCupones.innerHTML=html||"⚠️ Sin cupones disponibles";
 
 });
+  
+
 
 </script>
 
-</body></body>
+</body>
+
+</html>
