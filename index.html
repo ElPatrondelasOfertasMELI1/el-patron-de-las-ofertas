@@ -1144,12 +1144,21 @@ import {
 getFirestore,
 doc,
 collection,
-onSnapshot,
-getDoc,
-updateDoc,
+addDoc,
 setDoc,
-increment
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+onSnapshot,
+deleteDoc,
+serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+import {
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
@@ -1162,6 +1171,7 @@ appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage=getStorage(app);
 
 // Limpiar mensaje al cargar página
 window.addEventListener("load",()=>{
