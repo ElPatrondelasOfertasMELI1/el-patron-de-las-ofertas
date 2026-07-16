@@ -1164,6 +1164,7 @@ getDownloadURL
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
 
+const storage=getStorage(app);
 const firebaseConfig = {
 apiKey: "AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
 authDomain: "patronofertasweb.firebaseapp.com",
@@ -1453,7 +1454,7 @@ document.getElementById("ahorro").innerHTML =
 
 // ===== CARGAR OFERTAS DESDE ADMIN FIREBASE =====
 
-const contenedor = document.getElementById("ofertasPublicas");
+const track = document.getElementById("ofertasPublicas");
 const puntos = document.getElementById("flashDots");
 
 onSnapshot(collection(db,"ofertas"),(snap)=>{
@@ -1478,12 +1479,12 @@ return fb-fa;
 
 });
 
-contenedor.innerHTML="";
+track.innerHTML="";
 puntos.innerHTML="";
 
 ofertas.forEach((o,i)=>{
 
-contenedor.innerHTML+=`
+track.innerHTML+=`
 
 <div class="flash-slide"
 onclick="window.open('${o.link}','_blank')">
