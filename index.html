@@ -1,3 +1,5 @@
+Esta extra un OFF
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -387,24 +389,6 @@ box-shadow:0 6px 18px rgba(0,0,0,.2);
 }
 
 .toast{
-position:fixed;
-top:45%;
-left:50%;
-transform:translate(-50%,-50%);
-background:#111;
-color:#fff;
-padding:14px 22px;
-border-radius:14px;
-font-weight:900;
-font-size:16px;
-z-index:99999;
-opacity:0;
-pointer-events:none;
-transition:.3s;
-}
-
-.toast.show{
-opacity:1;
 animation:copiarOK .35s;
 }
 
@@ -661,14 +645,12 @@ width:calc(100% - 28px);
 touch-action:pan-y;
 }
 
-
 .flash-track{
 display:flex;
 width:100%;
 transition:transform .45s ease;
 will-change:transform;
 }
-
 
 .flash-slide{
 
@@ -695,8 +677,6 @@ user-select:none;
 
 }
 
-
-
 .flash-slide img{
 
 width:100%;
@@ -707,7 +687,6 @@ background:white;
 
 }
 
-
 .flash-slide h3{
 
 font-size:16px;
@@ -717,7 +696,6 @@ font-weight:900;
 margin:5px 0;
 
 }
-
 
 .flash-price{
 
@@ -730,7 +708,6 @@ color:#00c853;
 margin:3px 0;
 
 }
-
 
 .flash-btn{
 
@@ -753,7 +730,6 @@ margin-top:12px;
 
 }
 
-
 .flash-dot{
 
 width:10px;
@@ -763,7 +739,6 @@ background:#bbb;
 cursor:pointer;
 
 }
-
 
 .flash-dot.active{
 
@@ -929,61 +904,6 @@ transition:.2s;
 .bank-btn:active{
 
 transform:scale(.95);
-
-}
-
-.carrusel-box{
-
-display:flex;
-gap:15px;
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-padding:10px;
-
-}
-
-.oferta-card{
-
-min-width:280px;
-background:white;
-border-radius:20px;
-padding:15px;
-box-shadow:0 5px 15px #ddd;
-scroll-snap-align:center;
-cursor:pointer;
-
-}
-
-.oferta-card img{
-
-width:100%;
-height:220px;
-object-fit:contain;
-border-radius:15px;
-
-}
-
-
-.oferta-card h3{
-
-font-size:18px;
-font-weight:900;
-
-}
-
-
-.precio{
-
-font-size:28px;
-font-weight:900;
-color:#00a650;
-
-}
-
-
-.antes{
-
-color:#777;
 
 }
 
@@ -1172,39 +1092,7 @@ VER TERMINALES
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import { 
-getFirestore,
-doc,
-setDoc,
-getDoc,
-updateDoc,
-increment,
-collection,
-onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-
-apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
-
-authDomain:"patronofertasweb.firebaseapp.com",
-
-projectId:"patronofertasweb",
-
-storageBucket:"patronofertasweb.firebasestorage.app",
-
-messagingSenderId:"292338334268",
-
-appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
+const REDIRECT_URL = "https://meli.la/1mj3itE";
 
 /* MENU */
 window.toggleMenu = function(){
@@ -1245,6 +1133,31 @@ setInterval(()=>{
   updateStatus();
 },60000);
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+collection,
+onSnapshot,
+getDoc,
+updateDoc,
+setDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
+authDomain: "patronofertasweb.firebaseapp.com",
+projectId: "patronofertasweb",
+storageBucket: "patronofertasweb.firebasestorage.app",
+messagingSenderId: "292338334268",
+appId: "1:292338334268:web:9dbbafe00dd23ebb72e139"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 // Limpiar mensaje al cargar página
 window.addEventListener("load",()=>{
     const t=document.getElementById("toast");
@@ -1262,36 +1175,33 @@ timeZone:"America/Mexico_City"
 }
 ).format(new Date());
 
-
 const visitante =
 localStorage.getItem("fechaVisita");
-
 
 const contador =
 doc(
 db,
-"visitas",
+"estadisticas_diarias",
 fechaHoy
 );
 
-if (visitante !== fechaHoy) {
+if(!visitante || visitante !== fechaHoy){
 
-    await setDoc(
-        contador,
-        {
-            visitas: increment(1),
-            clics: increment(0),
-            fecha: fechaHoy
-        },
-        {
-            merge: true
-        }
-    );
+await setDoc(
+contador,
+{
+total:increment(1),
+fecha:fechaHoy
+},
+{
+merge:true
+}
+);
 
-    localStorage.setItem(
-        "fechaVisita",
-        fechaHoy
-    );
+localStorage.setItem(
+"fechaVisita",
+fechaHoy
+);
 
 }
 
@@ -1345,6 +1255,73 @@ document.activeElement.blur();
 
     }
 
+    // ===== CONTADOR GENERAL =====
+
+    const ref = doc(db,"contadores","global");
+
+const dia =
+new Intl.DateTimeFormat(
+"en-CA",
+{
+timeZone:"America/Mexico_City"
+}
+).format(new Date());
+
+const diarioRef =
+doc(
+db,
+"estadisticas_diarias",
+dia
+);
+
+await setDoc(
+diarioRef,
+{
+fecha:dia,
+clics:increment(1)
+},
+{
+merge:true
+}
+);
+
+await setDoc(
+doc(db,"estadisticas_diarias",fechaHoy),
+{
+fecha:fechaHoy,
+visitas:increment(1)
+},
+{
+merge:true
+}
+);
+
+    let datos={
+        total:increment(1)
+    };
+
+    if(categoria==="relampago"){
+        datos.relampago=increment(1);
+    }
+
+    if(categoria==="exclusivo"){
+        datos.exclusivos=increment(1);
+    }
+
+    if(categoria==="bancario"){
+        datos.bancarios=increment(1);
+    }
+
+    updateDoc(ref,datos).catch(async()=>{
+
+await setDoc(ref,{
+total:1,
+relampago: categoria==="relampago" ? 1 : 0,
+exclusivos: categoria==="exclusivo" ? 1 : 0,
+bancarios: categoria==="bancario" ? 1 : 0
+});
+
+});
     
     // ===== CONTADOR INDIVIDUAL =====
 
@@ -1360,16 +1337,12 @@ timeZone:"America/Mexico_City"
 }
 ).format(new Date());
 
-
-
 const estadistica =
 doc(
 db,
 "copias_diarias",
 fecha+"_"+code
 );
-
-
 
 setDoc(
 estadistica,
@@ -1397,24 +1370,6 @@ merge:true
 
     });
 
-// ===== CONTADOR GLOBAL DASHBOARD =====
-
-const globalRef = doc(db,"contadores","global");
-
-await setDoc(
-globalRef,
-{
-    total: increment(1),
-
-  [categoria==="exclusivo" ? "exclusivos" : categoria]:
-increment(1)
-
-},
-{
-    merge:true
-}
-);
-
 // ===== AHORRO AUTOMÁTICO DESDE ADMIN =====
 
 const ahorroRef = doc(db,"estadisticas","ahorro");
@@ -1423,23 +1378,17 @@ const cuponActual = await getDoc(
 doc(db,"cupones",code)
 );
 
-
 if(cuponActual.exists()){
 
 const datosCupon = cuponActual.data();
 
 const ahorro = Number(datosCupon.ahorro || 0);
 
-
 if(ahorro > 0){
 
 const clave = "ahorro_" + code + "_" + fecha;
 
-
 if(!localStorage.getItem(clave)){
-
-
-try{
 
 await setDoc(
 ahorroRef,
@@ -1451,34 +1400,22 @@ merge:true
 }
 );
 
-}catch(e){
-
-console.log("Error contador visitas:",e);
-
-}
-
-
 localStorage.setItem(
 clave,
 "ok"
 );
 
-
-}
-
-
 }
 
 }
 
-// ===== REDIRECCIÓN RÁPIDA =====
-// Solo redirige si tiene link propio
-const destino = "";
-if(destino && destino !== ""){
-setTimeout(()=>{
-window.location.assign(destino);
-},800);
 }
+
+    // ===== REDIRECCIÓN =====
+
+    setTimeout(()=>{
+window.location.href = REDIRECT_URL;
+},300);
 
 }
 
@@ -1493,26 +1430,19 @@ const total = snap.data()?.total || 0;
 document.getElementById("ahorro").innerHTML =
 "$" + total.toLocaleString("es-MX") + " MXN";
 
-}
-
 });
 
 // ===== CARGAR OFERTAS DESDE ADMIN FIREBASE =====
 
-
 const contenedor = document.getElementById("ofertasPublicas");
 const puntos = document.getElementById("flashDots");
 
-
 onSnapshot(collection(db,"ofertas"),(snap)=>{
-
 
 contenedor.innerHTML="";
 puntos.innerHTML="";
 
-
 let ofertas=[];
-
 
 snap.forEach(doc=>{
 
@@ -1522,8 +1452,6 @@ ofertas.push(o);
 
 });
 
-
-
 ofertas.forEach((o,i)=>{
 
 contenedor.innerHTML += `
@@ -1531,35 +1459,27 @@ contenedor.innerHTML += `
 <div class="flash-slide"
 onclick="window.open('${o.link}','_blank')">
 
-
 <img src="${o.imagen || ''}">
-
 
 <h3>
 ${o.titulo}
 </h3>
 
-
 <div class="flash-old">
 Antes: <s>$${o.precioAntes}</s>
 </div>
-
 
 <div class="flash-price">
 $${o.precioActual}
 </div>
 
-
 <div class="flash-btn">
 🛒 TOCA AQUÍ PARA COMPRAR
 </div>
 
-
 </div>
 
 `;
-
-
 
 puntos.innerHTML += `
 
@@ -1569,14 +1489,10 @@ onclick="irOferta(${i})">
 
 `;
 
-
-
 });
 
-if(ofertas.length > 0){
 actualizarCarrusel();
 iniciarAuto();
-}
 
 });
 
@@ -1590,7 +1506,6 @@ const dotsBox = document.getElementById("flashDots");
 
 let inicioX = 0;
 let inicioY = 0;
-
 
 function moverCarrusel(){
 
@@ -1608,13 +1523,7 @@ actualizarCarrusel();
 
 }
 
-
-
 function actualizarCarrusel(){
-
-const track = getTrack();
-
-if(!track) return;
 
 track.style.transform =
 `translate3d(-${posicion * 100}%,0,0)`;
@@ -1631,8 +1540,6 @@ i===posicion
 
 }
 
-
-
 function iniciarAuto(){
 
 clearInterval(timer);
@@ -1644,36 +1551,52 @@ moverCarrusel,
 
 }
 
-function getTrack(){
-return document.getElementById("ofertasPublicas");
-}
-
-if(track){
-
 track.addEventListener("touchstart",(e)=>{
+
 inicioX=e.touches[0].clientX;
 inicioY=e.touches[0].clientY;
-clearInterval(timer);
-},{passive:true});
 
+clearInterval(timer);
+
+},{passive:true});
 
 track.addEventListener("touchend",(e)=>{
 
 let finX=e.changedTouches[0].clientX;
+let finY=e.changedTouches[0].clientY;
+
 let movimientoX=inicioX-finX;
+let movimientoY=inicioY-finY;
 
-if(Math.abs(movimientoX)>50){
+if(Math.abs(movimientoX)>Math.abs(movimientoY)
+&& Math.abs(movimientoX)>50){
 
-const total=document.querySelectorAll(".flash-slide").length;
+const total =
+document.querySelectorAll(".flash-slide").length;
 
 if(movimientoX>0){
+
 posicion++;
-}else{
-posicion--;
+
 }
 
-if(posicion<0) posicion=total-1;
-if(posicion>=total) posicion=0;
+else{
+
+posicion--;
+
+}
+
+if(posicion<0){
+
+posicion=total-1;
+
+}
+
+if(posicion>=total){
+
+posicion=0;
+
+}
 
 actualizarCarrusel();
 
@@ -1682,8 +1605,6 @@ actualizarCarrusel();
 iniciarAuto();
 
 },{passive:true});
-
-}
 
 window.irOferta=function(i){
 
@@ -1694,20 +1615,48 @@ actualizarCarrusel();
 iniciarAuto();
 
 };
+  
+</script>
 
+<script type="module">
 
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+onSnapshot
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyBo_wk-k8TrcSl0CMQz0hoUCvAKre94hW0",
+
+authDomain:"patronofertasweb.firebaseapp.com",
+
+projectId:"patronofertasweb",
+
+storageBucket:"patronofertasweb.firebasestorage.app",
+
+messagingSenderId:"292338334268",
+
+appId:"1:292338334268:web:9dbbafe00dd23ebb72e139"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
 
 const zonaCupones = document.getElementById("cuponesFirebase");
-
-
 
 onSnapshot(
 collection(db,"cupones"),
 (snapshot)=>{
 
-
 let cupones=[];
-
 
 snapshot.forEach(doc=>{
 
@@ -1720,7 +1669,6 @@ id:doc.id,
 });
 
 });
-
 
 // ORDENAR POR COMPRA MÍNIMA
 
@@ -1738,19 +1686,13 @@ return A-B;
 
 });
 
-
-
 let html="";
 
-
-
 cupones.forEach(c=>{
-
 
 let estado="";
 
 let clase="";
-
 
 if(c.estado==="activo"){
 
@@ -1795,11 +1737,11 @@ ${c.tipo=="relampago"
 </div>
 
 <div class="cupon-desc">
-${String(c.descuento).replace(" OFF","")}
+${c.descuento} OFF
 </div>
 
 <div class="cupon-sub">
-OFF DE DESCUENTO
+DE DESCUENTO
 </div>
 
 <div class="cupon-min">
@@ -1818,27 +1760,14 @@ onclick="copy('${c.id}','${c.tipo}')">
 
 `;
 
-
 });
-
-
 
 zonaCupones.innerHTML = 
 
 html || "⚠️ Sin cupones disponibles";
 
-
-});
-
-// REINICIAR PÁGINA AL VOLVER DESDE MERCADO LIBRE
-
-window.addEventListener("pageshow", ()=>{
-
-window.copy = window.copy;
-
 });
 
 </script>
 
-
-</body>
+</body></body>
