@@ -382,7 +382,7 @@ const app=initializeApp(firebaseConfig);
 
 const db=getFirestore(app);
 
-
+const storage=getStorage(app);
 
 window.entrar=function(){
 
@@ -517,38 +517,65 @@ placeholder="Precio actual">
 placeholder="Link Mercado Libre">
 
 
-<input 
+<input
+type="file"
 id="imagen"
-placeholder="URL imagen producto">
+accept="image/*">
 
 
 <button class="green"
 window.crearOferta = async function(){
 
-const titulo = document.getElementById("producto").value.trim();
-const precioAntes = Number(document.getElementById("antes").value);
-const precioActual = Number(document.getElementById("precio").value);
-const link = document.getElementById("link").value.trim();
-const imagen = document.getElementById("imagen").value.trim();
+const titulo=document.getElementById("producto").value.trim();
 
-if(!titulo || !precioAntes || !precioActual || !link || !imagen){
-    alert("Completa todos los campos");
-    return;
+const precioAntes=Number(document.getElementById("antes").value);
+
+const precioActual=Number(document.getElementById("precio").value);
+
+const link=document.getElementById("link").value.trim();
+
+const archivo=document.getElementById("imagen").files[0];
+
+if(!archivo){
+
+alert("Selecciona una imagen");
+
+return;
+
 }
 
-const descuento = Math.round(
+const descuento=Math.round(
 ((precioAntes-precioActual)/precioAntes)*100
 );
+
+// subir imagen
+
+const nombre="ofertas/"+Date.now()+"_"+archivo.name;
+
+const storageRef=ref(storage,nombre);
+
+await uploadBytes(storageRef,archivo);
+
+const imagen=await getDownloadURL(storageRef);
+
+// guardar oferta
 
 await addDoc(collection(db,"ofertas"),{
 
 titulo,
+
 precioAntes,
+
 precioActual,
+
 descuento,
+
 link,
+
 imagen,
+
 estado:"activo",
+
 fecha:serverTimestamp()
 
 });
