@@ -358,6 +358,14 @@ serverTimestamp
 
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+import {
+getStorage,
+ref,
+uploadBytes,
+getDownloadURL
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+
 const firebaseConfig={
 
 
@@ -523,32 +531,29 @@ id="imagen"
 accept="image/*">
 
 
-<button class="green"
+<button class="green" onclick="crearOferta()">
+PUBLICAR OFERTA
+</button>
+
+<div id="listaAdminOfertas"></div>
+`;
+
 window.crearOferta = async function(){
 
 const titulo=document.getElementById("producto").value.trim();
-
 const precioAntes=Number(document.getElementById("antes").value);
-
 const precioActual=Number(document.getElementById("precio").value);
-
 const link=document.getElementById("link").value.trim();
-
 const archivo=document.getElementById("imagen").files[0];
 
-if(!archivo){
-
-alert("Selecciona una imagen");
-
-return;
-
+if(!titulo || !archivo){
+    alert("Completa todos los datos");
+    return;
 }
 
 const descuento=Math.round(
 ((precioAntes-precioActual)/precioAntes)*100
 );
-
-// subir imagen
 
 const nombre="ofertas/"+Date.now()+"_"+archivo.name;
 
@@ -558,37 +563,20 @@ await uploadBytes(storageRef,archivo);
 
 const imagen=await getDownloadURL(storageRef);
 
-// guardar oferta
-
 await addDoc(collection(db,"ofertas"),{
-
-titulo,
-
-precioAntes,
-
-precioActual,
-
-descuento,
-
-link,
-
-imagen,
-
-estado:"activo",
-
-fecha:serverTimestamp()
-
+    titulo,
+    precioAntes,
+    precioActual,
+    descuento,
+    link,
+    imagen,
+    estado:"activo",
+    fecha:serverTimestamp()
 });
-
-document.getElementById("producto").value="";
-document.getElementById("antes").value="";
-document.getElementById("precio").value="";
-document.getElementById("link").value="";
-document.getElementById("imagen").value="";
 
 alert("✅ Oferta publicada");
 
-}
+};
 
 
 // MOSTRAR OFERTAS EN ADMIN
