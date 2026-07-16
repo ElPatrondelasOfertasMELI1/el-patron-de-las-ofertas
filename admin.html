@@ -523,89 +523,35 @@ placeholder="URL imagen producto">
 
 
 <button class="green"
-onclick="crearOferta()">
+window.crearOferta = async function(){
 
-⚡ PUBLICAR AL CARRUSEL
+const titulo = document.getElementById("producto").value.trim();
+const precioAntes = Number(document.getElementById("antes").value);
+const precioActual = Number(document.getElementById("precio").value);
+const link = document.getElementById("link").value.trim();
+const imagen = document.getElementById("imagen").value.trim();
 
-</button>
-
-
-</div>
-
-
-<div id="listaAdminOfertas"></div>
-
-`;
-
-
-
-
-
-// GUARDAR OFERTA
-
-
-window.crearOferta=async function(){
-
-
-let titulo=
-document.getElementById("producto").value;
-
-
-let precioAntes=
-document.getElementById("antes").value;
-
-
-let precioActual=
-document.getElementById("precio").value;
-
-
-let link=
-document.getElementById("link").value;
-
-
-let imagen=
-document.getElementById("imagen").value;
-
-
-
-if(!titulo || !precioActual || !link){
-
-alert("Completa los datos");
-
-return;
-
+if(!titulo || !precioAntes || !precioActual || !link || !imagen){
+    alert("Completa todos los campos");
+    return;
 }
 
-
-
-await addDoc(
-
-collection(db,"ofertas"),
-
-{
-
-
-titulo,
-
-precioAntes,
-
-precioActual,
-
-link,
-
-imagen,
-
-
-estado:"activo",
-
-fecha:serverTimestamp()
-
-
-}
-
+const descuento = Math.round(
+((precioAntes-precioActual)/precioAntes)*100
 );
 
+await addDoc(collection(db,"ofertas"),{
 
+titulo,
+precioAntes,
+precioActual,
+descuento,
+link,
+imagen,
+estado:"activo",
+fecha:serverTimestamp()
+
+});
 
 document.getElementById("producto").value="";
 document.getElementById("antes").value="";
@@ -613,16 +559,9 @@ document.getElementById("precio").value="";
 document.getElementById("link").value="";
 document.getElementById("imagen").value="";
 
+alert("✅ Oferta publicada");
 
-alert("✅ Oferta enviada al carrusel");
-
-
-};
-
-
-
-
-
+}
 
 
 // MOSTRAR OFERTAS EN ADMIN
